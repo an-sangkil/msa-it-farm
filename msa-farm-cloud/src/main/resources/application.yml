@@ -1,0 +1,27 @@
+server:
+  port: 8888
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    env:
+      enabled: true
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/an-sangkil/msa-it-farm.git
+          #username:
+          #password:
+          search-paths: configuration
+
+
+##########################################################################################
+# 클라우드 컨피그레이션 참고
+# https://cloud.spring.io/spring-cloud-config/multi/multi__spring_cloud_config_server.html
+##########################################################################################
