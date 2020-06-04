@@ -1,2 +1,3 @@
-google.id: skan_dev
-google.password: skan!!!!
+google:
+  id: skan_dev
+  password: skan!!!!

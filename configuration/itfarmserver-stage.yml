@@ -1,2 +1,3 @@
-google.id: skan_stage
-google.password: skan!!!!
+google:
+  id: skan_stage
+  password: skan!!!!

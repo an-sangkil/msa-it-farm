@@ -29,11 +29,6 @@ management:
       show-details: always
 
 
-
-
-
-
-
 logging:
   file:
     name: logs/it.farm.client.log
@@ -41,6 +36,6 @@ logging:
     root: info
     com.skan: debug
     org.springframework : info
-    web: debug
+    web: info
 
 

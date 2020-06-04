@@ -1,4 +1,6 @@
 spring:
   application:
     name: itfarmserver
-
+  cloud:
+    config:
+      uri: http://localhost:8888
