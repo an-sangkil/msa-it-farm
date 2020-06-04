@@ -2,8 +2,6 @@ server:
   port: 8000
 
 spring:
-  application:
-    name: server
   boot:
     admin:
       client:

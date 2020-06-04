@@ -24,14 +24,12 @@ public class WebClientApplication {
     public static void main(String[] args) {
         SpringApplication.run(WebClientApplication.class, args);
     }
-
-
 }
 
 @Component
 class WebClientStart implements CommandLineRunner {
 
-    //@Value("${google.id}")
+    @Value("${google.id}")
     private String googleId;
 
     @Override
