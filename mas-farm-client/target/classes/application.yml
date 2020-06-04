@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8000
 
 spring:
   boot:
@@ -7,15 +7,16 @@ spring:
       client:
         url: http://localhost:9000
         instance:
-          name: it-farm-apiserver   #(어플리케이션 명)
-          metadata: # 나의 어플리케이션 (스프링 시큐리티 )로그인 정보
+          name: it-farm-client   #(어플리케이션 명)
+          metadata:
             user.name: admin
-            user.password: admin1!
+            user.password: apwhaleldj1!
+
 
   security:
     user:
       name: admin
-      password: admin1!
+      password: apwhaleldj1!
 management:
   endpoints:
     web:
@@ -27,9 +28,9 @@ management:
 
 logging:
   file:
-    name: logs/it.farm.apiserver.log
+    name: logs/it.farm.client.log
   level:
     root: info
     com.skan: debug
     org.springframework : info
-    web: info
+    web: debug

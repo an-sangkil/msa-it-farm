@@ -10,12 +10,12 @@ spring:
           name: it-farm-apiserver   #(어플리케이션 명)
           metadata: # 나의 어플리케이션 (스프링 시큐리티 )로그인 정보
             user.name: admin
-            user.password: admin1!
+            user.password: apwhaleldj1!
 
   security:
     user:
       name: admin
-      password: admin1!
+      password: apwhaleldj1!
 management:
   endpoints:
     web:
