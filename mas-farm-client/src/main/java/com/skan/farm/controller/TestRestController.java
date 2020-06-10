@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class TestRestController {
 
-    @Value("${google.id}")
+    @Value("${google.id:some default value }")
     private String googleId;
 
     @GetMapping("/get")

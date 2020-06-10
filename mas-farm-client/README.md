@@ -2,12 +2,25 @@
 ### 사전 준비
  - node js npm
  - vue.js 설치 vue-cli version
+```shell script
+# npm 으로 vue-cli 설치
+npm install -g @vue/cli
+
+#global addon <vue init>
+npm install -g @vue/cli-init   
+
+# project Create 
+vue init webpack frontend
+``` 
  
 ### 구동 스크립트 
 ```shell script
-cd vue
+# 필요 라이브러리 다운로드
+npn install 
+
 # 서버 구동
-$ npm run serve
-# 빌드 
-$ npm run build 
+npm start 
+
+# webpack 빌드  
+npm run build 
 ```
