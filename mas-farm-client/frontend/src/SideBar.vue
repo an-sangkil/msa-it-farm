@@ -1,7 +1,9 @@
 
 <template>
   <div id="app">
+    <hr>
     <template-compoment></template-compoment>
+    <hr>
   </div>
 </template>
 
@@ -12,13 +14,10 @@
     components: {
       'template-compoment': Template
     },
-    name: 'App'
+    name: 'SideBar'
   }
 </script>
+
+
 <style>
-
-  @import './assets/plugins/fontawesome-free/css/all.min.css';
-  @import './assets/dist/css/adminlte.min.css';
-
-
 </style>
