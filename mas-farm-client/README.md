@@ -21,6 +21,6 @@ npn install
 # 서버 구동
 npm start 
 
-# webpack 빌드  
+# webpack 빌드  (spring application 의 @/resources 폴더로 빌드)
 npm run build 
 ```
