@@ -35,5 +35,8 @@
 </script>
 
 <style>
+
+  @import '../assets/plugins/fontawesome-free/css/all.min.css';
+  @import '../assets/dist/css/adminlte.min.css';
   @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700");
 </style>
