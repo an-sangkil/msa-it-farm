@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
  * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
  * @since 2020-06-15
  */
+@CrossOrigin("*")
 @RestController
 public class TestApiController {
 
