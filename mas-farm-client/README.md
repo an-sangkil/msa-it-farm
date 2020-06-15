@@ -24,3 +24,11 @@ npm start
 # webpack 빌드  (spring application 의 @/resources 폴더로 빌드)
 npm run build 
 ```
+
+### 라이브러리 추가
+```shell script
+
+npm install vuex
+npm install axios
+
+``` 

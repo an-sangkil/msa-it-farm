@@ -17,6 +17,10 @@ spring:
     user:
       name: admin
       password: 1
+#  thymeleaf:
+#    mode: LEGACYHTML5
+#  mvc:
+#    static-path-pattern: /static/**
 management:
   endpoints:
     web:
