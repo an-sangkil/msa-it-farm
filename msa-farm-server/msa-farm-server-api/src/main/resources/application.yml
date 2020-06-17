@@ -1,7 +1,8 @@
 server:
   port: 8090
-
 spring:
+  profiles:
+    active: local
   boot:
     admin:
       client:
@@ -24,6 +25,69 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+
+---
+spring:
+  profiles: local
+  devtools:
+    restart:
+      enabled: false
+  r2dbc:
+    url: r2dbc:h2:file:///c:/Users/mezzomedia/database/naive-it-farm
+    username: admin
+    password: 1234
+    pool:
+      max-size: 10
+      validation-query: SELECT 1
+
+logging:
+  file:
+    name: logs/it.farm.apiserver.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info
+
+---
+spring:
+  profiles: test
+  devtools:
+    restart:
+      enabled: false
+
+  r2dbc:
+    url: r2dbc:mysql://127.0.0.1:3306/ae_report?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: rootQ1!
+    pool:
+      max-size: 100
+      validation-query: SELECT 1
+
+logging:
+  file:
+    name: logs/it.farm.apiserver.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info
+---
+spring:
+  profiles: dev
+  devtools:
+    restart:
+      enabled: false
+
+  r2dbc:
+    url: r2dbc:mysql://210.221.235.202:3306/ae_report?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: mezzo2018
+    pool:
+      max-size: 100
+      validation-query: SELECT 1
 
 logging:
   file:
