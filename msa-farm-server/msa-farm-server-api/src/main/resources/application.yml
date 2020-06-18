@@ -35,7 +35,7 @@ spring:
     restart:
       enabled: false
   r2dbc:
-    url: r2dbc:h2:file:///c:/Users/mezzomedia/database/naive-it-farm
+    url: r2dbc:h2:file:///c:/Users/mezzomedia/database/naive-it-farm;AUTO_SERVER=TRUE
     username: admin
     password: 1234
     pool:
@@ -59,9 +59,9 @@ spring:
       enabled: false
 
   r2dbc:
-    url: r2dbc:mysql://127.0.0.1:3306/ae_report?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
-    username: root
-    password: rootQ1!
+    url: r2dbc:mysql://127.0.0.1:3306/naive-it-farm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: admin
+    password: 1234
     pool:
       max-size: 100
       validation-query: SELECT 1

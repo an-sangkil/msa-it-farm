@@ -4,17 +4,12 @@ import com.skan.farm.model.Users;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <pre>
@@ -28,11 +23,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 2020-06-16
  */
 @SpringBootTest
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @Slf4j
 class TestR2dbcRepositoryTest {
 
+    //TimeUtils.secondsToUnit(60,TimeUnit.SECONDS);
     TestR2dbcRepository testR2dbcRepository;
 
     public TestR2dbcRepositoryTest(TestR2dbcRepository testR2dbcRepository) {
@@ -57,7 +53,7 @@ class TestR2dbcRepositoryTest {
 
     @Test
     void getOneV2() {
-        String userId = "dmlim";
+        var userId = "1";
         Mono<Users> usersMono = testR2dbcRepository.getOneV2(userId);
         usersMono.subscribe(users -> {
             log.debug(" getOneV2 user data = {} ", users);
@@ -87,5 +83,62 @@ class TestR2dbcRepositoryTest {
 
 
         ;
+    }
+
+    @Test
+    void insert() throws InterruptedException {
+        var id = "3";
+        var name = "userName";
+        StepVerifier.create(testR2dbcRepository.insert(name, id))
+                .consumeNextWith(integer -> {
+                    log.debug("data = {}", integer);
+                })
+                .expectComplete()
+                .verify();
+        ;
+
+    }
+
+    @Test
+    @Rollback(false)
+    void update() {
+        var id = "1";
+        var name = "userName update";
+        StepVerifier.create(testR2dbcRepository.update(name, id))
+                .verifyComplete();
+    }
+
+
+    @Test
+    @Rollback(false)
+    void updateCriteria() {
+        var id = "1";
+        var name = "userName update criteria";
+        StepVerifier.create(testR2dbcRepository.updateCriteria(id, name))
+                .verifyComplete();
+    }
+
+    @Test
+    void deleteCriteria() {
+        var id = "1";
+        var name = "name";
+        StepVerifier.create(testR2dbcRepository.deleteCriteria(id))
+                .verifyComplete();
+    }
+
+    @Test
+    void programTransactionTest() {
+        var id = "1";
+        var name = "name";
+        StepVerifier.create(testR2dbcRepository.insertProgramTransaction(id, name))
+                .verifyComplete();
+    }
+
+    @Test
+    void declarativeInsertTransactionTest() {
+        var id = "1";
+        var name = "name";
+        StepVerifier.create(testR2dbcRepository.declarativeInsertTransaction(id, name))
+                .verifyComplete();
     }
 }

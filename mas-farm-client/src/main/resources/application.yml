@@ -2,6 +2,8 @@ server:
   port: 8000
 
 spring:
+  profiles:
+    active: local
   boot:
     admin:
       client:
@@ -31,13 +33,51 @@ management:
       show-details: always
 
 
+---
+spring:
+  profiles: local
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    #jdbc-url: jdbc:h2:mem:naive-it-farm
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/database/naive-it-farm;AUTO_SERVER=TRUE
+    username: admin
+    password: 1234
+  jooq:
+    sql-dialect: h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 logging:
   file:
-    name: logs/it.farm.client.log
+    name: logs/it.farm.apiserver.local.log
   level:
     root: info
     com.skan: debug
     org.springframework : info
     web: info
 
-
+---
+spring:
+  profiles: test
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ae_report?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: mezzo2018
+  jooq:
+    sql-dialect: mysql
+logging:
+  file:
+    name: logs/it.farm.apiserver.test.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info

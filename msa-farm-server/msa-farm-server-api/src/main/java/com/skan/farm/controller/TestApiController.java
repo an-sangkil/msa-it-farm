@@ -1,5 +1,6 @@
 package com.skan.farm.controller;
 
+import com.skan.farm.repository.TestR2dbcRepository;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,6 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestApiController {
 
+    TestR2dbcRepository testR2dbcRepository;
+
+    public TestApiController(TestR2dbcRepository testR2dbcRepository) {
+        this.testR2dbcRepository = testR2dbcRepository;
+    }
+
     @GetMapping("/get/test")
     public TestModel getTest(ServerHttpRequest serverHttpRequest) {
         TestModel testModel = new TestModel();
@@ -31,9 +38,19 @@ public class TestApiController {
         return testModel;
     }
 
+    @GetMapping("/test/testR2dbcInsert")
+    public void testR2dbcInsert(ServerHttpRequest serverHttpRequest) {
+
+        var id = serverHttpRequest.getQueryParams().getFirst("id");
+        var name = serverHttpRequest.getQueryParams().getFirst("name");
+
+        testR2dbcRepository.insert(name, id);
+    }
+
 }
 
-@Getter@Setter
+@Getter
+@Setter
 @ToString
 class TestModel {
     String id;

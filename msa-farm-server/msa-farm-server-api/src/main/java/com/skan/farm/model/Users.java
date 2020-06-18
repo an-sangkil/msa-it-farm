@@ -1,6 +1,7 @@
 package com.skan.farm.model;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
 /**
  * <pre>
@@ -15,12 +16,13 @@ import lombok.Data;
  */
 @Data
 public class Users {
-    private String user_id;
-    private String user_name;
+    @Id
+    private String userId;
+    private String userName;
 
-    public Users(String user_id, String user_name) {
-        this.user_id = user_id;
-        this.user_name= user_name;
+    public Users(String userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 }
 
