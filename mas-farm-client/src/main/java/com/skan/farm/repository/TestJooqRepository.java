@@ -34,11 +34,25 @@ public class TestJooqRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     * jooq로 표쥰 sql 생성후 jdbctemplate 을 사용하여 데이터 불러오기
+     *
+     * @return
+     */
     public List<Map<String, Object>> getList() {
         String sql = dslContext.select(DSL.field("user_id"), DSL.field("user_name"))
                 .from(DSL.table("users")).getSQL();
         log.debug("string sql  = {}", sql);
         return jdbcTemplate.queryForList(sql);
+    }
+
+    /**
+     * jooq로 데이터를 가져와 domain 객체로 바꿔주기
+     * @return
+     */
+    public List<Users> getListObject() {
+        return dslContext.select(DSL.field("user_id"), DSL.field("user_name"))
+                .from(DSL.table("users")).fetchInto(Users.class);
     }
 
     public List<Users> getListDSLType() {
