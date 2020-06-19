@@ -13,22 +13,26 @@ npm install -g @vue/cli-init
 vue init webpack frontend
 ``` 
  
-### 구동 스크립트 
+### npm server 구동 스크립트 
 ```shell script
 # 필요 라이브러리 다운로드
-npn install 
+> npn install 
 
 # 서버 구동
-npm start 
+> npm start 
 
 # webpack 빌드  (spring application 의 @/resources 폴더로 빌드)
-npm run build 
+> npm run build 
 ```
 
-### 라이브러리 추가
+### vue.js 라이브러리 추가
+- 라이브러리는 plugs.js 에 포함 되어 있음으로 추가할 필요 없음.
 ```shell script
-
-npm install vuex
-npm install axios
-
+> npm install vuex
+> npm install axios
 ``` 
+
+### JOOQ DSL 생성
+```shell script
+> mvn jooq-codegen:generate
+```
