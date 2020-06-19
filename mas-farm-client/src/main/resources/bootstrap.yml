@@ -17,6 +17,13 @@ spring:
       fail-fast: false  # config server 와 연결이 되어 있지 않으면 예외를 발생시키고 종료 시키려면  fail-fast를 TRUE로 설정한다.
 ---
 spring:
+  profiles: test
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+---
+spring:
   profiles: dev
   cloud:
     config:

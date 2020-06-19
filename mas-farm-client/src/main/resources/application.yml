@@ -40,9 +40,9 @@ spring:
     restart:
       enabled: false
   datasource:
-    #jdbc-url: jdbc:h2:mem:naive-it-farm
-    driver-class-name: org.h2.Driver
+    #url: jdbc:h2:mem:naive-it-farm
     url: jdbc:h2:file:~/database/naive-it-farm;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
     username: admin
     password: 1234
   jooq:
@@ -67,10 +67,37 @@ spring:
     restart:
       enabled: false
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/ae_report?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
-    username: root
-    password: mezzo2018
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/naive-it-farm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
+      password: 1234
+      maximum-pool-size: 100
+  jooq:
+    sql-dialect: mysql
+logging:
+  file:
+    name: logs/it.farm.apiserver.test.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info
+
+
+---
+spring:
+  profiles: dev
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/naive-it-farm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
+      password: 1234
+      maximum-pool-size: 100
   jooq:
     sql-dialect: mysql
 logging:
