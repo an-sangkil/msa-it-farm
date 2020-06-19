@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+  # DB Mysql
+  db:
+    image: mysql:5.7.21
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      MYSQL_DATABASE: naive-it-farm
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      TZ: Asia/Seoul
+    volumes:
+      #- /var/lib/mysql:/var/lib/mysql       # linux volumes link
+      - ${MYSQL_DATA_FOLDER}:/var/lib/mysql  # windows volumes link
+      # OS 볼륨의 타임존을 따라가게 할때 사용한다.
+      #- /etc/timezone:/etc/timezone:ro
+      #- /etc/localtime:/etc/localtime:ro
+    ports:
+      - 3306:3306
+
+# Dockerfile 컨테이너 안의 내부 경로 사용시 사용함.( virtual machine 안에 볼륨 링크)
+#volumes:
+#  db-mysql-data:
+
+
