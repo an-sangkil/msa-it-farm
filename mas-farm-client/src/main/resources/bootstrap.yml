@@ -7,7 +7,7 @@ spring:
   application:
     name: itfarmserver
   profiles:
-    active: dev
+    active: test
 ---
 spring:
   profiles: local
@@ -28,5 +28,5 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      fail-fast: false
+      fail-fast: true
 

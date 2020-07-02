@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * <pre>
- * Description :
+ * Description : ReactTransaction 활성화
  *
  *
  * </pre>

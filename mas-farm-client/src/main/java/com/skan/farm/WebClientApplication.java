@@ -29,7 +29,7 @@ public class WebClientApplication {
 @Component
 class WebClientStart implements CommandLineRunner {
 
-    @Value("${google.id}")
+    @Value("${google.id:default value}")
     private String googleId;
 
     @Override
