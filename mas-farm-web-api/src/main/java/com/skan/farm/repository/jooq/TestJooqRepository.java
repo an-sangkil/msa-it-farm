@@ -70,6 +70,15 @@ public class TestJooqRepository {
                 .execute();
     }
 
+    public void update(Users users) {
+        JUsers jUsers = JUsers.USERS;
+        int updateRecords = dslContext.update(jUsers)
+                .set(jUsers.USER_NAME, users.getUserName())
+                .where(jUsers.USER_ID.equal(users.getUuid()))
+                .execute();
+
+    }
+
     public void delete(String key) {
         int deleteRecords = dslContext.delete(JUsers.USERS).where(JUsers.USERS.USER_ID.equal(key)).execute();
         log.debug("deleteRecords : {}", deleteRecords);
