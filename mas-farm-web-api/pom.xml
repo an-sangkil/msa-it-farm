@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>mas-farm-webclient</artifactId>
+    <artifactId>mas-farm-web-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -63,10 +63,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
@@ -201,7 +201,8 @@
                         </database>
                         <target>
                             <packageName>com.skan.farm.domain</packageName>
-                            <directory>target/generated-sources/jooq</directory>
+                            <!--<directory>target/generated-sources/jooq</directory>-->
+                            <directory>src/generated-sources/jooq</directory>
                             <encoding>UTF-8</encoding>
                             <clean>true</clean>
                         </target>

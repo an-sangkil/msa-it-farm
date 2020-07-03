@@ -21,7 +21,6 @@
         <module>msa-farm-server-repository</module>
         <module>msa-farm-server-model</module>
         <module>msa-farm-server-api</module>
-        <module>mas-farm-web-api</module>
     </modules>
 
 
