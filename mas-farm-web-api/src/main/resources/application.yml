@@ -1,0 +1,110 @@
+server:
+  port: 8000
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000
+        #admin monitoring server 의 id
+        username: admin
+        #admin monitoring server 의 password
+        password: admin
+        instance:
+          name: it-farm-client   #(어플리케이션 명)
+          metadata: # 나의 어플리케이션 (스프링 시큐리티 )로그인 정보
+            user.name: user1
+            user.password: user1
+  security:
+    user:
+      name: user1
+      password: user1
+#  thymeleaf:
+#    mode: LEGACYHTML5
+#  mvc:
+#    static-path-pattern: /static/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+
+---
+spring:
+  profiles: local
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    #url: jdbc:h2:mem:naive-it-farm
+    url: jdbc:h2:file:~/database/naive-it-farm;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: 1234
+  jooq:
+    sql-dialect: h2
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+logging:
+  file:
+    name: logs/it.farm.apiserver.local.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info
+
+---
+spring:
+  profiles: test
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/naive-it-farm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
+      password: 1234
+      maximum-pool-size: 100
+  jooq:
+    sql-dialect: mysql
+logging:
+  file:
+    name: logs/it.farm.apiserver.test.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info
+
+
+---
+spring:
+  profiles: dev
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/naive-it-farm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: admin
+      password: 1234
+      maximum-pool-size: 100
+  jooq:
+    sql-dialect: mysql
+logging:
+  file:
+    name: logs/it.farm.apiserver.test.log
+  level:
+    root: info
+    com.skan: debug
+    org.springframework : info
+    web: info

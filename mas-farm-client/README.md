@@ -1,38 +1,30 @@
+# frontend
 
-### 사전 준비
- - node js npm
- - vue.js 설치 vue-cli version
-```shell script
-# npm 으로 vue-cli 설치
-npm install -g @vue/cli
+> mas-it-farm project (Vue.js)
 
-#global addon <vue init>
-npm install -g @vue/cli-init   
+## Build Setup
 
-# project Create 
-vue init webpack frontend
-``` 
- 
-### npm server 구동 스크립트 
-```shell script
-# 필요 라이브러리 다운로드
-> npn install 
+``` bash
+# install dependencies
+npm install
 
-# 서버 구동
-> npm start 
+# serve with hot reload at localhost:8080
+npm run dev
 
-# webpack 빌드  (spring application 의 @/resources 폴더로 빌드)
-> npm run build 
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
 ```
 
-### vue.js 라이브러리 추가
-- 라이브러리는 plugs.js 에 포함 되어 있음으로 추가할 필요 없음.
-```shell script
-> npm install vuex
-> npm install axios
-``` 
-
-### JOOQ DSL 생성
-```shell script
-> mvn jooq-codegen:generate
-```
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
