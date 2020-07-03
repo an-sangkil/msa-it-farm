@@ -70,11 +70,12 @@ spring:
       hibernate.format_sql: true
 logging:
   file:
-    name: logs/it.farm.apiserver.local.log
+    name: logs/it.farm.webapi.log
   level:
     root: info
     com.skan: debug
     org.springframework : info
+    org.hibernate.type.descriptor.sql: trace
     web: info
 
 ---
@@ -116,11 +117,12 @@ spring:
         enabled: true
 logging:
   file:
-    name: logs/it.farm.apiserver.test.log
+    name: logs/it.farm.webapi.log
   level:
     root: info
     com.skan: debug
     org.springframework : info
+    org.hibernate.type.descriptor.sql: trace
     web: info
 
 
@@ -164,7 +166,7 @@ spring:
 
 logging:
   file:
-    name: logs/it.farm.apiserver.test.log
+    name: logs/it.farm.webapi.log
   level:
     root: info
     com.skan: debug

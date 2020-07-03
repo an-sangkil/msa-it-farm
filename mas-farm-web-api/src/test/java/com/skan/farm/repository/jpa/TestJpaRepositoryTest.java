@@ -51,6 +51,18 @@ class TestJpaRepositoryTest {
     }
 
     @Test
+    void testNonRollbackInsert(){
+        Users user =  new Users();
+        user.setUuid(UUID.randomUUID().toString());
+        user.setUserId("skan");
+        user.setUserName("skan");
+        user.setPassword("password");
+
+        testJpaRepository.save(user);
+    }
+
+
+    @Test
     void list(){
         testJpaRepository.findAll();
     }
