@@ -30,3 +30,9 @@ target/
 **/*/target
 
 /logs
+
+# eclipse 
+*/**/.classpath
+*/**/.project
+*.settings/
+/.project
