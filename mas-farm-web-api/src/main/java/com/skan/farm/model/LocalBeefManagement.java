@@ -1,10 +1,11 @@
 package com.skan.farm.model;
 
-import lombok.Data;
-import lombok.ToString;
+import com.skan.farm.code.GenderCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,9 @@ import java.util.Set;
  */
 @Entity
 @Data
-@ToString(exclude = {"calvesManagementSet", "cattleBuyInformationSet", "cattleSellStoreInformationSet", "diseaseTreatmentSet"})
+@ToString(exclude = {"calvesManagementSet", "cattleBuyInformation", "cattleSellStoreInformationSet", "diseaseTreatmentSet"})
+@AllArgsConstructor
+@Builder
 public class LocalBeefManagement implements Serializable {
 
     /**
@@ -27,6 +30,7 @@ public class LocalBeefManagement implements Serializable {
 
     @Embeddable
     @Data
+    @AllArgsConstructor
     public static class LocalBeefManagementPK implements Serializable {
         /**
          * 개체관리번호.
@@ -37,6 +41,9 @@ public class LocalBeefManagement implements Serializable {
          * 개체식별번호.
          */
         private String entityIdentificationNumber;
+
+        public LocalBeefManagementPK() {
+        }
     }
 
     @EmbeddedId
@@ -56,27 +63,28 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 출생일, 태어난날.
      */
-    private Date birthDay;
+    private LocalDate birthDay;
 
     /**
      * 입식일.
      */
-    private Date enterDate;
+    private LocalDate enterDate;
 
     /**
      * 귀표장착일.
      */
-    private Date earTagDate;
+    private LocalDate earTagDate;
 
     /**
      * 거세일.
      */
-    private Date castrationDate;
+    private LocalDate castrationDate;
 
     /**
      * 성별.
      */
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private GenderCode gender;
 
     /**
      * 판매여부.
@@ -102,8 +110,8 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 구입기록 목록.
      */
-    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-    private Set<CattleBuyInformation> cattleBuyInformationSet;
+    @OneToOne(mappedBy = "localBeefManagement", fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    private CattleBuyInformation cattleBuyInformation;
 
     /**
      * 판매지정보 목록.
@@ -122,7 +130,7 @@ public class LocalBeefManagement implements Serializable {
      */
     public LocalBeefManagement() {
         this.calvesManagementSet = new HashSet<CalvesManagement>();
-        this.cattleBuyInformationSet = new HashSet<CattleBuyInformation>();
+        //this.cattleBuyInformation = new CattleBuyInformation();
         this.cattleSellStoreInformationSet = new HashSet<CattleSellStoreInformation>();
         this.diseaseTreatmentSet = new HashSet<DiseaseTreatment>();
     }

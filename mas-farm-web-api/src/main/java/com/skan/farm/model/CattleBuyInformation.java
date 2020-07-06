@@ -1,7 +1,10 @@
 package com.skan.farm.model;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +18,9 @@ import java.time.LocalDate;
  */
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CattleBuyInformation implements Serializable {
 
 	/** serialVersionUID. */
@@ -22,6 +28,7 @@ public class CattleBuyInformation implements Serializable {
 
 	@Embeddable
 	@Data
+	@AllArgsConstructor
 	public static class CattleBuyInformationPK implements Serializable {
 		/**
 		 * 개체관리번호.
@@ -32,6 +39,9 @@ public class CattleBuyInformation implements Serializable {
 		 * 개체식별번호.
 		 */
 		private String entityIdentificationNumber;
+
+		public CattleBuyInformationPK() {
+		}
 	}
 
 	@EmbeddedId
@@ -54,10 +64,10 @@ public class CattleBuyInformation implements Serializable {
 
 	/** 한우(암소/수소) 개체관리기록부. */
 	@MapsId("localBeefManagementPK")
-	@ManyToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumns({
-			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
-			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false),
+			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber"),
+			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber"),
 	})
 	private LocalBeefManagement localBeefManagement;
 
