@@ -2,10 +2,7 @@ package com.skan.farm.model;
 
 import lombok.Data;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -22,9 +19,6 @@ public class CattleSellStoreInformation implements Serializable {
 	/** serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** 한우(암소/수소) 개체관리기록부. */
-	@Transient
-	private LocalBeefManagement localBeefManagement;
 
 	@Embeddable
 	@Data
@@ -66,6 +60,15 @@ public class CattleSellStoreInformation implements Serializable {
 
 	/** 등급(1++A, 1++B). */
 	private String beefGrade;
+
+	@MapsId("localBeefManagementPK")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumns({
+			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
+			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false),
+	})
+	/** 한우(암소/수소) 개체관리기록부. */
+	private LocalBeefManagement localBeefManagement;
 
 	/**
 	 * 생성자.

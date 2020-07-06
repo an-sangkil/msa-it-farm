@@ -3,10 +3,7 @@ package com.skan.farm.model;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -99,25 +96,25 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 분만관리(송아지 관리) 목록.
      */
-    @Transient
+    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
     private Set<CalvesManagement> calvesManagementSet;
 
     /**
      * 구입기록 목록.
      */
-    @Transient
+    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
     private Set<CattleBuyInformation> cattleBuyInformationSet;
 
     /**
      * 판매지정보 목록.
      */
-    @Transient
+    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
     private Set<CattleSellStoreInformation> cattleSellStoreInformationSet;
 
     /**
      * 질병 및 치료 목록.
      */
-    @Transient
+    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
     private Set<DiseaseTreatment> diseaseTreatmentSet;
 
     /**

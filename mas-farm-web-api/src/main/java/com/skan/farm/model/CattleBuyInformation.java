@@ -3,10 +3,7 @@ package com.skan.farm.model;
 
 import lombok.Data;
 
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -56,7 +53,12 @@ public class CattleBuyInformation implements Serializable {
 	private String buySellPhoneNumber;
 
 	/** 한우(암소/수소) 개체관리기록부. */
-	@Transient
+	@MapsId("localBeefManagementPK")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumns({
+			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
+			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false),
+	})
 	private LocalBeefManagement localBeefManagement;
 
 }
