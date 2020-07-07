@@ -1,14 +1,15 @@
 package com.skan.farm.model;
 
 import com.skan.farm.code.GenderCode;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 한우(암소/수소) 개체관리기록부 모델 클래스.
@@ -17,10 +18,15 @@ import java.util.Set;
  * @version $Id$
  */
 @Entity
-@Data
-@ToString(exclude = {"calvesManagementSet", "cattleBuyInformation", "cattleSellStoreInformationSet", "diseaseTreatmentSet"})
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
+//@EqualsAndHashCode(exclude = {"cattleBuyInformation"}, callSuper = false)
+@ToString(exclude = {
+        //    "calvesManagementSet",
+        "cattleBuyInformation"//,
+        //      "cattleSellStoreInformationSet",
+//        "diseaseTreatmentSet"
+})
 public class LocalBeefManagement implements Serializable {
 
     /**
@@ -28,27 +34,26 @@ public class LocalBeefManagement implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    @Embeddable
-    @Data
-    @AllArgsConstructor
-    public static class LocalBeefManagementPK implements Serializable {
-        /**
-         * 개체관리번호.
-         */
-        private String entityManagementNumber;
+//    @Builder
+//    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Date createdTime, Date modifiedTime) {
+//        this.localBeefManagementPK = localBeefManagementPK;
+//        this.parentPapaNo = parentPapaNo;
+//        this.parentMomNo = parentMomNo;
+//        this.birthDay = birthDay;
+//        this.enterDate = enterDate;
+//        this.earTagDate = earTagDate;
+//        this.castrationDate = castrationDate;
+//        this.gender = gender;
+//        this.sellYn = sellYn;
+//        this.createdTime = createdTime;
+//        this.modifiedTime = modifiedTime;
+//    }
 
-        /**
-         * 개체식별번호.
-         */
-        private String entityIdentificationNumber;
 
-        public LocalBeefManagementPK() {
-        }
-    }
-
-    @EmbeddedId
-    LocalBeefManagementPK localBeefManagementPK;
-
+    //    @EmbeddedId
+//    protected LocalBeefManagementPK localBeefManagementPK;
+    @Id
+    private String entityManagementNumber;
 
     /**
      * 부 번호.
@@ -101,38 +106,38 @@ public class LocalBeefManagement implements Serializable {
      */
     private Date modifiedTime;
 
-    /**
-     * 분만관리(송아지 관리) 목록.
-     */
-    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-    private Set<CalvesManagement> calvesManagementSet;
+//    /**
+//     * 분만관리(송아지 관리) 목록.
+//     */
+//    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+//    private Set<CalvesManagement> calvesManagementSet;
 
     /**
-     * 구입기록 목록.
+     * 구입기록 목록. {양방향 사용 하지 않음}
      */
-    @OneToOne(mappedBy = "localBeefManagement", fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "localBeefManagement"
+            , fetch = FetchType.LAZY
+            , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
+            , optional = false)
+    //@Transient
     private CattleBuyInformation cattleBuyInformation;
 
-    /**
-     * 판매지정보 목록.
-     */
-    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-    private Set<CattleSellStoreInformation> cattleSellStoreInformationSet;
-
-    /**
-     * 질병 및 치료 목록.
-     */
-    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-    private Set<DiseaseTreatment> diseaseTreatmentSet;
+//    /**
+//     * 판매지정보 목록.
+//     */
+//    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+//    private Set<CattleSellStoreInformation> cattleSellStoreInformationSet;
+//
+//    /**
+//     * 질병 및 치료 목록.
+//     */
+//    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+//    private Set<DiseaseTreatment> diseaseTreatmentSet;
 
     /**
      * 생성자.
      */
     public LocalBeefManagement() {
-        this.calvesManagementSet = new HashSet<CalvesManagement>();
-        //this.cattleBuyInformation = new CattleBuyInformation();
-        this.cattleSellStoreInformationSet = new HashSet<CattleSellStoreInformation>();
-        this.diseaseTreatmentSet = new HashSet<DiseaseTreatment>();
     }
 
 

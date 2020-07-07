@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JUsers extends TableImpl<JUsersRecord> {
 
-    private static final long serialVersionUID = 128022840;
+    private static final long serialVersionUID = -336303428;
 
     /**
      * The reference instance of <code>naive-it-farm.users</code>
@@ -48,75 +48,74 @@ public class JUsers extends TableImpl<JUsersRecord> {
     }
 
     /**
-     * The column <code>naive-it-farm.users.uuid</code>. uuid
-
+     * The column <code>naive-it-farm.users.uuid</code>.
      */
-    public final TableField<JUsersRecord, String> UUID = createField(DSL.name("uuid"), org.jooq.impl.SQLDataType.VARCHAR(64).nullable(false), this, "uuid\n");
-
-    /**
-     * The column <code>naive-it-farm.users.user_id</code>. 사용자 아이디
-     */
-    public final TableField<JUsersRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(16).nullable(false), this, "사용자 아이디");
+    public final TableField<JUsersRecord, String> UUID = createField(DSL.name("uuid"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.password</code>. 패스워드
+     * The column <code>naive-it-farm.users.description</code>.
      */
-    public final TableField<JUsersRecord, String> PASSWORD = createField(DSL.name("password"), org.jooq.impl.SQLDataType.VARCHAR(1024).nullable(false), this, "패스워드");
+    public final TableField<JUsersRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.user_name</code>. 사용자이름
+     * The column <code>naive-it-farm.users.email</code>.
      */
-    public final TableField<JUsersRecord, String> USER_NAME = createField(DSL.name("user_name"), org.jooq.impl.SQLDataType.VARCHAR(32).nullable(false), this, "사용자이름");
+    public final TableField<JUsersRecord, String> EMAIL = createField(DSL.name("email"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.email</code>. 이메일
+     * The column <code>naive-it-farm.users.fail_login_count</code>.
      */
-    public final TableField<JUsersRecord, String> EMAIL = createField(DSL.name("email"), org.jooq.impl.SQLDataType.VARCHAR(32), this, "이메일");
+    public final TableField<JUsersRecord, Long> FAIL_LOGIN_COUNT = createField(DSL.name("fail_login_count"), org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
-     * The column <code>naive-it-farm.users.phone_number</code>. 전화번호
+     * The column <code>naive-it-farm.users.fail_login_time</code>.
      */
-    public final TableField<JUsersRecord, String> PHONE_NUMBER = createField(DSL.name("phone_number"), org.jooq.impl.SQLDataType.VARCHAR(16), this, "전화번호");
+    public final TableField<JUsersRecord, LocalDateTime> FAIL_LOGIN_TIME = createField(DSL.name("fail_login_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
-     * The column <code>naive-it-farm.users.mobile_phone_number</code>. 휴대전화번호
+     * The column <code>naive-it-farm.users.gender</code>.
      */
-    public final TableField<JUsersRecord, String> MOBILE_PHONE_NUMBER = createField(DSL.name("mobile_phone_number"), org.jooq.impl.SQLDataType.VARCHAR(16), this, "휴대전화번호");
+    public final TableField<JUsersRecord, String> GENDER = createField(DSL.name("gender"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.ssn_number</code>. 주민번호
+     * The column <code>naive-it-farm.users.last_login_time</code>.
      */
-    public final TableField<JUsersRecord, String> SSN_NUMBER = createField(DSL.name("ssn_number"), org.jooq.impl.SQLDataType.VARCHAR(12), this, "주민번호");
+    public final TableField<JUsersRecord, LocalDateTime> LAST_LOGIN_TIME = createField(DSL.name("last_login_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
-     * The column <code>naive-it-farm.users.gender</code>. 성별(M : 남성F : 여성)
+     * The column <code>naive-it-farm.users.mobile_phone_number</code>.
      */
-    public final TableField<JUsersRecord, String> GENDER = createField(DSL.name("gender"), org.jooq.impl.SQLDataType.VARCHAR(1), this, "성별(M : 남성F : 여성)");
+    public final TableField<JUsersRecord, String> MOBILE_PHONE_NUMBER = createField(DSL.name("mobile_phone_number"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.last_login_time</code>. 마지막 접속 시간
+     * The column <code>naive-it-farm.users.password</code>.
      */
-    public final TableField<JUsersRecord, LocalDateTime> LAST_LOGIN_TIME = createField(DSL.name("last_login_time"), org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.LOCALDATETIME)), this, "마지막 접속 시간");
+    public final TableField<JUsersRecord, String> PASSWORD = createField(DSL.name("password"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.fail_login_time</code>. 마지막 접속 실패 시간
+     * The column <code>naive-it-farm.users.phone_number</code>.
      */
-    public final TableField<JUsersRecord, LocalDateTime> FAIL_LOGIN_TIME = createField(DSL.name("fail_login_time"), org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.LOCALDATETIME)), this, "마지막 접속 실패 시간");
+    public final TableField<JUsersRecord, String> PHONE_NUMBER = createField(DSL.name("phone_number"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.fail_login_count</code>. 로그인 실패 횟수
+     * The column <code>naive-it-farm.users.ssn_number</code>.
      */
-    public final TableField<JUsersRecord, Long> FAIL_LOGIN_COUNT = createField(DSL.name("fail_login_count"), org.jooq.impl.SQLDataType.BIGINT, this, "로그인 실패 횟수");
+    public final TableField<JUsersRecord, String> SSN_NUMBER = createField(DSL.name("ssn_number"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.use_lock_state</code>. 잠금여부 (Y : 잠김)
+     * The column <code>naive-it-farm.users.use_lock_state</code>.
      */
-    public final TableField<JUsersRecord, String> USE_LOCK_STATE = createField(DSL.name("use_lock_state"), org.jooq.impl.SQLDataType.VARCHAR(1).defaultValue(org.jooq.impl.DSL.inline("N", org.jooq.impl.SQLDataType.VARCHAR)), this, "잠금여부 (Y : 잠김)");
+    public final TableField<JUsersRecord, String> USE_LOCK_STATE = createField(DSL.name("use_lock_state"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.users.description</code>. 비고
+     * The column <code>naive-it-farm.users.user_id</code>.
      */
-    public final TableField<JUsersRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.CLOB, this, "비고");
+    public final TableField<JUsersRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>naive-it-farm.users.user_name</code>.
+     */
+    public final TableField<JUsersRecord, String> USER_NAME = createField(DSL.name("user_name"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>naive-it-farm.users</code> table reference
@@ -163,7 +162,7 @@ public class JUsers extends TableImpl<JUsersRecord> {
 
     @Override
     public List<UniqueKey<JUsersRecord>> getKeys() {
-        return Arrays.<UniqueKey<JUsersRecord>>asList(Keys.KEY_USERS_PRIMARY, Keys.KEY_USERS_USER_ID);
+        return Arrays.<UniqueKey<JUsersRecord>>asList(Keys.KEY_USERS_PRIMARY, Keys.KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF);
     }
 
     @Override
@@ -197,7 +196,7 @@ public class JUsers extends TableImpl<JUsersRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row14<String, String, String, String, String, String, String, String, String, LocalDateTime, LocalDateTime, Long, String, String> fieldsRow() {
+    public Row14<String, String, String, Long, LocalDateTime, String, LocalDateTime, String, String, String, String, String, String, String> fieldsRow() {
         return (Row14) super.fieldsRow();
     }
 }

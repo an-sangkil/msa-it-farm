@@ -4,7 +4,6 @@
 package com.skan.farm.domain.tables;
 
 
-import com.skan.farm.domain.Indexes;
 import com.skan.farm.domain.JNaiveItFarm;
 import com.skan.farm.domain.Keys;
 import com.skan.farm.domain.tables.records.JPersonalCodeRecord;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row7;
@@ -34,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
 
-    private static final long serialVersionUID = -1594306670;
+    private static final long serialVersionUID = 1687312612;
 
     /**
      * The reference instance of <code>naive-it-farm.personal_code</code>
@@ -123,11 +121,6 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PERSONAL_CODE_UPPER_CODE);
-    }
-
-    @Override
     public UniqueKey<JPersonalCodeRecord> getPrimaryKey() {
         return Keys.KEY_PERSONAL_CODE_PRIMARY;
     }
@@ -139,10 +132,14 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
 
     @Override
     public List<ForeignKey<JPersonalCodeRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<JPersonalCodeRecord, ?>>asList(Keys.PERSONAL_CODE_IBFK_1);
+        return Arrays.<ForeignKey<JPersonalCodeRecord, ?>>asList(Keys.FK1KYMM6VJBNV2QBNEIQEH8KNDN, Keys.PERSONAL_CODE_IBFK_1);
     }
 
-    public JPersonalCode personalCode() {
+    public JPersonalCode fk1kymm6vjbnv2qbneiqeh8kndn() {
+        return new JPersonalCode(this, Keys.FK1KYMM6VJBNV2QBNEIQEH8KNDN);
+    }
+
+    public JPersonalCode personalCodeIbfk_1() {
         return new JPersonalCode(this, Keys.PERSONAL_CODE_IBFK_1);
     }
 

@@ -15,7 +15,7 @@ import java.time.LocalDate;
  * @version $Id$
  */
 @Data
-@Entity
+//@Entity
 public class DiseaseTreatment implements Serializable {
 
 	/** serialVersionUID. */
@@ -24,7 +24,7 @@ public class DiseaseTreatment implements Serializable {
 	@MapsId("localBeefManagementPK")
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumns({
-			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
+			@JoinColumn(name = "localBeefManagementPK.entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
 			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false),
 	})
 	/** 한우(암소/수소) 개체관리기록부. */

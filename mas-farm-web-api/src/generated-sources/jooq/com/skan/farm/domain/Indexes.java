@@ -4,9 +4,7 @@
 package com.skan.farm.domain;
 
 
-import com.skan.farm.domain.tables.JCommonCode;
 import com.skan.farm.domain.tables.JHouseKeepingBook;
-import com.skan.farm.domain.tables.JPersonalCode;
 import com.skan.farm.domain.tables.JSchedule;
 
 import org.jooq.Index;
@@ -24,9 +22,7 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index COMMON_CODE_UPPER_CODE = Indexes0.COMMON_CODE_UPPER_CODE;
     public static final Index HOUSE_KEEPING_BOOK_CATEGORY_CODE = Indexes0.HOUSE_KEEPING_BOOK_CATEGORY_CODE;
-    public static final Index PERSONAL_CODE_UPPER_CODE = Indexes0.PERSONAL_CODE_UPPER_CODE;
     public static final Index SCHEDULE_GROUP_NO = Indexes0.SCHEDULE_GROUP_NO;
 
     // -------------------------------------------------------------------------
@@ -34,9 +30,7 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index COMMON_CODE_UPPER_CODE = Internal.createIndex("upper_code", JCommonCode.COMMON_CODE, new OrderField[] { JCommonCode.COMMON_CODE.UPPER_CODE }, false);
         public static Index HOUSE_KEEPING_BOOK_CATEGORY_CODE = Internal.createIndex("category_code", JHouseKeepingBook.HOUSE_KEEPING_BOOK, new OrderField[] { JHouseKeepingBook.HOUSE_KEEPING_BOOK.CATEGORY_CODE }, false);
-        public static Index PERSONAL_CODE_UPPER_CODE = Internal.createIndex("upper_code", JPersonalCode.PERSONAL_CODE, new OrderField[] { JPersonalCode.PERSONAL_CODE.UPPER_CODE }, false);
         public static Index SCHEDULE_GROUP_NO = Internal.createIndex("group_no", JSchedule.SCHEDULE, new OrderField[] { JSchedule.SCHEDULE.GROUP_NO, JSchedule.SCHEDULE.USER_ID }, false);
     }
 }

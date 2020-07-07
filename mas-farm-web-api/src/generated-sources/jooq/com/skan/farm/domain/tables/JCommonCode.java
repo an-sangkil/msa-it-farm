@@ -4,7 +4,6 @@
 package com.skan.farm.domain.tables;
 
 
-import com.skan.farm.domain.Indexes;
 import com.skan.farm.domain.JNaiveItFarm;
 import com.skan.farm.domain.Keys;
 import com.skan.farm.domain.tables.records.JCommonCodeRecord;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row6;
@@ -34,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JCommonCode extends TableImpl<JCommonCodeRecord> {
 
-    private static final long serialVersionUID = 1133184170;
+    private static final long serialVersionUID = -1632800589;
 
     /**
      * The reference instance of <code>naive-it-farm.common_code</code>
@@ -50,34 +48,34 @@ public class JCommonCode extends TableImpl<JCommonCodeRecord> {
     }
 
     /**
-     * The column <code>naive-it-farm.common_code.code</code>. 코드
+     * The column <code>naive-it-farm.common_code.code</code>.
      */
-    public final TableField<JCommonCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(16).nullable(false), this, "코드");
+    public final TableField<JCommonCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>naive-it-farm.common_code.upper_code</code>. 상위코드
+     * The column <code>naive-it-farm.common_code.code_comment</code>.
      */
-    public final TableField<JCommonCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(16), this, "상위코드");
+    public final TableField<JCommonCodeRecord, String> CODE_COMMENT = createField(DSL.name("code_comment"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.common_code.code_seq</code>. 그룹별 코드 순번
+     * The column <code>naive-it-farm.common_code.code_name</code>.
      */
-    public final TableField<JCommonCodeRecord, Long> CODE_SEQ = createField(DSL.name("code_seq"), org.jooq.impl.SQLDataType.BIGINT, this, "그룹별 코드 순번");
+    public final TableField<JCommonCodeRecord, String> CODE_NAME = createField(DSL.name("code_name"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.common_code.code_name</code>. 코드이름
+     * The column <code>naive-it-farm.common_code.code_seq</code>.
      */
-    public final TableField<JCommonCodeRecord, String> CODE_NAME = createField(DSL.name("code_name"), org.jooq.impl.SQLDataType.VARCHAR(128), this, "코드이름");
+    public final TableField<JCommonCodeRecord, Integer> CODE_SEQ = createField(DSL.name("code_seq"), org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>naive-it-farm.common_code.code_comment</code>. 코드 설명
+     * The column <code>naive-it-farm.common_code.created_time</code>.
      */
-    public final TableField<JCommonCodeRecord, String> CODE_COMMENT = createField(DSL.name("code_comment"), org.jooq.impl.SQLDataType.VARCHAR(2048), this, "코드 설명");
+    public final TableField<JCommonCodeRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
-     * The column <code>naive-it-farm.common_code.created_time</code>. 생성일시
+     * The column <code>naive-it-farm.common_code.upper_code</code>.
      */
-    public final TableField<JCommonCodeRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.LOCALDATETIME)), this, "생성일시");
+    public final TableField<JCommonCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>naive-it-farm.common_code</code> table reference
@@ -118,11 +116,6 @@ public class JCommonCode extends TableImpl<JCommonCodeRecord> {
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.COMMON_CODE_UPPER_CODE);
-    }
-
-    @Override
     public UniqueKey<JCommonCodeRecord> getPrimaryKey() {
         return Keys.KEY_COMMON_CODE_PRIMARY;
     }
@@ -134,11 +127,11 @@ public class JCommonCode extends TableImpl<JCommonCodeRecord> {
 
     @Override
     public List<ForeignKey<JCommonCodeRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<JCommonCodeRecord, ?>>asList(Keys.COMMON_CODE_IBFK_1);
+        return Arrays.<ForeignKey<JCommonCodeRecord, ?>>asList(Keys.FKC4P1HKO5VS86OID1LTDGX7S7D);
     }
 
     public JCommonCode commonCode() {
-        return new JCommonCode(this, Keys.COMMON_CODE_IBFK_1);
+        return new JCommonCode(this, Keys.FKC4P1HKO5VS86OID1LTDGX7S7D);
     }
 
     @Override
@@ -172,7 +165,7 @@ public class JCommonCode extends TableImpl<JCommonCodeRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row6<String, String, Long, String, String, LocalDateTime> fieldsRow() {
+    public Row6<String, String, String, Integer, LocalDateTime, String> fieldsRow() {
         return (Row6) super.fieldsRow();
     }
 }

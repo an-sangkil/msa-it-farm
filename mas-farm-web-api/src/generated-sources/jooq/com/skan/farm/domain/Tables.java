@@ -7,14 +7,13 @@ package com.skan.farm.domain;
 import com.skan.farm.domain.tables.JAddressDetail;
 import com.skan.farm.domain.tables.JAddressManagement;
 import com.skan.farm.domain.tables.JAnniversary;
-import com.skan.farm.domain.tables.JCalveManagement;
+import com.skan.farm.domain.tables.JCattleBuyInformation;
 import com.skan.farm.domain.tables.JCommonCode;
 import com.skan.farm.domain.tables.JEmail;
 import com.skan.farm.domain.tables.JGroupManagement;
 import com.skan.farm.domain.tables.JGroupMember;
-import com.skan.farm.domain.tables.JHmCattleBuyInfo;
 import com.skan.farm.domain.tables.JHouseKeepingBook;
-import com.skan.farm.domain.tables.JLocalBeffManagement;
+import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
 import com.skan.farm.domain.tables.JPhone;
 import com.skan.farm.domain.tables.JSchedule;
@@ -43,9 +42,9 @@ public class Tables {
     public static final JAnniversary ANNIVERSARY = JAnniversary.ANNIVERSARY;
 
     /**
-     * The table <code>naive-it-farm.calve_management</code>.
+     * The table <code>naive-it-farm.cattle_buy_information</code>.
      */
-    public static final JCalveManagement CALVE_MANAGEMENT = JCalveManagement.CALVE_MANAGEMENT;
+    public static final JCattleBuyInformation CATTLE_BUY_INFORMATION = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
 
     /**
      * The table <code>naive-it-farm.common_code</code>.
@@ -68,19 +67,14 @@ public class Tables {
     public static final JGroupMember GROUP_MEMBER = JGroupMember.GROUP_MEMBER;
 
     /**
-     * The table <code>naive-it-farm.hm_cattle_buy_info</code>.
-     */
-    public static final JHmCattleBuyInfo HM_CATTLE_BUY_INFO = JHmCattleBuyInfo.HM_CATTLE_BUY_INFO;
-
-    /**
      * The table <code>naive-it-farm.house_keeping_book</code>.
      */
     public static final JHouseKeepingBook HOUSE_KEEPING_BOOK = JHouseKeepingBook.HOUSE_KEEPING_BOOK;
 
     /**
-     * The table <code>naive-it-farm.local_beff_management</code>.
+     * The table <code>naive-it-farm.local_beef_management</code>.
      */
-    public static final JLocalBeffManagement LOCAL_BEFF_MANAGEMENT = JLocalBeffManagement.LOCAL_BEFF_MANAGEMENT;
+    public static final JLocalBeefManagement LOCAL_BEEF_MANAGEMENT = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
 
     /**
      * The table <code>naive-it-farm.personal_code</code>.
