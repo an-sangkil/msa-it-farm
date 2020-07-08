@@ -34,6 +34,10 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     final LocalBeefManagementJpaRepository localBeefManagementJpaRepository;
     final CattleBuyInformationJpaRepository cattleBuyInformationJpaRepository;
 
+
+    String entityNumber = "1111";
+    String identityNumber = "2222";
+
     @BeforeEach
     void setUp() {
     }
@@ -49,20 +53,17 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     }
 
     @Test
-    @DisplayName("기본 저장 ")
+    @DisplayName("기록관리 기본 저장 ")
     @Override
     @Order(1)
     public void save() {
 
-//        LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
-//                .localBeefManagementPK(new LocalBeefManagementPK("1234", "5678"))
-//                .birthDay(LocalDate.now())
-//                .gender(GenderCode.FEMALE)
-//                .build();
-        LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-        localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("1111", "2222"));
-        localBeefManagement.setBirthDay(LocalDate.now());
-        localBeefManagement.setGender(GenderCode.FEMALE);
+
+        LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
+                .localBeefManagementPK(new LocalBeefManagementPK(entityNumber, identityNumber))
+                .birthDay(LocalDate.now())
+                .gender(GenderCode.FEMALE)
+                .build();
 
 
         this.localBeefManagementJpaRepository.save(localBeefManagement);
@@ -73,30 +74,30 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     @Order(2)
     void cattleBuySave() {
 
-
+        // parent key 가 없으면 제약 조건 위배로 오류.
         CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
         cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("1111", "2222"));
         cattleBuyInformation.setBuyDate(LocalDate.now());
         cattleBuyInformation.setBuyNote("노트 처음");
 
         cattleBuyInformation = this.cattleBuyInformationJpaRepository.save(cattleBuyInformation);
+        log.debug("cattleBuyInformation 저장 정보 : {}", cattleBuyInformation);
     }
 
     @Test
     @Order(3)
-    @DisplayName("저장된 판매내역 불러와 수정 하면서 업데이트 하기 ")
+    @DisplayName("저장된 판매내역 불러와 수정 하면서 업데이트 하기 - 준영속성 전파로 업데이트")
     void findAndSave() {
 
-        cattleBuyInformationJpaRepository.findAll();
-//        localBeefManagementJpaRepository.findAll();
-//        LocalBeefManagement localBeefManagement = localBeefManagementJpaRepository.findById(new LocalBeefManagement.LocalBeefManagementPK("1234", "5678")).orElseThrow();
-//        CattleBuyInformation cattleBuyInformation = cattleBuyInformationJpaRepository.findById(new CattleBuyInformation.CattleBuyInformationPK("1234", "5678")).orElseThrow();
-//
-//        System.out.println("---------------------------------- 절취선 -------------------------------------------");
-//        cattleBuyInformation.setBuyNote("노트트트 수정");
-//        System.out.println(localBeefManagement.getBirthDay());
-        //System.out.println(localBeefManagement.getCattleBuyInformation());
-        //localBeefManagement.setCattleBuyInformation(cattleBuyInformation);
+        LocalBeefManagement localBeefManagement = localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(entityNumber, identityNumber)).orElseThrow();
+        CattleBuyInformation cattleBuyInformation = cattleBuyInformationJpaRepository.findById(new LocalBeefManagementPK(entityNumber, identityNumber)).orElseThrow();
+
+        System.out.println("---------------------------------- 절취선 -------------------------------------------");
+        cattleBuyInformation.setBuyNote("노트트트 수정");
+        System.out.println(String.format("수정 내용 >> localBeefManagement.getCattleBuyInformation() :  %s", localBeefManagement.getCattleBuyInformation()));
+
+        localBeefManagement.setCattleBuyInformation(cattleBuyInformation);
+        localBeefManagementJpaRepository.save(localBeefManagement);
 
         System.out.println("end");
     }
@@ -106,7 +107,7 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     @DisplayName("부모객체에 자식객체 추가하여 한번에 저장하기 : 영속성 전이 관계를 설정하여야만 동작 한다.")
     void localbeefAndCattleSave() {
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-        localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("3333" , "5555"));
+        localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("3333", "5555"));
         localBeefManagement.setBirthDay(LocalDate.now());
         localBeefManagement.setGender(GenderCode.FEMALE);
 
@@ -126,16 +127,6 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     @Order(5)
     @DisplayName("자식객체에 부모객체를 삽입하여 저장하기 : 영속성 전이 관계가 있어야만 작동된다.")
     void localbeefAndCattleSaveReverse() {
-        /*LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
-                .localBeefManagementPK(new LocalBeefManagementPK("5555", "6666"))
-                .birthDay(LocalDate.now())
-                .gender(GenderCode.FEMALE)
-                .build();
-        CattleBuyInformation cattleBuyInformation = CattleBuyInformation.builder()
-                .cattleBuyInformationPK(new CattleBuyInformationPK("5555", "6666"))
-                .buyDate(LocalDate.now())
-                .buyNote("노트 처음")
-                .build();*/
 
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
         localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("4444", "5555"));
@@ -226,7 +217,13 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
         List<LocalBeefManagement> beefManagements = this.localBeefManagementJpaRepository.findAll();
 
         beefManagements.forEach(localBeefManagement -> {
-            log.debug("beefManagement getCattleBuyInformation info : {} ", localBeefManagement.getCattleBuyInformation());
+            try {
+                log.debug("beefManagement 구입기록 info : {} ", localBeefManagement.getCattleBuyInformation());
+                log.debug("beefManagement 판매기록 info : {} ", localBeefManagement.getCattleSellStoreInformation());
+            }catch (Exception e) {
+                log.error("parent point of view .. ",e);
+            }
+
         });
         log.debug("beef size = {}", beefManagements.size());
 
@@ -238,7 +235,7 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     @Test
     @DisplayName("레이지 로딩 동작 확인 - 자식 기준 단방향 맵핑시")
     @Order(9)
-    public void selectChild_단방향() {
+    public void selectChild_양_단방향() {
         System.out.println("-------------------------------- 조회 시작 ----------------------------");
         List<CattleBuyInformation> beefManagements = this.cattleBuyInformationJpaRepository.findAll();
         beefManagements.forEach(cattleBuyInformation -> {

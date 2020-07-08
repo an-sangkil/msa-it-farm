@@ -13,22 +13,21 @@ import java.time.LocalDate;
  * @version $Id$
  */
 @Entity
-@Getter
-@Setter
+@Getter@Setter
 @NoArgsConstructor
-//@EqualsAndHashCode(exclude = "localBeefManagement", callSuper = false)
-//@ToString(exclude = {"localBeefManagement"})
+@EqualsAndHashCode(callSuper = false)
+@ToString(exclude = {"localBeefManagement"})
 public class CattleBuyInformation implements Serializable {
 
-//    @Builder
-//    public CattleBuyInformation(CattleBuyInformationPK cattleBuyInformationPK, String buyStoreName, LocalDate buyDate, String buyNote, String buyPhoneNumber, String buySellPhoneNumber) {
-//        this.cattleBuyInformationPK = cattleBuyInformationPK;
-//        this.buyStoreName = buyStoreName;
-//        this.buyDate = buyDate;
-//        this.buyNote = buyNote;
-//        this.buyPhoneNumber = buyPhoneNumber;
-//        this.buySellPhoneNumber = buySellPhoneNumber;
-//    }
+    @Builder
+    public CattleBuyInformation(LocalBeefManagementPK cattleBuyInformationPK, String buyStoreName, LocalDate buyDate, String buyNote, String buyPhoneNumber, String buySellPhoneNumber) {
+        this.cattleBuyInformationPK = cattleBuyInformationPK;
+        this.buyStoreName = buyStoreName;
+        this.buyDate = buyDate;
+        this.buyNote = buyNote;
+        this.buyPhoneNumber = buyPhoneNumber;
+        this.buySellPhoneNumber = buySellPhoneNumber;
+    }
 
     /**
      * serialVersionUID.
@@ -69,14 +68,12 @@ public class CattleBuyInformation implements Serializable {
     /**
      * 한우(암소/수소) 개체관리기록부.
      */
-
     @MapsId("localBeefManagementPK")
-    @OneToOne(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST, CascadeType.MERGE
-    }, optional = false)
+    @OneToOne(fetch = FetchType.LAZY
+            , cascade = {CascadeType.PERSIST, CascadeType.MERGE}
+            , optional = false)
             @JoinColumn(name = "entityManagementNumber" ,referencedColumnName = "entityManagementNumber")
             @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber")
-//    @Transient
     private LocalBeefManagement localBeefManagement;
 
 

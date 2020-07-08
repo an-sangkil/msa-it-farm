@@ -98,7 +98,7 @@ spring:
     open-in-view: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy

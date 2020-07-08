@@ -1,15 +1,13 @@
 package com.skan.farm.model;
 
 import com.skan.farm.code.GenderCode;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * 한우(암소/수소) 개체관리기록부 모델 클래스.
@@ -20,22 +18,30 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-//@EqualsAndHashCode(exclude = {"cattleBuyInformation"}, callSuper = false)
-//@ToString(exclude = {
-        //    "calvesManagementSet",
-//        "cattleBuyInformation"//,
-        //      "cattleSellStoreInformationSet",
-//        "diseaseTreatmentSet"
-//})
+@EqualsAndHashCode(exclude = {"cattleBuyInformation"}, callSuper = false)
+@ToString(exclude = {
+        "calvesManagementSet",
+        "cattleBuyInformation",
+        "cattleSellStoreInformation",
+        "diseaseTreatmentSet"
+})
 public class LocalBeefManagement implements Serializable {
 
-    /**
-     * serialVersionUID.
-     */
-    private static final long serialVersionUID = 1L;
+    @Builder
+    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Date createdTime, Date modifiedTime) {
+        this.localBeefManagementPK = localBeefManagementPK;
+        this.parentPapaNo = parentPapaNo;
+        this.parentMomNo = parentMomNo;
+        this.birthDay = birthDay;
+        this.enterDate = enterDate;
+        this.earTagDate = earTagDate;
+        this.castrationDate = castrationDate;
+        this.gender = gender;
+        this.sellYn = sellYn;
+        this.createdTime = createdTime;
+        this.modifiedTime = modifiedTime;
+    }
 
-    //    @Id
-//    private String entityManagementNumber;
     @EmbeddedId
     protected LocalBeefManagementPK localBeefManagementPK;
 
@@ -90,11 +96,11 @@ public class LocalBeefManagement implements Serializable {
      */
     private Date modifiedTime;
 
-//    /**
-//     * 분만관리(송아지 관리) 목록.
-//     */
-//    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-//    private Set<CalvesManagement> calvesManagementSet;
+    /**
+     * 분만관리(송아지 관리) 목록.
+     */
+    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+    private Set<CalvesManagement> calvesManagementSet;
 
     /**
      * 구입기록 목록. {양방향 사용 하지 않음}
@@ -102,29 +108,22 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
-            , optional = true)
-//    @Transient
-//    @MapsId("cattleBuyInformationPK")
-//    @OneToOne(fetch = FetchType.LAZY, cascade = {
-//            CascadeType.PERSIST, CascadeType.MERGE
-//    }, optional = false)
-//    @JoinColumns({
-//            @JoinColumn(name = "entityManagementNumber",referencedColumnName = "cattleEntityManagementNumber")
-//            , @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "cattleEntityIdentificationNumber")
-//    })
+            , optional = false)
     private CattleBuyInformation cattleBuyInformation;
 
-//    /**
-//     * 판매지정보 목록.
-//     */
-//    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-//    private Set<CattleSellStoreInformation> cattleSellStoreInformationSet;
-//
-//    /**
-//     * 질병 및 치료 목록.
-//     */
-//    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-//    private Set<DiseaseTreatment> diseaseTreatmentSet;
+    /**
+     * 판매지정보 목록.
+     */
+    @OneToOne(mappedBy = "localBeefManagement"
+            , fetch = FetchType.LAZY
+            , optional = false)
+    private CattleSellStoreInformation cattleSellStoreInformation;
+
+    /**
+     * 질병 및 치료 목록.
+     */
+    @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+    private Set<DiseaseTreatment> diseaseTreatmentSet;
 
     /**
      * 생성자.
