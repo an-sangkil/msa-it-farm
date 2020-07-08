@@ -1,9 +1,6 @@
 package com.skan.farm.model;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -24,7 +21,9 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 public class LocalBeefManagementPK implements Serializable {
+
     /**
      * 개체관리번호.
      */
@@ -35,6 +34,4 @@ public class LocalBeefManagementPK implements Serializable {
      */
     private String entityIdentificationNumber;
 
-    public LocalBeefManagementPK() {
-    }
 }

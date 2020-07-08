@@ -15,5 +15,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
  * @since 2020-07-06
  */
-public interface LocalBeefManagementJpaRepository extends JpaRepository<LocalBeefManagement, String> {
+public interface LocalBeefManagementJpaRepository extends JpaRepository<LocalBeefManagement, LocalBeefManagementPK> {
 }

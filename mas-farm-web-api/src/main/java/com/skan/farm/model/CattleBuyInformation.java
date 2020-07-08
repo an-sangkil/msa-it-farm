@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 //@EqualsAndHashCode(exclude = "localBeefManagement", callSuper = false)
-@ToString(exclude = {"localBeefManagement"})
+//@ToString(exclude = {"localBeefManagement"})
 public class CattleBuyInformation implements Serializable {
 
 //    @Builder
@@ -35,11 +35,11 @@ public class CattleBuyInformation implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    @Id
-    private String cattleEntityManagementNumber;
+//    @Id
+//    private String cattleEntityManagementNumber;
 
-//    @EmbeddedId
-//    protected CattleBuyInformationPK cattleBuyInformationPK;
+    @EmbeddedId
+    protected LocalBeefManagementPK cattleBuyInformationPK;
 
     /**
      * 구입처.
@@ -70,14 +70,13 @@ public class CattleBuyInformation implements Serializable {
      * 한우(암소/수소) 개체관리기록부.
      */
 
-    @MapsId
+    @MapsId("localBeefManagementPK")
     @OneToOne(fetch = FetchType.LAZY, cascade = {
-            CascadeType.PERSIST,CascadeType.MERGE
+            CascadeType.PERSIST, CascadeType.MERGE
     }, optional = false)
-    @JoinColumns({
-            @JoinColumn(name = "cattleEntityManagementNumber", referencedColumnName = "entityManagementNumber")
-            //,@JoinColumn(name = "cattleEntityIdentificationNumber", referencedColumnName = "entityIdentificationNumber")
-    })
+            @JoinColumn(name = "entityManagementNumber" ,referencedColumnName = "entityManagementNumber")
+            @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber")
+//    @Transient
     private LocalBeefManagement localBeefManagement;
 
 

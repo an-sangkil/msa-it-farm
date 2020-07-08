@@ -21,12 +21,12 @@ import java.util.Date;
 @Getter
 @Setter
 //@EqualsAndHashCode(exclude = {"cattleBuyInformation"}, callSuper = false)
-@ToString(exclude = {
+//@ToString(exclude = {
         //    "calvesManagementSet",
-        "cattleBuyInformation"//,
+//        "cattleBuyInformation"//,
         //      "cattleSellStoreInformationSet",
 //        "diseaseTreatmentSet"
-})
+//})
 public class LocalBeefManagement implements Serializable {
 
     /**
@@ -34,26 +34,10 @@ public class LocalBeefManagement implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-//    @Builder
-//    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Date createdTime, Date modifiedTime) {
-//        this.localBeefManagementPK = localBeefManagementPK;
-//        this.parentPapaNo = parentPapaNo;
-//        this.parentMomNo = parentMomNo;
-//        this.birthDay = birthDay;
-//        this.enterDate = enterDate;
-//        this.earTagDate = earTagDate;
-//        this.castrationDate = castrationDate;
-//        this.gender = gender;
-//        this.sellYn = sellYn;
-//        this.createdTime = createdTime;
-//        this.modifiedTime = modifiedTime;
-//    }
-
-
-    //    @EmbeddedId
-//    protected LocalBeefManagementPK localBeefManagementPK;
-    @Id
-    private String entityManagementNumber;
+    //    @Id
+//    private String entityManagementNumber;
+    @EmbeddedId
+    protected LocalBeefManagementPK localBeefManagementPK;
 
     /**
      * 부 번호.
@@ -118,8 +102,16 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
-            , optional = false)
-    //@Transient
+            , optional = true)
+//    @Transient
+//    @MapsId("cattleBuyInformationPK")
+//    @OneToOne(fetch = FetchType.LAZY, cascade = {
+//            CascadeType.PERSIST, CascadeType.MERGE
+//    }, optional = false)
+//    @JoinColumns({
+//            @JoinColumn(name = "entityManagementNumber",referencedColumnName = "cattleEntityManagementNumber")
+//            , @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "cattleEntityIdentificationNumber")
+//    })
     private CattleBuyInformation cattleBuyInformation;
 
 //    /**
