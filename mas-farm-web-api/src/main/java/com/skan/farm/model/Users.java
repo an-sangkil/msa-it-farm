@@ -1,8 +1,6 @@
 package com.skan.farm.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,14 +21,19 @@ import java.util.Date;
  * @since 2020-06-16
  */
 //@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
 //@Table(name="users")
+@Entity
 @Getter@Setter
 @ToString
 public class Users implements Serializable {
 
-    /** serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    public Users() {
+    }
+
+    public Users(String uuid, String userId) {
+        this.uuid = uuid;
+        this.userId = userId;
+    }
 
     /** uuid. */
     @Id

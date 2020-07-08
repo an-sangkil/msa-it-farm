@@ -3,6 +3,7 @@ package com.skan.farm.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.function.RouterFunction;
 
 /**
  * <pre>
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
+
+
+
 
 
 
