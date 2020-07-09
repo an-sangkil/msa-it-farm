@@ -32,7 +32,7 @@ management:
     health:
       show-details: always
 
-
+#spring.jackson.serialization.fail-on-empty-beans: false
 ---
 spring:
   profiles: local
@@ -68,6 +68,7 @@ spring:
       hibernate.order_updates: true
       hibernate.enable_lazy_load_no_trans: true
       hibernate.format_sql: true
+
 logging:
   file:
     name: logs/it.farm.webapi.log
@@ -115,6 +116,7 @@ spring:
     jpa:
       repositories:
         enabled: true
+
 logging:
   file:
     name: logs/it.farm.webapi.log
@@ -124,7 +126,6 @@ logging:
     org.springframework : info
     org.hibernate.type.descriptor.sql: trace
     web: info
-
 
 ---
 spring:

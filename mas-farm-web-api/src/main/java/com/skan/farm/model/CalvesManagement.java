@@ -1,5 +1,6 @@
 package com.skan.farm.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString(exclude = {"localBeefManagement", "localBeefManagement2"})
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+@JsonIgnoreProperties(ignoreUnknown = true,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CalvesManagement {
 
     @Builder
@@ -129,6 +133,7 @@ public class CalvesManagement {
             @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
             @JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false),
     })
+    @JsonBackReference
     private LocalBeefManagement localBeefManagement;
 
     /**
@@ -137,6 +142,7 @@ public class CalvesManagement {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "entityIdentificationNumberChild", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false)
     @JoinColumn(name = "entityManagementNumberChild", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false)
+    @JsonBackReference
     private LocalBeefManagement localBeefManagement2;
 
     /**

@@ -1,5 +1,6 @@
 package com.skan.farm.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +16,10 @@ import java.time.LocalDate;
 @Entity
 @Getter@Setter
 @ToString(exclude = "localBeefManagement")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+@JsonIgnoreProperties(ignoreUnknown = true,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CattleSellStoreInformation implements Serializable {
 
 	/**
@@ -70,6 +75,7 @@ public class CattleSellStoreInformation implements Serializable {
 			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber"),
 			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber"),
 	})
+	@JsonBackReference
 	/** 한우(암소/수소) 개체관리기록부. */
 	private LocalBeefManagement localBeefManagement;
 

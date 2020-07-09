@@ -1,5 +1,6 @@
 package com.skan.farm.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString(exclude = {"localBeefManagement"})
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+@JsonIgnoreProperties(ignoreUnknown = true,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class CattleBuyInformation implements Serializable {
 
     @Builder
@@ -34,8 +38,6 @@ public class CattleBuyInformation implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-//    @Id
-//    private String cattleEntityManagementNumber;
 
     @EmbeddedId
     protected LocalBeefManagementPK cattleBuyInformationPK;
@@ -74,6 +76,8 @@ public class CattleBuyInformation implements Serializable {
             , optional = false)
             @JoinColumn(name = "entityManagementNumber" ,referencedColumnName = "entityManagementNumber")
             @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber")
+    @JsonBackReference
+    //@JsonIgnore
     private LocalBeefManagement localBeefManagement;
 
 

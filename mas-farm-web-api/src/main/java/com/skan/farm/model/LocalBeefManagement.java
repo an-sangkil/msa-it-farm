@@ -1,5 +1,6 @@
 package com.skan.farm.model;
 
+import com.fasterxml.jackson.annotation.*;
 import com.skan.farm.code.GenderCode;
 import lombok.*;
 
@@ -25,6 +26,10 @@ import java.util.Set;
         "cattleSellStoreInformation",
         "diseaseTreatmentSet"
 })
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
+@JsonIgnoreProperties(ignoreUnknown = true,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
 public class LocalBeefManagement implements Serializable {
 
     @Builder
@@ -100,6 +105,7 @@ public class LocalBeefManagement implements Serializable {
      * 분만관리(송아지 관리) 목록.
      */
     @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<CalvesManagement> calvesManagementSet;
 
     /**
@@ -109,6 +115,7 @@ public class LocalBeefManagement implements Serializable {
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
             , optional = false)
+    @JsonManagedReference
     private CattleBuyInformation cattleBuyInformation;
 
     /**
@@ -117,12 +124,15 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , fetch = FetchType.LAZY
             , optional = false)
+    //@JsonManagedReference
+    @JsonIgnore
     private CattleSellStoreInformation cattleSellStoreInformation;
 
     /**
      * 질병 및 치료 목록.
      */
     @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<DiseaseTreatment> diseaseTreatmentSet;
 
     /**
