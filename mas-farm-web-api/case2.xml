@@ -1,0 +1,42 @@
+<configuration>
+    <!-- JDBC connection parameters -->
+    <jdbc>
+        <driver>com.mysql.jdbc.Driver</driver>
+        <url>jdbc:mysql://localhost:3306/naive-it-farm?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Seoul</url>
+        <user>admin</user>
+        <password>1234</password>
+    </jdbc>
+    <!-- Generator parameters -->
+    <generator>
+        <!-- The default code generator. You can override this one, to generate your own code style
+               Defaults to org.jooq.codegen.JavaGenerator -->
+        <name>org.jooq.codegen.JavaGenerator</name>
+
+        <!-- The naming strategy used for class and field names.
+             You may override this with your custom naming strategy. Some examples follow
+             Defaults to org.jooq.codegen.DefaultGeneratorStrategy -->
+        <strategy>
+            <name>com.skan.farm.common.config.CustomGeneratorStrategy</name>
+        </strategy>
+
+
+        <database>
+            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+            <inputSchema>naive-it-farm</inputSchema>
+            <includes>.*</includes>
+            <excludes>
+                UNUSED_TABLE # This table (unqualified name) should not be generated
+                | PREFIX_.* # Objects with a given prefix should not be generated
+                | SECRET_SCHEMA\.SECRET_TABLE # This table (qualified name) should not be generated
+                | SECRET_ROUTINE # This routine (unqualified name) ...
+            </excludes>
+        </database>
+        <target>
+            <packageName>com.skan.farm.domain</packageName>
+            <!--<directory>target/generated-sources/jooq</directory>-->
+            <directory>src/generated-sources/jooq</directory>
+            <encoding>UTF-8</encoding>
+            <clean>true</clean>
+        </target>
+    </generator>
+</configuration>

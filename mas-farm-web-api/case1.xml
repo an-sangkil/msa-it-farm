@@ -1,0 +1,35 @@
+<configuration>
+    <jdbc>
+        <driver>org.h2.Driver</driver>
+        <url>jdbc:h2:file:~/database/naive-it-farm;AUTO_SERVER=TRUE</url>
+        <user>admin</user>
+        <password>1234</password>
+    </jdbc>
+    <generator>
+        <!--<name>org.jooq.codegen.JavaGenerator</name>-->
+
+        <strategy>
+            <name>com.skan.farm.common.config.CustomGeneratorStrategy</name>
+        </strategy>
+
+        <database>
+            <name>org.jooq.meta.h2.H2Database</name>
+            <!--<inputSchema>naive-it-farm</inputSchema>-->
+            <includes>.*</includes>
+            <excludes>
+                UNUSED_TABLE # This table (unqualified name) should not be generated
+                | PREFIX_.* # Objects with a given prefix should not be generated
+                | SECRET_SCHEMA\.SECRET_TABLE # This table (qualified name) should not be generated
+                | SECRET_ROUTINE # This routine (unqualified name) ...
+            </excludes>
+        </database>
+        <target>
+            <packageName>com.skan.farm.domain</packageName>
+            <!--<directory>target/generated-sources/jooq</directory>-->
+            <directory>src/generated-sources/jooq</directory>
+            <encoding>UTF-8</encoding>
+            <clean>true</clean>
+        </target>
+    </generator>
+</configuration>
+
