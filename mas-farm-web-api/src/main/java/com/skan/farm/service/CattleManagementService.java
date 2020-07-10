@@ -1,14 +1,14 @@
 package com.skan.farm.service;
 
 import com.skan.farm.model.LocalBeefManagement;
+import com.skan.farm.paging.PageableDefault;
+import com.skan.farm.paging.PageableJooq;
+import com.skan.farm.repository.jooq.LocalBeefManagementJooqRepository;
 import com.skan.farm.repository.jpa.LocalBeefManagementJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * <pre>
@@ -26,9 +26,13 @@ import java.util.Optional;
 public class CattleManagementService {
 
     private final LocalBeefManagementJpaRepository localBeefManagementJpaRepository;
+    private final LocalBeefManagementJooqRepository localBeefManagementJooqRepository;
 
-    public List<LocalBeefManagement> findAllPaging(LocalBeefManagement localBeefManagement, Pageable pageable, Sort sort) {
-        return  localBeefManagementJpaRepository.findAll();
+    public Page<LocalBeefManagement> findAllPaging(Pageable pageable) {
+        return localBeefManagementJpaRepository.findAll(pageable);
+    }
+    public com.skan.farm.paging.Page<LocalBeefManagement> findAll(LocalBeefManagement localBeefManagement, PageableDefault pageableDefault) {
+        return localBeefManagementJooqRepository.findAll(localBeefManagement, pageableDefault);
     }
 
 }

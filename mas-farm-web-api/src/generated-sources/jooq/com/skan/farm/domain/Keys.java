@@ -4,33 +4,21 @@
 package com.skan.farm.domain;
 
 
-import com.skan.farm.domain.tables.JAddressDetail;
-import com.skan.farm.domain.tables.JAddressManagement;
-import com.skan.farm.domain.tables.JAnniversary;
+import com.skan.farm.domain.tables.JCalvesManagement;
 import com.skan.farm.domain.tables.JCattleBuyInformation;
+import com.skan.farm.domain.tables.JCattleSellStoreInformation;
 import com.skan.farm.domain.tables.JCommonCode;
-import com.skan.farm.domain.tables.JEmail;
-import com.skan.farm.domain.tables.JGroupManagement;
-import com.skan.farm.domain.tables.JGroupMember;
-import com.skan.farm.domain.tables.JHouseKeepingBook;
+import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
-import com.skan.farm.domain.tables.JPhone;
-import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
-import com.skan.farm.domain.tables.records.JAddressDetailRecord;
-import com.skan.farm.domain.tables.records.JAddressManagementRecord;
-import com.skan.farm.domain.tables.records.JAnniversaryRecord;
+import com.skan.farm.domain.tables.records.JCalvesManagementRecord;
 import com.skan.farm.domain.tables.records.JCattleBuyInformationRecord;
+import com.skan.farm.domain.tables.records.JCattleSellStoreInformationRecord;
 import com.skan.farm.domain.tables.records.JCommonCodeRecord;
-import com.skan.farm.domain.tables.records.JEmailRecord;
-import com.skan.farm.domain.tables.records.JGroupManagementRecord;
-import com.skan.farm.domain.tables.records.JGroupMemberRecord;
-import com.skan.farm.domain.tables.records.JHouseKeepingBookRecord;
+import com.skan.farm.domain.tables.records.JDiseaseTreatmentRecord;
 import com.skan.farm.domain.tables.records.JLocalBeefManagementRecord;
 import com.skan.farm.domain.tables.records.JPersonalCodeRecord;
-import com.skan.farm.domain.tables.records.JPhoneRecord;
-import com.skan.farm.domain.tables.records.JScheduleRecord;
 import com.skan.farm.domain.tables.records.JUsersRecord;
 
 import org.jooq.ForeignKey;
@@ -55,21 +43,13 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<JAddressDetailRecord> KEY_ADDRESS_DETAIL_PRIMARY = UniqueKeys0.KEY_ADDRESS_DETAIL_PRIMARY;
-    public static final UniqueKey<JAddressManagementRecord> KEY_ADDRESS_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_ADDRESS_MANAGEMENT_PRIMARY;
-    public static final UniqueKey<JAnniversaryRecord> KEY_ANNIVERSARY_PRIMARY = UniqueKeys0.KEY_ANNIVERSARY_PRIMARY;
+    public static final UniqueKey<JCalvesManagementRecord> KEY_CALVES_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_CALVES_MANAGEMENT_PRIMARY;
     public static final UniqueKey<JCattleBuyInformationRecord> KEY_CATTLE_BUY_INFORMATION_PRIMARY = UniqueKeys0.KEY_CATTLE_BUY_INFORMATION_PRIMARY;
+    public static final UniqueKey<JCattleSellStoreInformationRecord> KEY_CATTLE_SELL_STORE_INFORMATION_PRIMARY = UniqueKeys0.KEY_CATTLE_SELL_STORE_INFORMATION_PRIMARY;
     public static final UniqueKey<JCommonCodeRecord> KEY_COMMON_CODE_PRIMARY = UniqueKeys0.KEY_COMMON_CODE_PRIMARY;
-    public static final UniqueKey<JEmailRecord> KEY_EMAIL_PRIMARY = UniqueKeys0.KEY_EMAIL_PRIMARY;
-    public static final UniqueKey<JGroupManagementRecord> KEY_GROUP_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_GROUP_MANAGEMENT_PRIMARY;
-    public static final UniqueKey<JGroupMemberRecord> KEY_GROUP_MEMBER_PRIMARY = UniqueKeys0.KEY_GROUP_MEMBER_PRIMARY;
-    public static final UniqueKey<JGroupMemberRecord> KEY_GROUP_MEMBER_USER_ID = UniqueKeys0.KEY_GROUP_MEMBER_USER_ID;
-    public static final UniqueKey<JHouseKeepingBookRecord> KEY_HOUSE_KEEPING_BOOK_PRIMARY = UniqueKeys0.KEY_HOUSE_KEEPING_BOOK_PRIMARY;
+    public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = UniqueKeys0.KEY_DISEASE_TREATMENT_PRIMARY;
     public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY;
     public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = UniqueKeys0.KEY_PERSONAL_CODE_PRIMARY;
-    public static final UniqueKey<JPhoneRecord> KEY_PHONE_PRIMARY = UniqueKeys0.KEY_PHONE_PRIMARY;
-    public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_PRIMARY = UniqueKeys0.KEY_SCHEDULE_PRIMARY;
-    public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_USER_ID = UniqueKeys0.KEY_SCHEDULE_USER_ID;
     public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = UniqueKeys0.KEY_USERS_PRIMARY;
     public static final UniqueKey<JUsersRecord> KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF = UniqueKeys0.KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF;
 
@@ -77,45 +57,37 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FKBTDOIJOBJ7F4J74YLOXQ3X8KA = ForeignKeys0.FKBTDOIJOBJ7F4J74YLOXQ3X8KA;
+    public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FK6EMEBSP37XCSESP63XU8DHGDH = ForeignKeys0.FK6EMEBSP37XCSESP63XU8DHGDH;
     public static final ForeignKey<JCattleBuyInformationRecord, JLocalBeefManagementRecord> FK10C3F92T20D0IDC02YDWEXMP9 = ForeignKeys0.FK10C3F92T20D0IDC02YDWEXMP9;
+    public static final ForeignKey<JCattleSellStoreInformationRecord, JLocalBeefManagementRecord> FK7LCCG28LA9RJ67746F63RJHTF = ForeignKeys0.FK7LCCG28LA9RJ67746F63RJHTF;
     public static final ForeignKey<JCommonCodeRecord, JCommonCodeRecord> FKC4P1HKO5VS86OID1LTDGX7S7D = ForeignKeys0.FKC4P1HKO5VS86OID1LTDGX7S7D;
-    public static final ForeignKey<JGroupMemberRecord, JGroupManagementRecord> GROUP_MEMBER_IBFK_1 = ForeignKeys0.GROUP_MEMBER_IBFK_1;
-    public static final ForeignKey<JHouseKeepingBookRecord, JPersonalCodeRecord> HOUSE_KEEPING_BOOK_IBFK_1 = ForeignKeys0.HOUSE_KEEPING_BOOK_IBFK_1;
+    public static final ForeignKey<JDiseaseTreatmentRecord, JLocalBeefManagementRecord> FKQPKXO8RKFQVR65KXY88EEXRR1 = ForeignKeys0.FKQPKXO8RKFQVR65KXY88EEXRR1;
     public static final ForeignKey<JPersonalCodeRecord, JPersonalCodeRecord> FK1KYMM6VJBNV2QBNEIQEH8KNDN = ForeignKeys0.FK1KYMM6VJBNV2QBNEIQEH8KNDN;
-    public static final ForeignKey<JPersonalCodeRecord, JPersonalCodeRecord> PERSONAL_CODE_IBFK_1 = ForeignKeys0.PERSONAL_CODE_IBFK_1;
-    public static final ForeignKey<JScheduleRecord, JGroupMemberRecord> SCHEDULE_IBFK_1 = ForeignKeys0.SCHEDULE_IBFK_1;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<JAddressDetailRecord> KEY_ADDRESS_DETAIL_PRIMARY = Internal.createUniqueKey(JAddressDetail.ADDRESS_DETAIL, "KEY_address_detail_PRIMARY", new TableField[] { JAddressDetail.ADDRESS_DETAIL.MANAGEMENT_NUMBER, JAddressDetail.ADDRESS_DETAIL.HM_AD_NO, JAddressDetail.ADDRESS_DETAIL.USER_ID }, true);
-        public static final UniqueKey<JAddressManagementRecord> KEY_ADDRESS_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JAddressManagement.ADDRESS_MANAGEMENT, "KEY_address_management_PRIMARY", new TableField[] { JAddressManagement.ADDRESS_MANAGEMENT.USER_ID, JAddressManagement.ADDRESS_MANAGEMENT.MANAGEMENT_NUMBER }, true);
-        public static final UniqueKey<JAnniversaryRecord> KEY_ANNIVERSARY_PRIMARY = Internal.createUniqueKey(JAnniversary.ANNIVERSARY, "KEY_anniversary_PRIMARY", new TableField[] { JAnniversary.ANNIVERSARY.HM_MG_NO, JAnniversary.ANNIVERSARY.HM_AM_NO, JAnniversary.ANNIVERSARY.USER_ID }, true);
+        public static final UniqueKey<JCalvesManagementRecord> KEY_CALVES_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JCalvesManagement.CALVES_MANAGEMENT, "KEY_calves_management_PRIMARY", new TableField[] { JCalvesManagement.CALVES_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JCalvesManagement.CALVES_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER, JCalvesManagement.CALVES_MANAGEMENT.SEQ }, true);
         public static final UniqueKey<JCattleBuyInformationRecord> KEY_CATTLE_BUY_INFORMATION_PRIMARY = Internal.createUniqueKey(JCattleBuyInformation.CATTLE_BUY_INFORMATION, "KEY_cattle_buy_information_PRIMARY", new TableField[] { JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
+        public static final UniqueKey<JCattleSellStoreInformationRecord> KEY_CATTLE_SELL_STORE_INFORMATION_PRIMARY = Internal.createUniqueKey(JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION, "KEY_cattle_sell_store_information_PRIMARY", new TableField[] { JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JCommonCodeRecord> KEY_COMMON_CODE_PRIMARY = Internal.createUniqueKey(JCommonCode.COMMON_CODE, "KEY_common_code_PRIMARY", new TableField[] { JCommonCode.COMMON_CODE.CODE }, true);
-        public static final UniqueKey<JEmailRecord> KEY_EMAIL_PRIMARY = Internal.createUniqueKey(JEmail.EMAIL, "KEY_email_PRIMARY", new TableField[] { JEmail.EMAIL.MANAGEMENT_NUMBER, JEmail.EMAIL.HM_EM_NO, JEmail.EMAIL.USER_ID }, true);
-        public static final UniqueKey<JGroupManagementRecord> KEY_GROUP_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JGroupManagement.GROUP_MANAGEMENT, "KEY_group_management_PRIMARY", new TableField[] { JGroupManagement.GROUP_MANAGEMENT.GROUP_NO }, true);
-        public static final UniqueKey<JGroupMemberRecord> KEY_GROUP_MEMBER_PRIMARY = Internal.createUniqueKey(JGroupMember.GROUP_MEMBER, "KEY_group_member_PRIMARY", new TableField[] { JGroupMember.GROUP_MEMBER.GROUP_NO, JGroupMember.GROUP_MEMBER.USER_ID }, true);
-        public static final UniqueKey<JGroupMemberRecord> KEY_GROUP_MEMBER_USER_ID = Internal.createUniqueKey(JGroupMember.GROUP_MEMBER, "KEY_group_member_user_id", new TableField[] { JGroupMember.GROUP_MEMBER.USER_ID }, true);
-        public static final UniqueKey<JHouseKeepingBookRecord> KEY_HOUSE_KEEPING_BOOK_PRIMARY = Internal.createUniqueKey(JHouseKeepingBook.HOUSE_KEEPING_BOOK, "KEY_house_keeping_book_PRIMARY", new TableField[] { JHouseKeepingBook.HOUSE_KEEPING_BOOK.MANAGEMENT_NO }, true);
+        public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = Internal.createUniqueKey(JDiseaseTreatment.DISEASE_TREATMENT, "KEY_disease_treatment_PRIMARY", new TableField[] { JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_IDENTIFICATION_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_MANAGEMENT_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.SEQ }, true);
         public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT, "KEY_local_beef_management_PRIMARY", new TableField[] { JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = Internal.createUniqueKey(JPersonalCode.PERSONAL_CODE, "KEY_personal_code_PRIMARY", new TableField[] { JPersonalCode.PERSONAL_CODE.CODE }, true);
-        public static final UniqueKey<JPhoneRecord> KEY_PHONE_PRIMARY = Internal.createUniqueKey(JPhone.PHONE, "KEY_phone_PRIMARY", new TableField[] { JPhone.PHONE.MANAGEMENT_NUMBER, JPhone.PHONE.HM_PHO_NO, JPhone.PHONE.USER_ID }, true);
-        public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_PRIMARY = Internal.createUniqueKey(JSchedule.SCHEDULE, "KEY_schedule_PRIMARY", new TableField[] { JSchedule.SCHEDULE.SCH_MGT_NO, JSchedule.SCHEDULE.SCH_SEQ }, true);
-        public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_USER_ID = Internal.createUniqueKey(JSchedule.SCHEDULE, "KEY_schedule_user_id", new TableField[] { JSchedule.SCHEDULE.USER_ID }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = Internal.createUniqueKey(JUsers.USERS, "KEY_users_PRIMARY", new TableField[] { JUsers.USERS.UUID }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF = Internal.createUniqueKey(JUsers.USERS, "KEY_users_UK_6efs5vmce86ymf5q7lmvn2uuf", new TableField[] { JUsers.USERS.USER_ID }, true);
     }
 
     private static class ForeignKeys0 {
+        public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FKBTDOIJOBJ7F4J74YLOXQ3X8KA = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCalvesManagement.CALVES_MANAGEMENT, "FKbtdoijobj7f4j74yloxq3x8ka", new TableField[] { JCalvesManagement.CALVES_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JCalvesManagement.CALVES_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER }, true);
+        public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FK6EMEBSP37XCSESP63XU8DHGDH = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCalvesManagement.CALVES_MANAGEMENT, "FK6emebsp37xcsesp63xu8dhgdh", new TableField[] { JCalvesManagement.CALVES_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER_CHILD, JCalvesManagement.CALVES_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER_CHILD }, true);
         public static final ForeignKey<JCattleBuyInformationRecord, JLocalBeefManagementRecord> FK10C3F92T20D0IDC02YDWEXMP9 = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCattleBuyInformation.CATTLE_BUY_INFORMATION, "FK10c3f92t20d0idc02ydwexmp9", new TableField[] { JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
+        public static final ForeignKey<JCattleSellStoreInformationRecord, JLocalBeefManagementRecord> FK7LCCG28LA9RJ67746F63RJHTF = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION, "FK7lccg28la9rj67746f63rjhtf", new TableField[] { JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final ForeignKey<JCommonCodeRecord, JCommonCodeRecord> FKC4P1HKO5VS86OID1LTDGX7S7D = Internal.createForeignKey(Keys.KEY_COMMON_CODE_PRIMARY, JCommonCode.COMMON_CODE, "FKc4p1hko5vs86oid1ltdgx7s7d", new TableField[] { JCommonCode.COMMON_CODE.UPPER_CODE }, true);
-        public static final ForeignKey<JGroupMemberRecord, JGroupManagementRecord> GROUP_MEMBER_IBFK_1 = Internal.createForeignKey(Keys.KEY_GROUP_MANAGEMENT_PRIMARY, JGroupMember.GROUP_MEMBER, "group_member_ibfk_1", new TableField[] { JGroupMember.GROUP_MEMBER.GROUP_NO }, true);
-        public static final ForeignKey<JHouseKeepingBookRecord, JPersonalCodeRecord> HOUSE_KEEPING_BOOK_IBFK_1 = Internal.createForeignKey(Keys.KEY_PERSONAL_CODE_PRIMARY, JHouseKeepingBook.HOUSE_KEEPING_BOOK, "house_keeping_book_ibfk_1", new TableField[] { JHouseKeepingBook.HOUSE_KEEPING_BOOK.CATEGORY_CODE }, true);
+        public static final ForeignKey<JDiseaseTreatmentRecord, JLocalBeefManagementRecord> FKQPKXO8RKFQVR65KXY88EEXRR1 = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JDiseaseTreatment.DISEASE_TREATMENT, "FKqpkxo8rkfqvr65kxy88eexrr1", new TableField[] { JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_IDENTIFICATION_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final ForeignKey<JPersonalCodeRecord, JPersonalCodeRecord> FK1KYMM6VJBNV2QBNEIQEH8KNDN = Internal.createForeignKey(Keys.KEY_PERSONAL_CODE_PRIMARY, JPersonalCode.PERSONAL_CODE, "FK1kymm6vjbnv2qbneiqeh8kndn", new TableField[] { JPersonalCode.PERSONAL_CODE.UPPER_CODE }, true);
-        public static final ForeignKey<JPersonalCodeRecord, JPersonalCodeRecord> PERSONAL_CODE_IBFK_1 = Internal.createForeignKey(Keys.KEY_PERSONAL_CODE_PRIMARY, JPersonalCode.PERSONAL_CODE, "personal_code_ibfk_1", new TableField[] { JPersonalCode.PERSONAL_CODE.UPPER_CODE }, true);
-        public static final ForeignKey<JScheduleRecord, JGroupMemberRecord> SCHEDULE_IBFK_1 = Internal.createForeignKey(Keys.KEY_GROUP_MEMBER_PRIMARY, JSchedule.SCHEDULE, "schedule_ibfk_1", new TableField[] { JSchedule.SCHEDULE.GROUP_NO, JSchedule.SCHEDULE.USER_ID }, true);
     }
 }

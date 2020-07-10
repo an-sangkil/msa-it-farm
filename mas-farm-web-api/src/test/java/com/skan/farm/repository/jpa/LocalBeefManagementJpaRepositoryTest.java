@@ -150,12 +150,12 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
         List<LocalBeefManagement> localBeefManagements = new ArrayList<>();
         IntStream.range(0, 100).forEach(value -> {
             LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-            localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("1111" + value, "2222"));
+            localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("" + value, "2222"));
             localBeefManagement.setBirthDay(LocalDate.now());
             localBeefManagement.setGender(GenderCode.FEMALE);
 
             CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-            cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("1111" + value, "2222"));
+            cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("" + value, "2222"));
             cattleBuyInformation.setBuyDate(LocalDate.now());
             cattleBuyInformation.setBuyNote("노트 처음" + value);
 
@@ -182,14 +182,14 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     @Order(7)
     public void saveManyChild_단방향() {
         List<CattleBuyInformation> cattleBuyInformations = new ArrayList<>();
-        IntStream.range(0, 100).forEach(value -> {
+        IntStream.range(100, 200).forEach(value -> {
             LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-            localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("1111" + value, "2222"));
+            localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK( ""+value, "2222"));
             localBeefManagement.setBirthDay(LocalDate.now());
             localBeefManagement.setGender(GenderCode.FEMALE);
 
             CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-            cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("1111" + value, "2222"));
+            cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK(""+ value, "2222"));
             cattleBuyInformation.setBuyDate(LocalDate.now());
             cattleBuyInformation.setBuyNote("노트 처음" + value);
 

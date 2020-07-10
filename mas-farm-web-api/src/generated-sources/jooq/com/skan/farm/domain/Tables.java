@@ -4,19 +4,13 @@
 package com.skan.farm.domain;
 
 
-import com.skan.farm.domain.tables.JAddressDetail;
-import com.skan.farm.domain.tables.JAddressManagement;
-import com.skan.farm.domain.tables.JAnniversary;
+import com.skan.farm.domain.tables.JCalvesManagement;
 import com.skan.farm.domain.tables.JCattleBuyInformation;
+import com.skan.farm.domain.tables.JCattleSellStoreInformation;
 import com.skan.farm.domain.tables.JCommonCode;
-import com.skan.farm.domain.tables.JEmail;
-import com.skan.farm.domain.tables.JGroupManagement;
-import com.skan.farm.domain.tables.JGroupMember;
-import com.skan.farm.domain.tables.JHouseKeepingBook;
+import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
-import com.skan.farm.domain.tables.JPhone;
-import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
 
 
@@ -27,19 +21,9 @@ import com.skan.farm.domain.tables.JUsers;
 public class Tables {
 
     /**
-     * The table <code>naive-it-farm.address_detail</code>.
+     * The table <code>naive-it-farm.calves_management</code>.
      */
-    public static final JAddressDetail ADDRESS_DETAIL = JAddressDetail.ADDRESS_DETAIL;
-
-    /**
-     * The table <code>naive-it-farm.address_management</code>.
-     */
-    public static final JAddressManagement ADDRESS_MANAGEMENT = JAddressManagement.ADDRESS_MANAGEMENT;
-
-    /**
-     * The table <code>naive-it-farm.anniversary</code>.
-     */
-    public static final JAnniversary ANNIVERSARY = JAnniversary.ANNIVERSARY;
+    public static final JCalvesManagement CALVES_MANAGEMENT = JCalvesManagement.CALVES_MANAGEMENT;
 
     /**
      * The table <code>naive-it-farm.cattle_buy_information</code>.
@@ -47,29 +31,19 @@ public class Tables {
     public static final JCattleBuyInformation CATTLE_BUY_INFORMATION = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
 
     /**
+     * The table <code>naive-it-farm.cattle_sell_store_information</code>.
+     */
+    public static final JCattleSellStoreInformation CATTLE_SELL_STORE_INFORMATION = JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION;
+
+    /**
      * The table <code>naive-it-farm.common_code</code>.
      */
     public static final JCommonCode COMMON_CODE = JCommonCode.COMMON_CODE;
 
     /**
-     * The table <code>naive-it-farm.email</code>.
+     * The table <code>naive-it-farm.disease_treatment</code>.
      */
-    public static final JEmail EMAIL = JEmail.EMAIL;
-
-    /**
-     * The table <code>naive-it-farm.group_management</code>.
-     */
-    public static final JGroupManagement GROUP_MANAGEMENT = JGroupManagement.GROUP_MANAGEMENT;
-
-    /**
-     * The table <code>naive-it-farm.group_member</code>.
-     */
-    public static final JGroupMember GROUP_MEMBER = JGroupMember.GROUP_MEMBER;
-
-    /**
-     * The table <code>naive-it-farm.house_keeping_book</code>.
-     */
-    public static final JHouseKeepingBook HOUSE_KEEPING_BOOK = JHouseKeepingBook.HOUSE_KEEPING_BOOK;
+    public static final JDiseaseTreatment DISEASE_TREATMENT = JDiseaseTreatment.DISEASE_TREATMENT;
 
     /**
      * The table <code>naive-it-farm.local_beef_management</code>.
@@ -80,16 +54,6 @@ public class Tables {
      * The table <code>naive-it-farm.personal_code</code>.
      */
     public static final JPersonalCode PERSONAL_CODE = JPersonalCode.PERSONAL_CODE;
-
-    /**
-     * The table <code>naive-it-farm.phone</code>.
-     */
-    public static final JPhone PHONE = JPhone.PHONE;
-
-    /**
-     * The table <code>naive-it-farm.schedule</code>.
-     */
-    public static final JSchedule SCHEDULE = JSchedule.SCHEDULE;
 
     /**
      * The table <code>naive-it-farm.users</code>.

@@ -4,19 +4,13 @@
 package com.skan.farm.domain;
 
 
-import com.skan.farm.domain.tables.JAddressDetail;
-import com.skan.farm.domain.tables.JAddressManagement;
-import com.skan.farm.domain.tables.JAnniversary;
+import com.skan.farm.domain.tables.JCalvesManagement;
 import com.skan.farm.domain.tables.JCattleBuyInformation;
+import com.skan.farm.domain.tables.JCattleSellStoreInformation;
 import com.skan.farm.domain.tables.JCommonCode;
-import com.skan.farm.domain.tables.JEmail;
-import com.skan.farm.domain.tables.JGroupManagement;
-import com.skan.farm.domain.tables.JGroupMember;
-import com.skan.farm.domain.tables.JHouseKeepingBook;
+import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
-import com.skan.farm.domain.tables.JPhone;
-import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
 
 import java.util.Arrays;
@@ -33,7 +27,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JNaiveItFarm extends SchemaImpl {
 
-    private static final long serialVersionUID = -1377133876;
+    private static final long serialVersionUID = -151801810;
 
     /**
      * The reference instance of <code>naive-it-farm</code>
@@ -41,19 +35,9 @@ public class JNaiveItFarm extends SchemaImpl {
     public static final JNaiveItFarm NAIVE_IT_FARM = new JNaiveItFarm();
 
     /**
-     * The table <code>naive-it-farm.address_detail</code>.
+     * The table <code>naive-it-farm.calves_management</code>.
      */
-    public final JAddressDetail ADDRESS_DETAIL = JAddressDetail.ADDRESS_DETAIL;
-
-    /**
-     * The table <code>naive-it-farm.address_management</code>.
-     */
-    public final JAddressManagement ADDRESS_MANAGEMENT = JAddressManagement.ADDRESS_MANAGEMENT;
-
-    /**
-     * The table <code>naive-it-farm.anniversary</code>.
-     */
-    public final JAnniversary ANNIVERSARY = JAnniversary.ANNIVERSARY;
+    public final JCalvesManagement CALVES_MANAGEMENT = JCalvesManagement.CALVES_MANAGEMENT;
 
     /**
      * The table <code>naive-it-farm.cattle_buy_information</code>.
@@ -61,29 +45,19 @@ public class JNaiveItFarm extends SchemaImpl {
     public final JCattleBuyInformation CATTLE_BUY_INFORMATION = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
 
     /**
+     * The table <code>naive-it-farm.cattle_sell_store_information</code>.
+     */
+    public final JCattleSellStoreInformation CATTLE_SELL_STORE_INFORMATION = JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION;
+
+    /**
      * The table <code>naive-it-farm.common_code</code>.
      */
     public final JCommonCode COMMON_CODE = JCommonCode.COMMON_CODE;
 
     /**
-     * The table <code>naive-it-farm.email</code>.
+     * The table <code>naive-it-farm.disease_treatment</code>.
      */
-    public final JEmail EMAIL = JEmail.EMAIL;
-
-    /**
-     * The table <code>naive-it-farm.group_management</code>.
-     */
-    public final JGroupManagement GROUP_MANAGEMENT = JGroupManagement.GROUP_MANAGEMENT;
-
-    /**
-     * The table <code>naive-it-farm.group_member</code>.
-     */
-    public final JGroupMember GROUP_MEMBER = JGroupMember.GROUP_MEMBER;
-
-    /**
-     * The table <code>naive-it-farm.house_keeping_book</code>.
-     */
-    public final JHouseKeepingBook HOUSE_KEEPING_BOOK = JHouseKeepingBook.HOUSE_KEEPING_BOOK;
+    public final JDiseaseTreatment DISEASE_TREATMENT = JDiseaseTreatment.DISEASE_TREATMENT;
 
     /**
      * The table <code>naive-it-farm.local_beef_management</code>.
@@ -94,16 +68,6 @@ public class JNaiveItFarm extends SchemaImpl {
      * The table <code>naive-it-farm.personal_code</code>.
      */
     public final JPersonalCode PERSONAL_CODE = JPersonalCode.PERSONAL_CODE;
-
-    /**
-     * The table <code>naive-it-farm.phone</code>.
-     */
-    public final JPhone PHONE = JPhone.PHONE;
-
-    /**
-     * The table <code>naive-it-farm.schedule</code>.
-     */
-    public final JSchedule SCHEDULE = JSchedule.SCHEDULE;
 
     /**
      * The table <code>naive-it-farm.users</code>.
@@ -126,19 +90,13 @@ public class JNaiveItFarm extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
-            JAddressDetail.ADDRESS_DETAIL,
-            JAddressManagement.ADDRESS_MANAGEMENT,
-            JAnniversary.ANNIVERSARY,
+            JCalvesManagement.CALVES_MANAGEMENT,
             JCattleBuyInformation.CATTLE_BUY_INFORMATION,
+            JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION,
             JCommonCode.COMMON_CODE,
-            JEmail.EMAIL,
-            JGroupManagement.GROUP_MANAGEMENT,
-            JGroupMember.GROUP_MEMBER,
-            JHouseKeepingBook.HOUSE_KEEPING_BOOK,
+            JDiseaseTreatment.DISEASE_TREATMENT,
             JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT,
             JPersonalCode.PERSONAL_CODE,
-            JPhone.PHONE,
-            JSchedule.SCHEDULE,
             JUsers.USERS);
     }
 }

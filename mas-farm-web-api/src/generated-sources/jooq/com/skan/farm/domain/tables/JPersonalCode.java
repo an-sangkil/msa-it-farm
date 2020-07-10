@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
 
-    private static final long serialVersionUID = 1687312612;
+    private static final long serialVersionUID = -796772195;
 
     /**
      * The reference instance of <code>naive-it-farm.personal_code</code>
@@ -50,37 +50,37 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
     /**
      * The column <code>naive-it-farm.personal_code.code</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(5).nullable(false), this, "");
+    public final TableField<JPersonalCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>naive-it-farm.personal_code.upper_code</code>. 부모코드
+     * The column <code>naive-it-farm.personal_code.code_comments</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(5).nullable(false), this, "부모코드");
+    public final TableField<JPersonalCodeRecord, String> CODE_COMMENTS = createField(DSL.name("code_comments"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.personal_code.user_id</code>. 사용자 아이디
+     * The column <code>naive-it-farm.personal_code.code_name</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(16), this, "사용자 아이디");
+    public final TableField<JPersonalCodeRecord, String> CODE_NAME = createField(DSL.name("code_name"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.personal_code.code_seq</code>. 순서
+     * The column <code>naive-it-farm.personal_code.code_seq</code>.
      */
-    public final TableField<JPersonalCodeRecord, Integer> CODE_SEQ = createField(DSL.name("code_seq"), org.jooq.impl.SQLDataType.INTEGER, this, "순서");
+    public final TableField<JPersonalCodeRecord, Integer> CODE_SEQ = createField(DSL.name("code_seq"), org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>naive-it-farm.personal_code.code_name</code>. 코드명
+     * The column <code>naive-it-farm.personal_code.created_time</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> CODE_NAME = createField(DSL.name("code_name"), org.jooq.impl.SQLDataType.VARCHAR(128), this, "코드명");
+    public final TableField<JPersonalCodeRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
-     * The column <code>naive-it-farm.personal_code.code_comments</code>. 코드 상세
+     * The column <code>naive-it-farm.personal_code.user_id</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> CODE_COMMENTS = createField(DSL.name("code_comments"), org.jooq.impl.SQLDataType.VARCHAR(256), this, "코드 상세");
+    public final TableField<JPersonalCodeRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>naive-it-farm.personal_code.created_time</code>. 생성일시
+     * The column <code>naive-it-farm.personal_code.upper_code</code>.
      */
-    public final TableField<JPersonalCodeRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.LOCALDATETIME)), this, "생성일시");
+    public final TableField<JPersonalCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>naive-it-farm.personal_code</code> table reference
@@ -132,15 +132,11 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
 
     @Override
     public List<ForeignKey<JPersonalCodeRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<JPersonalCodeRecord, ?>>asList(Keys.FK1KYMM6VJBNV2QBNEIQEH8KNDN, Keys.PERSONAL_CODE_IBFK_1);
+        return Arrays.<ForeignKey<JPersonalCodeRecord, ?>>asList(Keys.FK1KYMM6VJBNV2QBNEIQEH8KNDN);
     }
 
-    public JPersonalCode fk1kymm6vjbnv2qbneiqeh8kndn() {
+    public JPersonalCode personalCode() {
         return new JPersonalCode(this, Keys.FK1KYMM6VJBNV2QBNEIQEH8KNDN);
-    }
-
-    public JPersonalCode personalCodeIbfk_1() {
-        return new JPersonalCode(this, Keys.PERSONAL_CODE_IBFK_1);
     }
 
     @Override
@@ -174,7 +170,7 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<String, String, String, Integer, String, String, LocalDateTime> fieldsRow() {
+    public Row7<String, String, String, Integer, LocalDateTime, String, String> fieldsRow() {
         return (Row7) super.fieldsRow();
     }
 }
