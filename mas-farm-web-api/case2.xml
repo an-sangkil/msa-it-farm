@@ -1,7 +1,7 @@
 <configuration>
     <!-- JDBC connection parameters -->
     <jdbc>
-        <driver>com.mysql.jdbc.Driver</driver>
+        <driver>com.mysql.cj.jdbc.Driver</driver>
         <url>jdbc:mysql://localhost:3306/naive-it-farm?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Seoul</url>
         <user>admin</user>
         <password>1234</password>

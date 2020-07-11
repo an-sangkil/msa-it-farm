@@ -176,8 +176,6 @@
                         <!--<configurationFile>${basedir}/case1.xml</configurationFile>-->
                     </configurationFiles>
                 </configuration>
-
-
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
