@@ -1,6 +1,7 @@
 package com.skan.farm.repository.jooq;
 
 import com.skan.farm.model.LocalBeefManagement;
+import com.skan.farm.paging.Page;
 import com.skan.farm.paging.PageableJooq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,8 @@ class LocalBeefManagementJooqRepositoryTest {
     void findAll() {
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
         PageableJooq pageableJooq = new PageableJooq(0, 10);
-        localBeefManagementJooqRepository.findAll(localBeefManagement, pageableJooq);
+        Page<LocalBeefManagement> paging = localBeefManagementJooqRepository.findAll(localBeefManagement, pageableJooq);
+        log.debug("paging = {}", paging);
+
     }
 }

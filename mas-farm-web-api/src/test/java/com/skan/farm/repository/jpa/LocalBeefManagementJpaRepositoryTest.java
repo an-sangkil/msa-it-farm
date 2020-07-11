@@ -4,6 +4,7 @@ import com.skan.farm.code.GenderCode;
 import com.skan.farm.model.CattleBuyInformation;
 import com.skan.farm.model.LocalBeefManagement;
 import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.repository.LocalNonConfiguration;
 import com.skan.farm.repository.TestCodeGeneration;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.RequiredArgsConstructor;

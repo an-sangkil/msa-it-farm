@@ -1,6 +1,7 @@
 package com.skan.farm.paging;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
  * @since 2020-07-10
  */
+@ToString
 public class Page <T> {
 
     /**
@@ -25,10 +27,10 @@ public class Page <T> {
 
     private Page() {}
 
-    public Page(PageableDefault pageableDefault, List<T> contents) {
+    public Page(PageableDefault pageableDefault, List<T> contents, int total) {
         this.pageableDefault = pageableDefault;
         this.contents = contents;
-        this.total = contents.size();
+        this.total = total;
     }
 
     /**
@@ -59,5 +61,9 @@ public class Page <T> {
 
     public boolean isLast() {
         return !hasNext();
+    }
+
+    public PageableDefault getPageable() {
+        return pageableDefault;
     }
 }

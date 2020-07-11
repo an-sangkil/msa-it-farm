@@ -22,6 +22,7 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class LocalBeefManagementPK implements Serializable {
 
     /**

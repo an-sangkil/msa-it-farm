@@ -49,7 +49,7 @@ public class RouterCattleManagement {
 //            Pageable pageable = PageRequest.of(page, size);
 //            return ServerResponse.ok().body(cattleManagementService.findAllPaging(pageable));
             LocalBeefManagement localBeefManagement = LocalBeefManagement.builder().localBeefManagementPK(new LocalBeefManagementPK(entityId,identityId)).build();
-            PageableDefault pageable = new PageableJooq(0, 10);
+            PageableDefault pageable = new PageableJooq(page, size);
             return  ServerResponse.ok().body(cattleManagementService.findAll(localBeefManagement, pageable));
 
         }).andRoute(GET("/cattle/detail"), request -> {
