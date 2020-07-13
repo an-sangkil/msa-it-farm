@@ -22,7 +22,13 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)   // on class LEVEL
-@SpringBootTest
+@SpringBootTest(
+        properties = {
+                "google.id=skan"
+                ,"google.name=skan2222"
+        }
+        ,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ActiveProfiles("local")
 public @interface LocalNonConfiguration {

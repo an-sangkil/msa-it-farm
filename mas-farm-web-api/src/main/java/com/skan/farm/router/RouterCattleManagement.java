@@ -46,6 +46,8 @@ public class RouterCattleManagement {
             int page = Integer.parseInt(request.param("page").orElse("0"));
             int size = Integer.parseInt(request.param("size").orElse("10"));
 
+
+
 //            Pageable pageable = PageRequest.of(page, size);
 //            return ServerResponse.ok().body(cattleManagementService.findAllPaging(pageable));
             LocalBeefManagement localBeefManagement = LocalBeefManagement.builder().localBeefManagementPK(new LocalBeefManagementPK(entityId,identityId)).build();

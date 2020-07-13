@@ -10,15 +10,13 @@ import com.skan.farm.model.LocalBeefManagement;
 import com.skan.farm.model.LocalBeefManagementPK;
 import com.skan.farm.paging.Page;
 import com.skan.farm.paging.PageableDefault;
-import com.skan.farm.paging.PageableJooq;
-import com.skan.farm.paging.PageableJpa;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
+import org.jooq.conf.ParamType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -60,10 +58,10 @@ public class LocalBeefManagementJooqRepository {
                 .on(
                         jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(jCattleBuyInformation.ENTITY_MANAGEMENT_NUMBER),
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleBuyInformation.ENTITY_IDENTIFICATION_NUMBER))
-                //.where("","")
-                .getSQL();
+                .where(this.dynamicConditionsLocalbeffManagement(predicate))
+                .getSQL(ParamType.INLINED);
         log.debug("sql = : {}", sql);
-        int totalCount = jdbcTemplate.queryForObject(sql, Integer.class);
+        Integer totalCount = jdbcTemplate.queryForObject(sql, Integer.class);
 
 
         sql = dslContext.select(
@@ -102,15 +100,15 @@ public class LocalBeefManagementJooqRepository {
                         jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(jCattleSellStoreInformation.ENTITY_IDENTIFICATION_NUMBER),
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleSellStoreInformation.ENTITY_IDENTIFICATION_NUMBER)
                 )
-                //.where("","")
+                .where(this.dynamicConditionsLocalbeffManagement(predicate))
                 .limit(pageableDefault.getPageSize())
                 .offset(pageableDefault.getOffset())
-                .getSQL();
+                .getSQL(ParamType.INLINED);
 
 
         log.debug("sql = : {}", sql);
         List<LocalBeefManagement> localBeefManagements = new ArrayList<>();
-        jdbcTemplate.queryForList(sql, pageableDefault.getPageSize(), pageableDefault.getOffset())
+        jdbcTemplate.queryForList(sql)
                 .forEach(stringObjectMap -> {
 
                     String ENTITY_MANAGEMENT_NUMBER = (String) stringObjectMap.get("ENTITY_MANAGEMENT_NUMBER");
@@ -156,5 +154,30 @@ public class LocalBeefManagementJooqRepository {
 
         return new Page<LocalBeefManagement>(pageableDefault, localBeefManagements, totalCount);
 
+    }
+
+    protected List<Condition> dynamicConditionsLocalbeffManagement(LocalBeefManagement predicate) {
+        List<Condition> conditions = new ArrayList<>();
+        JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
+        JCattleBuyInformation jCattleBuyInformation = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
+        JCattleSellStoreInformation jCattleSellStoreInformation = JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION;
+
+        if (!StringUtils.isEmpty(predicate.getLocalBeefManagementPK().getEntityManagementNumber())) {
+            conditions.add(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(predicate.getLocalBeefManagementPK().getEntityManagementNumber()));
+        }
+
+        if (!StringUtils.isEmpty(predicate.getLocalBeefManagementPK().getEntityIdentificationNumber())) {
+            conditions.add(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(predicate.getLocalBeefManagementPK().getEntityIdentificationNumber()));
+        }
+
+        if (!StringUtils.isEmpty(predicate.getBirthDay())) {
+            conditions.add(jLocalBeefManagement.BIRTH_DAY.between(predicate.getBirthDay(), LocalDate.now()));
+        }
+
+        if (!StringUtils.isEmpty(predicate.getGender())) {
+            conditions.add(jLocalBeefManagement.GENDER.eq(predicate.getGender().name()));
+        }
+
+        return conditions;
     }
 }
