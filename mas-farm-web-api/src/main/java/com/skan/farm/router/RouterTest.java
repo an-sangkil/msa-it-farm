@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
  * @since 2020-07-08
  */
 @Component
-public class Router {
+public class RouterTest {
 
 
     @Bean
