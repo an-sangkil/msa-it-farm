@@ -28,6 +28,10 @@ vue init webpack frontend
 ### vue.js 라이브러리 추가
 - 라이브러리는 plugs.js 에 포함 되어 있음으로 추가할 필요 없음.
 ```shell script
-> npm install vuex
-> npm install axios
+> npm install --save vuex
+> npm install --save axios
+
+# --save 종속성 추가
+# --save-dev 개발시만 사용하고 업로드시 사용하지 않음
+# -g 운도우 운영체제 전역에 설치
 ```

@@ -11,26 +11,25 @@
 </template>
 
 <script>
-  import Header from "@/components/Header.vue";
-  import TemplateSidebar from "@/components/TemplateSidebar.vue";
-  import Body from "@/components/Body.vue";
-  import TemplateControlSidebar from "@/components/TemplateControlSidebar.vue";
-  import Footer from "@/components/Footer.vue";
+import Header from "@/components/Header.vue";
+import TemplateSidebar from "@/components/Sidebar.vue";
+import Body from "@/components/Body.vue";
+import TemplateControlSidebar from "@/components/ControlSidebar.vue";
+import Footer from "@/components/Footer.vue";
 
-  export default {
-    components: {
-      't-header': Header,
-      't-sidebar': TemplateSidebar,
-      't-body': Body,
-      't-control-sidebar': TemplateControlSidebar,
-      't-footer': Footer
-    }
+export default {
+  components: {
+    't-header': Header,
+    't-sidebar': TemplateSidebar,
+    't-body': Body,
+    't-control-sidebar': TemplateControlSidebar,
+    't-footer': Footer
   }
+}
 
-  require('../assets/plugins/jquery/jquery.min.js')
-  //require('../assets/plugins/bootstrap/js/bootstrap.bundle.min.js')
-  require('../assets/dist/js/adminlte.min.js')
-
+require('../assets/plugins/jquery/jquery.min.js')
+// require('../assets/plugins/bootstrap/js/bootstrap.bundle.min.js')
+require('../assets/dist/js/adminlte.min.js')
 
 </script>
 

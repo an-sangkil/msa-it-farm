@@ -1,4 +1,3 @@
-
 <template>
   <div id="app">
     <template-compoment></template-compoment>
@@ -6,17 +5,15 @@
 </template>
 
 <script>
-  import Template from "@/components/Template.vue";
+import Template from '@/components/Template.vue';
 
-  export default {
-    components: {
-      'template-compoment': Template
-    },
-    name: 'App'
-  }
+export default {
+  components: {
+    'template-compoment': Template
+  },
+  name: 'App'
+}
 </script>
 <style>
-
-
 
 </style>
