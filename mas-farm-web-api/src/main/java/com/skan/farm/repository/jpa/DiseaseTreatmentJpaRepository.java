@@ -3,6 +3,8 @@ package com.skan.farm.repository.jpa;
 import com.skan.farm.model.DiseaseTreatment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * <pre>
  * Description :
@@ -16,4 +18,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface DiseaseTreatmentJpaRepository extends JpaRepository<DiseaseTreatment, DiseaseTreatment.DiseaseTreatmentPK> {
 
+    List<DiseaseTreatment> findByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(String entityId, String identityId);
 }

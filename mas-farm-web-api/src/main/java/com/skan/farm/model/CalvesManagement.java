@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 public class CalvesManagement {
 
     @Builder
-    public CalvesManagement(CalvesManagementPK calvesManagementPK, Short fertilizationIndex, String years, LocalDateTime fertilizationDate, LocalDateTime expectedDateConfinement, LocalDateTime calvingDate, Long spermNo, String nothingSpecial, String entityIdentificationNumberChild, String entityManagementNumberChild, LocalBeefManagement localBeefManagement, LocalBeefManagement localBeefManagement2) {
+    public CalvesManagement(CalvesManagementPK calvesManagementPK, Short fertilizationIndex, String years, LocalDateTime fertilizationDate, LocalDateTime expectedDateConfinement, LocalDateTime calvingDate, String spermNo, String nothingSpecial, String entityIdentificationNumberChild, String entityManagementNumberChild) {
         this.calvesManagementPK = calvesManagementPK;
         this.fertilizationIndex = fertilizationIndex;
         this.years = years;
@@ -35,8 +35,6 @@ public class CalvesManagement {
         this.nothingSpecial = nothingSpecial;
         this.entityIdentificationNumberChild = entityIdentificationNumberChild;
         this.entityManagementNumberChild = entityManagementNumberChild;
-        this.localBeefManagement = localBeefManagement;
-        this.localBeefManagement2 = localBeefManagement2;
     }
 
     /**
@@ -102,7 +100,7 @@ public class CalvesManagement {
     /**
      * 정액번호.
      */
-    private Long spermNo;
+    private String spermNo;
 
     /**
      * 특이사항.

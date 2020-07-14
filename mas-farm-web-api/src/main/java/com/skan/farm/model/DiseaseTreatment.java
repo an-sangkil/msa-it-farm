@@ -29,10 +29,9 @@ public class DiseaseTreatment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Builder
-	public DiseaseTreatment(LocalBeefManagement localBeefManagement, DiseaseTreatmentPK diseaseTreatmentPK, Short fertilizationIndex, LocalDate cureDate, String diseaseName, String medicationName, String treatmentDetails, String injectionMethod, LocalDate withdrawalPeriodExpirationDate, String needleLoseYn) {
+	public DiseaseTreatment(LocalBeefManagement localBeefManagement, DiseaseTreatmentPK diseaseTreatmentPK,  LocalDate cureDate, String diseaseName, String medicationName, String treatmentDetails, String injectionMethod, LocalDate withdrawalPeriodExpirationDate, String needleLoseYn) {
 		this.localBeefManagement = localBeefManagement;
 		this.diseaseTreatmentPK = diseaseTreatmentPK;
-		this.fertilizationIndex = fertilizationIndex;
 		this.cureDate = cureDate;
 		this.diseaseName = diseaseName;
 		this.medicationName = medicationName;
@@ -67,8 +66,6 @@ public class DiseaseTreatment implements Serializable {
 	@EmbeddedId
 	DiseaseTreatmentPK diseaseTreatmentPK;
 
-	/** 수정 회차. */
-	private Short fertilizationIndex;
 
 	/** 치료_날짜. */
 	private LocalDate cureDate;

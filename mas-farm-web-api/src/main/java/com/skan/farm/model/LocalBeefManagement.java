@@ -33,7 +33,7 @@ import java.util.Set;
 public class LocalBeefManagement implements Serializable {
 
     @Builder
-    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Date createdTime, Date modifiedTime) {
+    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Boolean deleteYn, Date createdTime, Date modifiedTime) {
         this.localBeefManagementPK = localBeefManagementPK;
         this.parentPapaNo = parentPapaNo;
         this.parentMomNo = parentMomNo;
@@ -43,6 +43,7 @@ public class LocalBeefManagement implements Serializable {
         this.castrationDate = castrationDate;
         this.gender = gender;
         this.sellYn = sellYn;
+        this.deleteYn = deleteYn;
         this.createdTime = createdTime;
         this.modifiedTime = modifiedTime;
     }
@@ -90,6 +91,11 @@ public class LocalBeefManagement implements Serializable {
      * 판매여부.
      */
     private String sellYn;
+
+    /**
+     * 삭제여부
+     */
+    private Boolean deleteYn;
 
     /**
      * 생성일시.

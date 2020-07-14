@@ -3,6 +3,8 @@ package com.skan.farm.repository.jpa;
 import com.skan.farm.model.CalvesManagement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * <pre>
  * Description :
@@ -16,4 +18,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CalvesManagementJpaRepository extends JpaRepository<CalvesManagement, CalvesManagement.CalvesManagementPK> {
 
+    List<CalvesManagement> findByCalvesManagementPK_EntityManagementNumberAndCalvesManagementPK_EntityIdentificationNumber(String entityId, String indentId);
 }

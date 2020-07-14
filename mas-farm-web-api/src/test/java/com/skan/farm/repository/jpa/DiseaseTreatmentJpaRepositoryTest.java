@@ -12,8 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,15 +65,48 @@ class DiseaseTreatmentJpaRepositoryTest implements TestCodeGeneration {
 
     }
 
+    @Test
     @Override
     public void save() {
 
+        String entityNumber = "1111";
+        String identityNumber = "2222";
+
+        LocalBeefManagement localBeefManagement = new LocalBeefManagement();
+        localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK(entityNumber, identityNumber));
+        localBeefManagement.setBirthDay(LocalDate.now());
+        localBeefManagement.setGender(GenderCode.FEMALE);
+
+        localBeefManagementJpaRepository.save(localBeefManagement);
+
+        List<DiseaseTreatment> diseaseTreatments = new ArrayList<>();
+        IntStream.rangeClosed(1,3).forEach(value -> {
+            DiseaseTreatment diseaseTreatment1 = new DiseaseTreatment();
+            diseaseTreatment1.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, (short) value));
+            diseaseTreatment1.setDiseaseName("감기"+ value);
+
+            diseaseTreatments.add(diseaseTreatment1);
+        });
+
+        diseaseTreatmentJpaRepository.saveAll(diseaseTreatments);
     }
 
     @Test
     @Override
     public void select() {
         diseaseTreatmentJpaRepository.findAll()
+                .forEach(diseaseTreatment -> {
+                    System.out.println(String.format("diseaseTreatment.getLocalBeefManagement() = %s", diseaseTreatment.getLocalBeefManagement().toString()));
+                });
+
+
+    }
+
+    @Test
+    public void findByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber() {
+        String entityNumber = "1111";
+        String identityNumber = "2222";
+        diseaseTreatmentJpaRepository.findByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(entityNumber, identityNumber)
                 .forEach(diseaseTreatment -> {
                     System.out.println(String.format("diseaseTreatment.getLocalBeefManagement() = %s", diseaseTreatment.getLocalBeefManagement().toString()));
                 });
