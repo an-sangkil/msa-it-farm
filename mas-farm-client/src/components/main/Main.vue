@@ -83,29 +83,30 @@
 </template>
 <script>
   import axios from "axios"
+
   export default {
     data() {
       return {
         name: 'body template'
       }
-    }
-    ,methods : {
+    },
+    methods: {
 
-      textChange: function (){
-        this.name='body~ template~ data change'
+      textChange: function () {
+        this.name = 'body~ template~ data change'
       }
     },
     created() {
       axios.get("http://127.0.0.1:8090/get/test")
-      .then(value => {
-        console.log(`response original   = ${JSON.stringify(value)}`)
-        console.log(`response data value = ${JSON.stringify(value.data)}`)
-      }).catch(reason => {
+        .then(value => {
+          console.log(`response original   = ${JSON.stringify(value)}`)
+          console.log(`response data value = ${JSON.stringify(value.data)}`)
+        }).catch(reason => {
         console.error(`조회 실패 : ${reason}`)
       })
 
     }
-    ,beforeDestroy() {
+    , beforeDestroy() {
     }
   }
 

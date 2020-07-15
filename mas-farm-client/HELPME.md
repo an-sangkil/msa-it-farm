@@ -30,6 +30,7 @@ vue init webpack frontend
 ```shell script
 > npm install --save vuex
 > npm install --save axios
+> npm install --save vuex
 
 # --save 종속성 추가
 # --save-dev 개발시만 사용하고 업로드시 사용하지 않음
