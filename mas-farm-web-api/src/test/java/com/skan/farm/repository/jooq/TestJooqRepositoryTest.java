@@ -74,7 +74,7 @@ class TestJooqRepositoryTest {
 
     @Test
     void insert() {
-        Users users = new Users();
+        Users users = Users.builder().build();
         users.setUuid(UUID.randomUUID().toString());
         users.setUserId("skan");
         users.setUserName("skan");

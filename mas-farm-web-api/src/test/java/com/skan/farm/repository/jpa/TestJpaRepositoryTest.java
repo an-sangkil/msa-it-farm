@@ -41,10 +41,8 @@ class TestJpaRepositoryTest {
     @Transactional
     @Rollback(true)
     void testInsert(){
-        Users user =  new Users();
+        Users user =  new Users("skan","skan");
         user.setUuid(UUID.randomUUID().toString());
-        user.setUserId("skan");
-        user.setUserName("skan");
         user.setPassword("password");
 
         testJpaRepository.save(user);
@@ -52,10 +50,8 @@ class TestJpaRepositoryTest {
 
     @Test
     void testNonRollbackInsert(){
-        Users user =  new Users();
+        Users user =  new Users("skan","skan");
         user.setUuid(UUID.randomUUID().toString());
-        user.setUserId("skan");
-        user.setUserName("skan");
         user.setPassword("password");
 
         testJpaRepository.save(user);
