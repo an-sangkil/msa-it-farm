@@ -47,6 +47,6 @@ public class AccountController {
     public void findUser(HttpServletRequest httpServletRequest){
         String userId = httpServletRequest.getParameter("userId");
         Optional<Users> users = userJpaRepository.findByUserId(userId);
-        
+
     }
 }
