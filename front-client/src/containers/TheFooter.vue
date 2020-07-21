@@ -1,18 +1,12 @@
 <template>
-  <CFooter :fixed="false">
-    <div>
-      <a href="https://coreui.io" target="_blank">CoreUI</a>
-      <span class="ml-1">&copy; {{new Date().getFullYear()}} creativeLabs.</span>
-    </div>
-    <div class="ml-auto">
-      <span class="mr-1">Powered by</span>
-      <a href="https://coreui.io/vue" target="_blank">CoreUI for Vue</a>
-    </div>
-  </CFooter>
+  <footer class="c-footer">
+    <div><a href="https://coreui.io">CoreUI</a> © {{new Date().getFullYear()}} creativeLabs.</div>
+    <div class="ml-auto">Powered by&nbsp;<a href="https://coreui.io/">CoreUI</a></div>
+  </footer>
 </template>
 
 <script>
-export default {
-  name: 'TheFooter'
-}
+  export default {
+    name: 'TheFooter'
+  }
 </script>
