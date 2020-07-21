@@ -1,19 +1,17 @@
+<script src="containers/_nav.js"></script>
+<script src="store.js"></script>
+<script src="main.js"></script>
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <router-view></router-view>
 </template>
 
-<style lang="stylus">
-#app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
+<style lang="scss">
+  // Import Main styles for this application
+  @import 'assets/scss/style';
 </style>
