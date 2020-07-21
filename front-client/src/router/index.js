@@ -1,37 +1,31 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home.vue'
-import NotFound from "../components/common/NotFound";
-
-
 // Containers
 const TheContainer = () => import('../containers/TheContainer')
 
 // Views
 const Dashboard = () => import('../views/Dashboard')
-const Colors = () => import('../views/theme/Colors')
-const Typography = () => import('../views/theme/Typography')
-const Charts = () => import('@/views/charts/Charts')
-const Widgets = () => import('@/views/widgets/Widgets')
-
+import CattleList from '../views/cattle/CattleList'
+import CattleSave from '../views/cattle/CattleSave'
 
 // Views - Pages
-const Page404 = () => import('@/views/pages/Page404')
-const Page500 = () => import('@/views/pages/Page500')
-const Login = () => import('@/views/pages/Login')
-const Register = () => import('@/views/pages/Register')
+import NotFound from "../components/common/NotFound";
+const Page404 = () => import('../views/pages/Page404')
+const Page500 = () => import('../views/pages/Page500')
+const Login = () => import('../views/pages/Login')
+const Register = () => import('../views/pages/Register')
 
 
 
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Home',
-  //   component: Home
-  // },
+  {
+    path: '/',
+    name: 'HomePage',
+    redirect: "/pages/login"
+  },
   // {
   //   path: '/about',
   //   name: 'About',
@@ -46,8 +40,7 @@ const routes = [
   }
   ,
   {
-    path: '/',
-    redirect: '/dashboard',
+    path: '/dashboard',
     name: 'Home',
     component: TheContainer,
     children: [
@@ -57,8 +50,8 @@ const routes = [
         component: Dashboard
       },
       {
-        path: 'theme',
-        redirect: '/theme/colors',
+        path: '/cattle',
+        redirect: '/cattle/cattleList',
         name: 'Theme',
         component: {
           render(c) {
@@ -67,26 +60,16 @@ const routes = [
         },
         children: [
           {
-            path: 'colors',
-            name: 'Colors',
-            component: Colors
+            path: 'cattleList',
+            name: 'CattleList',
+            component: CattleList
           },
           {
-            path: 'typography',
-            name: 'Typography',
-            component: Typography
+            path: 'cattleSave',
+            name: 'CattleSave',
+            component: CattleSave
           }
         ]
-      },
-      {
-        path: 'charts',
-        name: 'Charts',
-        component: Charts
-      },
-      {
-        path: 'widgets',
-        name: 'Widgets',
-        component: Widgets
       },
       {
         path: 'base',

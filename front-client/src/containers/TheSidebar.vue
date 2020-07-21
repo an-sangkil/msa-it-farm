@@ -9,27 +9,27 @@
       </svg>
     </div>
     <ul class="c-sidebar-nav">
-      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="index.html">
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
         </svg>
         Dashboard<span class="badge badge-info">NEW</span></a></li>
+
       <li class="c-sidebar-nav-title">Theme</li>
       <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="colors.html">
         <svg class="c-sidebar-nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-drop1"></use>
-        </svg>
-        Colors</a></li>
-      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="typography.html">
+          <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-drop1"></use>
+        </svg>Colors</a></li>
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/cattle">
         <svg class="c-sidebar-nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-        </svg>
-        Typography</a></li>
+          <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+        </svg>Typography</a></li>
+
+
       <li class="c-sidebar-nav-title">Components</li>
-      <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
-        <svg class="c-sidebar-nav-icon">
-          <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-puzzle"></use>
-        </svg>
+      <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+        <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+          <svg class="c-sidebar-nav-icon"><use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-puzzle"></use></svg>
         Base</a>
         <ul class="c-sidebar-nav-dropdown-items">
           <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="base/breadcrumb.html"><span class="c-sidebar-nav-icon"></span> Breadcrumb</a></li>
@@ -102,7 +102,7 @@
         </svg>
         Pages</a>
         <ul class="c-sidebar-nav-dropdown-items">
-          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="login.html" target="_top">
+          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/pages/login" target="_top">
             <svg class="c-sidebar-nav-icon">
               <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
             </svg>

@@ -12,7 +12,7 @@
 
   require('./vendors/@coreui/coreui/js/coreui.bundle.min.js')
   require('./vendors/@coreui/icons/js/svgxuse.min.js')
-  require('./vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js')
+  //require('./vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js')
   require('./vendors/@coreui/utils/js/coreui-utils.js')
 
 
