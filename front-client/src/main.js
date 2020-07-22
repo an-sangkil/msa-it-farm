@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import axios from "axios"
+import axios from "./js/axios.intercepter"
 import VueSession from 'vue-session'
 
 const sessionOptions = {

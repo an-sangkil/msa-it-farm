@@ -32,24 +32,20 @@ public class AccountService {
 
     final UserJpaRepository userJpaRepository;
 
-    public boolean isUser(Users requestUsers) {
+    public Users isUser(Users requestUsers) {
         String userId = requestUsers.getUserId();
 
         try {
             Users users = userJpaRepository.findByUserId(userId).orElseThrow(NullPointerException::new);
-
             if (users.getPassword().equals(requestUsers.getPassword())) {
-
-                return true;
+                return users;
             } else {
                 log.debug(" {} 님의 비밀번호가 잘못 되었습니다.", userId);
-                return false;
+                return null;
             }
         } catch (NullPointerException e) {
-
             log.debug("{} 의 데이터가 없습니다. ", userId);
-
-            return false;
+            return null;
         }
 
 

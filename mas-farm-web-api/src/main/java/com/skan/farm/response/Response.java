@@ -61,7 +61,7 @@ public class Response<T> {
      * 응답 코드
      */
     public enum ResponseCode {
-        SUCCESS(1000), ERROR(2000) ;
+        SUCCESS(1000), FAILED(2000) , ERROR(3000) ;
         private int code;
         ResponseCode(int i) {
             code = i;

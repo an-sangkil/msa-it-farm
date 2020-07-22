@@ -9,14 +9,14 @@
       </svg>
     </div>
     <ul class="c-sidebar-nav">
-      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/">
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/dashboard">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
         </svg>
         Dashboard<span class="badge badge-info">NEW</span></a></li>
 
       <li class="c-sidebar-nav-title">Theme</li>
-      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="colors.html">
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/cattle/cattleList">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-drop1"></use>
         </svg>Colors</a></li>

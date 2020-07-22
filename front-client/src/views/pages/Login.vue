@@ -13,14 +13,14 @@
                       <svg class="c-icon">
                         <use xlink:href="../../vendors/@coreui/icons/svg/free.svg#cil-user"></use>
                       </svg></span></div>
-                  <input class="form-control" type="text" placeholder="Username">
+                  <input class="form-control" type="text" placeholder="Username" v-model="userId" >
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend"><span class="input-group-text">
                       <svg class="c-icon">
                         <use xlink:href="../../vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
                       </svg></span></div>
-                  <input class="form-control" type="password" placeholder="Password">
+                  <input class="form-control" type="password" placeholder="Password" v-model="password">
                 </div>
                 <div class="row">
                   <div class="col-6">
@@ -52,22 +52,50 @@
 
 <script>
 
-// import('../../vendors/@coreui/coreui/js/coreui.bundle.min.js')
-// import('../../vendors/@coreui/icons/js/svgxuse.min.js')
+  // import('../../vendors/@coreui/coreui/js/coreui.bundle.min.js')
+  // import('../../vendors/@coreui/icons/js/svgxuse.min.js')
 
-export default {
-  name: 'Login',
-  methods:{
-    login_action : function () {
-      this.$http.get("http://localhost:8000/cattle/cattle_management_list").then((res)=>{
-        console.log('data =', res.data)
+  export default {
+    data(){
+      return { userId : '', password:''}
+    },
+    created() {
+      console.log(process.env)
+      console.log(process.env.VUE_APP_API_SERVER_HOST)
+      console.log(process.env.BASE_URL)
+    },
+    name: 'Login',
+    methods: {
+      login_action: function () {
 
-      });
+        console.log('this.$data.userId = ', this.$data.userId)
 
-      //location.href='/dashboard'
+        let data = {
+          userId: this.$data.userId,
+          password: this.$data.password
+        }
+
+        this.$http.post(this.$store.state.host+"/account/sign_in", data)
+          .then((res) => {
+            console.log('data =', res.data)
+            let data =  res.data;
+            if (data.status === 'SUCCESS') {
+              // TODO SESSION CREATION
+              this.$router.push('/dashboard')
+            } else {
+              console.log(`login 실패 = ${this.$data.userId}`)
+
+              this.$router.push('/dashboard')
+            }
+
+
+
+          }).catch((error) => {
+            console.log('login fail message ', error)
+        });
+      }
     }
   }
-}
 </script>
 <style>
   /*@import "../../css/style.css";*/

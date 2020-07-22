@@ -117,6 +117,10 @@ const routes = [
   }
 ]
 
+const requireAuth = ()=> (from, to , next)=>{
+
+}
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -126,5 +130,10 @@ const router = new VueRouter({
   scrollBehavior: () => ({y: 0}),
   routes
 })
+
+//router.beforeEach(async (to, from, next)=>{
+  //alert('로그인 해주세요');
+  //return next('/login');
+//})
 
 export default router
