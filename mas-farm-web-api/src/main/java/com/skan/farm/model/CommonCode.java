@@ -28,6 +28,7 @@ public class CommonCode implements Serializable {
      * 코드.
      */
     @Id
+    @Column(length = 32)
     private String code;
 
     /**

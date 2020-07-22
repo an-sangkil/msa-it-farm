@@ -27,6 +27,7 @@ public class PersonalCode implements Serializable {
 
 	/** 코드. */
 	@Id
+	@Column(length = 128)
 	private String code;
 
 	/** 사용자 아이디. */

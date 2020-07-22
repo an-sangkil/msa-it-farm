@@ -56,12 +56,13 @@ public class Users implements Serializable {
      * uuid.
      */
     @Id
+    @Column(length = 128)
     private String uuid;
 
     /**
      * 사용자 아이디.
      */
-    @Column(unique = true)
+    @Column(unique = true,length = 32)
     private String userId;
 
     /**

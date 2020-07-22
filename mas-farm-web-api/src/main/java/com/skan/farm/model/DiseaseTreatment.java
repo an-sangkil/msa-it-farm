@@ -50,11 +50,13 @@ public class DiseaseTreatment implements Serializable {
 		/**
 		 * 개체관리번호.
 		 */
+		@Column(length = 32)
 		private String entityManagementNumber;
 
 		/**
 		 * 개체식별번호.
 		 */
+		@Column(length = 32)
 		private String entityIdentificationNumber;
 
 		/**

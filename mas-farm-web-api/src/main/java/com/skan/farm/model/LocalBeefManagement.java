@@ -29,7 +29,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 //@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-@JsonIgnoreProperties(ignoreUnknown = true,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
+@JsonIgnoreProperties(ignoreUnknown = false,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
 public class LocalBeefManagement implements Serializable {
 
     @Builder
@@ -130,8 +130,8 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , fetch = FetchType.LAZY
             , optional = false)
-    //@JsonManagedReference
-    @JsonIgnore
+    @JsonManagedReference
+    //@JsonIgnore
     private CattleSellStoreInformation cattleSellStoreInformation;
 
     /**

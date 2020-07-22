@@ -42,6 +42,7 @@ public class Schedule implements Serializable {
      * uuid.
      */
     @Id
+    @Column(length = 128)
     private String uuid;
 
     /**
