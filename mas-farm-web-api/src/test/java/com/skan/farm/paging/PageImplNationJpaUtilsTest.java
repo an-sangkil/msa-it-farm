@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 2020-07-23
  */
 @Slf4j
-class PageNationJpaUtilsTest {
+class PageImplNationJpaUtilsTest {
 
     PageNationJpaUtils  pageNationJpaUtils = new  PageNationJpaUtils();
 

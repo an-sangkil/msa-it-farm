@@ -96,18 +96,12 @@
     mounted() {
       this.$http.get(this.$store.state.host + '/cattle/cattle_management_list')
         .then((res) => {
-
-          console.log("this.pagination= ",res)
+          //console.log("response = ",res)
           this.pagingProcess(res);
-
-          console.log("this.pagination= ",this.pagination)
-          //console.log('paging begin= ' + pagination.begin, `paging end = ${pagination.end}`);
-
         })
         .catch((error) => {
 
         })
-
     },
 
     methods: {
@@ -140,12 +134,14 @@
         let calculatorPagination = PaginationUtils.Pagination(currentNumber, totalSize, PaginationUtils.DEFAULT_BLOCK_PAGE_SIZE)
 
         console.log('calculatorPagination', calculatorPagination)
+        console.log('paging begin= ' + calculatorPagination.begin, `paging end = ${calculatorPagination.end}`);
+
 
         this.cattleData = responseData.contents
         this.pagination = calculatorPagination
         this.CURRENT_NUMBER = responseData.pageable.pageNumber
 
-        console.log(`responseData.pageable.pageNumber = ${responseData.pageable.pageNumber}`)
+        console.log(`this.CURRENT_NUMBER = ${responseData.pageable.pageNumber}`)
 
       }
     }

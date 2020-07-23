@@ -14,37 +14,34 @@ import org.springframework.data.domain.Sort;
  * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
  * @since 2020-07-10
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class PageableJooq implements PageableDefault {
+@JsonIgnoreProperties(ignoreUnknown = false)
+public class PageableRequest implements Pageable {
 
     /**
-     * 페이지
+     * 현제 페이지
      */
     private int page;
 
     /**
-     * 출력 데이터
+     * 화면에 출력할 데이터 사이즈
      */
     private int size;
-
 
     @Deprecated
     private Sort sort;
     @Deprecated
     private Sort.Direction direction;
 
-    private PageableJooq() {}
+    private PageableRequest() {
+    }
 
-    public PageableJooq(int page, int size) {
+    public PageableRequest(int page, int size) {
+        //this.page = page <= 0 ? 1 : page;
         this.page = page;
-        this.size = size;
+        this.setSize(size);
     }
 
-    public void setPage(int page) {
-        this.page = page <= 0 ? 1 : page;
-    }
-
-    public void setSize(int size) {
+    private void setSize(int size) {
         int DEFAULT_SIZE = 10;
         int MAX_SIZE = 100;
 
@@ -56,7 +53,13 @@ public class PageableJooq implements PageableDefault {
 
     }
 
+    public int getPage() {
+        return page;
+    }
 
+    public int getSize() {
+        return size;
+    }
 
     /**
      * 다음 페이지
@@ -64,8 +67,8 @@ public class PageableJooq implements PageableDefault {
      * @return
      */
     @Override
-    public PageableJooq next() {
-        return new PageableJooq(getPageNumber() + 1, getPageSize());
+    public PageableRequest next() {
+        return new PageableRequest(getPageNumber() + 1, getPageSize());
     }
 
     /**
@@ -74,13 +77,15 @@ public class PageableJooq implements PageableDefault {
      * @return
      */
     @Override
-    public PageableJooq previous() {
-        return getPageNumber() == 0 ? this : new PageableJooq(getPageNumber() - 1, getPageSize());
+    public PageableRequest previous() {
+        return getPageNumber() == 0 ? this.first() : new PageableRequest(getPageNumber() - 1, getPageSize());
     }
+
     @Override
-    public PageableJooq first() {
-        return new PageableJooq(0, getPageSize());
+    public PageableRequest first() {
+        return new PageableRequest(0, getPageSize());
     }
+
 
     /**
      * 사용자 이벤트 클릭에 따른 위치 주소값 변경값.
@@ -94,7 +99,8 @@ public class PageableJooq implements PageableDefault {
     }
 
     /**
-     * 출력 데이터 사이즈
+     * 화면에 출력할 데이터 사이즈
+     *
      * @return
      */
     @Override
@@ -103,14 +109,12 @@ public class PageableJooq implements PageableDefault {
     }
 
     /**
-     * 페이지 번호
+     * 현재 페이지 번호
+     *
      * @return
      */
     @Override
     public int getPageNumber() {
         return page;
     }
-
-
-
 }

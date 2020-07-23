@@ -8,8 +8,9 @@ import com.skan.farm.model.CattleBuyInformation;
 import com.skan.farm.model.CattleSellStoreInformation;
 import com.skan.farm.model.LocalBeefManagement;
 import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.paging.PageImpl;
 import com.skan.farm.paging.Page;
-import com.skan.farm.paging.PageableDefault;
+import com.skan.farm.paging.Pageable;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
@@ -45,7 +46,7 @@ public class LocalBeefManagementJooqRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Page<LocalBeefManagement> findAll(LocalBeefManagement predicate, PageableDefault pageableDefault) {
+    public PageImpl<LocalBeefManagement> findAll(LocalBeefManagement predicate, Pageable pageable) {
 
         JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
         JCattleBuyInformation jCattleBuyInformation = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
@@ -101,8 +102,8 @@ public class LocalBeefManagementJooqRepository {
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleSellStoreInformation.ENTITY_IDENTIFICATION_NUMBER)
                 )
                 .where(this.dynamicConditionsLocalbeffManagement(predicate))
-                .limit(pageableDefault.getPageSize())
-                .offset(pageableDefault.getOffset())
+                .limit(pageable.getPageSize())
+                .offset(pageable.getOffset())
                 .getSQL(ParamType.INLINED);
 
 
@@ -152,7 +153,7 @@ public class LocalBeefManagementJooqRepository {
                     localBeefManagements.add(localBeefManagement);
                 });
 
-        return new Page<LocalBeefManagement>(pageableDefault, localBeefManagements, totalCount);
+        return new PageImpl<LocalBeefManagement>(pageable, localBeefManagements, totalCount);
 
     }
 

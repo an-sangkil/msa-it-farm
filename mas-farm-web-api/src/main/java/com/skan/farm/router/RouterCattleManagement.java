@@ -2,8 +2,8 @@ package com.skan.farm.router;
 
 import com.skan.farm.code.GenderCode;
 import com.skan.farm.model.*;
-import com.skan.farm.paging.PageableDefault;
-import com.skan.farm.paging.PageableJooq;
+import com.skan.farm.paging.Page;
+import com.skan.farm.paging.PageableRequest;
 import com.skan.farm.repository.jpa.CalvesManagementJpaRepository;
 import com.skan.farm.repository.jpa.DiseaseTreatmentJpaRepository;
 import com.skan.farm.repository.jpa.LocalBeefManagementJpaRepository;
@@ -11,12 +11,9 @@ import com.skan.farm.service.CattleManagementService;
 import com.skan.farm.service.ChildBirthManagementService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.function.RequestPredicates;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerResponse;
@@ -63,7 +60,7 @@ public class RouterCattleManagement {
 //            Pageable pageable = PageRequest.of(page, size);
 //            return ServerResponse.ok().body(cattleManagementService.findAllPaging(pageable));
             LocalBeefManagement localBeefManagement = LocalBeefManagement.builder().localBeefManagementPK(new LocalBeefManagementPK(entityId, identityId)).build();
-            PageableDefault pageable = new PageableJooq(page, size);
+            PageableRequest pageable = new PageableRequest(page, size);
             return ServerResponse.ok().body(cattleManagementService.findAll(localBeefManagement, pageable));
 
         }).andRoute(GET("/cattle/detail"), request -> {

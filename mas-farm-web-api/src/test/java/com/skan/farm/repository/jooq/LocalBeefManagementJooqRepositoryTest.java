@@ -1,16 +1,14 @@
 package com.skan.farm.repository.jooq;
 
 import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.paging.Page;
-import com.skan.farm.paging.PageableJooq;
+import com.skan.farm.paging.PageImpl;
+import com.skan.farm.paging.PageableRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <pre>
@@ -35,8 +33,8 @@ class LocalBeefManagementJooqRepositoryTest {
     @Test
     void findAll() {
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-        PageableJooq pageableJooq = new PageableJooq(0, 10);
-        Page<LocalBeefManagement> paging = localBeefManagementJooqRepository.findAll(localBeefManagement, pageableJooq);
+        PageableRequest pageableRequest = new PageableRequest(0, 10);
+        PageImpl<LocalBeefManagement> paging = localBeefManagementJooqRepository.findAll(localBeefManagement, pageableRequest);
         log.debug("paging = {}", paging);
 
     }
