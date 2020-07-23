@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2020-07-10
  */
 @ToString
-public class Page <T> {
+public class Page <T> extends PageableJooq {
 
     /**
      * 전체 페이지  사이즈
@@ -25,19 +25,15 @@ public class Page <T> {
     private int total;
     private PageableDefault pageableDefault;
 
-    private Page() {}
-
-    public Page(PageableDefault pageableDefault, List<T> contents, int total) {
-        this.pageableDefault = pageableDefault;
-        this.contents = contents;
-        this.total = total;
-    }
-
     /**
      * 데이터
      */
     @Getter
     List<T> contents;
+
+    public Page(int page, int size) {
+        super(page, size);
+    }
 
     /**
      * 전체 페이지 값

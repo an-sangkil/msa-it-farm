@@ -9,7 +9,7 @@ export default new Vuex.Store({
     title:'Admin',
     subtitle:'Dashboard',
     host: process.env.VUE_APP_API_SERVER_HOST
-  
+
   },
   mutations: {
       changeHome: (state,payload) => {
@@ -24,7 +24,6 @@ export default new Vuex.Store({
         console.log(payload)
         return state.subtitle=payload.name
       }
-
   },
   actions: {
   },

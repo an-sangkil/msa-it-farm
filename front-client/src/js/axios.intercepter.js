@@ -4,7 +4,7 @@ axios.interceptors.request.use((config)=>{
   config.headers.token = '';
   config.headers.refresh_token = ''
 
-  console.log('config = ', config)
+  //console.log('config = ', config)
 
   return config
 }, (error)=> {
