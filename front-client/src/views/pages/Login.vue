@@ -84,11 +84,8 @@
               this.$router.push('/dashboard')
             } else {
               console.log(`login 실패 = ${this.$data.userId}`)
-
               this.$router.push('/dashboard')
             }
-
-
 
           }).catch((error) => {
             console.log('login fail message ', error)

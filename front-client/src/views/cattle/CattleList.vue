@@ -16,7 +16,7 @@
                 <i class="fa fa-align-justify"></i>
                 <div class="col-12 col-xl mb-3 mb-xl-0">Cattle List</div>
                 <div class=" mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-success" type="button">등록</button>
+                  <button class="btn btn-block btn-outline-success" type="button" v-on:click="cattleSave">등록</button>
                 </div>
               </div>
             </div>
@@ -31,7 +31,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item in cattleData" v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
+                <tr v-for="item in this.$store.state.pagingData"
+                    v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
                   <td>{{ item.localBeefManagementPK.entityManagementNumber}}</td>
                   <td>{{ item.localBeefManagementPK.entityIdentificationNumber}}</td>
                   <td>{{ item.birthDay }}</td>
@@ -43,15 +44,19 @@
               </table>
               <ul class="pagination">
 
-                <div v-if="pagination.isPre">
-                  <li class="page-item"><a class="page-link" href="#" v-on:click="pageMove(pagination.begin-2)">Prev</a></li>
+                <div v-if="isPre">
+                  <li class="page-item"><a class="page-link" href="#" v-on:click="pageMove(begin-2)">Prev</a>
+                  </li>
                 </div>
 
-                <div v-for="(item,index) in pagingItem()">
-                  <li class="page-item" :class="{active: item.active}"><a class="page-link" href="#" v-on:click="pageMove(item.value)">{{item.viewValue}}</a></li>
+                <div v-for="(item,index) in pagination">
+                  <li class="page-item" :class="{active: item.active}"><a class="page-link" href="#"
+                                                                          v-on:click="pageMove(item.value)">{{item.viewValue}}</a>
+                  </li>
                 </div>
-                <div v-if="pagination.isNext">
-                  <li class="page-item"><a class="page-link" href="#" v-on:click="pageMove(pagination.end)">Next</a></li>
+                <div v-if="isNext">
+                  <li class="page-item"><a class="page-link" href="#" v-on:click="pageMove(end)">Next</a>
+                  </li>
                 </div>
               </ul>
             </div>
@@ -76,28 +81,33 @@
 
     data() {
       return {
-        cattleData: []
-        , pagination: {
-          //mount 에서 데이터를 채워준다.
-        }
-        , pagingItem: function () {
-          let list = [];
-          for (let i = this.pagination.begin; i <= this.pagination.end; i++) {
-            let item = {"value": i - 1, "viewValue": i, "active": this.CURRENT_NUMBER+1 === i}
-            list.push(item)
-          }
-          return list;
-
-        }
-        , CURRENT_NUMBER: 0
-        , BLOCK_PAGE_SIZE: 10
+      }
+    },
+    computed:{
+      contents () {
+        return this.$store.state.pagingData;
+      },
+      isPre: function () {
+        return this.$store.state.paginationValue.isPre;
+      },
+      isNext () {
+        return this.$store.state.paginationValue.isNext;
+      },
+      begin () {
+        return this.$store.state.paginationValue.begin;
+      },
+      end () {
+        return this.$store.state.paginationValue.end;
+      },
+      pagination(){
+        return this.$store.state.paginationObject;
       }
     },
     mounted() {
       this.$http.get(this.$store.state.host + '/cattle/cattle_management_list')
         .then((res) => {
           //console.log("response = ",res)
-          this.pagingProcess(res);
+          this.$store.commit('pagingProcess', {"data": res.data})
         })
         .catch((error) => {
 
@@ -106,16 +116,14 @@
 
     methods: {
       cattleSave: function () {
-        this.$route.push('/cattle/cattleSave')
+        this.$router.push('/cattle/cattleSave')
       },
       pageMove: function (currentPage) {
-
-        //console.log("user click current page = ", currentPage)
 
         this.$http
           .get(this.$store.state.host + '/cattle/cattle_management_list?page=' + currentPage)
           .then((res) => {
-            this.pagingProcess(res);
+            this.$store.commit('pagingProcess', {"data": res.data})
           })
           .catch((error) => {
 
@@ -124,13 +132,13 @@
       ,
       pagingProcess: function (res) {
 
-        console.log(`response data = `,res.data)
+        console.log(`response data = `, res.data)
 
         let responseData = res.data;
         let totalSize = responseData.totalPages
 
         // 페이지 네이션 구할때 현재 페이지에 + 1
-        let currentNumber = responseData.pageable.pageNumber+1
+        let currentNumber = responseData.pageable.pageNumber + 1
         let calculatorPagination = PaginationUtils.Pagination(currentNumber, totalSize, PaginationUtils.DEFAULT_BLOCK_PAGE_SIZE)
 
         console.log('calculatorPagination', calculatorPagination)
