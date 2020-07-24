@@ -1,65 +1,64 @@
 <template>
-  <div class="d-flex align-items-center min-vh-100">
-    <CContainer fluid>
-      <CRow class="justify-content-center">
-        <CCol md="6">
-          <CCard class="mx-4 mb-0">
-            <CCardBody class="p-4">
-              <CForm>
-                <h1>Register</h1>
-                <p class="text-muted">Create your account</p>
-                <CInput
-                  placeholder="Username"
-                  autocomplete="username"
-                >
-                  <template #prepend-content><CIcon name="cil-user"/></template>
-                </CInput>
-                <CInput
-                  placeholder="Email"
-                  autocomplete="email"
-                  prepend="@"
-                />
-                <CInput
-                  placeholder="Password"
-                  type="password"
-                  autocomplete="new-password"
-                >
-                  <template #prepend-content><CIcon name="cil-lock-locked"/></template>
-                </CInput>
-                <CInput
-                  placeholder="Repeat password"
-                  type="password"
-                  autocomplete="new-password"
-                  class="mb-4"
-                >
-                  <template #prepend-content><CIcon name="cil-lock-locked"/></template>
-                </CInput>
-                <CButton color="success" block>Create Account</CButton>
-              </CForm>
-            </CCardBody>
-            <CCardFooter class="p-4">
-              <CRow>
-                <CCol col="6">
-                  <CButton block color="facebook">
-                    Facebook
-                  </CButton>
-                </CCol>
-                <CCol col="6">
-                  <CButton block color="twitter">
-                    Twitter
-                  </CButton>
-                </CCol>
-              </CRow>
-            </CCardFooter>
-          </CCard>
-        </CCol>
-      </CRow>
-    </CContainer>
+  <div class="c-app flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <h1>Register</h1>
+              <p class="text-muted">Create your account</p>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend"><span class="input-group-text">
+                    <svg class="c-icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+                    </svg></span></div>
+                <input class="form-control" type="text" placeholder="Username">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend"><span class="input-group-text">
+                    <svg class="c-icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
+                    </svg></span></div>
+                <input class="form-control" type="text" placeholder="Email">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend"><span class="input-group-text">
+                    <svg class="c-icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                    </svg></span></div>
+                <input class="form-control" type="password" placeholder="Password">
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend"><span class="input-group-text">
+                    <svg class="c-icon">
+                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-lock-locked"></use>
+                    </svg></span></div>
+                <input class="form-control" type="password" placeholder="Repeat password">
+              </div>
+              <button class="btn btn-block btn-success" type="button">Create Account</button>
+            </div>
+            <!--<div class="card-footer p-4">
+              <div class="row">
+                <div class="col-6">
+                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
-export default {
-  name: 'Register'
-}
+  export default {}
 </script>
+
+<style>
+
+</style>

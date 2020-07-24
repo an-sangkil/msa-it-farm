@@ -75,7 +75,7 @@ logging:
   level:
     root: info
     com.skan: debug
-    org.springframework : info
+    org.springframework : debug
     org.hibernate.type.descriptor.sql: trace
     web: info
 

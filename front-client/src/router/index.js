@@ -6,16 +6,19 @@ const TheContainer = () => import('../containers/TheContainer')
 
 // Views
 const Dashboard = () => import('../views/Dashboard')
+
 import CattleList from '../views/cattle/CattleList'
-import CattleSave from '../views/cattle/CattleSave'
+import CattleForm from '../views/cattle/CattleForm'
+import ScheduleList from '../views/schedule/ScheduleList'
+import ScheduleForm from '../views/schedule/ScheduleForm'
 
 // Views - Pages
 import NotFound from "../components/common/NotFound";
+
 const Page404 = () => import('../views/pages/Page404')
 const Page500 = () => import('../views/pages/Page500')
 const Login = () => import('../views/pages/Login')
 const Register = () => import('../views/pages/Register')
-
 
 
 Vue.use(VueRouter)
@@ -23,17 +26,9 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'HomePage',
+    name: 'LoginPage',
     redirect: "/pages/login"
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // },
   {
     path: '*'
     , component: NotFound
@@ -41,7 +36,7 @@ const routes = [
   ,
   {
     path: '/dashboard',
-    name: 'Home',
+    name: 'HomePage',
     component: TheContainer,
     children: [
       {
@@ -65,9 +60,31 @@ const routes = [
             component: CattleList
           },
           {
-            path: 'cattleSave',
-            name: 'CattleSave',
-            component: CattleSave
+            path: 'cattleForm',
+            name: 'CattleForm',
+            component: CattleForm
+          }
+        ]
+      },
+      {
+        path: '/schedule',
+        redirect: '/schedule/scheduleList',
+        name: 'Base',
+        component: {
+          render(c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: 'scheduleList',
+            name: 'ScheduleList',
+            component: ScheduleList
+          },
+          {
+            path: 'scheduleForm',
+            name: 'ScheduleForm',
+            component: ScheduleForm
           }
         ]
       },
@@ -117,7 +134,7 @@ const routes = [
   }
 ]
 
-const requireAuth = ()=> (from, to , next)=>{
+const requireAuth = () => (from, to, next) => {
 
 }
 
@@ -132,8 +149,8 @@ const router = new VueRouter({
 })
 
 //router.beforeEach(async (to, from, next)=>{
-  //alert('로그인 해주세요');
-  //return next('/login');
+//alert('로그인 해주세요');
+//return next('/login');
 //})
 
 export default router

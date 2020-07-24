@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import PaginationUtils from "../js/Pagination";
+import axios from "../js/axios.intercepter";
+
 
 Vue.use(Vuex)
 
@@ -19,21 +21,15 @@ export default new Vuex.Store({
   },
   mutations: {
     changeHome: (state, payload) => {
-      //console.log(payload)
       return state.home = payload.name
     },
     changeTitle: (state, payload) => {
-      //console.log(payload)
       return state.title = payload.name
     },
     changeSubtitle: (state, payload) => {
-      //console.log(payload)
       return state.subtitle = payload.name
     },
     pagingProcess: function (state, payload) {
-
-      //console.log(`response data = `, payload.data)
-
       try {
         let responseData = payload.data;
         let totalSize = responseData.totalPages
@@ -58,6 +54,20 @@ export default new Vuex.Store({
       }
     }
   },
-  actions: {},
+  actions: {
+    pagingAction: (context, {actionUrl})=> {
+
+      let state = context.state
+      axios
+        .get(state.host + actionUrl)
+        .then((res) => {
+          context.commit('pagingProcess', {"data": res.data.detail.data})
+        })
+        .catch((error) => {
+
+        })
+
+    }
+  },
   modules: {}
 })

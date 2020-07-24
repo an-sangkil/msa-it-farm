@@ -13,7 +13,7 @@
                       <svg class="c-icon">
                         <use xlink:href="../../vendors/@coreui/icons/svg/free.svg#cil-user"></use>
                       </svg></span></div>
-                  <input class="form-control" type="text" placeholder="Username" v-model="userId" >
+                  <input class="form-control" type="text" placeholder="Username" v-model="userId">
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend"><span class="input-group-text">
@@ -37,7 +37,7 @@
                 <div>
                   <h2>Sign up</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  <button class="btn btn-lg btn-outline-light mt-3" type="button">Register Now!</button>
+                  <button class="btn btn-lg btn-outline-light mt-3" type="button" v-on:click="registerForm()">Register Now!</button>
                 </div>
               </div>
             </div>
@@ -56,8 +56,8 @@
   // import('../../vendors/@coreui/icons/js/svgxuse.min.js')
 
   export default {
-    data(){
-      return { userId : '', password:''}
+    data() {
+      return {userId: '', password: ''}
     },
     created() {
       console.log(process.env)
@@ -75,10 +75,10 @@
           password: this.$data.password
         }
 
-        this.$http.post(this.$store.state.host+"/account/sign_in", data)
+        this.$http.post(this.$store.state.host + "/account/sign_in", data)
           .then((res) => {
             console.log('data =', res.data)
-            let data =  res.data;
+            let data = res.data;
             if (data.status === 'SUCCESS') {
               // TODO SESSION CREATION
               this.$router.push('/dashboard')
@@ -88,8 +88,11 @@
             }
 
           }).catch((error) => {
-            console.log('login fail message ', error)
+          console.log('login fail message ', error)
         });
+      },
+      registerForm: function(){
+        this.$router.push('/pages/register')
       }
     }
   }

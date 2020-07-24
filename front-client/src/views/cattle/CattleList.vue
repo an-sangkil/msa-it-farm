@@ -104,53 +104,18 @@
       }
     },
     mounted() {
-      this.$http.get(this.$store.state.host + '/cattle/cattle_management_list')
-        .then((res) => {
-          //console.log("response = ",res)
-          this.$store.commit('pagingProcess', {"data": res.data})
-        })
-        .catch((error) => {
-
-        })
+      //this.$store.dispatch('pagingAction',{actionUrl:'/cattle/cattle_management_list?page=0'})
+      this.pageMove(0);
     },
 
     methods: {
       cattleSave: function () {
-        this.$router.push('/cattle/cattleSave')
+        this.$router.push('/cattle/cattleForm')
       },
       pageMove: function (currentPage) {
 
-        this.$http
-          .get(this.$store.state.host + '/cattle/cattle_management_list?page=' + currentPage)
-          .then((res) => {
-            this.$store.commit('pagingProcess', {"data": res.data})
-          })
-          .catch((error) => {
-
-          })
-      }
-      ,
-      pagingProcess: function (res) {
-
-        console.log(`response data = `, res.data)
-
-        let responseData = res.data;
-        let totalSize = responseData.totalPages
-
-        // 페이지 네이션 구할때 현재 페이지에 + 1
-        let currentNumber = responseData.pageable.pageNumber + 1
-        let calculatorPagination = PaginationUtils.Pagination(currentNumber, totalSize, PaginationUtils.DEFAULT_BLOCK_PAGE_SIZE)
-
-        console.log('calculatorPagination', calculatorPagination)
-        console.log('paging begin= ' + calculatorPagination.begin, `paging end = ${calculatorPagination.end}`);
-
-
-        this.cattleData = responseData.contents
-        this.pagination = calculatorPagination
-        this.CURRENT_NUMBER = responseData.pageable.pageNumber
-
-        console.log(`this.CURRENT_NUMBER = ${responseData.pageable.pageNumber}`)
-
+        let actionUrl = '/cattle/cattle_management_list?page=' + currentPage;
+        this.$store.dispatch('pagingAction',{actionUrl:actionUrl})
       }
     }
   }
