@@ -75,7 +75,7 @@ public class CattleSellStoreInformation implements Serializable {
 			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber"),
 			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber"),
 	})
-	@JsonBackReference
+	@JsonBackReference("cattleSellStoreInformation")
 	/** 한우(암소/수소) 개체관리기록부. */
 	private LocalBeefManagement localBeefManagement;
 

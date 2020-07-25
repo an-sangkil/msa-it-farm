@@ -55,7 +55,7 @@ public class LocalBeefManagementJooqRepository {
 
         String sql = dslContext.selectCount()
                 .from(jLocalBeefManagement)
-                .join(jCattleBuyInformation)
+                .leftJoin(jCattleBuyInformation)
                 .on(
                         jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(jCattleBuyInformation.ENTITY_MANAGEMENT_NUMBER),
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleBuyInformation.ENTITY_IDENTIFICATION_NUMBER))
@@ -76,6 +76,7 @@ public class LocalBeefManagementJooqRepository {
                 , jLocalBeefManagement.PARENT_MOM_NO
                 , jLocalBeefManagement.PARENT_PAPA_NO
                 , jLocalBeefManagement.GENDER
+                , jLocalBeefManagement.ROOM_NUMBER
                 , jLocalBeefManagement.SELL_YN
                 , jCattleBuyInformation.BUY_DATE
                 , jCattleBuyInformation.BUY_NOTE
@@ -90,7 +91,7 @@ public class LocalBeefManagementJooqRepository {
                 , jCattleSellStoreInformation.SELL_PHONE_NUMBER
         )
                 .from(jLocalBeefManagement)
-                .join(jCattleBuyInformation)
+                .leftJoin(jCattleBuyInformation)
                 .on(
                         jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(jCattleBuyInformation.ENTITY_MANAGEMENT_NUMBER),
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleBuyInformation.ENTITY_IDENTIFICATION_NUMBER))
@@ -117,13 +118,14 @@ public class LocalBeefManagementJooqRepository {
                     LocalBeefManagement localBeefManagement = LocalBeefManagement
                             .builder()
                             .localBeefManagementPK(new LocalBeefManagementPK(ENTITY_MANAGEMENT_NUMBER, ENTITY_IDENTIFICATION_NUMBER))
-                            .birthDay(((java.sql.Date) stringObjectMap.get("BIRTH_DAY")).toLocalDate())
+                            .birthDay( stringObjectMap.get("BIRTH_DAY") != null?  ((java.sql.Date) stringObjectMap.get("BIRTH_DAY")).toLocalDate(): null)
                             .earTagDate(stringObjectMap.get("EAR_TAG_DATE") != null ? ((java.sql.Date) stringObjectMap.get("EAR_TAG_DATE")).toLocalDate() : null)
                             .enterDate(stringObjectMap.get("ENTER_DATE") != null ? ((java.sql.Date) stringObjectMap.get("ENTER_DATE")).toLocalDate() : null)
                             .parentMomNo((String) stringObjectMap.get("PARENT_MOM_NO"))
                             .parentPapaNo((String) stringObjectMap.get("PARENT_PAPA_NO"))
                             .sellYn((String) stringObjectMap.get("SELL_YN"))
                             .gender(stringObjectMap.get("GENDER") != null ? GenderCode.valueOf(stringObjectMap.get("GENDER").toString()) : GenderCode.MALE)
+                            .roomNumber((String) stringObjectMap.get("ROOM_NUMBER"))
                             .createdTime(((java.sql.Date) stringObjectMap.get("CREATED_TIME")))
                             .build();
 

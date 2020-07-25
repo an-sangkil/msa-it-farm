@@ -11,6 +11,7 @@ import com.skan.farm.domain.tables.JCommonCode;
 import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
+import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
 import com.skan.farm.domain.tables.records.JCalvesManagementRecord;
 import com.skan.farm.domain.tables.records.JCattleBuyInformationRecord;
@@ -19,6 +20,7 @@ import com.skan.farm.domain.tables.records.JCommonCodeRecord;
 import com.skan.farm.domain.tables.records.JDiseaseTreatmentRecord;
 import com.skan.farm.domain.tables.records.JLocalBeefManagementRecord;
 import com.skan.farm.domain.tables.records.JPersonalCodeRecord;
+import com.skan.farm.domain.tables.records.JScheduleRecord;
 import com.skan.farm.domain.tables.records.JUsersRecord;
 
 import org.jooq.ForeignKey;
@@ -50,6 +52,7 @@ public class Keys {
     public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = UniqueKeys0.KEY_DISEASE_TREATMENT_PRIMARY;
     public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY;
     public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = UniqueKeys0.KEY_PERSONAL_CODE_PRIMARY;
+    public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_PRIMARY = UniqueKeys0.KEY_SCHEDULE_PRIMARY;
     public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = UniqueKeys0.KEY_USERS_PRIMARY;
     public static final UniqueKey<JUsersRecord> KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF = UniqueKeys0.KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF;
 
@@ -77,6 +80,7 @@ public class Keys {
         public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = Internal.createUniqueKey(JDiseaseTreatment.DISEASE_TREATMENT, "KEY_disease_treatment_PRIMARY", new TableField[] { JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_IDENTIFICATION_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_MANAGEMENT_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.SEQ }, true);
         public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT, "KEY_local_beef_management_PRIMARY", new TableField[] { JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = Internal.createUniqueKey(JPersonalCode.PERSONAL_CODE, "KEY_personal_code_PRIMARY", new TableField[] { JPersonalCode.PERSONAL_CODE.CODE }, true);
+        public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_PRIMARY = Internal.createUniqueKey(JSchedule.SCHEDULE, "KEY_schedule_PRIMARY", new TableField[] { JSchedule.SCHEDULE.UUID }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = Internal.createUniqueKey(JUsers.USERS, "KEY_users_PRIMARY", new TableField[] { JUsers.USERS.UUID }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF = Internal.createUniqueKey(JUsers.USERS, "KEY_users_UK_6efs5vmce86ymf5q7lmvn2uuf", new TableField[] { JUsers.USERS.USER_ID }, true);
     }

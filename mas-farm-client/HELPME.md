@@ -9,8 +9,10 @@ npm install -g @vue/cli
 #global addon <vue init>
 npm install -g @vue/cli-init
 
-# project Create
+# project Create vue.2.X
 vue init webpack frontend
+# project Create vue.3.X after
+vue create frontend
 ```
 
 ### npm server 구동 스크립트

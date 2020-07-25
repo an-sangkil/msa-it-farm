@@ -76,7 +76,7 @@ public class CattleBuyInformation implements Serializable {
             , optional = false)
             @JoinColumn(name = "entityManagementNumber" ,referencedColumnName = "entityManagementNumber")
             @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber")
-    @JsonBackReference
+    @JsonBackReference("cattleBuyInformation")
     //@JsonIgnore
     private LocalBeefManagement localBeefManagement;
 

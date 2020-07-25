@@ -11,6 +11,7 @@ import com.skan.farm.domain.tables.JCommonCode;
 import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
+import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
 
 
@@ -54,6 +55,11 @@ public class Tables {
      * The table <code>naive-it-farm.personal_code</code>.
      */
     public static final JPersonalCode PERSONAL_CODE = JPersonalCode.PERSONAL_CODE;
+
+    /**
+     * The table <code>naive-it-farm.schedule</code>.
+     */
+    public static final JSchedule SCHEDULE = JSchedule.SCHEDULE;
 
     /**
      * The table <code>naive-it-farm.users</code>.

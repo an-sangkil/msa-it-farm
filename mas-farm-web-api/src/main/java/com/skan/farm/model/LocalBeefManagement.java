@@ -1,8 +1,15 @@
 package com.skan.farm.model;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.skan.farm.code.GenderCode;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,11 +36,11 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 //@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
-@JsonIgnoreProperties(ignoreUnknown = false,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
+@JsonIgnoreProperties(ignoreUnknown = true,value = {"hibernateLazyInitializer","$$_hibernate_interceptor", "handler"})
 public class LocalBeefManagement implements Serializable {
 
     @Builder
-    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Boolean deleteYn, Date createdTime, Date modifiedTime) {
+    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Boolean deleteYn, Date createdTime, Date modifiedTime,String roomNumber) {
         this.localBeefManagementPK = localBeefManagementPK;
         this.parentPapaNo = parentPapaNo;
         this.parentMomNo = parentMomNo;
@@ -46,6 +53,7 @@ public class LocalBeefManagement implements Serializable {
         this.deleteYn = deleteYn;
         this.createdTime = createdTime;
         this.modifiedTime = modifiedTime;
+        this.roomNumber = roomNumber;
     }
 
     @EmbeddedId
@@ -62,23 +70,45 @@ public class LocalBeefManagement implements Serializable {
     private String parentMomNo;
 
     /**
+     * 방번호
+     */
+    private String roomNumber;
+
+
+    /**
      * 출생일, 태어난날.
      */
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDay;
 
     /**
      * 입식일.
      */
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate enterDate;
 
     /**
      * 귀표장착일.
      */
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate earTagDate;
 
     /**
      * 거세일.
      */
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate castrationDate;
 
     /**
@@ -100,18 +130,22 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 생성일시.
      */
+    @DateTimeFormat
+    @CreationTimestamp
     private Date createdTime;
 
     /**
      * 수정시간.
      */
+    @DateTimeFormat
+    @UpdateTimestamp
     private Date modifiedTime;
 
     /**
      * 분만관리(송아지 관리) 목록.
      */
     @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("calvesManagementSet")
     private Set<CalvesManagement> calvesManagementSet;
 
     /**
@@ -121,7 +155,7 @@ public class LocalBeefManagement implements Serializable {
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
             , optional = false)
-    @JsonManagedReference
+    @JsonManagedReference("cattleBuyInformation")
     private CattleBuyInformation cattleBuyInformation;
 
     /**
@@ -130,7 +164,7 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , fetch = FetchType.LAZY
             , optional = false)
-    @JsonManagedReference
+    @JsonManagedReference("cattleSellStoreInformation")
     //@JsonIgnore
     private CattleSellStoreInformation cattleSellStoreInformation;
 
@@ -138,7 +172,7 @@ public class LocalBeefManagement implements Serializable {
      * 질병 및 치료 목록.
      */
     @OneToMany(mappedBy = "localBeefManagement", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonManagedReference("diseaseTreatmentSet")
     private Set<DiseaseTreatment> diseaseTreatmentSet;
 
     /**

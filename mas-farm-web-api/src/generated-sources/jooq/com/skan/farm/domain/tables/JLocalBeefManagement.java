@@ -17,7 +17,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row12;
+import org.jooq.Row14;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> {
 
-    private static final long serialVersionUID = 957998761;
+    private static final long serialVersionUID = 1668399136;
 
     /**
      * The reference instance of <code>naive-it-farm.local_beef_management</code>
@@ -107,6 +107,16 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
      * The column <code>naive-it-farm.local_beef_management.sell_yn</code>.
      */
     public final TableField<JLocalBeefManagementRecord, String> SELL_YN = createField(DSL.name("sell_yn"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>naive-it-farm.local_beef_management.delete_yn</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, Boolean> DELETE_YN = createField(DSL.name("delete_yn"), org.jooq.impl.SQLDataType.BIT, this, "");
+
+    /**
+     * The column <code>naive-it-farm.local_beef_management.room_number</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, String> ROOM_NUMBER = createField(DSL.name("room_number"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>naive-it-farm.local_beef_management</code> table reference
@@ -183,11 +193,11 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     }
 
     // -------------------------------------------------------------------------
-    // Row12 type methods
+    // Row14 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row12<String, String, LocalDate, LocalDate, LocalDateTime, LocalDate, LocalDate, String, LocalDateTime, String, String, String> fieldsRow() {
-        return (Row12) super.fieldsRow();
+    public Row14<String, String, LocalDate, LocalDate, LocalDateTime, LocalDate, LocalDate, String, LocalDateTime, String, String, String, Boolean, String> fieldsRow() {
+        return (Row14) super.fieldsRow();
     }
 }

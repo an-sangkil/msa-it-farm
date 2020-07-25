@@ -133,7 +133,7 @@ public class CalvesManagement {
             @JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false),
             @JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false),
     })
-    @JsonBackReference
+    @JsonBackReference("calvesManagementSet")
     private LocalBeefManagement localBeefManagement;
 
     /**
@@ -142,7 +142,7 @@ public class CalvesManagement {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "entityIdentificationNumberChild", referencedColumnName = "entityIdentificationNumber", insertable = false, updatable = false)
     @JoinColumn(name = "entityManagementNumberChild", referencedColumnName = "entityManagementNumber", insertable = false, updatable = false)
-    @JsonBackReference
+    @JsonBackReference("calvesManagementSet2")
     private LocalBeefManagement localBeefManagement2;
 
     /**

@@ -25,9 +25,17 @@
                 <thead>
                 <tr>
                   <th>entityNumber</th>
-                  <th>indentityNumber</th>
-                  <th>date</th>
+                  <th>identityNumber</th>
+                  <th>roomNumber</th>
+                  <th>count</th>
+                  <th>calvesDate</th>
+                  <th>calvesCount</th>
                   <th>gender</th>
+                  <th>birthDate</th>
+                  <th>number of month </th>
+                  <th>mother iden-n</th>
+                  <th>care history</th>
+                  <th>care date</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,10 +43,16 @@
                     v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
                   <td>{{ item.localBeefManagementPK.entityManagementNumber}}</td>
                   <td>{{ item.localBeefManagementPK.entityIdentificationNumber}}</td>
-                  <td>{{ item.birthDay }}</td>
+                  <td>{{ item.roomNumber}}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                   <td>{{ item.gender }}</td>
-                  <td>Member</td>
-                  <td><span class="badge badge-success">Active</span></td>
+                  <td>{{ item.birthDay }}</td>
+                  <td>{{ item.parentMomNo}}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
                 </tbody>
               </table>

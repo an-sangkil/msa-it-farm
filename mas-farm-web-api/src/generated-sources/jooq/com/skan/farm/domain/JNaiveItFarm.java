@@ -11,6 +11,7 @@ import com.skan.farm.domain.tables.JCommonCode;
 import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.domain.tables.JPersonalCode;
+import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
 
 import java.util.Arrays;
@@ -27,7 +28,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JNaiveItFarm extends SchemaImpl {
 
-    private static final long serialVersionUID = -151801810;
+    private static final long serialVersionUID = 1061470602;
 
     /**
      * The reference instance of <code>naive-it-farm</code>
@@ -70,6 +71,11 @@ public class JNaiveItFarm extends SchemaImpl {
     public final JPersonalCode PERSONAL_CODE = JPersonalCode.PERSONAL_CODE;
 
     /**
+     * The table <code>naive-it-farm.schedule</code>.
+     */
+    public final JSchedule SCHEDULE = JSchedule.SCHEDULE;
+
+    /**
      * The table <code>naive-it-farm.users</code>.
      */
     public final JUsers USERS = JUsers.USERS;
@@ -97,6 +103,7 @@ public class JNaiveItFarm extends SchemaImpl {
             JDiseaseTreatment.DISEASE_TREATMENT,
             JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT,
             JPersonalCode.PERSONAL_CODE,
+            JSchedule.SCHEDULE,
             JUsers.USERS);
     }
 }

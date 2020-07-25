@@ -1,10 +1,7 @@
 package com.skan.farm.model;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -90,13 +87,14 @@ public class DiseaseTreatment implements Serializable {
 	/** 주사침분실여부. */
 	private String needleLoseYn;
 
+	/** 한우(암소/수소) 개체관리기록부. */
 	@MapsId("localBeefManagementPK")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
 			@JoinColumn(name = "entityIdentificationNumber", referencedColumnName = "entityIdentificationNumber"),
 			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber"),
 	})
-	/** 한우(암소/수소) 개체관리기록부. */
+	@JsonBackReference("diseaseTreatmentSet")
 	private LocalBeefManagement localBeefManagement;
 
 }

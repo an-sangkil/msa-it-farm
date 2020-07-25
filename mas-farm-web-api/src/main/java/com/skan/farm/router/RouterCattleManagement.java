@@ -113,13 +113,13 @@ public class RouterCattleManagement {
             try {
 
                 String paramJson = request.servletRequest().getReader().readLine();
+
+                log.debug("paramJson = {} ",paramJson);
                 LocalBeefManagement localBeefManagement = JsonUtils.convertJson(paramJson, LocalBeefManagement.class);
 
 
-                var entityId = request.param("entityManagementNumber").orElseThrow();
+                /*var entityId = request.param("entityManagementNumber").orElseThrow();
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
-
-
                 var birthDay = request.param("birth_day").orElseThrow();
                 var castrationDate = request.param("castration_date").orElse("");
                 var earTagDate = request.param("ear_tag_date").orElse("");
@@ -131,8 +131,7 @@ public class RouterCattleManagement {
                 var sellYn = request.param("sell_Yn").orElseGet(() -> "N");
                 var deleteYN = request.param("delete_YN").orElseGet(() -> "false");
 
-
-                /*LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
+                LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
                         .localBeefManagementPK(new LocalBeefManagementPK(entityId, identityId))
                         .birthDay(LocalDate.parse(birthDay))
                         .gender(GenderCode.valueOf(gender))
@@ -140,7 +139,7 @@ public class RouterCattleManagement {
                         .parentPapaNo(parentPapaNo.orElse(""))
                         .sellYn(sellYn)
                         .deleteYn(Boolean.valueOf(deleteYN))
-                        .build();*/
+                        .build();
 
                 if (!StringUtils.isEmpty(castrationDate)) {
                     localBeefManagement.setCastrationDate(LocalDate.parse(castrationDate));
@@ -150,25 +149,23 @@ public class RouterCattleManagement {
                 }
                 if (!StringUtils.isEmpty(enterDate)) {
                     localBeefManagement.setEnterDate(LocalDate.parse(enterDate));
-                }
+                }*/
 
                 this.localBeefManagementJpaRepository.save(localBeefManagement);
 
 
-                response.setMessage("delete success ");
+                response.setMessage("cattle save success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
 
             } catch (Exception e) {
-                log.debug("sign in error =", e);
+                log.debug("cattle save in error =", e);
                 response.setMessage(e.getMessage());
                 response.setStatus(Response.ResponseCode.ERROR);
                 response.setDetail(new Error<>());
             }
 
 
-            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
-                    response
-            );
+            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(response);
         }).filter((request, next) -> {
             return next.handle(request);
         }).andRoute(DELETE("/cattle/delete"), request -> {

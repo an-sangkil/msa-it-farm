@@ -113,7 +113,6 @@
 </template>
 <script>
 
-  import * as qs from "javascript-stringify";
 
   export default {
     created() {
@@ -145,12 +144,14 @@
     methods: {
       cattleSave: function (e) {
 
-        console.log(this.gender)
-        console.log(this.sellYn)
-        let data = qs.stringify({
-          entityManagementNumber: this.entityIdentificationNumber
-          , entityIdentificationNumber: this.entityIdentificationNumber
-          , parentPapaNo: this.parentPapaNo
+
+
+        let data = JSON.stringify({
+          localBeefManagementPK:{
+            entityManagementNumber: this.entityManagementNumber
+            , entityIdentificationNumber: this.entityIdentificationNumber
+          },
+          parentPapaNo: this.parentPapaNo
           , parentMomNo: this.parentMomNo
           , birthDay: this.birthDay
           , enterDate: this.enterDate

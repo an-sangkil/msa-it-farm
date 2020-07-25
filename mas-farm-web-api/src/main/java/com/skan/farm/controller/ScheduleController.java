@@ -6,12 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.UUID;
 
 /**
  * <pre>
@@ -59,8 +62,8 @@ public class ScheduleController {
         scheduleService.scheduleSearch(LocalDate.parse(paramStartDate), LocalDate.parse(paramEndDate));
     }
 
-    @GetMapping("/schedule/save")
-    public void scheduleSave(@Valid Schedule requestSchedule) {
+    @PutMapping("/schedule/save")
+    public void scheduleSave(@Valid @RequestBody Schedule requestSchedule) {
         scheduleService.scheduleSave(requestSchedule);
     }
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * <pre>
@@ -35,7 +36,7 @@ public class ScheduleService {
     }
 
     public void scheduleSave(Schedule requestSchedule) {
-        String uuid = requestSchedule.getUuid();
+        String uuid =Optional.ofNullable(requestSchedule.getUuid()).orElseGet(()->"") ;
 
         Optional<Schedule> findOneSchedule = scheduleJpaRepository.findById(uuid);
         findOneSchedule.ifPresentOrElse(schedule -> {
@@ -48,6 +49,7 @@ public class ScheduleService {
             // 신규저장으로
             List<Schedule> findSchedules = scheduleJpaRepository.findByStandardDate(requestSchedule.getStandardDate());
             int size = findSchedules.size();
+            requestSchedule.setUuid(UUID.randomUUID().toString());
             requestSchedule.setSeq((short) (size + 1));
             scheduleJpaRepository.save(requestSchedule);
         });
