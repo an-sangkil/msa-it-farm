@@ -27,9 +27,8 @@
                   <th>entityNumber</th>
                   <th>identityNumber</th>
                   <th>roomNumber</th>
-                  <th>count</th>
-                  <th>calvesDate</th>
                   <th>calvesCount</th>
+                  <th>calvesDate</th>
                   <th>gender</th>
                   <th>birthDate</th>
                   <th>number of month </th>
@@ -41,11 +40,14 @@
                 <tbody>
                 <tr v-for="item in this.$store.state.pagingData"
                     v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
-                  <td>{{ item.localBeefManagementPK.entityManagementNumber}}</td>
-                  <td>{{ item.localBeefManagementPK.entityIdentificationNumber}}</td>
-                  <td>{{ item.roomNumber}}</td>
-                  <td></td>
-                  <td></td>
+                  <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
+                    <a href="javascript:void (0);">{{ item.localBeefManagementPK.entityManagementNumber}}</a>
+                  </td>
+                  <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
+                    <a href="javascript:void (0);" >{{ item.localBeefManagementPK.entityIdentificationNumber}}</a>
+                  </td>
+                  <td>{{ item.roomNumber == null ? '-':item.roomNumber}}</td>
+                  <td>{{ item.calvesCount}}</td>
                   <td></td>
                   <td>{{ item.gender }}</td>
                   <td>{{ item.birthDay }}</td>
@@ -59,17 +61,17 @@
               <ul class="pagination">
 
                 <div v-if="isPre">
-                  <li class="page-item"><a class="page-link" href="#" v-on:click="pageMove(begin-2)">Prev</a>
+                  <li class="page-item"><a class="page-link" href="#" v-on:click="pagingMove(begin-2)">Prev</a>
                   </li>
                 </div>
 
                 <div v-for="(item,index) in pagination">
                   <li class="page-item" :class="{active: item.active}"><a class="page-link" href="#"
-                                                                          v-on:click="pageMove(item.value)">{{item.viewValue}}</a>
+                                                                          v-on:click="pagingMove(item.value)">{{item.viewValue}}</a>
                   </li>
                 </div>
                 <div v-if="isNext">
-                  <li class="page-item"><a class="page-link" href="#" v-on:click="pageMove(end)">Next</a>
+                  <li class="page-item"><a class="page-link" href="#" v-on:click="pagingMove(end)">Next</a>
                   </li>
                 </div>
               </ul>
@@ -119,17 +121,21 @@
     },
     mounted() {
       //this.$store.dispatch('pagingAction',{actionUrl:'/cattle/cattle_management_list?page=0'})
-      this.pageMove(0);
+      this.pagingMove(0);
     },
 
     methods: {
       cattleSave: function () {
         this.$router.push('/cattle/cattleForm')
       },
-      pageMove: function (currentPage) {
+      pagingMove: function (currentPage) {
 
         let actionUrl = '/cattle/cattle_management_list?page=' + currentPage;
         this.$store.dispatch('pagingAction',{actionUrl:actionUrl})
+      },
+      detailView: function (entityNumber, identityNumber) {
+        this.$router.push(`/cattle/cattleDetail?entityNumber=${entityNumber}&identityNumber=${identityNumber}`)
+
       }
     }
   }

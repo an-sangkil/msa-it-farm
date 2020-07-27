@@ -9,6 +9,7 @@ const Dashboard = () => import('../views/Dashboard')
 
 import CattleList from '../views/cattle/CattleList'
 import CattleForm from '../views/cattle/CattleForm'
+import CattleView from '../views/cattle/CattleView'
 import ScheduleList from '../views/schedule/ScheduleList'
 import ScheduleForm from '../views/schedule/ScheduleForm'
 
@@ -63,6 +64,12 @@ const routes = [
             path: 'cattleForm',
             name: 'CattleForm',
             component: CattleForm
+          }
+          ,
+          {
+            path: 'cattleDetail',
+            name: 'CattleView',
+            component: CattleView
           }
         ]
       },

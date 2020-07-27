@@ -2,10 +2,14 @@ package com.skan.farm.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 구입기록 모델 클래스.
@@ -25,7 +29,7 @@ public class CattleBuyInformation implements Serializable {
 
     @Builder
     public CattleBuyInformation(LocalBeefManagementPK cattleBuyInformationPK, String buyStoreName, LocalDate buyDate, String buyNote, String buyPhoneNumber, String buySellPhoneNumber) {
-        this.cattleBuyInformationPK = cattleBuyInformationPK;
+        this.localBeefManagementPK = cattleBuyInformationPK;
         this.buyStoreName = buyStoreName;
         this.buyDate = buyDate;
         this.buyNote = buyNote;
@@ -40,7 +44,7 @@ public class CattleBuyInformation implements Serializable {
 
 
     @EmbeddedId
-    protected LocalBeefManagementPK cattleBuyInformationPK;
+    protected LocalBeefManagementPK localBeefManagementPK;
 
     /**
      * 구입처.
@@ -66,6 +70,20 @@ public class CattleBuyInformation implements Serializable {
      * 구입 연락처 전화번호 2.
      */
     private String buySellPhoneNumber;
+
+    /**
+     * 생성일시.
+     */
+    @DateTimeFormat
+    @CreationTimestamp
+    private LocalDateTime createdTime;
+
+    /**
+     * 수정시간.
+     */
+    @DateTimeFormat
+    @UpdateTimestamp
+    private LocalDateTime modifiedTime;
 
     /**
      * 한우(암소/수소) 개체관리기록부.

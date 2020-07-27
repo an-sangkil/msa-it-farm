@@ -2,10 +2,14 @@ package com.skan.farm.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 판매지정보 모델 클래스.
@@ -68,6 +72,20 @@ public class CattleSellStoreInformation implements Serializable {
 
 	/** 등급(1++A, 1++B). */
 	private String beefGrade;
+
+	/**
+	 * 생성일시.
+	 */
+	@DateTimeFormat
+	@CreationTimestamp
+	private LocalDateTime createdTime;
+
+	/**
+	 * 수정시간.
+	 */
+	@DateTimeFormat
+	@UpdateTimestamp
+	private LocalDateTime modifiedTime;
 
 	@MapsId("localBeefManagementPK")
 	@OneToOne(fetch = FetchType.LAZY)

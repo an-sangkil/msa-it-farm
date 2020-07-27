@@ -3,10 +3,14 @@ package com.skan.farm.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 질병 및 치료 모델 클래스.
@@ -86,6 +90,20 @@ public class DiseaseTreatment implements Serializable {
 
 	/** 주사침분실여부. */
 	private String needleLoseYn;
+
+	/**
+	 * 생성일시.
+	 */
+	@DateTimeFormat
+	@CreationTimestamp
+	private LocalDateTime createdTime;
+
+	/**
+	 * 수정시간.
+	 */
+	@DateTimeFormat
+	@UpdateTimestamp
+	private LocalDateTime modifiedTime;
 
 	/** 한우(암소/수소) 개체관리기록부. */
 	@MapsId("localBeefManagementPK")

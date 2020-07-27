@@ -1,6 +1,7 @@
 package com.skan.farm.repository.jooq;
 
 import com.skan.farm.code.GenderCode;
+import com.skan.farm.domain.tables.JCalvesManagement;
 import com.skan.farm.domain.tables.JCattleBuyInformation;
 import com.skan.farm.domain.tables.JCattleSellStoreInformation;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
@@ -14,12 +15,15 @@ import com.skan.farm.paging.Pageable;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
+import org.jooq.Field;
 import org.jooq.conf.ParamType;
+import org.jooq.impl.DSL;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +55,7 @@ public class LocalBeefManagementJooqRepository {
         JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
         JCattleBuyInformation jCattleBuyInformation = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
         JCattleSellStoreInformation jCattleSellStoreInformation = JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION;
+        JCalvesManagement jCalvesManagement = JCalvesManagement.CALVES_MANAGEMENT;
 
 
         String sql = dslContext.selectCount()
@@ -63,6 +68,22 @@ public class LocalBeefManagementJooqRepository {
                 .getSQL(ParamType.INLINED);
         log.debug("sql = : {}", sql);
         Integer totalCount = jdbcTemplate.queryForObject(sql, Integer.class);
+
+        // 수정횟수
+        Field<String> calves =  dslContext.select(DSL.concat(jCalvesManagement.FERTILIZATION_INDEX, DSL.concat("-"), DSL.count(jCalvesManagement.FERTILIZATION_INDEX)))
+                .from(jCalvesManagement).where(
+                        jCalvesManagement.ENTITY_MANAGEMENT_NUMBER.eq(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER),
+                        jCalvesManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER),
+                        jCalvesManagement.FERTILIZATION_INDEX.eq(dslContext.select(DSL.max(jCalvesManagement.FERTILIZATION_INDEX))
+                                .from(jCalvesManagement)
+                                .where(
+                                        jCalvesManagement.ENTITY_MANAGEMENT_NUMBER.eq(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER)
+                                                .and(jCalvesManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER))
+                                ))
+                ).asField("calves_count");
+
+
+
 
 
         sql = dslContext.select(
@@ -89,6 +110,8 @@ public class LocalBeefManagementJooqRepository {
                 , jCattleSellStoreInformation.SELL_DATE
                 , jCattleSellStoreInformation.SELL_NOTE
                 , jCattleSellStoreInformation.SELL_PHONE_NUMBER
+                , calves
+
         )
                 .from(jLocalBeefManagement)
                 .leftJoin(jCattleBuyInformation)
@@ -126,8 +149,10 @@ public class LocalBeefManagementJooqRepository {
                             .sellYn((String) stringObjectMap.get("SELL_YN"))
                             .gender(stringObjectMap.get("GENDER") != null ? GenderCode.valueOf(stringObjectMap.get("GENDER").toString()) : GenderCode.MALE)
                             .roomNumber((String) stringObjectMap.get("ROOM_NUMBER"))
-                            .createdTime(((java.sql.Date) stringObjectMap.get("CREATED_TIME")))
+                            .createdTime(stringObjectMap.get("CREATED_TIME") != null ? ((java.sql.Timestamp) stringObjectMap.get("CREATED_TIME")).toLocalDateTime() : null)
                             .build();
+
+                    localBeefManagement.setCalvesCount((String) stringObjectMap.get("calves_count"));
 
                     CattleBuyInformation cattleBuyInformation = CattleBuyInformation.builder()
                             .cattleBuyInformationPK(new LocalBeefManagementPK(ENTITY_MANAGEMENT_NUMBER, ENTITY_IDENTIFICATION_NUMBER))

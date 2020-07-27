@@ -28,6 +28,7 @@ const Pagination = function (currentNo, totalPages, blockPageSize = 10) {
   }
 
   function isNextPage(totalPages){
+      console.log(totalPages, BEGIN)
       return totalPages > BEGIN;
   }
 

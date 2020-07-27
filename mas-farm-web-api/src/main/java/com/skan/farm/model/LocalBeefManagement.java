@@ -14,6 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -40,7 +41,7 @@ import java.util.Set;
 public class LocalBeefManagement implements Serializable {
 
     @Builder
-    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Boolean deleteYn, Date createdTime, Date modifiedTime,String roomNumber) {
+    public LocalBeefManagement(LocalBeefManagementPK localBeefManagementPK, String parentPapaNo, String parentMomNo, LocalDate birthDay, LocalDate enterDate, LocalDate earTagDate, LocalDate castrationDate, GenderCode gender, String sellYn, Boolean deleteYn, LocalDateTime createdTime, LocalDateTime modifiedTime,String roomNumber) {
         this.localBeefManagementPK = localBeefManagementPK;
         this.parentPapaNo = parentPapaNo;
         this.parentMomNo = parentMomNo;
@@ -128,18 +129,24 @@ public class LocalBeefManagement implements Serializable {
     private Boolean deleteYn;
 
     /**
+     *
+     */
+    @Transient
+    private String calvesCount;
+
+    /**
      * 생성일시.
      */
     @DateTimeFormat
     @CreationTimestamp
-    private Date createdTime;
+    private LocalDateTime createdTime;
 
     /**
      * 수정시간.
      */
     @DateTimeFormat
     @UpdateTimestamp
-    private Date modifiedTime;
+    private LocalDateTime modifiedTime;
 
     /**
      * 분만관리(송아지 관리) 목록.
@@ -162,10 +169,10 @@ public class LocalBeefManagement implements Serializable {
      * 판매지정보 목록.
      */
     @OneToOne(mappedBy = "localBeefManagement"
+            , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
             , fetch = FetchType.LAZY
             , optional = false)
     @JsonManagedReference("cattleSellStoreInformation")
-    //@JsonIgnore
     private CattleSellStoreInformation cattleSellStoreInformation;
 
     /**
@@ -181,5 +188,8 @@ public class LocalBeefManagement implements Serializable {
     public LocalBeefManagement() {
     }
 
+    public CattleSellStoreInformation getCattleSellStoreInformation(){
+        return this.cattleSellStoreInformation != null ? this.cattleSellStoreInformation : new  CattleSellStoreInformation();
+    }
 
 }

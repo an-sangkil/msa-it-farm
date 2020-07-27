@@ -2,69 +2,69 @@
   <div class="container-fluid">
     <div class="fade-in">
       <div class="row">
+
+        <!-- cattle management (localbeef)  -->
         <div class="col-lg-12">
-
-
           <div class="card">
             <div class="card-header"><strong>Basic Form</strong> Elements</div>
             <div class="card-body">
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static0</label>
+                    <label class="col-md-3 col-form-label">entityNumber</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input0" type="text" name="text-input" placeholder="Text"><span class="help-block">This is a help text</span>
+                      <p class="form-control-static">{{entityManagementNumber}}</p>
                     </div>
                   </div>
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label">Static1</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">identityNumber</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input1" type="text" name="text-input" placeholder="Text"><span class="help-block">This is a help text</span>
+                      <p class="form-control-static">{{entityIdentificationNumber}}</p>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static2</label>
+                    <label class="col-md-3 col-form-label">parentPapaNo</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input3" type="text" name="text-input" placeholder="Text"><span class="help-block">This is a help text</span>
+                      <p class="form-control-static">{{parentPapaNo}}</p>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static3</label>
+                    <label class="col-md-3 col-form-label">parentMomNo</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="text-input4" type="text" name="text-input" placeholder="Text"><span class="help-block">This is a help text</span>
+                      <p class="form-control-static">{{parentMomNo}}</p>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label" for="date-input11">Date Input</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">birthDay</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="date-input11" type="date" name="date-input" placeholder="date"><span class="help-block">Please enter a valid date</span>
+                      <p class="form-control-static">{{birthDay}}</p>
                     </div>
                   </div>
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label" for="date-input22">Date Input</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">enterDate</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="date-input22" type="date" name="date-input" placeholder="date"><span class="help-block">Please enter a valid date</span>
+                      <p class="form-control-static">{{enterDate}}</p>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label" for="date-input33">Date Input</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">earTagDate</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="date-input33" type="date" name="date-input" placeholder="date"><span class="help-block">Please enter a valid date</span>
+                      <p class="form-control-static">{{earTagDate}}</p>
                     </div>
                   </div>
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label" for="date-input44">Date Input</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">castrationDate</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="date-input44" type="date" name="date-input" placeholder="date"><span class="help-block">Please enter a valid date</span>
+                      <p class="form-control-static">{{castrationDate}}</p>
                     </div>
                   </div>
                 </div>
@@ -72,45 +72,245 @@
 
                 <div class="row">
 
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label">Inline Radios</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">genders</label>
                     <div class="col-md-9 col-form-label">
-                      <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" id="inline-radio1" type="radio" value="MALE" name="inline-radios">
-                        <label class="form-check-label" for="inline-radio1">One M</label>
-                      </div>
-                      <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" id="inline-radio2" type="radio" value="FEMALE" name="inline-radios">
-                        <label class="form-check-label" for="inline-radio2">Two F</label>
-                      </div>
+                      <p class="form-control-static">{{gender}}</p>
                     </div>
                   </div>
 
-                  <div class="form-group col-md-6 row" >
-                    <label class="col-md-3 col-form-label" for="select1">Select</label>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">sellYn</label>
                     <div class="col-md-9">
-                      <select class="form-control" id="select1" name="select1">
-                        <option value="Y">Option Y</option>
-                        <option value="N">Option N</option>
-                      </select>
+                      <p class="form-control-static">{{sellYn}}</p>
                     </div>
                   </div>
-
 
 
                 </div>
 
               </form>
             </div>
-            <div class="card-footer">
+            <!--<div class="card-footer">
               <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-              <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
-            </div>
+              <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
+            </div>-->
           </div>
-
-
-
         </div>
+
+        <!-- calves management -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><strong>calves Form</strong> Elements</div>
+            <div class="card-body">
+              <table class="table table-responsive-sm">
+                <thead>
+                <tr>
+                  <th>seq</th>
+                  <th>fertilizationIndex</th>
+                  <th>years</th>
+                  <th>fertilizationDate</th>
+                  <th>expectedDateConfinement</th>
+                  <th>calvingDate</th>
+                  <th>spermNo</th>
+                  <th>calvingDate</th>
+                  <th>nothingSpecial</th>
+                  <th>child</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in this.calvesManagementSet"
+                    v-bind:key="item.calvesManagementPK.entityManagementNumber+item.calvesManagementPK.entityIdentificationNumber+item.calvesManagementPK.seq">
+                  <td>{{item.calvesManagementPK.seq}}</td>
+                  <td>{{item.fertilizationIndex}}</td>
+                  <td>{{item.years}}</td>
+                  <td>{{item.fertilizationDate}}</td>
+                  <td>{{item.expectedDateConfinement}}</td>
+                  <td>{{item.calvingDate}}</td>
+                  <td>{{item.spermNo}}</td>
+                  <td>{{item.calvingDate}}</td>
+                  <td>{{item.nothingSpecial}}</td>
+                  <td>{{item.entityIdentificationNumberChild}}-{{item.entityManagementNumberChild}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <!--<div class="card-footer"></div>-->
+          </div>
+        </div>
+
+        <!-- Disease Treatment -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><strong>Disease Form</strong> Elements</div>
+            <div class="card-body">
+              <table class="table table-responsive-sm">
+                <thead>
+                <tr>
+                  <th>seq</th>
+                  <th>cureDate</th>
+                  <th>diseaseName</th>
+                  <th>medicationName</th>
+                  <th>treatmentDetails</th>
+                  <th>injectionMethod</th>
+                  <th>withdrawalPeriodExpirationDate</th>
+                  <th>needleLoseYn</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr v-if:this.calvesManagementSet!=null v-for="item in this.diseaseTreatmentSet"
+                    v-bind:key="item.diseaseTreatmentPK.entityManagementNumber+item.diseaseTreatmentPK.entityIdentificationNumber+item.diseaseTreatmentPK.seq">
+                  <td>{{item.diseaseTreatmentPK.seq}}</td>
+                  <td>{{item.cureDate}}</td>
+                  <td>{{item.diseaseName}}</td>
+                  <td>{{item.medicationName}}</td>
+                  <td>{{item.treatmentDetails}}</td>
+                  <td>{{item.injectionMethod}}</td>
+                  <td>{{item.withdrawalPeriodExpirationDate}}</td>
+                  <td>{{item.needleLoseYn}}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+            <!--<div class="card-footer"></div>-->
+          </div>
+        </div>
+
+
+        <!-- buy information -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><strong>BuyInformation Form</strong> Elements</div>
+            <div class="card-body">
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">buyStoreName</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleBuyInformation.buyStoreName}}</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">buyDate</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleBuyInformation.buyDate}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">buyNote</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleBuyInformation.buyNote}}</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">buyPhoneNumber</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleBuyInformation.buyPhoneNumber}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">buySellPhoneNumber</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleBuyInformation.buySellPhoneNumber}}</p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <!--<div class="card-footer">
+              <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
+              <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
+            </div>-->
+          </div>
+        </div>
+
+        <!-- sell information -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header"><strong>sell Form</strong> Elements</div>
+            <div class="card-body">
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">storeName</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.storeName}}</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">sellDate</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.sellDate}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">sellNote</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.sellNote}}</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">sellPhoneNumber</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.sellPhoneNumber}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">sellingPrice</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.sellingPrice}}</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">liveweight</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.liveweight}}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">dressedWeight</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.dressedWeight}}</p>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 row">
+                  <label class="col-md-3 col-form-label">beefGrade</label>
+                  <div class="col-md-9">
+                    <p class="form-control-static">{{cattleSellStoreInformation.beefGrade}}</p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <!--<div class="card-footer">
+              <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
+              <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
+            </div>-->
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -127,23 +327,82 @@
     },
 
     data() {
-      return {}
+      return {
+        entityManagementNumber: ''
+        , entityIdentificationNumber: ''
+        , parentPapaNo: ''
+        , parentMomNo: ''
+        , birthDay: ''
+        , enterDate: ''
+        , earTagDate: ''
+        , castrationDate: ''
+        , gender: 'MALE'
+        , sellYn: 'N'
+        , cattleBuyInformation: {
+          buyStoreName: ''
+          , buyDate: ''
+          , buyNote: ''
+          , buyPhoneNumber: ''
+          , buySellPhoneNumber: ''
+        }
+        , cattleSellStoreInformation: {
+          storeName: ''
+          , sellDate: ''
+          , sellNote: ''
+          , sellPhoneNumber: ''
+          , sellingPrice: ''
+          , liveweight: ''
+          , dressedWeight: ''
+          , beefGrade: ''
+        }
+
+        , diseaseTreatmentSet: []
+        , calvesManagementSet: []
+      }
     },
     mounted() {
 
-    },
-    computed:{
+      let actionURL = `${this.$store.state.host}/cattle/detail?`
+      console.log(actionURL)
+      this.$http.get(actionURL, {
+        params: {
+          entityManagementNumber: this.$route.query.entityNumber,
+          entityIdentificationNumber: this.$route.query.identityNumber
+        }
+      }).then((res) => {
 
+        console.log(res)
+        let responseData = res.data.detail.data
+
+
+        this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
+        this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
+        this.parentPapaNo = responseData.parentPapaNo
+        this.parentMomNo = responseData.parentMomNo
+        this.birthDay = responseData.birthDay
+        this.enterDate = responseData.enterDate
+        this.earTagDate = responseData.earTagDate
+        this.castrationDate = responseData.castrationDate
+        this.gender = responseData.gender
+        this.sellYn = responseData.sellYn
+
+        this.cattleBuyInformation = responseData.cattleBuyInformation
+        this.cattleSellStoreInformation = responseData.cattleSellStoreInformation
+        this.diseaseTreatmentSet = responseData.diseaseTreatmentSet
+        this.calvesManagementSet = responseData.calvesManagementSet
+
+        console.log( responseData.calvesManagementSet)
+
+      }).catch((error) => {
+        console.log(error.message())
+      })
     },
+    computed: {},
     methods: {
-      cattleSave: function () {
-
-      },
       pageMove: function (currentPage) {
 
 
       }
-
     }
   }
 

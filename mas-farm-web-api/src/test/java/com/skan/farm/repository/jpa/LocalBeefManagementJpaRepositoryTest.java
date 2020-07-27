@@ -2,6 +2,7 @@ package com.skan.farm.repository.jpa;
 
 import com.skan.farm.code.GenderCode;
 import com.skan.farm.model.CattleBuyInformation;
+import com.skan.farm.model.CattleSellStoreInformation;
 import com.skan.farm.model.LocalBeefManagement;
 import com.skan.farm.model.LocalBeefManagementPK;
 import com.skan.farm.repository.LocalNonConfiguration;
@@ -77,7 +78,7 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
 
         // parent key 가 없으면 제약 조건 위배로 오류.
         CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-        cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("1111", "2222"));
+        cattleBuyInformation.setLocalBeefManagementPK(new LocalBeefManagementPK("1111", "2222"));
         cattleBuyInformation.setBuyDate(LocalDate.now());
         cattleBuyInformation.setBuyNote("노트 처음");
 
@@ -113,7 +114,7 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
         localBeefManagement.setGender(GenderCode.FEMALE);
 
         CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-        cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("3333", "5555"));
+        cattleBuyInformation.setLocalBeefManagementPK(new LocalBeefManagementPK("3333", "5555"));
         cattleBuyInformation.setBuyDate(LocalDate.now());
         cattleBuyInformation.setBuyNote("노트 처음");
 
@@ -135,7 +136,7 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
         localBeefManagement.setGender(GenderCode.FEMALE);
 
         CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-        cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("4444", "5555"));
+        cattleBuyInformation.setLocalBeefManagementPK(new LocalBeefManagementPK("4444", "5555"));
         cattleBuyInformation.setBuyDate(LocalDate.now());
         cattleBuyInformation.setBuyNote("노트 처음");
 
@@ -151,16 +152,26 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
         List<LocalBeefManagement> localBeefManagements = new ArrayList<>();
         IntStream.range(0, 100).forEach(value -> {
             LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-            localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK("" + value, "2222"));
+            LocalBeefManagementPK  localBeefManagementPK = new LocalBeefManagementPK("" + value, "2222");
+            localBeefManagement.setLocalBeefManagementPK(localBeefManagementPK);
             localBeefManagement.setBirthDay(LocalDate.now());
             localBeefManagement.setGender(GenderCode.FEMALE);
 
             CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-            cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK("" + value, "2222"));
+            cattleBuyInformation.setLocalBeefManagementPK(localBeefManagementPK);
             cattleBuyInformation.setBuyDate(LocalDate.now());
-            cattleBuyInformation.setBuyNote("노트 처음" + value);
+            cattleBuyInformation.setBuyNote("buy 노트 처음" + value);
 
+            CattleSellStoreInformation cattleSellStoreInformation = new CattleSellStoreInformation();
+            cattleSellStoreInformation.setLocalBeefManagementPK(localBeefManagementPK);
+            cattleSellStoreInformation.setBeefGrade("1++");
+            cattleSellStoreInformation.setSellNote("sell note" + value);
+
+            // 양쪽에 모두 주입
             cattleBuyInformation.setLocalBeefManagement(localBeefManagement);
+            cattleSellStoreInformation.setLocalBeefManagement(localBeefManagement);
+
+            localBeefManagement.setCattleSellStoreInformation(cattleSellStoreInformation);
             localBeefManagement.setCattleBuyInformation(cattleBuyInformation);
 
             localBeefManagements.add(localBeefManagement);
@@ -184,13 +195,21 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     public void saveManyChild_단방향() {
         List<CattleBuyInformation> cattleBuyInformations = new ArrayList<>();
         IntStream.range(100, 200).forEach(value -> {
+            LocalBeefManagementPK  localBeefManagementPK = new LocalBeefManagementPK("" + value, "2222");
+
+            CattleSellStoreInformation cattleSellStoreInformation = new CattleSellStoreInformation();
+            cattleSellStoreInformation.setLocalBeefManagementPK(localBeefManagementPK);
+            cattleSellStoreInformation.setBeefGrade("1++");
+            cattleSellStoreInformation.setSellNote("sell note" + value);
+
             LocalBeefManagement localBeefManagement = new LocalBeefManagement();
-            localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK( ""+value, "2222"));
+            localBeefManagement.setLocalBeefManagementPK(localBeefManagementPK);
             localBeefManagement.setBirthDay(LocalDate.now());
             localBeefManagement.setGender(GenderCode.FEMALE);
+            localBeefManagement.setLocalBeefManagementPK(localBeefManagementPK);
 
             CattleBuyInformation cattleBuyInformation = new CattleBuyInformation();
-            cattleBuyInformation.setCattleBuyInformationPK(new LocalBeefManagementPK(""+ value, "2222"));
+            cattleBuyInformation.setLocalBeefManagementPK(localBeefManagementPK);
             cattleBuyInformation.setBuyDate(LocalDate.now());
             cattleBuyInformation.setBuyNote("노트 처음" + value);
 

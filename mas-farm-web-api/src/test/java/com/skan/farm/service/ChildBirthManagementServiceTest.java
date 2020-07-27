@@ -4,6 +4,7 @@ import com.skan.farm.model.CalvesManagement;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -29,13 +30,15 @@ class ChildBirthManagementServiceTest {
     final ChildBirthManagementService childBirthManagementService;
 
     @Test
+    @DisplayName("회차 정보를 추가해가며 확인하기 - 실제 분만일로 카운트 ")
     void save() {
-        String entityNumber = "1111";
+        String entityNumber = "90";
         String identityNumber = "2222";
 
+        // 실제 분만일로 조정
         CalvesManagement calvesManagement = CalvesManagement.builder()
-                .nothingSpecial("하하2")
-                .calvingDate(LocalDateTime.now())
+                .nothingSpecial("하하4")
+                //.calvingDate(LocalDateTime.now()) // 실제분만일
                 .years("2020")
                 .spermNo("111111")
                 .fertilizationDate(LocalDateTime.now())

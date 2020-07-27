@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
+import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDate;
@@ -82,7 +83,6 @@ public class RouterCattleManagement {
                 response.setDetail(new Error<>());
             }
 
-//
             return ServerResponse.ok().body(response);
 
         }).andRoute(GET("/cattle/detail"), request -> {
@@ -93,8 +93,9 @@ public class RouterCattleManagement {
                 var entityId = request.param("entityManagementNumber").orElseThrow();
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
 
-                Optional<LocalBeefManagement> localBeefManagement = this.localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(entityId, identityId));
-                response.setDetail(new Success<>(localBeefManagement.orElseGet(LocalBeefManagement::new)));
+                LocalBeefManagement localBeefManagement = cattleManagementService.findOne(entityId,identityId);
+
+                response.setDetail(new Success<>(localBeefManagement ));
                 response.setStatus(Response.ResponseCode.SUCCESS);
 
             } catch (Exception e) {
@@ -116,43 +117,15 @@ public class RouterCattleManagement {
 
                 log.debug("paramJson = {} ",paramJson);
                 LocalBeefManagement localBeefManagement = JsonUtils.convertJson(paramJson, LocalBeefManagement.class);
+                CattleSellStoreInformation cattleSellStoreInformation = JsonUtils.convertJson(paramJson, CattleSellStoreInformation.class);
+                CattleBuyInformation cattleBuyInformation = JsonUtils.convertJson(paramJson, CattleBuyInformation.class);
+                //this.parameterMatching(request);
 
-
-                /*var entityId = request.param("entityManagementNumber").orElseThrow();
-                var identityId = request.param("entityIdentificationNumber").orElseThrow();
-                var birthDay = request.param("birth_day").orElseThrow();
-                var castrationDate = request.param("castration_date").orElse("");
-                var earTagDate = request.param("ear_tag_date").orElse("");
-                var enterDate = request.param("enter_date").orElse("");
-                var gender = request.param("gender").orElse("MAIL");
-                var parentMomNo = request.param("parent_mom_no").or(Optional::empty);
-                var parentPapaNo = request.param("parent_papa_no").or(Optional::empty);
-
-                var sellYn = request.param("sell_Yn").orElseGet(() -> "N");
-                var deleteYN = request.param("delete_YN").orElseGet(() -> "false");
-
-                LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
-                        .localBeefManagementPK(new LocalBeefManagementPK(entityId, identityId))
-                        .birthDay(LocalDate.parse(birthDay))
-                        .gender(GenderCode.valueOf(gender))
-                        .parentMomNo(parentMomNo.orElse(""))
-                        .parentPapaNo(parentPapaNo.orElse(""))
-                        .sellYn(sellYn)
-                        .deleteYn(Boolean.valueOf(deleteYN))
-                        .build();
-
-                if (!StringUtils.isEmpty(castrationDate)) {
-                    localBeefManagement.setCastrationDate(LocalDate.parse(castrationDate));
-                }
-                if (!StringUtils.isEmpty(earTagDate)) {
-                    localBeefManagement.setEarTagDate(LocalDate.parse(earTagDate));
-                }
-                if (!StringUtils.isEmpty(enterDate)) {
-                    localBeefManagement.setEnterDate(LocalDate.parse(enterDate));
-                }*/
+                // 신규 등록인 경우 1:1 양방향 관계가 맺어져 있기 때문에 두가지 Model 을 채워준다.
+                localBeefManagement.setCattleSellStoreInformation(cattleSellStoreInformation);
+                localBeefManagement.setCattleBuyInformation(cattleBuyInformation);
 
                 this.localBeefManagementJpaRepository.save(localBeefManagement);
-
 
                 response.setMessage("cattle save success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
@@ -351,6 +324,8 @@ public class RouterCattleManagement {
             var seq = request.param("seq").orElseThrow();
 
             try {
+
+                // 데이터를 실제 삭제 하도록 함.
                 calvesManagementJpaRepository.deleteById(new CalvesManagement.CalvesManagementPK(entityId, identityId, Short.valueOf(seq)));
 
                 response.setMessage("child Birth delete success ");
@@ -365,6 +340,44 @@ public class RouterCattleManagement {
 
             return ServerResponse.ok().body(response);
         });
+
+    }
+
+
+    @Deprecated
+    protected void parameterMatching(ServerRequest request) {
+        var entityId = request.param("entityManagementNumber").orElseThrow();
+        var identityId = request.param("entityIdentificationNumber").orElseThrow();
+        var birthDay = request.param("birth_day").orElseThrow();
+        var castrationDate = request.param("castration_date").orElse("");
+        var earTagDate = request.param("ear_tag_date").orElse("");
+        var enterDate = request.param("enter_date").orElse("");
+        var gender = request.param("gender").orElse("MAIL");
+        var parentMomNo = request.param("parent_mom_no").or(Optional::empty);
+        var parentPapaNo = request.param("parent_papa_no").or(Optional::empty);
+
+        var sellYn = request.param("sell_Yn").orElseGet(() -> "N");
+        var deleteYN = request.param("delete_YN").orElseGet(() -> "false");
+
+        LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
+                .localBeefManagementPK(new LocalBeefManagementPK(entityId, identityId))
+                .birthDay(LocalDate.parse(birthDay))
+                .gender(GenderCode.valueOf(gender))
+                .parentMomNo(parentMomNo.orElse(""))
+                .parentPapaNo(parentPapaNo.orElse(""))
+                .sellYn(sellYn)
+                .deleteYn(Boolean.valueOf(deleteYN))
+                .build();
+
+        if (!StringUtils.isEmpty(castrationDate)) {
+            localBeefManagement.setCastrationDate(LocalDate.parse(castrationDate));
+        }
+        if (!StringUtils.isEmpty(earTagDate)) {
+            localBeefManagement.setEarTagDate(LocalDate.parse(earTagDate));
+        }
+        if (!StringUtils.isEmpty(enterDate)) {
+            localBeefManagement.setEnterDate(LocalDate.parse(enterDate));
+        }
 
     }
 }

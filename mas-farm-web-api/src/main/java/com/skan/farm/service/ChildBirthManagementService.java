@@ -54,7 +54,8 @@ public class ChildBirthManagementService {
     }
 
     /**
-     * 분만관리 저장
+     * 분만관리 저장 
+     *  - 회차에 대한 로직 정의됨
      * @param calvesManagement
      * @param entityId
      * @param identityId

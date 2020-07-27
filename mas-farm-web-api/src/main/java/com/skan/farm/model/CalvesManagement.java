@@ -2,6 +2,9 @@ package com.skan.farm.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -120,6 +123,21 @@ public class CalvesManagement {
      */
     @Column(nullable = true)
     private String entityManagementNumberChild;
+
+    /**
+     * 생성일시.
+     */
+    @DateTimeFormat
+    @CreationTimestamp
+    private LocalDateTime createdTime;
+
+    /**
+     * 수정시간.
+     */
+    @DateTimeFormat
+    @UpdateTimestamp
+    private LocalDateTime modifiedTime;
+
 
     /**
      * 한우(암소/수소) 개체관리기록부.
