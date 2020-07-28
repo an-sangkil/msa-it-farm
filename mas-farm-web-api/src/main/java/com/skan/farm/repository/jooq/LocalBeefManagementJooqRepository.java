@@ -24,6 +24,8 @@ import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,8 +71,13 @@ public class LocalBeefManagementJooqRepository {
         log.debug("sql = : {}", sql);
         Integer totalCount = jdbcTemplate.queryForObject(sql, Integer.class);
 
-        // 수정횟수
-        Field<String> calves =  dslContext.select(DSL.concat(jCalvesManagement.FERTILIZATION_INDEX, DSL.concat("-"), DSL.count(jCalvesManagement.FERTILIZATION_INDEX)))
+        // 분만정보(수정횟수..etc)
+        Field<String> calves =  dslContext.select(
+                DSL.concat(
+                        jCalvesManagement.FERTILIZATION_INDEX, DSL.concat("@@")
+                        , DSL.count(jCalvesManagement.FERTILIZATION_INDEX), DSL.concat("@@")
+                        , DSL.max(jCalvesManagement.EXPECTED_DATE_CONFINEMENT)
+                ))
                 .from(jCalvesManagement).where(
                         jCalvesManagement.ENTITY_MANAGEMENT_NUMBER.eq(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER),
                         jCalvesManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER),
@@ -80,10 +87,7 @@ public class LocalBeefManagementJooqRepository {
                                         jCalvesManagement.ENTITY_MANAGEMENT_NUMBER.eq(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER)
                                                 .and(jCalvesManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER))
                                 ))
-                ).asField("calves_count");
-
-
-
+                ).asField("calves_information");
 
 
         sql = dslContext.select(
@@ -152,7 +156,16 @@ public class LocalBeefManagementJooqRepository {
                             .createdTime(stringObjectMap.get("CREATED_TIME") != null ? ((java.sql.Timestamp) stringObjectMap.get("CREATED_TIME")).toLocalDateTime() : null)
                             .build();
 
-                    localBeefManagement.setCalvesCount((String) stringObjectMap.get("calves_count"));
+                    if ( stringObjectMap.get("calves_information") != null) {
+                        String[] calvesInformation = ((String) stringObjectMap.get("calves_information")).split("@@");
+                        localBeefManagement.setCalvesCount(calvesInformation[0]+"/"+calvesInformation[1]);
+                        localBeefManagement.setExpectedDateConfinement(LocalDateTime.parse(calvesInformation[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                    }
+
+                    Period period = Period.between(localBeefManagement.getBirthDay(),LocalDate.now());
+                    localBeefManagement.setNumberOfMonth(String.valueOf(period.getMonths()));
+
+
 
                     CattleBuyInformation cattleBuyInformation = CattleBuyInformation.builder()
                             .cattleBuyInformationPK(new LocalBeefManagementPK(ENTITY_MANAGEMENT_NUMBER, ENTITY_IDENTIFICATION_NUMBER))

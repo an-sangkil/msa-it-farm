@@ -31,7 +31,7 @@
                   <th>calvesDate</th>
                   <th>gender</th>
                   <th>birthDate</th>
-                  <th>number of month </th>
+                  <th>number of month</th>
                   <th>mother iden-n</th>
                   <th>care history</th>
                   <th>care date</th>
@@ -44,15 +44,15 @@
                     <a href="javascript:void (0);">{{ item.localBeefManagementPK.entityManagementNumber}}</a>
                   </td>
                   <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
-                    <a href="javascript:void (0);" >{{ item.localBeefManagementPK.entityIdentificationNumber}}</a>
+                    <a href="javascript:void (0);">{{ item.localBeefManagementPK.entityIdentificationNumber}}</a>
                   </td>
                   <td>{{ item.roomNumber == null ? '-':item.roomNumber}}</td>
                   <td>{{ item.calvesCount}}</td>
-                  <td></td>
+                  <td>{{ item.expectedDateConfinement }}</td>
                   <td>{{ item.gender }}</td>
                   <td>{{ item.birthDay }}</td>
+                  <td>{{ item.numberOfMonth}}</td>
                   <td>{{ item.parentMomNo}}</td>
-                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -96,26 +96,25 @@
     },
 
     data() {
-      return {
-      }
+      return {}
     },
-    computed:{
-      contents () {
+    computed: {
+      contents() {
         return this.$store.state.pagingData;
       },
       isPre: function () {
         return this.$store.state.paginationValue.isPre;
       },
-      isNext () {
+      isNext() {
         return this.$store.state.paginationValue.isNext;
       },
-      begin () {
+      begin() {
         return this.$store.state.paginationValue.begin;
       },
-      end () {
+      end() {
         return this.$store.state.paginationValue.end;
       },
-      pagination(){
+      pagination() {
         return this.$store.state.paginationObject;
       }
     },
@@ -131,7 +130,7 @@
       pagingMove: function (currentPage) {
 
         let actionUrl = '/cattle/cattle_management_list?page=' + currentPage;
-        this.$store.dispatch('pagingAction',{actionUrl:actionUrl})
+        this.$store.dispatch('pagingAction', {actionUrl: actionUrl})
       },
       detailView: function (entityNumber, identityNumber) {
         this.$router.push(`/cattle/cattleDetail?entityNumber=${entityNumber}&identityNumber=${identityNumber}`)

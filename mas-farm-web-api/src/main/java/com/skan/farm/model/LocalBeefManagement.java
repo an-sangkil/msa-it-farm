@@ -15,7 +15,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -129,10 +128,20 @@ public class LocalBeefManagement implements Serializable {
     private Boolean deleteYn;
 
     /**
-     *
+     * 수정/분만
      */
     @Transient
     private String calvesCount;
+
+    /** 개월수 */
+    @Transient
+    private String numberOfMonth;
+
+    /** 분만예정일. */
+    @Transient
+    private LocalDateTime expectedDateConfinement;
+
+
 
     /**
      * 생성일시.

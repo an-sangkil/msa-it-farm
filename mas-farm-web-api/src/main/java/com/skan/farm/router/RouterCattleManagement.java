@@ -114,16 +114,19 @@ public class RouterCattleManagement {
             try {
 
                 String paramJson = request.servletRequest().getReader().readLine();
-
                 log.debug("paramJson = {} ",paramJson);
+
                 LocalBeefManagement localBeefManagement = JsonUtils.convertJson(paramJson, LocalBeefManagement.class);
-                CattleSellStoreInformation cattleSellStoreInformation = JsonUtils.convertJson(paramJson, CattleSellStoreInformation.class);
-                CattleBuyInformation cattleBuyInformation = JsonUtils.convertJson(paramJson, CattleBuyInformation.class);
-                //this.parameterMatching(request);
+
+                LocalBeefManagementPK localBeefManagementPK = localBeefManagement.getLocalBeefManagementPK();
+                localBeefManagement.getCattleSellStoreInformation().setLocalBeefManagementPK(localBeefManagementPK);
+                localBeefManagement.getCattleBuyInformation().setLocalBeefManagementPK(localBeefManagementPK);
+
 
                 // 신규 등록인 경우 1:1 양방향 관계가 맺어져 있기 때문에 두가지 Model 을 채워준다.
-                localBeefManagement.setCattleSellStoreInformation(cattleSellStoreInformation);
-                localBeefManagement.setCattleBuyInformation(cattleBuyInformation);
+                //this.parameterMatching(request);
+                //localBeefManagement.setCattleSellStoreInformation(cattleSellStoreInformation);
+                //localBeefManagement.setCattleBuyInformation(cattleBuyInformation);
 
                 this.localBeefManagementJpaRepository.save(localBeefManagement);
 

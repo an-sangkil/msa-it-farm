@@ -230,8 +230,8 @@
 
             </div>
             <!--<div class="card-footer">
-              <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-              <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
+              <button class="btn btn-sm btn-primary" type="button"> Submit</button>
+              &lt;!&ndash;<button class="btn btn-sm btn-danger" type="reset"> Reset</button>&ndash;&gt;
             </div>-->
           </div>
         </div>
@@ -304,10 +304,10 @@
 
 
             </div>
-            <!--<div class="card-footer">
-              <button class="btn btn-sm btn-primary" type="submit"> Submit</button>
-              <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
-            </div>-->
+            <div class="card-footer">
+              <button class="btn btn-sm btn-primary" type="button" v-on:click="cattleModifyForm()"> Submit</button>
+              <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
+            </div>
           </div>
         </div>
 
@@ -399,10 +399,11 @@
     },
     computed: {},
     methods: {
-      pageMove: function (currentPage) {
-
-
+      cattleModifyForm: function () {
+        let actionUrl = `/cattle/cattleForm?entityNumber=${this.entityManagementNumber}&identityNumber=${this.entityIdentificationNumber}`
+        this.$router.push(actionUrl)
       }
+
     }
   }
 
