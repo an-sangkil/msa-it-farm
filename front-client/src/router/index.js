@@ -12,6 +12,7 @@ import CattleForm from '../views/cattle/CattleForm'
 import CattleView from '../views/cattle/CattleView'
 import ScheduleList from '../views/schedule/ScheduleList'
 import ScheduleForm from '../views/schedule/ScheduleForm'
+import ScheduleView from '../views/schedule/ScheduleView'
 
 // Views - Pages
 import NotFound from "../components/common/NotFound";
@@ -48,7 +49,7 @@ const routes = [
       {
         path: '/cattle',
         redirect: '/cattle/cattleList',
-        name: 'Theme',
+        name: 'Cattle',
         component: {
           render(c) {
             return c('router-view')
@@ -76,7 +77,7 @@ const routes = [
       {
         path: '/schedule',
         redirect: '/schedule/scheduleList',
-        name: 'Base',
+        name: 'Schedule',
         component: {
           render(c) {
             return c('router-view')
@@ -92,6 +93,11 @@ const routes = [
             path: 'scheduleForm',
             name: 'ScheduleForm',
             component: ScheduleForm
+          },
+          {
+            path: 'scheduleDetail',
+            name: 'ScheduleView',
+            component: ScheduleView
           }
         ]
       },

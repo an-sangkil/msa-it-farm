@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 public interface ScheduleJpaRepository extends JpaRepository<Schedule, String> {
 
-    List<Schedule> findByStandardDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Schedule> findByStandardDateBetweenOrderByStandardDateDescSeqDesc(LocalDate startDate, LocalDate endDate);
 
     List<Schedule> findByStandardDate(LocalDate standardDate);
 }

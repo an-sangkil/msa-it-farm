@@ -32,7 +32,7 @@ public class ScheduleService {
 
     public List<Schedule> scheduleSearch(LocalDate startDate, LocalDate endDate) {
 
-        return this.scheduleJpaRepository.findByStandardDateBetween(startDate, endDate);
+        return this.scheduleJpaRepository.findByStandardDateBetweenOrderByStandardDateDescSeqDesc(startDate, endDate);
     }
 
     public void scheduleSave(Schedule requestSchedule) {
@@ -41,10 +41,10 @@ public class ScheduleService {
         Optional<Schedule> findOneSchedule = scheduleJpaRepository.findById(uuid);
         findOneSchedule.ifPresentOrElse(schedule -> {
 
-            schedule.setSubject(requestSchedule.getSubject());
-            schedule.setContent(requestSchedule.getContent());
+            //schedule.setSubject(requestSchedule.getSubject());
+            //schedule.setContent(requestSchedule.getContent());
             // 데이터 수정으로
-            scheduleJpaRepository.save(schedule);
+            scheduleJpaRepository.save(requestSchedule);
         },() -> {
             // 신규저장으로
             List<Schedule> findSchedules = scheduleJpaRepository.findByStandardDate(requestSchedule.getStandardDate());
@@ -59,4 +59,7 @@ public class ScheduleService {
         scheduleJpaRepository.deleteById(uuid);
     }
 
+    public Schedule findOne(String uuid, String seq) {
+        return scheduleJpaRepository.findById(uuid).orElseThrow(NullPointerException::new);
+    }
 }

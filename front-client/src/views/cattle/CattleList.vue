@@ -16,7 +16,7 @@
                 <i class="fa fa-align-justify"></i>
                 <div class="col-12 col-xl mb-3 mb-xl-0">Cattle List</div>
                 <div class=" mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-success" type="button" v-on:click="cattleSave">등록</button>
+                  <button class="btn btn-block btn-outline-success" type="button" v-on:click="cattleSave">register</button>
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
                 </tr>
                 </tbody>
               </table>
-              <ul class="pagination">
+              <ul class="pagination justify-content-center">
 
                 <div v-if="isPre">
                   <li class="page-item"><a class="page-link" href="#" v-on:click="pagingMove(begin-2)">Prev</a>
@@ -119,7 +119,6 @@
       }
     },
     mounted() {
-      //this.$store.dispatch('pagingAction',{actionUrl:'/cattle/cattle_management_list?page=0'})
       this.pagingMove(0);
     },
 
@@ -129,7 +128,7 @@
       },
       pagingMove: function (currentPage) {
 
-        let actionUrl = '/cattle/cattle_management_list?page=' + currentPage;
+        let actionUrl = '/cattle/cattle_management_list?page=' + currentPage+'&size=20';
         this.$store.dispatch('pagingAction', {actionUrl: actionUrl})
       },
       detailView: function (entityNumber, identityNumber) {

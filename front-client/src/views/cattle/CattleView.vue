@@ -101,7 +101,17 @@
         <!-- calves management -->
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-header"><strong>calves Form</strong> Elements</div>
+            <div class="card-header">
+              <div class="row align-items-center">
+                <i class="fa fa-align-justify"></i>
+                <div class="col-12 col-xl mb-3 mb-xl-0">
+                  <strong>calves List</strong>
+                </div>
+                <div class=" mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-success"  type="button" data-toggle="modal" data-target="#calvesModal">register</button>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <table class="table table-responsive-sm">
                 <thead>
@@ -144,7 +154,17 @@
         <!-- Disease Treatment -->
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-header"><strong>Disease Form</strong> Elements</div>
+            <div class="card-header">
+              <div class="row align-items-center">
+                <i class="fa fa-align-justify"></i>
+                <div class="col-12 col-xl mb-3 mb-xl-0">
+                  <strong>Disease Form</strong> Elements
+                </div>
+                <div class=" mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-success" type="button" data-toggle="modal" data-target="#diseaseModal">register</button>
+                </div>
+              </div>
+            </div>
             <div class="card-body">
               <table class="table table-responsive-sm">
                 <thead>
@@ -305,11 +325,62 @@
 
             </div>
             <div class="card-footer">
-              <button class="btn btn-sm btn-primary" type="button" v-on:click="cattleModifyForm()"> Submit</button>
+              <div class="row justify-content-end">
+                <div class="mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-info" type="button" v-on:click="cattleModifyForm()">modify</button>
+                </div>
+              </div>
+
+              <!--<button class="btn btn-sm btn-primary" type="button" v-on:click="cattleModifyForm()"> Submit</button>-->
               <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
             </div>
           </div>
         </div>
+
+
+
+
+        <!-- /.modal-->
+        <div class="modal fade" id="calvesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">calves  title</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </div>
+              <div class="modal-body">
+                <p>One fine body…</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="button">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
+
+        <div class="modal fade" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Disease  title</h4>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              </div>
+              <div class="modal-body">
+                <p>One fine body…</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="button">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content-->
+          </div>
+          <!-- /.modal-dialog-->
+        </div>
+
 
       </div>
     </div>
@@ -402,6 +473,11 @@
       cattleModifyForm: function () {
         let actionUrl = `/cattle/cattleForm?entityNumber=${this.entityManagementNumber}&identityNumber=${this.entityIdentificationNumber}`
         this.$router.push(actionUrl)
+      }
+      ,calvesForm : function () {
+
+      },diseaseForm :function () {
+
       }
 
     }

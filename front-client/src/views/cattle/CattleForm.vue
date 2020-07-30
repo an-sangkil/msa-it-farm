@@ -11,37 +11,37 @@
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="cattleSave">
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static0</label>
+                    <label class="col-md-3 col-form-label"><span style="color: red">*</span> entityNumber</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="entityManagementNumber" type="text" name="entityManagementNumber" placeholder="Text" v-model="entityManagementNumber"><span class="help-block">This is a help text</span>
+                      <input class="form-control" id="entityManagementNumber" type="number" name="entityManagementNumber" placeholder="Text" v-model="entityManagementNumber"  v-bind:readonly="isReadonly"><span class="help-block">This is a help text</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static1</label>
+                    <label class="col-md-3 col-form-label"><span style="color: #ff0000">*</span> identificationNumber</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="entityIdentificationNumber" type="text" name="entityIdentificationNumber" placeholder="Text" v-model="entityIdentificationNumber"><span class="help-block">This is a help text</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static2</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="parentPapaNo" type="text" name="parentPapaNo" placeholder="Text" v-model="parentPapaNo"><span class="help-block">This is a help text</span>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Static3</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="parentMomNo" type="text" name="parentMomNo" placeholder="Text" v-model="parentMomNo"><span class="help-block">This is a help text</span>
+                      <input class="form-control" id="entityIdentificationNumber" type="number" name="entityIdentificationNumber" placeholder="Text" v-model="entityIdentificationNumber"  v-bind:readonly="isReadonly"><span class="help-block">This is a help text</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="birthDay">Date Input</label>
+                    <label class="col-md-3 col-form-label">parentPapaNo</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="parentPapaNo" type="number" name="parentPapaNo" placeholder="Text" v-model="parentPapaNo"><span class="help-block">This is a help text</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">parentMomNo</label>
+                    <div class="col-md-9">
+                      <input class="form-control" id="parentMomNo" type="number" name="parentMomNo" placeholder="Text" v-model="parentMomNo"><span class="help-block">This is a help text</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label" for="birthDay">birthDay</label>
                     <div class="col-md-9">
                       <input class="form-control" id="birthDay" type="date" name="birthDay" placeholder="date" v-model="birthDay"><span class="help-block">Please enter a valid date</span>
                     </div>
@@ -56,13 +56,13 @@
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="earTagDate">Date Input</label>
+                    <label class="col-md-3 col-form-label" for="earTagDate">earTagDate</label>
                     <div class="col-md-9">
                       <input class="form-control" id="earTagDate" type="date" name="earTagDate" placeholder="date" v-model="earTagDate"><span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="castrationDate">Date Input</label>
+                    <label class="col-md-3 col-form-label" for="castrationDate">castrationDate</label>
                     <div class="col-md-9">
                       <input class="form-control" id="castrationDate" type="date" name="castrationDate" placeholder="date" v-model="castrationDate"><span class="help-block">Please enter a valid date</span>
                     </div>
@@ -73,7 +73,7 @@
                 <div class="row">
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Inline Radios</label>
+                    <label class="col-md-3 col-form-label">gender</label>
                     <div class="col-md-9 col-form-label">
                       <div class="form-check form-check-inline mr-1">
                         <input class="form-check-input" id="gender1" type="radio" value="MALE" name="gender" v-model="gender">
@@ -87,7 +87,7 @@
                   </div>
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">Select</label>
+                    <label class="col-md-3 col-form-label">sellYn</label>
                     <div class="col-md-9">
                       <select class="form-control" id="sellYn" name="sellYn" v-model="sellYn">
                         <option value="Y">Option Y</option>
@@ -229,7 +229,7 @@
 
             </div>
             <div class="card-footer">
-              <div class="row align-items-center">
+              <div class="row justify-content-end">
                 <div class="mb-3 mb-xl-0">
                   <button class="btn btn-block btn-info" type="submit" v-on:click="cattleSave($event)">submit</button>
                 </div>
@@ -286,6 +286,7 @@
         }
         , diseaseTreatmentSet: []
         , calvesManagementSet: []
+        , isReadonly:false
       }
     },
     mounted() {
@@ -293,17 +294,39 @@
       let entityManagementNumber =  this.$route.query.entityNumber
       let entityIdentificationNumber =  this.$route.query.identityNumber
 
-      if (entityManagementNumber !== undefined)
+      console.log("asdasdsad",entityManagementNumber)
+      if (entityManagementNumber !== undefined) {
+
         this.detail(entityManagementNumber,entityIdentificationNumber)
+        this.isReadonly = true
+      }
+
     },
     computed: {},
     methods: {
       validation :function(){
 
+        if ( this.entityIdentificationNumber == '' || this.entityIdentificationNumber == '') {
+          console.log('필수 입력 데이터 입니다.')
+        }
+
       },
       cattleSave: function (e) {
 
+        this.validation()
 
+        let data = this.dataGeneration()
+        console.log(data)
+
+        this.$http.put(this.$store.state.host + '/cattle/save', data)
+          .then((res) => {
+            console.log(res.data)
+          }).catch((error) => {
+          console.log(error)
+        })
+
+      },
+      dataGeneration: function () {
         let data = JSON.stringify({
             localBeefManagementPK: {
               entityManagementNumber: this.entityManagementNumber
@@ -338,19 +361,7 @@
             , calvesManagementSet: []
           }
         )
-
-        console.log(data)
-
-        this.$http.put(this.$store.state.host + '/cattle/save', data)
-          .then((res) => {
-            console.log(res.data)
-          }).catch((error) => {
-          console.log(error)
-        })
-
-      },
-      pageMove: function (currentPage) {
-
+        return data
 
       },
       detail :function (entityNumber, identityNumber) {
@@ -365,7 +376,6 @@
 
           console.log(res)
           let responseData = res.data.detail.data
-
 
           this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
           this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
@@ -386,7 +396,7 @@
           console.log( responseData.calvesManagementSet)
 
         }).catch((error) => {
-          console.log(error.message())
+          console.log(error.message)
         })
 
       }
