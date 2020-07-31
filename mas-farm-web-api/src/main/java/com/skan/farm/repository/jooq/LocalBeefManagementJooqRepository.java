@@ -130,6 +130,7 @@ public class LocalBeefManagementJooqRepository {
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleSellStoreInformation.ENTITY_IDENTIFICATION_NUMBER)
                 )
                 .where(this.dynamicConditionsLocalbeffManagement(predicate))
+                .orderBy(jLocalBeefManagement.CASTRATION_DATE.desc())
                 .limit(pageable.getPageSize())
                 .offset(pageable.getOffset())
                 .getSQL(ParamType.INLINED);
@@ -162,9 +163,10 @@ public class LocalBeefManagementJooqRepository {
                         localBeefManagement.setExpectedDateConfinement(LocalDateTime.parse(calvesInformation[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                     }
 
-                    Period period = Period.between(localBeefManagement.getBirthDay(),LocalDate.now());
-                    localBeefManagement.setNumberOfMonth(String.valueOf(period.getMonths()));
-
+                    if (localBeefManagement.getBirthDay() != null) {
+                        Period period = Period.between(localBeefManagement.getBirthDay(),LocalDate.now());
+                        localBeefManagement.setNumberOfMonth(String.valueOf(period.getMonths()));
+                    }
 
 
                     CattleBuyInformation cattleBuyInformation = CattleBuyInformation.builder()

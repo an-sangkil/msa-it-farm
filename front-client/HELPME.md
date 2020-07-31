@@ -41,5 +41,5 @@ vue init webpack frontend
 ### plug-in 설치 
 ```shell script
 npm install vue bootstrap-vue bootstrap
-
+npm install moment --save 
 ```

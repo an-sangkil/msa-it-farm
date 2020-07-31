@@ -108,7 +108,7 @@
                   <strong>calves List</strong>
                 </div>
                 <div class=" mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-success"  type="button" data-toggle="modal" data-target="#calvesModal">register</button>
+                  <b-button id="show-btn" @click="$bvModal.show('calvesModal')" variant="outline-success">register</b-button>
                 </div>
               </div>
             </div>
@@ -126,12 +126,14 @@
                   <th>calvingDate</th>
                   <th>nothingSpecial</th>
                   <th>child</th>
-
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="item in this.calvesManagementSet"
-                    v-bind:key="item.calvesManagementPK.entityManagementNumber+item.calvesManagementPK.entityIdentificationNumber+item.calvesManagementPK.seq">
+                    v-bind:key="item.calvesManagementPK.entityManagementNumber+item.calvesManagementPK.entityIdentificationNumber+item.calvesManagementPK.seq"
+                    v-on:click="calvesDetail(item.calvesManagementPK.entityManagementNumber,item.calvesManagementPK.entityIdentificationNumber,item.calvesManagementPK.seq)"
+                    style="cursor: pointer"
+                >
                   <td>{{item.calvesManagementPK.seq}}</td>
                   <td>{{item.fertilizationIndex}}</td>
                   <td>{{item.years}}</td>
@@ -145,6 +147,9 @@
                 </tr>
                 </tbody>
               </table>
+              <!-- <div>
+                 <b-table striped hover :items="calvesManagementSet" :fields="fields"></b-table>
+               </div>-->
 
             </div>
             <!--<div class="card-footer"></div>-->
@@ -161,7 +166,7 @@
                   <strong>Disease Form</strong> Elements
                 </div>
                 <div class=" mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-success" type="button" data-toggle="modal" data-target="#diseaseModal">register</button>
+                  <b-button id="show-btn2" @click="$bvModal.show('diseaseModal')" variant="outline-success">register</b-button>
                 </div>
               </div>
             </div>
@@ -184,7 +189,7 @@
 
                 <tr v-if:this.calvesManagementSet!=null v-for="item in this.diseaseTreatmentSet"
                     v-bind:key="item.diseaseTreatmentPK.entityManagementNumber+item.diseaseTreatmentPK.entityIdentificationNumber+item.diseaseTreatmentPK.seq">
-                  <td>{{item.diseaseTreatmentPK.seq}}</td>
+                  <td v-on:click="calvesDetail(item.diseaseTreatmentPK.entityManagementNumber,item.diseaseTreatmentPK.entityIdentificationNumber,item.diseaseTreatmentPK.seq)">{{item.diseaseTreatmentPK.seq}}</td>
                   <td>{{item.cureDate}}</td>
                   <td>{{item.diseaseName}}</td>
                   <td>{{item.medicationName}}</td>
@@ -200,7 +205,6 @@
             <!--<div class="card-footer"></div>-->
           </div>
         </div>
-
 
         <!-- buy information -->
         <div class="col-lg-12">
@@ -338,50 +342,101 @@
         </div>
 
 
-
-
         <!-- calves /.modal-->
-        <div class="modal fade" id="calvesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Calves  title</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <b-modal ref="calves-modal" id="calvesModal" size="xl" centered title="calves form">
+          <b-container>
+            <div class="row">
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">years</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your years" type="number" v-model="calvesManagement.years"></b-form-input>
+                </div>
               </div>
-              <div class="modal-body">
-                <p>One fine body…</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="button">Save changes</button>
-              </div>
-            </div>
-            <!-- /.modal-content-->
-          </div>
-          <!-- /.modal-dialog-->
-        </div>
-
-
-
-        <!-- disease Modal -->
-        <div class="modal fade" id="diseaseModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">DiseaseModal Modal title</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">fertilizationDate</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your fertilizationDate" type="date" v-model="calvesManagement.fertilizationDate"></b-form-input>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+            <div class="row">
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">calvingDate</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your calvingDate" type="date" v-model="calvesManagement.calvingDate"></b-form-input>
+                </div>
+              </div>
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">spermNo</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your spermNo" type="number" v-model="calvesManagement.spermNo"></b-form-input>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">nothingSpecial</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your nothingSpecial" type="text" v-model="calvesManagement.nothingSpecial"></b-form-input>
+                </div>
+              </div>
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">child</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your child number" type="number" v-model="calvesManagement.child"></b-form-input>
+                </div>
+              </div>
+            </div>
+          </b-container>
+        </b-modal>
 
+        <b-modal ref="disease-modal" id="diseaseModal" size="xl" centered title="calves form">
+          <b-container>
+            <div class="row">
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">cureDate</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your cureDate" type="date" v-model="diseaseTreatment.cureDate"></b-form-input>
+                </div>
+              </div>
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">diseaseName</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your diseaseName" type="text" v-model="diseaseTreatment.diseaseName"></b-form-input>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">medicationName</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your name" v-model="diseaseTreatment.medicationName"></b-form-input>
+                </div>
+              </div>
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">treatmentDetails</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your treatmentDetails" v-model="diseaseTreatment.treatmentDetails"></b-form-input>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">injectionMethod</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your injectionMethod" type="text" v-model="diseaseTreatment.injectionMethod"></b-form-input>
+                </div>
+              </div>
+              <div class="form-group col-md-6 row">
+                <label class="col-md-3 col-form-label">withdrawalPeriodExpirationDate</label>
+                <div class="col-md-9">
+                  <b-form-input placeholder="Enter your withdrawalPeriodExpirationDate" type="text" v-model="diseaseTreatment.withdrawalPeriodExpirationDate"></b-form-input>
+                </div>
+              </div>
+            </div>
+          </b-container>
+        </b-modal>
 
 
       </div>
@@ -429,8 +484,10 @@
           , beefGrade: ''
         }
 
-        , diseaseTreatmentSet: []
         , calvesManagementSet: []
+        , diseaseTreatmentSet: []
+        , calvesManagement: {}
+        , diseaseTreatment: {}
       }
     },
     mounted() {
@@ -444,7 +501,7 @@
         }
       }).then((res) => {
 
-        console.log(res)
+        console.log('rount response :', res)
         let responseData = res.data.detail.data
 
 
@@ -464,8 +521,6 @@
         this.diseaseTreatmentSet = responseData.diseaseTreatmentSet
         this.calvesManagementSet = responseData.calvesManagementSet
 
-        console.log( responseData.calvesManagementSet)
-
       }).catch((error) => {
         console.log(error.message())
       })
@@ -476,9 +531,27 @@
         let actionUrl = `/cattle/cattleForm?entityNumber=${this.entityManagementNumber}&identityNumber=${this.entityIdentificationNumber}`
         this.$router.push(actionUrl)
       }
-      ,calvesForm : function () {
+      , calvesSave: function () {
 
-      },diseaseForm :function () {
+      }
+      , calvesDetail: function (entityNumber, identityNumber, seq) {
+
+        this.$http.get(this.$store.state.host + '/cattle/childbirth/detail', {
+          params: {
+            entityManagementNumber: entityNumber,
+            entityIdentificationNumber: identityNumber,
+            seq: seq
+          }
+        }).then(({data}) => {
+
+
+          this.calvesManagement = data.detail.data
+          this.$refs['calves-modal'].show()
+
+
+        })
+
+      }, diseaseDetail: function () {
 
       }
 

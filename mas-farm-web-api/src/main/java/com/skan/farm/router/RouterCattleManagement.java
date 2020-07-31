@@ -93,9 +93,9 @@ public class RouterCattleManagement {
                 var entityId = request.param("entityManagementNumber").orElseThrow();
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
 
-                LocalBeefManagement localBeefManagement = cattleManagementService.findOne(entityId,identityId);
+                LocalBeefManagement localBeefManagement = cattleManagementService.findOne(entityId, identityId);
 
-                response.setDetail(new Success<>(localBeefManagement ));
+                response.setDetail(new Success<>(localBeefManagement));
                 response.setStatus(Response.ResponseCode.SUCCESS);
 
             } catch (Exception e) {
@@ -114,7 +114,7 @@ public class RouterCattleManagement {
             try {
 
                 String paramJson = request.servletRequest().getReader().readLine();
-                log.debug("paramJson = {} ",paramJson);
+                log.debug("paramJson = {} ", paramJson);
 
                 LocalBeefManagement localBeefManagement = JsonUtils.convertJson(paramJson, LocalBeefManagement.class);
 
@@ -154,7 +154,7 @@ public class RouterCattleManagement {
 
             try {
 
-                Optional<LocalBeefManagement> localBeefManagementOptional =  this.localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(entityId, identityId));
+                Optional<LocalBeefManagement> localBeefManagementOptional = this.localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(entityId, identityId));
                 LocalBeefManagement localBeefManagement = localBeefManagementOptional.orElseThrow();
                 localBeefManagement.setDeleteYn(true);
 
@@ -249,14 +249,36 @@ public class RouterCattleManagement {
             var entityId = request.param("entityManagementNumber").orElseThrow();
             var identityId = request.param("entityIdentificationNumber").orElseThrow();
 
-            Response<List<CalvesManagement> > response = new Response<>();
+            Response<List<CalvesManagement>> response = new Response<>();
 
             try {
                 List<CalvesManagement> calvesManagements = this.calvesManagementJpaRepository.findByCalvesManagementPK_EntityManagementNumberAndCalvesManagementPK_EntityIdentificationNumber(entityId, identityId);
                 response.setDetail(new Success<>(calvesManagements));
                 response.setMessage("child birth search success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
-            }catch (Exception e) {
+            } catch (Exception e) {
+                log.debug("child birth delete error =", e);
+                response.setMessage(e.getMessage());
+                response.setStatus(Response.ResponseCode.ERROR);
+                response.setDetail(new Error<>());
+            }
+
+            return ServerResponse.ok().body(response);
+
+        }).andRoute(GET("/cattle/childbirth/detail"), request -> {
+
+            var entityId = request.param("entityManagementNumber").orElseThrow();
+            var identityId = request.param("entityIdentificationNumber").orElseThrow();
+            var seq = request.param("seq").orElseThrow();
+
+            Response<CalvesManagement> response = new Response<>();
+
+            try {
+                CalvesManagement calvesManagement = this.calvesManagementJpaRepository.findById(new CalvesManagement.CalvesManagementPK(entityId, identityId, Short.valueOf(seq))).orElseThrow();
+                response.setDetail(new Success<>(calvesManagement));
+                response.setMessage("child birth search success ");
+                response.setStatus(Response.ResponseCode.SUCCESS);
+            } catch (Exception e) {
                 log.debug("child birth delete error =", e);
                 response.setMessage(e.getMessage());
                 response.setStatus(Response.ResponseCode.ERROR);
@@ -309,13 +331,12 @@ public class RouterCattleManagement {
                 response.setMessage("child Birth save success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 log.debug("child Birth save  error =", e);
                 response.setMessage(e.getMessage());
                 response.setStatus(Response.ResponseCode.ERROR);
                 response.setDetail(new Error<>());
             }
-
 
 
             return ServerResponse.ok().body(response);
@@ -335,7 +356,7 @@ public class RouterCattleManagement {
                 response.setMessage("child Birth delete success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 log.debug("child Birth delete  error =", e);
                 response.setMessage(e.getMessage());
                 response.setStatus(Response.ResponseCode.ERROR);
