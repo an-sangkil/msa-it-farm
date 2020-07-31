@@ -340,12 +340,12 @@
 
 
 
-        <!-- /.modal-->
+        <!-- calves /.modal-->
         <div class="modal fade" id="calvesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">calves  title</h4>
+                <h4 class="modal-title">Calves  title</h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
@@ -361,25 +361,27 @@
           <!-- /.modal-dialog-->
         </div>
 
-        <div class="modal fade" id="diseaseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+
+
+        <!-- disease Modal -->
+        <div class="modal fade" id="diseaseModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title">Disease  title</h4>
+                <h5 class="modal-title" id="staticBackdropLabel">DiseaseModal Modal title</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
-                <p>One fine body…</p>
+                ...
               </div>
               <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="button">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
               </div>
             </div>
-            <!-- /.modal-content-->
           </div>
-          <!-- /.modal-dialog-->
         </div>
+
 
 
       </div>

@@ -320,7 +320,15 @@
 
         this.$http.put(this.$store.state.host + '/cattle/save', data)
           .then((res) => {
-            console.log(res.data)
+
+            console.log(res)
+            if (res.data.status === "SUCCESS") {
+              let entityNumber = res.data.detail.data.localBeefManagementPK.entityManagementNumber
+              let identityNumber = res.data.detail.data.localBeefManagementPK.entityIdentificationNumber
+              this.$router.push(`/cattle/cattleDetail?entityNumber=${entityNumber}&identityNumber=${identityNumber}`)
+              this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
+            }
+
           }).catch((error) => {
           console.log(error)
         })

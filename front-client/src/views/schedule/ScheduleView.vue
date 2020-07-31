@@ -67,16 +67,17 @@
               <div class="row justify-content-end">
                 <div class="mb-3 mb-xl-0">
                   <button class="btn btn-block btn-info" type="submit" v-on:click="scheduleModify()">modify</button>
+
                 </div>
               </div>
               <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 <script>
@@ -99,11 +100,12 @@
         content: '',
         todayWeatherCode: '',
         minimumTemperature: '',
-        maximumTemperature: ''
+        maximumTemperature: '',
       }
     },
     mounted() {
       this.scheduleDetailView()
+
     },
     computed: {},
     methods: {
@@ -134,6 +136,7 @@
       scheduleModify: function () {
         this.$router.push(`/schedule/scheduleForm?uuid=${this.uuid}`)
       }
+
 
     }
   }

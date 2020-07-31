@@ -78,6 +78,8 @@
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 <script>
@@ -100,7 +102,7 @@
         content: '',
         todayWeatherCode: '',
         minimumTemperature: '',
-        maximumTemperature: ''
+        maximumTemperature: '',
       }
     },
     mounted() {
@@ -135,6 +137,9 @@
 
               let uuid = res.data.detail.data.uuid
               let seq = res.data.detail.data.seq
+
+              this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
+
               let actionURL = `/schedule/scheduleDetail?uuid=${uuid}&seq=${seq}`
               this.$router.push(actionURL)
 
@@ -169,7 +174,6 @@
 
         })
       }
-
     }
   }
 

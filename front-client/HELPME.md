@@ -36,3 +36,10 @@ vue init webpack frontend
 # --save-dev 개발시만 사용하고 업로드시 사용하지 않음
 # -g 운도우 운영체제 전역에 설치
 ```
+
+
+### plug-in 설치 
+```shell script
+npm install vue bootstrap-vue bootstrap
+
+```

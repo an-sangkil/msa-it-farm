@@ -130,6 +130,7 @@ public class RouterCattleManagement {
 
                 this.localBeefManagementJpaRepository.save(localBeefManagement);
 
+                response.setDetail(new Success<>(localBeefManagement));
                 response.setMessage("cattle save success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
 
