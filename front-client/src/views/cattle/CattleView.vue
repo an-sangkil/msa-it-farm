@@ -343,7 +343,7 @@
 
 
         <!-- calves /.modal-->
-        <b-modal ref="calves-modal" id="calvesModal" size="xl" centered title="calves form">
+        <b-modal ref="calves-modal" id="calvesModal" size="xl" centered title="calves form" @hidden="calvesResetModal">
           <b-container>
             <div class="row">
               <div class="form-group col-md-6 row">
@@ -355,7 +355,8 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">fertilizationDate</label>
                 <div class="col-md-9">
-                  <b-form-input placeholder="Enter your fertilizationDate" type="date" v-model="calvesManagement.fertilizationDate"></b-form-input>
+                  <date-picker v-model="calvesManagement.fertilizationDate" format="YYYY-MM-DD HH:MM:SS"  value-type="YYYY-MM-DD HH:MM:SS"  lang="en" ></date-picker>
+                  <!--<b-form-input placeholder="Enter your fertilizationDate" type="text" v-model="calvesManagement.fertilizationDate"></b-form-input>-->
                 </div>
               </div>
             </div>
@@ -363,7 +364,8 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">calvingDate</label>
                 <div class="col-md-9">
-                  <b-form-input placeholder="Enter your calvingDate" type="date" v-model="calvesManagement.calvingDate"></b-form-input>
+                  <date-picker v-model="calvesManagement.calvingDate" format="YYYY-MM-DD HH:MM:SS"  value-type="YYYY-MM-DD HH:MM:SS"  lang="en" ></date-picker>
+                  <!--<b-form-input placeholder="Enter your calvingDate" type="date" v-model="calvesManagement.calvingDate"></b-form-input>-->
                 </div>
               </div>
               <div class="form-group col-md-6 row">
@@ -390,7 +392,7 @@
           </b-container>
         </b-modal>
 
-        <b-modal ref="disease-modal" id="diseaseModal" size="xl" centered title="calves form">
+        <b-modal ref="disease-modal" id="diseaseModal" size="xl" centered title="disease form" @hidden="diseaseResetModal">
           <b-container>
             <div class="row">
               <div class="form-group col-md-6 row">
@@ -445,6 +447,9 @@
 </template>
 <script>
 
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
+
   export default {
     created() {
 
@@ -453,7 +458,7 @@
       this.$store.commit('changeSubtitle', {name: 'View'})
 
     },
-
+    components: { DatePicker },
     data() {
       return {
         entityManagementNumber: ''
@@ -488,6 +493,7 @@
         , diseaseTreatmentSet: []
         , calvesManagement: {}
         , diseaseTreatment: {}
+        , time1: '2021-01-01 00:00:00'
       }
     },
     mounted() {
@@ -553,6 +559,10 @@
 
       }, diseaseDetail: function () {
 
+      }, calvesResetModal () {
+        this.calvesManagement = {}
+      }, diseaseResetModal() {
+        this.diseaseTreatment = {}
       }
 
     }
