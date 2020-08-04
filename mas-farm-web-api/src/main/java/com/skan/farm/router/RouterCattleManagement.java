@@ -12,6 +12,7 @@ import com.skan.farm.response.Response;
 import com.skan.farm.response.Success;
 import com.skan.farm.service.CattleManagementService;
 import com.skan.farm.service.ChildBirthManagementService;
+import com.skan.farm.service.DiseaseTreatmentService;
 import com.skan.farm.utils.JsonUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,10 @@ import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.springframework.web.servlet.function.RequestPredicates.*;
 import static org.springframework.web.servlet.function.RouterFunctions.route;
@@ -55,6 +58,7 @@ public class RouterCattleManagement {
     private final DiseaseTreatmentJpaRepository diseaseTreatmentJpaRepository;
     private final CalvesManagementJpaRepository calvesManagementJpaRepository;
     final ChildBirthManagementService childBirthManagementService;
+    private final DiseaseTreatmentService diseaseTreatmentService;
 
     @Bean
     RouterFunction<ServerResponse> RouterFunction() {
@@ -170,27 +174,66 @@ public class RouterCattleManagement {
             }
             return ServerResponse.ok().body(response);
         }).andRoute(GET("/cattle/disease_treatment/list"), request -> {
-            var entityId = request.param("entityManagementNumber").orElseThrow();
-            var identityId = request.param("entityIdentificationNumber").orElseThrow();
 
-            List<DiseaseTreatment> diseaseTreatments = this.diseaseTreatmentJpaRepository.findByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(entityId, identityId);
-            return ServerResponse.ok().body(diseaseTreatments);
-        }).andRoute(PUT("/cattle/disease_treatment/save"), request -> {
-
-            var entityId = request.param("entity_management_id").orElseThrow();
-            var identityId = request.param("identity_management_id").orElseThrow();
-
-            var diseaseName = request.param("disease_name").orElseThrow();
-            var cureDate = request.param("cure_date").orElseThrow();
-            var injectionMethod = request.param("injection_method").orElseThrow();
-            var medicationName = request.param("medication_name").orElseThrow();
-            var treatmentDetails = request.param("treatment_details").orElse("");
-            var withdrawalPeriodExpirationDate = request.param("withdrawal_period_expiration_date").orElse("");
-
-
-            Response<DiseaseTreatment> response = new Response<>();
-
+            Response< List<DiseaseTreatment>> response = new Response<>();
             try {
+
+                var entityId = request.param("entityManagementNumber").orElseThrow();
+                var identityId = request.param("entityIdentificationNumber").orElseThrow();
+
+                List<DiseaseTreatment> diseaseTreatments = this.diseaseTreatmentJpaRepository.findByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(entityId, identityId);
+                diseaseTreatments = diseaseTreatments.stream()
+                        .sorted(Comparator.comparing(DiseaseTreatment::getCreatedTime).reversed()).collect(Collectors.toList());
+
+                response.setDetail(new Success<>(diseaseTreatments));
+                response.setMessage("disease treatment save success ");
+                response.setStatus(Response.ResponseCode.SUCCESS);
+
+
+            }  catch (Exception e) {
+                log.debug("disease treatment save error =", e);
+                response.setMessage(e.getMessage());
+                response.setStatus(Response.ResponseCode.ERROR);
+                response.setDetail(new Error<>());
+             }
+
+            return ServerResponse.ok().body(response);
+        }).andRoute(GET("/cattle/disease_treatment/detail"), request -> {
+
+            Response< DiseaseTreatment> response = new Response<>();
+            try {
+
+                var entityId = request.param("entityManagementNumber").orElseThrow();
+                var identityId = request.param("entityIdentificationNumber").orElseThrow();
+                var seq = request.param("seq").orElseThrow();
+
+                DiseaseTreatment diseaseTreatment = this.diseaseTreatmentJpaRepository.findById(new DiseaseTreatment.DiseaseTreatmentPK(entityId,identityId, Short.valueOf(seq))).orElseThrow();
+
+                response.setDetail(new Success<>(diseaseTreatment));
+                response.setMessage("disease treatment detail  success ");
+                response.setStatus(Response.ResponseCode.SUCCESS);
+
+
+            }  catch (Exception e) {
+                log.debug("disease treatment save error =", e);
+                response.setMessage(e.getMessage());
+                response.setStatus(Response.ResponseCode.ERROR);
+                response.setDetail(new Error<>());
+            }
+
+            return ServerResponse.ok().body(response);
+
+        }).andRoute(PUT("/cattle/disease_treatment/save"), request -> {
+            Response<DiseaseTreatment> response = new Response<>();
+            try {
+                /*var entityId = request.param("entity_management_id").orElseThrow();
+                var identityId = request.param("identity_management_id").orElseThrow();
+                var diseaseName = request.param("disease_name").orElseThrow();
+                var cureDate = request.param("cure_date").orElseThrow();
+                var injectionMethod = request.param("injection_method").orElseThrow();
+                var medicationName = request.param("medication_name").orElseThrow();
+                var treatmentDetails = request.param("treatment_details").orElse("");
+                var withdrawalPeriodExpirationDate = request.param("withdrawal_period_expiration_date").orElse("");
                 DiseaseTreatment diseaseTreatment = DiseaseTreatment.builder()
                         .diseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityId, identityId, (short) 1))
                         .diseaseName(diseaseName)
@@ -204,9 +247,12 @@ public class RouterCattleManagement {
                     diseaseTreatment.setWithdrawalPeriodExpirationDate(LocalDate.parse(withdrawalPeriodExpirationDate));
                 } else {
                     diseaseTreatment.setWithdrawalPeriodExpirationDate(LocalDate.parse(cureDate).plusDays(1));
-                }
+                }*/
+                String paramJson = request.servletRequest().getReader().readLine();
+                log.debug("paramJson = {} ", paramJson);
 
-                this.diseaseTreatmentJpaRepository.save(diseaseTreatment);
+                DiseaseTreatment diseaseTreatment  = JsonUtils.convertJson(paramJson, DiseaseTreatment.class);
+                this.diseaseTreatmentService.save(diseaseTreatment);
 
                 response.setDetail(new Success<>(diseaseTreatment));
                 response.setMessage("disease treatment save success ");
@@ -253,6 +299,10 @@ public class RouterCattleManagement {
 
             try {
                 List<CalvesManagement> calvesManagements = this.calvesManagementJpaRepository.findByCalvesManagementPK_EntityManagementNumberAndCalvesManagementPK_EntityIdentificationNumber(entityId, identityId);
+                calvesManagements = calvesManagements.stream()
+                        .sorted(Comparator.comparing(CalvesManagement::getCreatedTime).reversed())
+                        .collect(Collectors.toList());
+
                 response.setDetail(new Success<>(calvesManagements));
                 response.setMessage("child birth search success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);
@@ -287,12 +337,12 @@ public class RouterCattleManagement {
 
             return ServerResponse.ok().body(response);
 
-        }).andRoute(GET("/cattle/childbirth/save"), request -> {
+        }).andRoute(PUT("/cattle/childbirth/save"), request -> {
 
             Response<CalvesManagement> response = new Response<>();
             try {
 
-                var entityId = request.param("entityManagementNumber").orElseThrow();
+                /*var entityId = request.param("entityManagementNumber").orElseThrow();
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
                 //var seq = request.param("seq").orElseThrow();
 
@@ -323,9 +373,14 @@ public class RouterCattleManagement {
 
                 if (!StringUtils.isEmpty(expectedDateConfinement)) {
                     calvesManagement.setExpectedDateConfinement(LocalDateTime.parse(expectedDateConfinement));
-                }
+                }*/
 
-                childBirthManagementService.save(calvesManagement, entityId, identityId);
+                String paramJson = request.servletRequest().getReader().readLine();
+                log.debug("paramJson = {} ", paramJson);
+
+                CalvesManagement calvesManagement  = JsonUtils.convertJson(paramJson, CalvesManagement.class);
+                CalvesManagement.CalvesManagementPK calvesManagementPK = calvesManagement.getCalvesManagementPK();
+                childBirthManagementService.save(calvesManagement,calvesManagementPK.getEntityManagementNumber(), calvesManagementPK.getEntityIdentificationNumber());
 
                 response.setDetail(new Success<>(calvesManagement));
                 response.setMessage("child Birth save success ");

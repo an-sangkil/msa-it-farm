@@ -41,30 +41,34 @@
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="birthDay">birthDay</label>
+                    <label class="col-md-3 col-form-label" >birthDay</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="birthDay" type="date" name="birthDay" placeholder="date" v-model="birthDay"><span class="help-block">Please enter a valid date</span>
+                      <date-picker v-model="birthDay" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select birthDay" style="width: 100%"></date-picker>
+                      <span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="enterDate">enter Date</label>
+                    <label class="col-md-3 col-form-label" >enter Date</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="enterDate" type="date" name="enterDate" placeholder="date" v-model="enterDate"><span class="help-block">Please enter a valid date</span>
+                      <date-picker v-model="enterDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select enterDate" style="width: 100%"></date-picker>
+                      <span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="earTagDate">earTagDate</label>
+                    <label class="col-md-3 col-form-label" >earTagDate</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="earTagDate" type="date" name="earTagDate" placeholder="date" v-model="earTagDate"><span class="help-block">Please enter a valid date</span>
+                      <date-picker v-model="earTagDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select earTagDate" style="width: 100%"></date-picker>
+                      <span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="castrationDate">castrationDate</label>
+                    <label class="col-md-3 col-form-label" >castrationDate</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="castrationDate" type="date" name="castrationDate" placeholder="date" v-model="castrationDate"><span class="help-block">Please enter a valid date</span>
+                      <date-picker v-model="castrationDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select castrationDate" style="width: 100%"></date-picker>
+                      <span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                 </div>
@@ -122,7 +126,7 @@
                 <div class="form-group col-md-6 row">
                   <label class="col-md-3 col-form-label">buyDate</label>
                   <div class="col-md-9">
-                    <input class="form-control" type="date" v-model="cattleBuyInformation.buyDate">
+                    <date-picker v-model="cattleBuyInformation.buyDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="buyDate"></date-picker>
                   </div>
                 </div>
               </div>
@@ -176,7 +180,7 @@
                 <div class="form-group col-md-6 row">
                   <label class="col-md-3 col-form-label">sellDate</label>
                   <div class="col-md-9">
-                    <input class="form-control" type="date" v-model="cattleSellStoreInformation.sellDate">
+                    <date-picker v-model="cattleSellStoreInformation.sellDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="sellDate" style="width: 100%"></date-picker>
                   </div>
                 </div>
               </div>
@@ -230,8 +234,8 @@
             </div>
             <div class="card-footer">
               <div class="row justify-content-end">
-                <div class="mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-info" type="submit" v-on:click="cattleSave($event)">submit</button>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="submit" v-on:click="cattleSave($event)">submit</button>
                 </div>
               </div>
             </div>
@@ -244,6 +248,8 @@
   </div>
 </template>
 <script>
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
 
 
   export default {
@@ -254,7 +260,9 @@
       this.$store.commit('changeSubtitle', {name: 'Form'})
 
     },
-
+    components:{
+      DatePicker
+    },
     data() {
       return {
         entityManagementNumber: ''
@@ -308,12 +316,18 @@
 
         if ( this.entityIdentificationNumber == '' || this.entityIdentificationNumber == '') {
           console.log('필수 입력 데이터 입니다.')
+          return false
+        } else {
+          return true
         }
 
       },
       cattleSave: function (e) {
 
-        this.validation()
+        if (!this.validation()){
+          console.log("여기?")
+          return false;
+        }
 
         let data = this.dataGeneration()
         console.log(data)

@@ -130,7 +130,7 @@ public class LocalBeefManagementJooqRepository {
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleSellStoreInformation.ENTITY_IDENTIFICATION_NUMBER)
                 )
                 .where(this.dynamicConditionsLocalbeffManagement(predicate))
-                .orderBy(jLocalBeefManagement.CASTRATION_DATE.desc())
+                .orderBy(jLocalBeefManagement.CREATED_TIME.desc())
                 .limit(pageable.getPageSize())
                 .offset(pageable.getOffset())
                 .getSQL(ParamType.INLINED);

@@ -19,4 +19,7 @@ import java.util.List;
 public interface DiseaseTreatmentJpaRepository extends JpaRepository<DiseaseTreatment, DiseaseTreatment.DiseaseTreatmentPK> {
 
     List<DiseaseTreatment> findByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(String entityId, String identityId);
+
+    long countByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(String entityId, String identityId);
+
 }

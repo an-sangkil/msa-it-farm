@@ -71,6 +71,7 @@ public class Schedule implements Serializable {
     /**
      * 제목.
      */
+    @Column(length = 512)
     private String subject;
 
     /**
@@ -84,11 +85,23 @@ public class Schedule implements Serializable {
      */
     private String todayWeatherCode;
 
+    /**
+     * 최저 온도 타입 (영상/영하)
+     */
+    @Column(length = 16)
+    private String minTemperatureType;
 
     /**
      * 최저 기온.
      */
     private Short minimumTemperature;
+
+    /**
+     * 최고 온도 타입 (영상/영하)
+     */
+
+    @Column(length = 16)
+    private String maxTemperatureType;
 
     /**
      * 최고온도.
@@ -103,6 +116,7 @@ public class Schedule implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdTime;
 
     /**
@@ -118,6 +132,7 @@ public class Schedule implements Serializable {
     /**
      * 공개 여부.
      */
+    @Column(length = 1)
     private String publicYn;
 
     /**

@@ -80,7 +80,7 @@ public class ScheduleController {
             String paramEndDate = httpServletRequest.getParameter("end_date");
 
             String startDate = Optional.ofNullable(paramStartDate).orElse(LocalDate.now().minusWeeks(6).toString());
-            String endDate = Optional.ofNullable(paramEndDate).orElse(LocalDate.now().toString());
+            String endDate = Optional.ofNullable(paramEndDate).orElse(LocalDate.now().plusMonths(6).toString());
 
             List<Schedule> schedules = scheduleService.scheduleSearch(LocalDate.parse(startDate), LocalDate.parse(endDate));
 

@@ -11,43 +11,63 @@
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
 
                 <div class="row">
-                  <div class="form-group col-md-12 row">
-                    <label class="col-md-1 col-form-label">standardDate</label>
-                    <div class="col-md-2">
+                  <div class="form-group col-md-4 row">
+                    <label class="col-md-3 col-form-label">standardDate</label>
+                    <div class="col-md-9">
                       <input class="form-control" id="uuid" type="hidden" name="text-input" v-model="uuid">
                       <input class="form-control" id="seq" type="hidden" name="text-input" v-model="seq">
-                      <input class="form-control" id="text-input0" type="date" name="text-input" placeholder="Text" v-model="standardDate"><span class="help-block">This is a help text</span>
-
+                      <date-picker v-model="standardDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="standardDate" style="width: 100%"></date-picker>
+                      <span class="help-block">This is a standardDate text</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4 row">
+                    <label class="col-md-3 col-form-label">todayWeatherCode</label>
+                    <div class="col-md-9">
+                      <b-form-select v-model="todayWeatherCode" :options="weatherOptions"></b-form-select>
+                      <span class="help-block">This is a weather Options </span>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">todayWeatherCode</label>
-                    <div class="col-md-9">
-                      <input class="form-control" id="text-input4" type="text" name="text-input" placeholder="Text" v-model="todayWeatherCode"><span class="help-block">This is a help text</span>
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">minimumTemperature</label>
-                    <div class="col-md-9">
-                      <input class="form-control" type="text" name="date-input" placeholder="date" v-model="minimumTemperature"><span class="help-block">Please enter a valid date</span>
+                    <div class="col-md-9 row">
+
+                      <div class="col-md-6">
+                        <b-form-select v-model="minTemperatureType" :options="temperatureOption"></b-form-select>
+                        <span class="help-block"></span>
+                      </div>
+                      <div class="col-md-6">
+                        <input class="form-control" type="number" name="date-input" placeholder="minTemperatureType" v-model="minimumTemperature">
+                        <span class="help-block"></span>
+                      </div>
+
+
                     </div>
                   </div>
                   <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">maximumTemperature</label>
-                    <div class="col-md-9">
-                      <input class="form-control" type="text" name="date-input" placeholder="date" v-model="maximumTemperature"><span class="help-block">Please enter a valid date</span>
+                    <div class="col-md-9 row">
+                      <div class="col-md-6">
+                        <b-form-select v-model="maxTemperatureType" :options="temperatureOption"></b-form-select>
+                        <span class="help-block"></span>
+                      </div>
+                      <div class="col-md-6">
+                        <input class="form-control" type="number" name="date-input" placeholder="maxTemperatureType" v-model="maximumTemperature">
+                        <span class="help-block"></span>
+                      </div>
                     </div>
                   </div>
                 </div>
+
 
                 <div class="row">
                   <div class="form-group col-md-12 row">
                     <label class="col-md-1 col-form-label">subject</label>
                     <div class="col-md-11">
-                      <input class="form-control" id="text-input1" type="text" name="text-input" placeholder="Text" v-model="subject"><span class="help-block">This is a help text</span>
+                      <input class="form-control" id="text-input1" type="text" name="text-input" placeholder="subject" v-model="subject">
+                      <span class="help-block">This is a help text</span>
                     </div>
                   </div>
                 </div>
@@ -66,8 +86,8 @@
             <div class="card-footer">
               <!--<button class="btn btn-sm btn-info" > Submit</button>-->
               <div class="row justify-content-end">
-                <div class="mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-info" type="submit" v-on:click="scheduleSave()">submit</button>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="submit" v-on:click="scheduleSave()">submit</button>
                 </div>
               </div>
               <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
@@ -83,6 +103,8 @@
   </div>
 </template>
 <script>
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
 
   export default {
     created() {
@@ -92,8 +114,9 @@
       this.$store.commit('changeSubtitle', {name: 'Form'})
 
     },
-
-    data() {
+    components: {
+      DatePicker
+    }, data() {
       return {
         uuid: '',
         seq: '',
@@ -101,8 +124,21 @@
         subject: '',
         content: '',
         todayWeatherCode: '',
+        minTemperatureType: '',
         minimumTemperature: '',
+        maxTemperatureType: '',
         maximumTemperature: '',
+        weatherOptions: [
+          {value: '', text: '선택하세요'},
+          {value: 'sunny', text: '맑음'},
+          {value: 'cloudy', text: '흐림'}
+        ],
+        temperatureOption: [
+          {value: '', text: '선택하세요'},
+          {value: 'plusDegrees', text: '영상'},
+          {value: 'minusDegrees', text: '영하'}
+        ],
+
       }
     },
     mounted() {

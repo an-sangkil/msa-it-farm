@@ -2,6 +2,12 @@ package com.skan.farm.model;
 
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -71,6 +77,10 @@ public class DiseaseTreatment implements Serializable {
 
 
 	/** 치료_날짜. */
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate cureDate;
 
 	/** 질병 명. */
@@ -86,6 +96,10 @@ public class DiseaseTreatment implements Serializable {
 	private String injectionMethod;
 
 	/** 휴약 기간 만료일. */
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate withdrawalPeriodExpirationDate;
 
 	/** 주사침분실여부. */
@@ -94,14 +108,21 @@ public class DiseaseTreatment implements Serializable {
 	/**
 	 * 생성일시.
 	 */
-	@DateTimeFormat
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@CreationTimestamp
+	@Column(updatable = false)
 	private LocalDateTime createdTime;
 
 	/**
 	 * 수정시간.
 	 */
-	@DateTimeFormat
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@UpdateTimestamp
 	private LocalDateTime modifiedTime;
 

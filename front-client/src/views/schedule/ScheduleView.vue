@@ -64,10 +64,17 @@
             </div>
             <div class="card-footer">
               <!--<button class="btn btn-sm btn-info" > Submit</button>-->
-              <div class="row justify-content-end">
-                <div class="mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-info" type="submit" v-on:click="scheduleModify()">modify</button>
 
+
+
+              <div class="row justify-content-end">
+
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info"  type="submit" v-on:click="scheduleModify()">modify</button>
+                </div>
+
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info"  type="button" v-on:click="scheduleList()">list</button>
                 </div>
               </div>
               <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
@@ -135,6 +142,9 @@
       },
       scheduleModify: function () {
         this.$router.push(`/schedule/scheduleForm?uuid=${this.uuid}`)
+      },
+      scheduleList: function () {
+        this.$router.push(`/schedule/scheduleList`)
       }
 
 

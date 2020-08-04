@@ -24,8 +24,7 @@
               <table class="table table-responsive-sm">
                 <thead>
                 <tr>
-                  <th>entityNumber</th>
-                  <th>identityNumber</th>
+                  <th>entityNumber/identityNumber</th>
                   <th>roomNumber</th>
                   <th>calvesCount</th>
                   <th>calvesDate</th>
@@ -41,10 +40,11 @@
                 <tr v-for="item in this.$store.state.pagingData"
                     v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
                   <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
-                    <a href="javascript:void (0);">{{ item.localBeefManagementPK.entityManagementNumber}}</a>
-                  </td>
-                  <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
-                    <a href="javascript:void (0);">{{ item.localBeefManagementPK.entityIdentificationNumber}}</a>
+                    <a href="javascript:void (0);">
+                      {{ item.localBeefManagementPK.entityManagementNumber}}
+                      -
+                      {{ item.localBeefManagementPK.entityIdentificationNumber}}
+                    </a>
                   </td>
                   <td>{{ item.roomNumber == null ? '-':item.roomNumber}}</td>
                   <td>{{ item.calvesCount}}</td>

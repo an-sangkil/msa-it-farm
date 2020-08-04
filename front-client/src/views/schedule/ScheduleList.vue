@@ -30,7 +30,9 @@
             <div class="card-header"><i class="fa fa-align-justify"></i>
               <input class="form-control" id="uuid" type="hidden" name="text-input" v-model="item.uuid">
               <input class="form-control" id="seq" type="hidden" name="text-input" v-model="item.seq">
-              <h2 style="cursor: pointer" v-on:click="scheduleDetail(item.uuid,item.seq)">{{item.standardDate}} ({{item.seq}})</h2>
+              <h2 style="cursor: pointer" v-on:click="scheduleDetail(item.uuid,item.seq)">
+                <a href="javascript:return false;">{{item.standardDate}} ({{item.seq}})</a>
+              </h2>
             </div>
             <div class="card-body">
 
@@ -41,12 +43,12 @@
                     <p class="form-control-static">{{item.standardDate}}</p>
                   </div>
                 </div>
-                <div class="form-group col-md-4 row" style="visibility: hidden">
+                <!--<div class="form-group col-md-4 row" style="visibility: hidden">
                   <label class="col-md-3 col-form-label"  >seq</label>
                   <div class="col-md-9">
                     <p class="form-control-static">{{item.seq}}</p>
                   </div>
-                </div>
+                </div>-->
                 <div class="form-group col-md-4 row" >
                   <label class="col-md-3 col-form-label" >createdTime</label>
                   <div class="col-md-9">

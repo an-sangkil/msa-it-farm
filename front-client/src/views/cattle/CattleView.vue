@@ -123,7 +123,6 @@
                   <th>expectedDateConfinement</th>
                   <th>calvingDate</th>
                   <th>spermNo</th>
-                  <th>calvingDate</th>
                   <th>nothingSpecial</th>
                   <th>child</th>
                 </tr>
@@ -141,7 +140,6 @@
                   <td>{{item.expectedDateConfinement}}</td>
                   <td>{{item.calvingDate}}</td>
                   <td>{{item.spermNo}}</td>
-                  <td>{{item.calvingDate}}</td>
                   <td>{{item.nothingSpecial}}</td>
                   <td>{{item.entityIdentificationNumberChild}}-{{item.entityManagementNumberChild}}</td>
                 </tr>
@@ -181,22 +179,25 @@
                   <th>treatmentDetails</th>
                   <th>injectionMethod</th>
                   <th>withdrawalPeriodExpirationDate</th>
-                  <th>needleLoseYn</th>
+                  <!--<th>needleLoseYn</th>-->
 
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr v-if:this.calvesManagementSet!=null v-for="item in this.diseaseTreatmentSet"
-                    v-bind:key="item.diseaseTreatmentPK.entityManagementNumber+item.diseaseTreatmentPK.entityIdentificationNumber+item.diseaseTreatmentPK.seq">
-                  <td v-on:click="calvesDetail(item.diseaseTreatmentPK.entityManagementNumber,item.diseaseTreatmentPK.entityIdentificationNumber,item.diseaseTreatmentPK.seq)">{{item.diseaseTreatmentPK.seq}}</td>
+                <tr v-for="item in this.diseaseTreatmentSet"
+                    v-bind:key="item.diseaseTreatmentPK.entityManagementNumber+item.diseaseTreatmentPK.entityIdentificationNumber+item.diseaseTreatmentPK.seq"
+                    v-on:click="diseaseDetail(item.diseaseTreatmentPK.entityManagementNumber,item.diseaseTreatmentPK.entityIdentificationNumber,item.diseaseTreatmentPK.seq)"
+                    style="cursor: pointer"
+                >
+                  <td>{{item.diseaseTreatmentPK.seq}}</td>
                   <td>{{item.cureDate}}</td>
                   <td>{{item.diseaseName}}</td>
                   <td>{{item.medicationName}}</td>
                   <td>{{item.treatmentDetails}}</td>
                   <td>{{item.injectionMethod}}</td>
                   <td>{{item.withdrawalPeriodExpirationDate}}</td>
-                  <td>{{item.needleLoseYn}}</td>
+                  <!--<td>{{item.needleLoseYn}}</td>-->
                 </tr>
                 </tbody>
               </table>
@@ -330,8 +331,11 @@
             </div>
             <div class="card-footer">
               <div class="row justify-content-end">
-                <div class="mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-info" type="button" v-on:click="cattleModifyForm()">modify</button>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info"  type="button" v-on:click="cattleModifyForm()">modify</button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info"  type="button" v-on:click="cattleList()">list</button>
                 </div>
               </div>
 
@@ -343,19 +347,19 @@
 
 
         <!-- calves /.modal-->
-        <b-modal ref="calves-modal" id="calvesModal" size="xl" centered title="calves form" @hidden="calvesResetModal">
+        <b-modal ref="calves-modal" id="calvesModal" size="xl" centered title="calves form" @hidden="calvesResetModal" @ok="calvesSave">
           <b-container>
             <div class="row">
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">years</label>
                 <div class="col-md-9">
-                  <b-form-input placeholder="Enter your years" type="number" v-model="calvesManagement.years"></b-form-input>
+                  <date-picker v-model="calvesManagement.years" value-type="format" format="YYYY" type="year" placeholder="Select year"></date-picker>
                 </div>
               </div>
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">fertilizationDate</label>
                 <div class="col-md-9">
-                  <date-picker v-model="calvesManagement.fertilizationDate" format="YYYY-MM-DD HH:MM:SS"  value-type="YYYY-MM-DD HH:MM:SS"  lang="en" ></date-picker>
+                  <date-picker v-model="calvesManagement.fertilizationDate" format="YYYY-MM-DD HH:MM:SS" value-type="YYYY-MM-DD HH:MM:SS" lang="en"></date-picker>
                   <!--<b-form-input placeholder="Enter your fertilizationDate" type="text" v-model="calvesManagement.fertilizationDate"></b-form-input>-->
                 </div>
               </div>
@@ -364,7 +368,7 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">calvingDate</label>
                 <div class="col-md-9">
-                  <date-picker v-model="calvesManagement.calvingDate" format="YYYY-MM-DD HH:MM:SS"  value-type="YYYY-MM-DD HH:MM:SS"  lang="en" ></date-picker>
+                  <date-picker v-model="calvesManagement.calvingDate" format="YYYY-MM-DD HH:MM:SS" value-type="YYYY-MM-DD HH:MM:SS" lang="en"></date-picker>
                   <!--<b-form-input placeholder="Enter your calvingDate" type="date" v-model="calvesManagement.calvingDate"></b-form-input>-->
                 </div>
               </div>
@@ -392,13 +396,13 @@
           </b-container>
         </b-modal>
 
-        <b-modal ref="disease-modal" id="diseaseModal" size="xl" centered title="disease form" @hidden="diseaseResetModal">
+        <b-modal ref="disease-modal" id="diseaseModal" size="xl" centered title="disease form" @hidden="diseaseResetModal" @ok="diseaseSave">
           <b-container>
             <div class="row">
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">cureDate</label>
                 <div class="col-md-9">
-                  <b-form-input placeholder="Enter your cureDate" type="date" v-model="diseaseTreatment.cureDate"></b-form-input>
+                  <date-picker v-model="diseaseTreatment.cureDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select date"></date-picker>
                 </div>
               </div>
               <div class="form-group col-md-6 row">
@@ -433,7 +437,7 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">withdrawalPeriodExpirationDate</label>
                 <div class="col-md-9">
-                  <b-form-input placeholder="Enter your withdrawalPeriodExpirationDate" type="text" v-model="diseaseTreatment.withdrawalPeriodExpirationDate"></b-form-input>
+                  <date-picker v-model="diseaseTreatment.withdrawalPeriodExpirationDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Enter your withdrawalPeriodExpirationDate"></date-picker>
                 </div>
               </div>
             </div>
@@ -458,7 +462,7 @@
       this.$store.commit('changeSubtitle', {name: 'View'})
 
     },
-    components: { DatePicker },
+    components: {DatePicker},
     data() {
       return {
         entityManagementNumber: ''
@@ -491,8 +495,8 @@
 
         , calvesManagementSet: []
         , diseaseTreatmentSet: []
-        , calvesManagement: {}
-        , diseaseTreatment: {}
+        , calvesManagement: {calvesManagementPK: {}}
+        , diseaseTreatment: {diseaseTreatmentPK: {}}
         , time1: '2021-01-01 00:00:00'
       }
     },
@@ -539,6 +543,31 @@
       }
       , calvesSave: function () {
 
+        this.calvesManagement.calvesManagementPK.entityManagementNumber = this.entityManagementNumber
+        this.calvesManagement.calvesManagementPK.entityIdentificationNumber = this.entityIdentificationNumber
+
+        this.$http.put(this.$store.state.host + '/cattle/childbirth/save', this.calvesManagement)
+          .then((res) => {
+
+            console.log(res)
+
+            if (res.data.status === "SUCCESS") {
+
+              this.$http.get(this.$store.state.host + '/cattle/childbirth/list', {
+                params: {
+                  entityManagementNumber: this.entityManagementNumber,
+                  entityIdentificationNumber: this.entityIdentificationNumber
+                }
+              }).then(({data}) => {
+                this.calvesManagementSet = data.detail.data
+              })
+
+            }
+
+          }).catch((error) => {
+          console.log(error)
+        })
+
       }
       , calvesDetail: function (entityNumber, identityNumber, seq) {
 
@@ -556,13 +585,59 @@
 
 
         })
+      }, diseaseSave() {
 
-      }, diseaseDetail: function () {
+        this.diseaseTreatment.diseaseTreatmentPK.entityManagementNumber = this.entityManagementNumber
+        this.diseaseTreatment.diseaseTreatmentPK.entityIdentificationNumber = this.entityIdentificationNumber
 
-      }, calvesResetModal () {
-        this.calvesManagement = {}
+        this.$http.put(this.$store.state.host + '/cattle/disease_treatment/save', this.diseaseTreatment)
+          .then((res) => {
+
+            if (res.data.status === "SUCCESS") {
+
+              this.$http.get(this.$store.state.host + '/cattle/disease_treatment/list', {
+                params: {
+                  entityManagementNumber: this.entityManagementNumber,
+                  entityIdentificationNumber: this.entityIdentificationNumber
+                }
+              }).then(({data}) => {
+                console.log('data =', data)
+                if (data.status === "SUCCESS") {
+                  this.diseaseTreatmentSet = data.detail.data
+                }
+
+              })
+
+            }
+
+          }).catch((error) => {
+          console.log(error)
+        })
+
+      }, diseaseDetail: function (entityNumber, identityNumber, seq) {
+
+        this.$http.get(this.$store.state.host + '/cattle/disease_treatment/detail', {
+          params: {
+            entityManagementNumber: entityNumber,
+            entityIdentificationNumber: identityNumber,
+            seq: seq
+          }
+        }).then(({data}) => {
+
+          if (data.status === 'SUCCESS') {
+
+            debugger
+            this.diseaseTreatment = data.detail.data
+            this.$refs['disease-modal'].show()
+          }
+
+        })
+      }, cattleList() {
+        this.$router.go(-1)
+      }, calvesResetModal() {
+        this.calvesManagement = {calvesManagementPK: {}}
       }, diseaseResetModal() {
-        this.diseaseTreatment = {}
+        this.diseaseTreatment = {diseaseTreatmentPK: {}}
       }
 
     }

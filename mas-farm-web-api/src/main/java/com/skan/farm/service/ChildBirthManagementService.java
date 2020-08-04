@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 
@@ -65,13 +66,15 @@ public class ChildBirthManagementService {
         //CalvesManagementJpaRepository calvesManagementJpaRepository = applicationContext.getBean(CalvesManagementJpaRepository.class);
         //CalvesManagementJooqRepository calvesManagementJooqRepository = applicationContext.getBean(CalvesManagementJooqRepository.class);
 
-        var lastCount = calvesManagementJooqRepository.findByLastCount(entityId, identityId);
-        var fertilizationIndex = calvesManagementJooqRepository.findByFertilizationIndex(entityId, identityId);
+        if (StringUtils.isEmpty(calvesManagement.getCalvesManagementPK().getSeq())) {
+            var lastCount = calvesManagementJooqRepository.findByLastCount(entityId, identityId);
+            var fertilizationIndex = calvesManagementJooqRepository.findByFertilizationIndex(entityId, identityId);
 
-        calvesManagement.setFertilizationIndex((short) (fertilizationIndex+1));
-        calvesManagement.setCalvesManagementPK(new CalvesManagement.CalvesManagementPK(entityId, identityId, (short) (lastCount + 1)));
+            calvesManagement.setFertilizationIndex((short) (fertilizationIndex+1));
+            calvesManagement.setCalvesManagementPK(new CalvesManagement.CalvesManagementPK(entityId, identityId, (short) (lastCount + 1)));
+        }
+
         calvesManagement.setExpectedDateConfinement(this.expectedDateConfinementCalculate(calvesManagement.getFertilizationDate()));
-
         calvesManagementJpaRepository.save(calvesManagement);
 
     }
