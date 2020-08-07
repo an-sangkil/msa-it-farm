@@ -1,10 +1,10 @@
 package com.skan.farm.controller;
 
-import com.skan.farm.model.Schedule;
+import com.skan.farm.model.Diary;
 import com.skan.farm.response.Error;
 import com.skan.farm.response.Response;
 import com.skan.farm.response.Success;
-import com.skan.farm.service.ScheduleService;
+import com.skan.farm.service.DiaryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
@@ -34,14 +34,14 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @Slf4j
-public class ScheduleController {
+public class DiaryController {
 
-    private final ScheduleService scheduleService;
+    private final DiaryService diaryService;
 
-    @GetMapping("/schedule/calender")
-    public void scheduleCalender(HttpServletRequest httpServletRequest) {
+    @GetMapping("/diary/calender")
+    public void diaryCalender(HttpServletRequest httpServletRequest) {
 
-        Response<List<Schedule>> response = new Response<>();
+        Response<List<Diary>> response = new Response<>();
 
         try {
 
@@ -56,13 +56,13 @@ public class ScheduleController {
                 endDate = YearMonth.from(startDate).atEndOfMonth();
             }
 
-            List<Schedule> schedules = scheduleService.scheduleSearch(startDate, endDate);
+            List<Diary> diaries = diaryService.diarySearch(startDate, endDate);
 
-            response.setDetail(new Success<>(schedules));
+            response.setDetail(new Success<>(diaries));
             response.setStatus(Response.ResponseCode.SUCCESS);
 
         } catch (Exception e) {
-            log.debug("schedule calender error =", e);
+            log.debug("diary calender error =", e);
             response.setMessage(e.getMessage());
             response.setStatus(Response.ResponseCode.ERROR);
             response.setDetail(new Error<>());
@@ -71,10 +71,10 @@ public class ScheduleController {
     }
 
 
-    @GetMapping("/schedule/list")
-    public Response<List<Schedule>> scheduleList(HttpServletRequest httpServletRequest) {
+    @GetMapping("/diary/list")
+    public Response<List<Diary>> diaryList(HttpServletRequest httpServletRequest) {
 
-        Response<List<Schedule>> response = new Response<>();
+        Response<List<Diary>> response = new Response<>();
         try {
             String paramStartDate = httpServletRequest.getParameter("start_date");
             String paramEndDate = httpServletRequest.getParameter("end_date");
@@ -82,13 +82,13 @@ public class ScheduleController {
             String startDate = Optional.ofNullable(paramStartDate).orElse(LocalDate.now().minusWeeks(6).toString());
             String endDate = Optional.ofNullable(paramEndDate).orElse(LocalDate.now().plusMonths(6).toString());
 
-            List<Schedule> schedules = scheduleService.scheduleSearch(LocalDate.parse(startDate), LocalDate.parse(endDate));
+            List<Diary> diaries = diaryService.diarySearch(LocalDate.parse(startDate), LocalDate.parse(endDate));
 
-            response.setDetail(new Success<>(schedules));
+            response.setDetail(new Success<>(diaries));
             response.setStatus(Response.ResponseCode.SUCCESS);
 
         } catch (Exception e) {
-            log.debug("schedule calender error =", e);
+            log.debug("diary calender error =", e);
             response.setMessage(e.getMessage());
             response.setStatus(Response.ResponseCode.ERROR);
             response.setDetail(new Error<>());
@@ -96,15 +96,15 @@ public class ScheduleController {
         return response;
     }
 
-    @PutMapping("/schedule/save")
-    public Response<Schedule> scheduleSave(@Valid @RequestBody Schedule requestSchedule) {
-        Response<Schedule> response = new Response<>();
+    @PutMapping("/diary/save")
+    public Response<Diary> diarySave(@Valid @RequestBody Diary requestDiary) {
+        Response<Diary> response = new Response<>();
         try {
-            scheduleService.scheduleSave(requestSchedule);
-            response.setDetail(new Success<>(requestSchedule));
+            diaryService.diarySave(requestDiary);
+            response.setDetail(new Success<>(requestDiary));
             response.setStatus(Response.ResponseCode.SUCCESS);
         } catch (Exception e) {
-            log.debug("schedule save error =", e);
+            log.debug("diary save error =", e);
             response.setMessage(e.getMessage());
             response.setStatus(Response.ResponseCode.ERROR);
             response.setDetail(new Error<>());
@@ -112,18 +112,18 @@ public class ScheduleController {
         return response;
     }
 
-    @GetMapping("/schedule/detail")
-    public Response<Schedule> scheduleDetail(HttpServletRequest request) {
-        Response<Schedule> response = new Response<>();
+    @GetMapping("/diary/detail")
+    public Response<Diary> diaryDetail(HttpServletRequest request) {
+        Response<Diary> response = new Response<>();
         try {
             String uuid = request.getParameter("uuid");
             String seq = request.getParameter("seq");
-            Schedule schedule = scheduleService.findOne(uuid, seq);
+            Diary diary = diaryService.findOne(uuid, seq);
 
-            response.setDetail(new Success<>(schedule));
+            response.setDetail(new Success<>(diary));
             response.setStatus(Response.ResponseCode.SUCCESS);
         } catch (Exception e) {
-            log.debug("schedule save error =", e);
+            log.debug("diary save error =", e);
             response.setMessage(e.getMessage());
             response.setStatus(Response.ResponseCode.ERROR);
             response.setDetail(new Error<>());
@@ -131,16 +131,16 @@ public class ScheduleController {
         return response;
     }
 
-    @GetMapping("/schedule/delete")
-    public Response<String> scheduleDelete(HttpServletRequest servletRequest) {
+    @GetMapping("/diary/delete")
+    public Response<String> diaryDelete(HttpServletRequest servletRequest) {
         Response<String> response = new Response<>();
         try {
             String uuid = servletRequest.getParameter("uuid");
-            scheduleService.scheduleDelete(uuid);
+            diaryService.diaryDelete(uuid);
 
             response.setStatus(Response.ResponseCode.SUCCESS);
         } catch (Exception e) {
-            log.debug("schedule delete error =", e);
+            log.debug("diary delete error =", e);
             response.setMessage(e.getMessage());
             response.setStatus(Response.ResponseCode.ERROR);
             response.setDetail(new Error<>());

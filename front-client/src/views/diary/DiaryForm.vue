@@ -164,7 +164,7 @@
 
         console.log(data)
 
-        this.$http.put(this.$store.state.host + '/schedule/save', data, {
+        this.$http.put(this.$store.state.host + '/diary/save', data, {
           headers: {"Content-Type": "application/json"}
         })
           .then((res) => {
@@ -176,7 +176,7 @@
 
               this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
 
-              let actionURL = `/schedule/scheduleDetail?uuid=${uuid}&seq=${seq}`
+              let actionURL = `/diary/diaryDetail?uuid=${uuid}&seq=${seq}`
               this.$router.push(actionURL)
 
             }
@@ -187,7 +187,7 @@
 
 
       }, scheduleDetailView: function () {
-        let actionURL = `${this.$store.state.host}/schedule/detail?`
+        let actionURL = `${this.$store.state.host}/diary/detail?`
 
         console.log(actionURL)
         this.$http.get(actionURL, {

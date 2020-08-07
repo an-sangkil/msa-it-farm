@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS address_management;
 DROP TABLE IF EXISTS calve_management;
 DROP TABLE IF EXISTS common_code;
 DROP TABLE IF EXISTS disease_treatment;
-DROP TABLE IF EXISTS schedule;
+DROP TABLE IF EXISTS diary;
 DROP TABLE IF EXISTS group_member;
 DROP TABLE IF EXISTS group_management;
 DROP TABLE IF EXISTS hm_cattle_buy_info;
@@ -285,7 +285,7 @@ CREATE TABLE phone
 ) WITHOUT OIDS;
 
 
-CREATE TABLE schedule
+CREATE TABLE diary
 (
 	-- 일정관리번호
 	sch_mgt_no bigint NOT NULL,
@@ -406,7 +406,7 @@ ALTER TABLE group_member
 ;
 
 
-ALTER TABLE schedule
+ALTER TABLE diary
 	ADD FOREIGN KEY (group_no, user_id)
 	REFERENCES group_member (group_no, user_id)
 	ON UPDATE RESTRICT
@@ -537,20 +537,20 @@ COMMENT ON COLUMN personal_code.code_comments IS '코드 상세';
 COMMENT ON COLUMN personal_code.created_time IS '생성일시';
 COMMENT ON COLUMN phone.management_number IS '관리 번호';
 COMMENT ON COLUMN phone.user_id IS '사용자 아이디';
-COMMENT ON COLUMN schedule.sch_mgt_no IS '일정관리번호';
-COMMENT ON COLUMN schedule.sch_seq IS '같은날의 순번';
-COMMENT ON COLUMN schedule.sch_subject IS '제목';
-COMMENT ON COLUMN schedule.std_date IS '기준날짜
+COMMENT ON COLUMN diary.sch_mgt_no IS '일정관리번호';
+COMMENT ON COLUMN diary.sch_seq IS '같은날의 순번';
+COMMENT ON COLUMN diary.sch_subject IS '제목';
+COMMENT ON COLUMN diary.std_date IS '기준날짜
 ';
-COMMENT ON COLUMN schedule.today_weather_code IS '오늘 날씨 (''맑음......'')';
-COMMENT ON COLUMN schedule.min_temperature IS '최저 기온
+COMMENT ON COLUMN diary.today_weather_code IS '오늘 날씨 (''맑음......'')';
+COMMENT ON COLUMN diary.min_temperature IS '최저 기온
 ';
-COMMENT ON COLUMN schedule.max_temperature IS '최고온도';
-COMMENT ON COLUMN schedule.create_time IS '생성시간';
-COMMENT ON COLUMN schedule.modify_time IS '수정시간';
-COMMENT ON COLUMN schedule.public_yn IS '공개 여부 ''Y'' : 공개  ''N'' 비공개';
-COMMENT ON COLUMN schedule.group_no IS '그룹번호';
-COMMENT ON COLUMN schedule.user_id IS '사용자 아이디';
+COMMENT ON COLUMN diary.max_temperature IS '최고온도';
+COMMENT ON COLUMN diary.create_time IS '생성시간';
+COMMENT ON COLUMN diary.modify_time IS '수정시간';
+COMMENT ON COLUMN diary.public_yn IS '공개 여부 ''Y'' : 공개  ''N'' 비공개';
+COMMENT ON COLUMN diary.group_no IS '그룹번호';
+COMMENT ON COLUMN diary.user_id IS '사용자 아이디';
 COMMENT ON COLUMN users.uuid IS 'uuid
 ';
 COMMENT ON COLUMN users.user_id IS '사용자 아이디';

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
  * @since 2020-07-15
  */
-class ScheduleControllerTest {
+class DiaryControllerTest {
 
     @Test
     void scheduleSearch() {

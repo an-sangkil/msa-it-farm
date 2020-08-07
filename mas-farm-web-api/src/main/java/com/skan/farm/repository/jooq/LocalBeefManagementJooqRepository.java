@@ -160,7 +160,7 @@ public class LocalBeefManagementJooqRepository {
                     if ( stringObjectMap.get("calves_information") != null) {
                         String[] calvesInformation = ((String) stringObjectMap.get("calves_information")).split("@@");
                         localBeefManagement.setCalvesCount(calvesInformation[0]+"/"+calvesInformation[1]);
-                        localBeefManagement.setExpectedDateConfinement(LocalDateTime.parse(calvesInformation[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                        localBeefManagement.setExpectedDateChildbirth(LocalDateTime.parse(calvesInformation[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                     }
 
                     if (localBeefManagement.getBirthDay() != null) {

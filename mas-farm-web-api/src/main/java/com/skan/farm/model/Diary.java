@@ -31,10 +31,10 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Schedule implements Serializable {
+public class Diary implements Serializable {
 
     @Builder
-    public Schedule(String uuid, Short seq, LocalDate standardDate, String subject, String content, String todayWeatherCode, Short minimumTemperature, Short maximumTemperature, String publicYn) {
+    public Diary(String uuid, Short seq, LocalDate standardDate, String subject, String content, String todayWeatherCode, Short minimumTemperature, Short maximumTemperature, String publicYn) {
         this.uuid = uuid;
         this.seq = seq;
         this.standardDate = standardDate;

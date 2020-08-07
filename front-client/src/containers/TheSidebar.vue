@@ -20,7 +20,7 @@
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-drop1"></use>
         </svg>Colors</a></li>
-      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/schedule/scheduleList">
+      <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="/diary/diaryList">
         <svg class="c-sidebar-nav-icon">
           <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
         </svg>Typography</a></li>

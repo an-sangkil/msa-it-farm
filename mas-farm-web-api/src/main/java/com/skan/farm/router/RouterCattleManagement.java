@@ -28,6 +28,7 @@ import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +99,11 @@ public class RouterCattleManagement {
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
 
                 LocalBeefManagement localBeefManagement = cattleManagementService.findOne(entityId, identityId);
+
+                if (localBeefManagement.getBirthDay() != null) {
+                    Period period = Period.between(localBeefManagement.getBirthDay(),LocalDate.now());
+                    localBeefManagement.setNumberOfMonth(String.valueOf(period.getMonths()));
+                }
 
                 response.setDetail(new Success<>(localBeefManagement));
                 response.setStatus(Response.ResponseCode.SUCCESS);

@@ -141,7 +141,8 @@ public class LocalBeefManagement implements Serializable {
 
     /** 분만예정일. */
     @Transient
-    private LocalDateTime expectedDateConfinement;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime expectedDateChildbirth;
 
 
 

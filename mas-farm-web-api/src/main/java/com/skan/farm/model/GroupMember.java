@@ -23,13 +23,13 @@ public class GroupMember implements Serializable {
 	private String userId;
 
 	/** 일정관리 테이블 목록. */
-	private Set<Schedule> scheduleSet;
+	private Set<Diary> diarySet;
 
 	/**
 	 * 생성자.
 	 */
 	public GroupMember() {
-		this.scheduleSet = new HashSet<Schedule>();
+		this.diarySet = new HashSet<Diary>();
 	}
 
 	/**
@@ -73,21 +73,21 @@ public class GroupMember implements Serializable {
 	/**
 	 * 일정관리 테이블 목록을 설정합니다..
 	 * 
-	 * @param scheduleSet
+	 * @param diarySet
 	 *            일정관리 테이블 목록
 	 */
-	public void setScheduleSet(Set<Schedule> scheduleSet) {
-		this.scheduleSet = scheduleSet;
+	public void setDiarySet(Set<Diary> diarySet) {
+		this.diarySet = diarySet;
 	}
 
 	/**
 	 * 일정관리 테이블를 추가합니다..
 	 * 
-	 * @param schedule
+	 * @param diary
 	 *            일정관리 테이블
 	 */
-	public void addSchedule(Schedule schedule) {
-		this.scheduleSet.add(schedule);
+	public void addSchedule(Diary diary) {
+		this.diarySet.add(diary);
 	}
 
 	/**
@@ -95,8 +95,8 @@ public class GroupMember implements Serializable {
 	 * 
 	 * @return 일정관리 테이블 목록
 	 */
-	public Set<Schedule> getScheduleSet() {
-		return this.scheduleSet;
+	public Set<Diary> getDiarySet() {
+		return this.diarySet;
 	}
 
 	/**

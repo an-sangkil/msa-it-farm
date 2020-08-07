@@ -69,11 +69,26 @@
                   </div>
                 </div>
 
+                <div class="row">
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">genders</label>
+                    <div class="col-md-9 col-form-label">
+                      <p class="form-control-static">{{gender}}</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label">sellYn</label>
+                    <div class="col-md-9">
+                      <p class="form-control-static">{{sellYn}}</p>
+                    </div>
+                  </div>
+                </div>
 
                 <div class="row">
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">genders</label>
+                    <label class="col-md-3 col-form-label">number of month</label>
                     <div class="col-md-9 col-form-label">
                       <p class="form-control-static">{{gender}}</p>
                     </div>

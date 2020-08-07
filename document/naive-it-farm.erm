@@ -4066,7 +4066,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>schedule</physical_name>
+			<physical_name>diary</physical_name>
 			<logical_name>일정관리 테이블</logical_name>
 			<description></description>
 			<constraint></constraint>

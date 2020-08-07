@@ -8,8 +8,70 @@
                      header
             </div> -->
             <div class="card-body">
+              <b-row class="form-group">
+                <b-col cols="12" sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-default">number:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="input-default" placeholder="Enter your name"></b-form-input>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-number">number:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="input-number" placeholder="Enter your name"></b-form-input>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col cols="12" sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-number2">number2:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="input-number2" placeholder="Enter your name"></b-form-input>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+
+              <b-row class="form-group" cols="12">
+                <b-col sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-default4">default4:</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="input-default4" placeholder="Enter your name"></b-form-input>
+                    </b-col>
+                  </b-row>
+                </b-col>
+
+              </b-row>
             </div>
+            <div class="card-footer">
+
+              <div class="row justify-content-end">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <b-button block variant="outline-info" type="button" @click="">search</b-button>
+                </div>
+
+              </div>
+
+              <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
+            </div>
+
           </div>
+
+
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
@@ -27,7 +89,7 @@
                   <th>entityNumber/identityNumber</th>
                   <th>roomNumber</th>
                   <th>calvesCount</th>
-                  <th>calvesDate</th>
+                  <th>expectedDateChildbirth</th>
                   <th>gender</th>
                   <th>birthDate</th>
                   <th>number of month</th>
@@ -48,7 +110,7 @@
                   </td>
                   <td>{{ item.roomNumber == null ? '-':item.roomNumber}}</td>
                   <td>{{ item.calvesCount}}</td>
-                  <td>{{ item.expectedDateConfinement }}</td>
+                  <td>{{ item.expectedDateChildbirth }}</td>
                   <td>{{ item.gender }}</td>
                   <td>{{ item.birthDay }}</td>
                   <td>{{ item.numberOfMonth}}</td>
@@ -128,7 +190,7 @@
       },
       pagingMove: function (currentPage) {
 
-        let actionUrl = '/cattle/cattle_management_list?page=' + currentPage+'&size=20';
+        let actionUrl = '/cattle/cattle_management_list?page=' + currentPage + '&size=20';
         this.$store.dispatch('pagingAction', {actionUrl: actionUrl})
       },
       detailView: function (entityNumber, identityNumber) {

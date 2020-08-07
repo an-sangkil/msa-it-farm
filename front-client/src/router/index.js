@@ -10,9 +10,9 @@ const Dashboard = () => import('../views/Dashboard')
 import CattleList from '../views/cattle/CattleList'
 import CattleForm from '../views/cattle/CattleForm'
 import CattleView from '../views/cattle/CattleView'
-import ScheduleList from '../views/schedule/ScheduleList'
-import ScheduleForm from '../views/schedule/ScheduleForm'
-import ScheduleView from '../views/schedule/ScheduleView'
+import DiaryList from '../views/diary/DiaryList'
+import DiaryForm from '../views/diary/DiaryForm'
+import DiaryView from '../views/diary/DiaryView'
 
 // Views - Pages
 import NotFound from "../components/common/NotFound";
@@ -75,9 +75,9 @@ const routes = [
         ]
       },
       {
-        path: '/schedule',
-        redirect: '/schedule/scheduleList',
-        name: 'Schedule',
+        path: '/diary',
+        redirect: '/diary/diaryList',
+        name: 'Diary',
         component: {
           render(c) {
             return c('router-view')
@@ -85,19 +85,19 @@ const routes = [
         },
         children: [
           {
-            path: 'scheduleList',
-            name: 'ScheduleList',
-            component: ScheduleList
+            path: 'diaryList',
+            name: 'DiaryList',
+            component: DiaryList
           },
           {
-            path: 'scheduleForm',
-            name: 'ScheduleForm',
-            component: ScheduleForm
+            path: 'diaryForm',
+            name: 'DiaryForm',
+            component: DiaryForm
           },
           {
-            path: 'scheduleDetail',
-            name: 'ScheduleView',
-            component: ScheduleView
+            path: 'diaryDetail',
+            name: 'DiaryView',
+            component: DiaryView
           }
         ]
       },

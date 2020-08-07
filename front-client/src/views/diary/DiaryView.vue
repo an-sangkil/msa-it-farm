@@ -117,7 +117,7 @@
     computed: {},
     methods: {
       scheduleDetailView: function () {
-        let actionURL = `${this.$store.state.host}/schedule/detail?`
+        let actionURL = `${this.$store.state.host}/diary/detail?`
 
         console.log(actionURL)
         this.$http.get(actionURL, {
@@ -141,10 +141,10 @@
         })
       },
       scheduleModify: function () {
-        this.$router.push(`/schedule/scheduleForm?uuid=${this.uuid}`)
+        this.$router.push(`/diary/diaryForm?uuid=${this.uuid}`)
       },
       scheduleList: function () {
-        this.$router.push(`/schedule/scheduleList`)
+        this.$router.push(`/diary/diaryList`)
       }
 
 
