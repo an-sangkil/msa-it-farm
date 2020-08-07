@@ -11,7 +11,7 @@
 
             <div class="card-body">
               <div class="row align-items-center">
-                <b-container fluid>
+                <b-container fluid="">
                   <div class="col-md-12 row">
                     <!--<div class="mb-auto mb-xl-0">search period</div>-->
 
@@ -21,9 +21,10 @@
 
                       <button class="btn btn-outline-info dropdown-toggle" :class="{active:searchDateType.active_three_month}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">월별</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin: 0px;">
-                        <a class="dropdown-item" href="#" @click="diaryPeriodCalculation(1)">1월</a>
-                        <a class="dropdown-item" href="#" @click="diaryPeriodCalculation(2)">2월</a>
-                        <a class="dropdown-item" href="#" @click="diaryPeriodCalculation(3)">3월</a>
+                        <div v-for="value in 12">
+                          <a class="dropdown-item" href="#" @click="diaryPeriodCalculation(value)">{{value}}월</a>
+                        </div>
+
                       </div>
                       <button class="btn btn-outline-info" :class="{active:searchDateType.active_period_date}" type="button" @click="scheduleSearchTypeSelection('active_period_date')">기간선택</button>
 
@@ -171,16 +172,20 @@
         endDate: null,
         scheduleData: [],
         searchDateType: {
-          active_one_month: false,
+          active_one_month: true,
           active_two_month: false,
           active_three_month: false,
-          active_period_date: true,
+          active_period_date: false,
         },
-        periodForm: true,
+        periodForm: false,
         periodDate: [],
       }
     },
     mounted() {
+      let now = moment()
+      this.endDate = now.add(1, 'days').format('YYYY-MM-DD');
+      this.startDate = now.subtract(1, 'months').format('YYYY-MM-DD')
+
       this.diarySearch()
 
     },

@@ -11,15 +11,20 @@
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="cattleSave">
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label"><span style="color: red">*</span> entityNumber</label>
+                    <label class="col-md-3 col-form-label" for="entityIdentificationNumber1"><span style="color: #ff0000">*</span> identificationNumber</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="entityManagementNumber" type="number" name="entityManagementNumber" placeholder="Text" v-model="entityManagementNumber"  v-bind:readonly="isReadonly"><span class="help-block">This is a help text</span>
+                      <b-row>
+                        <b-col sm="3"><input class="form-control" id="entityIdentificationNumber1" type="number"  placeholder="Text" v-model="identityNumberOne"  v-bind:readonly="isReadonly" min="0" max="999"></b-col>
+                        <b-col sm="7"><input class="form-control" id="entityIdentificationNumber2" type="number"  placeholder="Text" v-model="identityNumberTwo"  v-bind:readonly="isReadonly" maxlength="8" min="0" max="99999999" v-on:focusout="entityManagementNumber=identityNumberTwo" ></b-col>
+                        <b-col sm="2"><input class="form-control" id="entityIdentificationNumber3" type="number"  placeholder="Text" v-model="identityNumberThree"  v-bind:readonly="isReadonly"  maxlength="1" min="0" max="9"></b-col>
+                      </b-row>
+                      <span class="help-block">This is a help text</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label"><span style="color: #ff0000">*</span> identificationNumber</label>
+                    <label class="col-md-3 col-form-label"><span style="color: red">*</span> entityNumber</label>
                     <div class="col-md-9">
-                      <input class="form-control" id="entityIdentificationNumber" type="number" name="entityIdentificationNumber" placeholder="Text" v-model="entityIdentificationNumber"  v-bind:readonly="isReadonly"><span class="help-block">This is a help text</span>
+                      <input class="form-control" id="entityManagementNumber" type="number" name="entityManagementNumber" placeholder="Text" v-model="entityManagementNumber" readonly><span class="help-block">This is a help text</span>
                     </div>
                   </div>
                 </div>
@@ -100,6 +105,21 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="form-group col-md-6 row">
+                    <label class="col-md-3 col-form-label" for="roomNumber">roomNumber</label>
+                    <div class="col-md-9">
+                      <b-input v-model="roomNumber" id="roomNumber"></b-input>
+                      <span class="help-block">Please enter a valid roomNumber</span>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 row">
+
+                  </div>
+                </div>
+
+
               </form>
 
             </div>
@@ -235,7 +255,10 @@
             <div class="card-footer">
               <div class="row justify-content-end">
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-info" type="submit" v-on:click="cattleSave($event)">submit</button>
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="$router.go(-1)">cancel</button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="cattleSave($event)">submit</button>
                 </div>
               </div>
             </div>
@@ -265,7 +288,12 @@
     },
     data() {
       return {
-        entityManagementNumber: ''
+
+        identityNumberOne : ''
+        , identityNumberTwo : ''
+        , identityNumberThree : ''
+
+        , entityManagementNumber: ''
         , entityIdentificationNumber: ''
         , parentPapaNo: ''
         , parentMomNo: ''
@@ -273,6 +301,7 @@
         , enterDate: ''
         , earTagDate: ''
         , castrationDate: ''
+        , roomNumber:''
         , gender: 'MALE'
         , sellYn: 'N'
         , cattleBuyInformation: {
@@ -303,6 +332,7 @@
       let entityIdentificationNumber =  this.$route.query.identityNumber
 
       console.log("asdasdsad",entityManagementNumber)
+
       if (entityManagementNumber !== undefined) {
 
         this.detail(entityManagementNumber,entityIdentificationNumber)
@@ -324,12 +354,13 @@
       },
       cattleSave: function (e) {
 
+        let data = this.dataGeneration()
+
         if (!this.validation()){
           console.log("여기?")
           return false;
         }
 
-        let data = this.dataGeneration()
         console.log(data)
 
         this.$http.put(this.$store.state.host + '/cattle/save', data)
@@ -349,6 +380,11 @@
 
       },
       dataGeneration: function () {
+
+        let identity = [this.identityNumberOne , this.identityNumberTwo, this.identityNumberThree]
+        this.entityIdentificationNumber = identity.join('')
+        this.entityManagementNumber = this.identityNumberTwo
+
         let data = JSON.stringify({
             localBeefManagementPK: {
               entityManagementNumber: this.entityManagementNumber
@@ -362,6 +398,7 @@
             , castrationDate: this.castrationDate
             , gender: this.gender
             , sellYn: this.sellYn
+            , roomNumber: this.roomNumber
             , cattleBuyInformation: {
               buyStoreName: this.cattleBuyInformation.buyStoreName
               , buyDate: this.cattleBuyInformation.buyDate
@@ -399,8 +436,13 @@
           console.log(res)
           let responseData = res.data.detail.data
 
-          this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
           this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
+          this.identityNumberOne = this.entityIdentificationNumber.substring(0,3)
+          this.identityNumberTwo = this.entityIdentificationNumber.substring(3,11)
+          this.identityNumberThree = this.entityIdentificationNumber.substring(11)
+
+          this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
+
           this.parentPapaNo = responseData.parentPapaNo
           this.parentMomNo = responseData.parentMomNo
           this.birthDay = responseData.birthDay
@@ -409,6 +451,7 @@
           this.castrationDate = responseData.castrationDate
           this.gender = responseData.gender
           this.sellYn = responseData.sellYn
+          this.roomNumber = responseData.roomNumber
 
           this.cattleBuyInformation = responseData.cattleBuyInformation
           this.cattleSellStoreInformation = responseData.cattleSellStoreInformation

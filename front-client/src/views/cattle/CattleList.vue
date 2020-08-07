@@ -8,34 +8,28 @@
                      header
             </div> -->
             <div class="card-body">
-              <b-row class="form-group">
+              <b-row class="form-group" cols="12" cols-sm="12">
                 <b-col cols="12" sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-default">number:</label>
+                      <label for="input-identityId">identityId:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="input-default" placeholder="Enter your name"></b-form-input>
+                      <b-form-input id="input-identityId"  type="number" placeholder="Enter your identityId" v-model="entityIdentificationNumber"></b-form-input>
                     </b-col>
                   </b-row>
                 </b-col>
                 <b-col cols="12" sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-number">number:</label>
+                      <label for="input-gender">gender:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="input-number" placeholder="Enter your name"></b-form-input>
-                    </b-col>
-                  </b-row>
-                </b-col>
-                <b-col cols="12" sm="4">
-                  <b-row>
-                    <b-col sm="2">
-                      <label for="input-number2">number2:</label>
-                    </b-col>
-                    <b-col sm="10">
-                      <b-form-input id="input-number2" placeholder="Enter your name"></b-form-input>
+                      <select class="form-control" id="input-gender"  v-model="gender">
+                        <option value="">ALL</option>
+                        <option value="M">Option Y</option>
+                        <option value="F">Option N</option>
+                      </select>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -45,32 +39,45 @@
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-default4">default4:</label>
+                      <label for="input-roomNumber">roomNumber</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="input-default4" placeholder="Enter your name"></b-form-input>
+                      <b-form-input id="input-roomNumber" placeholder="Enter your roomNumber" v-model="roomNumber"></b-form-input>
                     </b-col>
                   </b-row>
                 </b-col>
-
+                <b-col sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-numberOfMonth">number Of Month</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <b-form-input id="input-numberOfMonth" type="number" placeholder="Enter your numberOfMonth" v-model="numberOfMonth"></b-form-input>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-birthDate" >birthDate</label>
+                    </b-col>
+                    <b-col sm="10">
+                      <date-picker v-model="birthDate" value-type="format" format="YYYY-MM-DD" placeholder="Select date range" range></date-picker>
+                    </b-col>
+                  </b-row>
+                </b-col>
               </b-row>
             </div>
             <div class="card-footer">
-
               <div class="row justify-content-end">
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
                   <b-button block variant="outline-info" type="button" @click="">search</b-button>
                 </div>
-
               </div>
-
-              <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->
             </div>
-
           </div>
-
 
           <div class="card">
             <div class="card-header">
@@ -86,7 +93,8 @@
               <table class="table table-responsive-sm">
                 <thead>
                 <tr>
-                  <th>entityNumber/identityNumber</th>
+                  <th>identityNumber</th>
+                  <th>entityNumber</th>
                   <th>roomNumber</th>
                   <th>calvesCount</th>
                   <th>expectedDateChildbirth</th>
@@ -103,9 +111,12 @@
                     v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
                   <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
                     <a href="javascript:void (0);">
-                      {{ item.localBeefManagementPK.entityManagementNumber}}
-                      -
-                      {{ item.localBeefManagementPK.entityIdentificationNumber}}
+                      {{ `${item.localBeefManagementPK.entityIdentificationNumber.substring(0,3)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(3,7)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(7,11)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(11)}`}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="#">
+                      {{ `${item.localBeefManagementPK.entityManagementNumber.substring(0,4)}-${item.localBeefManagementPK.entityManagementNumber.substring(4,8)}`}}
                     </a>
                   </td>
                   <td>{{ item.roomNumber == null ? '-':item.roomNumber}}</td>
@@ -147,8 +158,15 @@
 <script>
 
   import PaginationUtils from '../../js/Pagination'
+  import DatePicker from 'vue2-datepicker';
+  import 'vue2-datepicker/index.css';
+  import moment from 'moment';
+
 
   export default {
+    components:{
+      DatePicker
+    },
     created() {
 
       this.$store.commit('changeHome', {name: 'Home'})
@@ -158,7 +176,14 @@
     },
 
     data() {
-      return {}
+      return {
+        entityIdentificationNumber: '',
+        gender: '',
+        numberOfMonth:'',
+        roomNumber:'',
+        birthDate:''
+
+      }
     },
     computed: {
       contents() {

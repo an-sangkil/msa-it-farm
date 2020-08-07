@@ -25,17 +25,23 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 public class LocalBeefManagementPK implements Serializable {
-
-    /**
-     * 개체관리번호.
-     */
-    @Column(length = 32)
-    private String entityManagementNumber;
-
+    
+    // 1,2 확장코드
+    // 3 코드구분
+    // 4,5,6,7 -  8,9,10,11 일련번호 8자리
+    // 12 위변조 방지위한 체크번호
     /**
      * 개체식별번호.
      */
     @Column(length = 32)
     private String entityIdentificationNumber;
+
+
+    /**
+     * 개체관리번호. ( 일련번호 8자리)
+     */
+    @Column(length = 32)
+    private String entityManagementNumber;
+
 
 }

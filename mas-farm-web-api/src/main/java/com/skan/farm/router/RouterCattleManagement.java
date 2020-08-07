@@ -65,13 +65,23 @@ public class RouterCattleManagement {
     RouterFunction<ServerResponse> RouterFunction() {
         return RouterFunctions.route(GET("/cattle/cattle_management_list"), request -> {
 
-            var entityId = request.param("entityManagementNumber").orElse("");
-            var identityId = request.param("entityIdentificationNumber").orElse("");
 
-            int page = Integer.parseInt(request.param("page").orElse("0"));
-            int size = Integer.parseInt(request.param("size").orElse("10"));
             Response<PageImpl<LocalBeefManagement>> response = new Response<>();
             try {
+
+                int page = Integer.parseInt(request.param("page").orElse("0"));
+                int size = Integer.parseInt(request.param("size").orElse("10"));
+
+                var entityId = request.param("entityManagementNumber").orElse("");
+                var identityId = request.param("entityIdentificationNumber").orElse("");
+
+
+                // search parameter
+                var gender = request.param("entityIdentificationNumber").orElse("");
+                var numberOfMonth = request.param("entityIdentificationNumber").orElse("");
+                var roomNumber = request.param("entityIdentificationNumber").orElse("");
+                var birthDate = request.param("entityIdentificationNumber").orElse("");
+
 
                 //Pageable pageable = PageRequest.of(page, size);
                 //return ServerResponse.ok().body(cattleManagementService.findAllPaging(pageable));

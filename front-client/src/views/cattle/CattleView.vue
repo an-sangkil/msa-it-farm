@@ -11,15 +11,15 @@
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">entityNumber</label>
+                    <label class="col-md-3 col-form-label">identityNumber</label>
                     <div class="col-md-9">
-                      <p class="form-control-static">{{entityManagementNumber}}</p>
+                      <p class="form-control-static">{{entityIdentificationNumberView}}</p>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">identityNumber</label>
+                    <label class="col-md-3 col-form-label">entityNumber</label>
                     <div class="col-md-9">
-                      <p class="form-control-static">{{entityIdentificationNumber}}</p>
+                      <p class="form-control-static">{{entityManagementNumberView}}</p>
                     </div>
                   </div>
                 </div>
@@ -88,16 +88,16 @@
                 <div class="row">
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">number of month</label>
+                    <label class="col-md-3 col-form-label">roomNumber</label>
                     <div class="col-md-9 col-form-label">
-                      <p class="form-control-static">{{gender}}</p>
+                      <p class="form-control-static">{{roomNumber}}</p>
                     </div>
                   </div>
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">sellYn</label>
-                    <div class="col-md-9">
-                      <p class="form-control-static">{{sellYn}}</p>
+                    <label class="col-md-3 col-form-label">number of month</label>
+                    <div class="col-md-9 col-form-label">
+                      <p class="form-control-static">{{numberOfMonth}}</p>
                     </div>
                   </div>
 
@@ -347,10 +347,10 @@
             <div class="card-footer">
               <div class="row justify-content-end">
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-info"  type="button" v-on:click="cattleModifyForm()">modify</button>
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="cattleModifyForm()">modify</button>
                 </div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-info"  type="button" v-on:click="cattleList()">list</button>
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="cattleList()">list</button>
                 </div>
               </div>
 
@@ -480,8 +480,10 @@
     components: {DatePicker},
     data() {
       return {
-        entityManagementNumber: ''
+         entityIdentificationNumberView : ''
+        , entityManagementNumberView: ''
         , entityIdentificationNumber: ''
+        , entityManagementNumber: ''
         , parentPapaNo: ''
         , parentMomNo: ''
         , birthDay: ''
@@ -490,6 +492,7 @@
         , castrationDate: ''
         , gender: 'MALE'
         , sellYn: 'N'
+        , numberOfMonth: ''
         , cattleBuyInformation: {
           buyStoreName: ''
           , buyDate: ''
@@ -512,46 +515,55 @@
         , diseaseTreatmentSet: []
         , calvesManagement: {calvesManagementPK: {}}
         , diseaseTreatment: {diseaseTreatmentPK: {}}
-        , time1: '2021-01-01 00:00:00'
+
       }
     },
     mounted() {
-
-      let actionURL = `${this.$store.state.host}/cattle/detail?`
-      console.log(actionURL)
-      this.$http.get(actionURL, {
-        params: {
-          entityManagementNumber: this.$route.query.entityNumber,
-          entityIdentificationNumber: this.$route.query.identityNumber
-        }
-      }).then((res) => {
-
-        console.log('rount response :', res)
-        let responseData = res.data.detail.data
-
-
-        this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
-        this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
-        this.parentPapaNo = responseData.parentPapaNo
-        this.parentMomNo = responseData.parentMomNo
-        this.birthDay = responseData.birthDay
-        this.enterDate = responseData.enterDate
-        this.earTagDate = responseData.earTagDate
-        this.castrationDate = responseData.castrationDate
-        this.gender = responseData.gender
-        this.sellYn = responseData.sellYn
-
-        this.cattleBuyInformation = responseData.cattleBuyInformation
-        this.cattleSellStoreInformation = responseData.cattleSellStoreInformation
-        this.diseaseTreatmentSet = responseData.diseaseTreatmentSet
-        this.calvesManagementSet = responseData.calvesManagementSet
-
-      }).catch((error) => {
-        console.log(error.message())
-      })
+      this.localBeefDetail()
     },
     computed: {},
     methods: {
+      localBeefDetail : function () {
+
+        let actionURL = `${this.$store.state.host}/cattle/detail?`
+        console.log(`localBeefDetail : ${actionURL}`)
+
+        this.$http.get(actionURL, {
+          params: {
+            entityManagementNumber: this.$route.query.entityNumber,
+            entityIdentificationNumber: this.$route.query.identityNumber
+          }
+        }).then((res) => {
+
+          console.log('rount response :', res)
+          let responseData = res.data.detail.data
+
+          this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
+          this.entityIdentificationNumberView = `${this.entityIdentificationNumber.substring(0,3)}-${this.entityIdentificationNumber.substring(3,7)}-${this.entityIdentificationNumber.substring(7,11)}-${this.entityIdentificationNumber.substring(11)}`
+
+          this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
+          this.entityManagementNumberView = `${this.entityManagementNumber.substring(0,4)}-${this.entityManagementNumber.substring(4)}`
+
+          this.parentPapaNo = responseData.parentPapaNo
+          this.parentMomNo = responseData.parentMomNo
+          this.birthDay = responseData.birthDay
+          this.enterDate = responseData.enterDate
+          this.earTagDate = responseData.earTagDate
+          this.castrationDate = responseData.castrationDate
+          this.gender = responseData.gender
+          this.sellYn = responseData.sellYn
+          this.numberOfMonth = responseData.numberOfMonth
+          this.roomNumber  = responseData.roomNumber
+
+          this.cattleBuyInformation = responseData.cattleBuyInformation
+          this.cattleSellStoreInformation = responseData.cattleSellStoreInformation
+          this.diseaseTreatmentSet = responseData.diseaseTreatmentSet
+          this.calvesManagementSet = responseData.calvesManagementSet
+
+        }).catch((error) => {
+          console.log(error.message())
+        })
+      },
       cattleModifyForm: function () {
         let actionUrl = `/cattle/cattleForm?entityNumber=${this.entityManagementNumber}&identityNumber=${this.entityIdentificationNumber}`
         this.$router.push(actionUrl)

@@ -40,15 +40,23 @@ public class CattleManagementService {
         return localBeefManagementJpaRepository.findAll(pageable);
     }
 
+    /**
+     * 페이징 검색
+     * @param localBeefManagement
+     * @param pageable
+     * @return
+     */
     public PageImpl<LocalBeefManagement> findAll(LocalBeefManagement localBeefManagement, com.skan.farm.paging.Pageable pageable) {
         PageImpl<LocalBeefManagement> pageImpl = localBeefManagementJooqRepository.findAll(localBeefManagement, pageable);
-        /*pageImpl.getContents().forEach(localBeefManagement1 -> {
-            localBeefManagement1.setCalvesManagementSet(Set.of(new CalvesManagement()));
-        });*/
-
         return pageImpl;
     }
 
+    /**
+     * 한객체만 검색
+     * @param entityId
+     * @param identityId
+     * @return
+     */
     public LocalBeefManagement findOne(String entityId, String identityId) {
 
         Optional<LocalBeefManagement> localBeefManagementOptional = this.localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(entityId, identityId));
