@@ -103,17 +103,17 @@
               <table class="table table-responsive-sm">
                 <thead>
                 <tr>
-                  <th>identityNumber</th>
-                  <th>entityNumber</th>
-                  <th>roomNumber</th>
-                  <th>calvesCount</th>
-                  <th>expectedDateChildbirth</th>
-                  <th>gender</th>
-                  <th>birthDate</th>
-                  <th>number of month</th>
-                  <th>mother iden-n</th>
-                  <th>care history</th>
-                  <th>care date</th>
+                  <th>개체 식별번호</th>
+                  <th>관리번호</th>
+                  <th>사육방</th>
+                  <th>분만횟수</th>
+                  <th>분만예정일</th>
+                  <th>암수구분</th>
+                  <th>생년월일</th>
+                  <th>개월수</th>
+                  <th>모 개체식별 번호</th>
+                  <th>치료내역</th>
+                  <th>치료날짜</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -125,8 +125,8 @@
                       `${item.localBeefManagementPK.entityIdentificationNumber.substring(0,3)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(3,7)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(7,11)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(11)}`}}
                     </a>
                   </td>
-                  <td>
-                    <a href="#">
+                  <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
+                    <a href="javascript:void (0);">
                       {{ `${item.localBeefManagementPK.entityManagementNumber.substring(0,4)}-${item.localBeefManagementPK.entityManagementNumber.substring(4,8)}`}}
                     </a>
                   </td>

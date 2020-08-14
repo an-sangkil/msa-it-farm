@@ -368,13 +368,13 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">years</label>
                 <div class="col-md-9">
-                  <date-picker v-model="calvesManagement.years" value-type="format" format="YYYY" type="year" placeholder="Select year"></date-picker>
+                  <date-picker v-model="calvesManagement.years" value-type="format" format="YYYY" type="year" placeholder="Select year" style="width: 100%"></date-picker>
                 </div>
               </div>
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">fertilizationDate</label>
                 <div class="col-md-9">
-                  <date-picker v-model="calvesManagement.fertilizationDate" format="YYYY-MM-DD HH:MM:SS" value-type="YYYY-MM-DD HH:MM:SS" lang="en"></date-picker>
+                  <date-picker v-model="calvesManagement.fertilizationDate" format="YYYY-MM-DD HH:MM:SS" value-type="YYYY-MM-DD HH:MM:SS" lang="en" style="width: 100%"></date-picker>
                   <!--<b-form-input placeholder="Enter your fertilizationDate" type="text" v-model="calvesManagement.fertilizationDate"></b-form-input>-->
                 </div>
               </div>
@@ -383,7 +383,7 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">calvingDate</label>
                 <div class="col-md-9">
-                  <date-picker v-model="calvesManagement.calvingDate" format="YYYY-MM-DD HH:MM:SS" value-type="YYYY-MM-DD HH:MM:SS" lang="en"></date-picker>
+                  <date-picker v-model="calvesManagement.calvingDate" format="YYYY-MM-DD HH:MM:SS" value-type="YYYY-MM-DD HH:MM:SS" lang="en" style="width: 100%"></date-picker>
                   <!--<b-form-input placeholder="Enter your calvingDate" type="date" v-model="calvesManagement.calvingDate"></b-form-input>-->
                 </div>
               </div>
@@ -417,7 +417,7 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">cureDate</label>
                 <div class="col-md-9">
-                  <date-picker v-model="diseaseTreatment.cureDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select date"></date-picker>
+                  <date-picker v-model="diseaseTreatment.cureDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select date" style="width: 100%"></date-picker>
                 </div>
               </div>
               <div class="form-group col-md-6 row">
@@ -452,7 +452,7 @@
               <div class="form-group col-md-6 row">
                 <label class="col-md-3 col-form-label">withdrawalPeriodExpirationDate</label>
                 <div class="col-md-9">
-                  <date-picker v-model="diseaseTreatment.withdrawalPeriodExpirationDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Enter your withdrawalPeriodExpirationDate"></date-picker>
+                  <date-picker v-model="diseaseTreatment.withdrawalPeriodExpirationDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Enter your withdrawalPeriodExpirationDate" style="width: 100%"></date-picker>
                 </div>
               </div>
             </div>
@@ -493,6 +493,7 @@
         , gender: 'MALE'
         , sellYn: 'N'
         , numberOfMonth: ''
+        , roomNumber:''
         , cattleBuyInformation: {
           buyStoreName: ''
           , buyDate: ''

@@ -1,5 +1,5 @@
-<script src="containers/_nav.js"></script>
-<script src="main.js"></script>
+<!--<script src="containers/_nav.js"></script>-->
+<!--<script src="main.js"></script>-->
 <template>
   <router-view></router-view>
 </template>

@@ -6,7 +6,7 @@
         <!-- cattle management (localbeef)  -->
         <div class="col-lg-12">
           <div class="card">
-            <div class="card-header"><strong>Basic Form</strong> Elements</div>
+            <div class="card-header"><strong>기본정보</strong>.</div>
             <div class="card-body">
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="cattleSave">
                 <div class="row">
@@ -123,17 +123,24 @@
               </form>
 
             </div>
-            <!--<div class="card-footer">
-              <button class="btn btn-sm btn-danger" type="reset"> Reset</button>
-            </div>-->
+            <div class="card-footer">
+              <div class="row justify-content-end">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="$router.go(-1)">cancel</button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="cattleSave($event)">submit</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
 
         <!-- buy information -->
-        <div class="col-lg-12">
+        <div class="col-lg-12" v-if="entityIdentificationNumber != ''">
           <div class="card">
-            <div class="card-header"><strong>BuyInformation Form</strong> Elements</div>
+            <div class="card-header"><strong>구입 정보</strong>.</div>
             <div class="card-body">
 
               <div class="row">
@@ -185,9 +192,9 @@
 
 
         <!-- sell information -->
-        <div class="col-lg-12">
+        <div class="col-lg-12" v-if="entityIdentificationNumber != ''">
           <div class="card">
-            <div class="card-header"><strong>sell Form</strong> Elements</div>
+            <div class="card-header"><strong>판매정보</strong>.</div>
             <div class="card-body">
 
               <div class="row">
@@ -252,19 +259,10 @@
 
 
             </div>
-            <div class="card-footer">
-              <div class="row justify-content-end">
-                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="$router.go(-1)">cancel</button>
-                </div>
-                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="cattleSave($event)">submit</button>
-                </div>
-              </div>
-            </div>
+            <!--<div class="card-footer">
+            </div>-->
           </div>
         </div>
-
 
       </div>
     </div>

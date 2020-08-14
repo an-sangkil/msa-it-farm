@@ -39,10 +39,11 @@ const routes = [
   {
     path: '/dashboard',
     name: 'HomePage',
+    redirect: '/dashboard/dashboardView',
     component: TheContainer,
     children: [
       {
-        path: 'dashboard',
+        path: 'dashboardView',
         name: 'Dashboard',
         component: Dashboard
       },

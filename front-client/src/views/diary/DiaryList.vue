@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-12 col-xl mb-3 mb-xl-0">
                       <b-form inline v-if="periodForm">
-                        <date-picker v-model="periodDate" value-type="format" format="YYYY-MM-DD" range placeholder="Select date range"></date-picker>
+                        <date-picker v-model="periodDate" value-type="format" format="YYYY-MM-DD" range placeholder="기간을 선택해주세요."></date-picker>
                         <b-button variant="outline-info" type="button" v-on:click="periodSearch()">search</b-button>
                       </b-form>
                     </div>
@@ -82,7 +82,7 @@
 
               <div class="row">
                 <div class="form-group col-md-4 row">
-                  <label class="col-md-3 col-form-label">standardDate</label>
+                  <label class="col-md-3 col-form-label">날짜</label>
                   <div class="col-md-9">
                     <p class="form-control-static">{{item.standardDate}}</p>
                   </div>
@@ -94,7 +94,7 @@
                   </div>
                 </div>-->
                 <div class="form-group col-md-4 row">
-                  <label class="col-md-3 col-form-label">createdTime</label>
+                  <label class="col-md-3 col-form-label">생성시간</label>
                   <div class="col-md-9">
                     <p class="form-control-static">{{item.createdTime}}</p>
                   </div>
@@ -103,19 +103,19 @@
 
               <div class="row">
                 <div class="form-group col-md-4 row">
-                  <label class="col-md-3 col-form-label">todayWeatherCode</label>
+                  <label class="col-md-3 col-form-label">날씨</label>
                   <div class="col-md-9">
                     <p class="form-control-static">{{item.todayWeatherCode}}</p>
                   </div>
                 </div>
                 <div class="form-group col-md-4 row">
-                  <label class="col-md-3 col-form-label">minimumTemperature</label>
+                  <label class="col-md-3 col-form-label">최저온도</label>
                   <div class="col-md-9">
                     <p class="form-control-static">{{item.minTemperatureType}} {{item.minimumTemperature}}</p>
                   </div>
                 </div>
                 <div class="form-group col-md-4 row">
-                  <label class="col-md-3 col-form-label">maximumTemperature</label>
+                  <label class="col-md-3 col-form-label">최고온도</label>
                   <div class="col-md-9">
                     <p class="form-control-static">{{item.maxTemperatureType}} {{item.maximumTemperature}}</p>
                   </div>
@@ -124,7 +124,7 @@
 
               <div class="row">
                 <div class="form-group col-md-12 row">
-                  <label class="col-md-1 col-form-label">subject</label>
+                  <label class="col-md-1 col-form-label">제목</label>
                   <div class="col-md-11">
                     <p class="form-control-static">{{item.subject}}</p>
                   </div>
@@ -133,7 +133,7 @@
 
               <div class="row">
                 <div class="form-group col-md-12 row">
-                  <label class="col-md-1 col-form-label">content</label>
+                  <label class="col-md-1 col-form-label">내용</label>
                   <div class="col-md-11">
                     <p class="form-control-static">{{item.content}}</p>
                   </div>
