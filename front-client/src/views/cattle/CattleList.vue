@@ -12,7 +12,7 @@
                 <b-col cols="12" sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-identityId">identityId:</label>
+                      <label for="input-identityId">개체식별번호</label>
                     </b-col>
                     <b-col sm="10">
                       <b-form-input id="input-identityId" type="number" placeholder="Enter your identityId" v-model="entityIdentificationNumber"></b-form-input>
@@ -22,13 +22,13 @@
                 <b-col cols="12" sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-gender">gender:</label>
+                      <label for="input-gender">암수구분</label>
                     </b-col>
                     <b-col sm="10">
                       <select class="form-control" id="input-gender" v-model="gender">
-                        <option value="">ALL</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FEMALE">FEMALE</option>
+                        <option value="">전체</option>
+                        <option value="MALE">수컷</option>
+                        <option value="FEMALE">암컷</option>
                       </select>
                     </b-col>
                   </b-row>
@@ -36,7 +36,7 @@
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-roomNumber">roomNumber</label>
+                      <label for="input-roomNumber">사육방</label>
                     </b-col>
                     <b-col sm="10">
                       <b-form-input id="input-roomNumber" placeholder="Enter your roomNumber" v-model="roomNumber"></b-form-input>
@@ -49,7 +49,7 @@
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-numberOfMonth">number Of Month</label>
+                      <label for="input-numberOfMonth">개월수</label>
                     </b-col>
                     <b-col sm="10">
                       <b-form-input id="input-numberOfMonth" type="number" placeholder="Enter your numberOfMonth" v-model="numberOfMonth"></b-form-input>
@@ -59,7 +59,7 @@
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-birthDate">birthDate</label>
+                      <label for="input-birthDate">생년월일</label>
                     </b-col>
                     <b-col sm="10">
                       <date-picker v-model="birthDate" value-type="format" format="YYYY-MM-DD" placeholder="Select date range" range style="width: 100%"></date-picker>
@@ -83,7 +83,7 @@
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <b-button block variant="outline-info" type="button" @click="searchCattle()">search</b-button>
+                  <b-button block variant="outline-info" type="button" @click="searchCattle()">검색</b-button>
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@
                 <i class="fa fa-align-justify"></i>
                 <div class="col-12 col-xl mb-3 mb-xl-0">Cattle List</div>
                 <div class=" mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-success" type="button" v-on:click="cattleSave">register</button>
+                  <button class="btn btn-block btn-outline-success" type="button" v-on:click="cattleSave">등록</button>
                 </div>
               </div>
             </div>

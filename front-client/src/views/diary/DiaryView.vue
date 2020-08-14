@@ -12,7 +12,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12 row">
-                    <label class="col-md-1 col-form-label">standardDate</label>
+                    <label class="col-md-1 col-form-label">날짜</label>
                     <div class="col-md-2">
                       <input class="form-control" id="uuid" type="hidden" name="text-input" v-model="uuid">
                       <input class="form-control" id="seq" type="hidden" name="text-input" v-model="seq">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">todayWeatherCode</label>
+                    <label class="col-md-3 col-form-label">날씨</label>
                     <div class="col-md-9">
                       <p class="form-control-static">{{todayWeatherCode}}</p>
                     </div>
@@ -32,13 +32,13 @@
                 <div class="row">
 
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">minimumTemperature</label>
+                    <label class="col-md-3 col-form-label">최저온도</label>
                     <div class="col-md-9">
                       <p class="form-control-static">{{minTemperatureType}} {{minimumTemperature}}</p>
                     </div>
                   </div>
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">maximumTemperature</label>
+                    <label class="col-md-3 col-form-label">최고온도</label>
                     <div class="col-md-9">
                       <p class="form-control-static">{{maxTemperatureType}} {{maximumTemperature}}</p>
                     </div>
@@ -47,7 +47,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12 row">
-                    <label class="col-md-1 col-form-label">subject</label>
+                    <label class="col-md-1 col-form-label">제목</label>
                     <div class="col-md-11">
                       <p class="form-control-static">{{subject}}</p>
                     </div>
@@ -56,7 +56,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12 row">
-                    <label class="col-md-1 col-form-label">content</label>
+                    <label class="col-md-1 col-form-label">내용</label>
                     <div class="col-md-11">
                       <p class="form-control-static">{{content}}</p>
                     </div>
