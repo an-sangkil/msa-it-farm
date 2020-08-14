@@ -20,7 +20,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">todayWeatherCode</label>
@@ -28,16 +27,20 @@
                       <p class="form-control-static">{{todayWeatherCode}}</p>
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
+
                   <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">minimumTemperature</label>
                     <div class="col-md-9">
-                      <p class="form-control-static">{{minimumTemperature}}</p>
+                      <p class="form-control-static">{{minTemperatureType}} {{minimumTemperature}}</p>
                     </div>
                   </div>
                   <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">maximumTemperature</label>
                     <div class="col-md-9">
-                      <p class="form-control-static">{{maximumTemperature}}</p>
+                      <p class="form-control-static">{{maxTemperatureType}} {{maximumTemperature}}</p>
                     </div>
                   </div>
                 </div>
@@ -106,6 +109,8 @@
         subject: '',
         content: '',
         todayWeatherCode: '',
+        minTemperatureType:'',
+        maxTemperatureType:'',
         minimumTemperature: '',
         maximumTemperature: '',
       }
@@ -135,6 +140,10 @@
           this.subject = scheduleData.subject
           this.content = scheduleData.content
           this.todayWeatherCode = scheduleData.todayWeatherCode
+
+          this.minTemperatureType = scheduleData.minTemperatureType
+          this.maxTemperatureType = scheduleData.maxTemperatureType
+
           this.minimumTemperature = scheduleData.minimumTemperature
           this.maximumTemperature = scheduleData.maximumTemperature
 

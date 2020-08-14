@@ -86,11 +86,11 @@
                     <div class="col-md-9 col-form-label">
                       <div class="form-check form-check-inline mr-1">
                         <input class="form-check-input" id="gender1" type="radio" value="MALE" name="gender" v-model="gender">
-                        <label class="form-check-label" for="gender1">One M</label>
+                        <label class="form-check-label" for="gender1">MALE</label>
                       </div>
                       <div class="form-check form-check-inline mr-1">
                         <input class="form-check-input" id="gender2" type="radio" value="FEMALE" name="gender" v-model="gender">
-                        <label class="form-check-label" for="gender2">Two F</label>
+                        <label class="form-check-label" for="gender2">FEMALE</label>
                       </div>
                     </div>
                   </div>

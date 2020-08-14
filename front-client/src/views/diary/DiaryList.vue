@@ -111,13 +111,13 @@
                 <div class="form-group col-md-4 row">
                   <label class="col-md-3 col-form-label">minimumTemperature</label>
                   <div class="col-md-9">
-                    <p class="form-control-static">{{item.minimumTemperature}}</p>
+                    <p class="form-control-static">{{item.minTemperatureType}} {{item.minimumTemperature}}</p>
                   </div>
                 </div>
                 <div class="form-group col-md-4 row">
                   <label class="col-md-3 col-form-label">maximumTemperature</label>
                   <div class="col-md-9">
-                    <p class="form-control-static">{{item.maximumTemperature}}</p>
+                    <p class="form-control-static">{{item.maxTemperatureType}} {{item.maximumTemperature}}</p>
                   </div>
                 </div>
               </div>

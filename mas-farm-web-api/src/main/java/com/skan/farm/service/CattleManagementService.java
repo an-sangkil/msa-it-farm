@@ -42,13 +42,12 @@ public class CattleManagementService {
 
     /**
      * 페이징 검색
-     * @param localBeefManagement
+     * @param predicate
      * @param pageable
      * @return
      */
-    public PageImpl<LocalBeefManagement> findAll(LocalBeefManagement localBeefManagement, com.skan.farm.paging.Pageable pageable) {
-        PageImpl<LocalBeefManagement> pageImpl = localBeefManagementJooqRepository.findAll(localBeefManagement, pageable);
-        return pageImpl;
+    public PageImpl<LocalBeefManagement> findAll(LocalBeefManagement predicate, com.skan.farm.paging.Pageable pageable) {
+        return  localBeefManagementJooqRepository.findAll(predicate, pageable);
     }
 
     /**
@@ -59,7 +58,7 @@ public class CattleManagementService {
      */
     public LocalBeefManagement findOne(String entityId, String identityId) {
 
-        Optional<LocalBeefManagement> localBeefManagementOptional = this.localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(entityId, identityId));
+        Optional<LocalBeefManagement> localBeefManagementOptional = this.localBeefManagementJpaRepository.findById(new LocalBeefManagementPK(identityId,entityId));
         LocalBeefManagement localBeefManagement = localBeefManagementOptional.orElseThrow(NullPointerException::new);
 
         // 역순 정렬

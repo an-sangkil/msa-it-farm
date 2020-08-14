@@ -20,6 +20,9 @@
                       <span class="help-block">This is a standardDate text</span>
                     </div>
                   </div>
+                </div>
+
+                <div class="row">
                   <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">todayWeatherCode</label>
                     <div class="col-md-9">
@@ -33,17 +36,14 @@
                   <div class="form-group col-md-4 row">
                     <label class="col-md-3 col-form-label">minimumTemperature</label>
                     <div class="col-md-9 row">
-
                       <div class="col-md-6">
                         <b-form-select v-model="minTemperatureType" :options="temperatureOption"></b-form-select>
                         <span class="help-block"></span>
                       </div>
                       <div class="col-md-6">
-                        <input class="form-control" type="number" name="date-input" placeholder="minTemperatureType" v-model="minimumTemperature">
+                        <input class="form-control" type="number" name="date-input" placeholder="minimumTemperature" v-model="minimumTemperature">
                         <span class="help-block"></span>
                       </div>
-
-
                     </div>
                   </div>
                   <div class="form-group col-md-4 row">
@@ -54,7 +54,7 @@
                         <span class="help-block"></span>
                       </div>
                       <div class="col-md-6">
-                        <input class="form-control" type="number" name="date-input" placeholder="maxTemperatureType" v-model="maximumTemperature">
+                        <input class="form-control" type="number" name="date-input" placeholder="maximumTemperature" v-model="maximumTemperature">
                         <span class="help-block"></span>
                       </div>
                     </div>
@@ -125,18 +125,18 @@
         content: '',
         todayWeatherCode: '',
         minTemperatureType: '',
-        minimumTemperature: '',
         maxTemperatureType: '',
+        minimumTemperature: '',
         maximumTemperature: '',
         weatherOptions: [
           {value: '', text: '선택하세요'},
-          {value: 'sunny', text: '맑음'},
-          {value: 'cloudy', text: '흐림'}
+          {value: 'SUNNY', text: '맑음'},
+          {value: 'CLOUDY', text: '흐림'}
         ],
         temperatureOption: [
           {value: '', text: '선택하세요'},
-          {value: 'plusDegrees', text: '영상'},
-          {value: 'minusDegrees', text: '영하'}
+          {value: 'PLUS_DEGREES', text: '영상'},
+          {value: 'MINUS_DEGREES', text: '영하'}
         ],
 
       }
@@ -158,6 +158,8 @@
           subject: this.subject,
           content: this.content,
           todayWeatherCode: this.todayWeatherCode,
+          minTemperatureType: this.minTemperatureType,
+          maxTemperatureType: this.maxTemperatureType,
           minimumTemperature: this.minimumTemperature,
           maximumTemperature: this.maximumTemperature
         })
@@ -205,6 +207,9 @@
           this.subject = scheduleData.subject
           this.content = scheduleData.content
           this.todayWeatherCode = scheduleData.todayWeatherCode
+          this.minTemperatureType = scheduleData.minTemperatureType,
+          this.maxTemperatureType = scheduleData.maxTemperatureType,
+
           this.minimumTemperature = scheduleData.minimumTemperature
           this.maximumTemperature = scheduleData.maximumTemperature
 

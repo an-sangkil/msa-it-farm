@@ -60,6 +60,7 @@ public class LocalBeefManagementJooqRepository {
         JCalvesManagement jCalvesManagement = JCalvesManagement.CALVES_MANAGEMENT;
 
 
+        // 전체 카운트
         String sql = dslContext.selectCount()
                 .from(jLocalBeefManagement)
                 .leftJoin(jCattleBuyInformation)
@@ -68,11 +69,13 @@ public class LocalBeefManagementJooqRepository {
                         jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(jCattleBuyInformation.ENTITY_IDENTIFICATION_NUMBER))
                 .where(this.dynamicConditionsLocalbeffManagement(predicate))
                 .getSQL(ParamType.INLINED);
+
+
         log.debug("sql = : {}", sql);
         Integer totalCount = jdbcTemplate.queryForObject(sql, Integer.class);
 
         // 분만정보(수정횟수..etc)
-        Field<String> calves =  dslContext.select(
+        Field<String> calves = dslContext.select(
                 DSL.concat(
                         jCalvesManagement.FERTILIZATION_INDEX, DSL.concat("@@")
                         , DSL.count(jCalvesManagement.FERTILIZATION_INDEX), DSL.concat("@@")
@@ -89,7 +92,7 @@ public class LocalBeefManagementJooqRepository {
                                 ))
                 ).asField("calves_information");
 
-
+        // 데이터 조회 SQL 생성
         sql = dslContext.select(
                 jLocalBeefManagement.BIRTH_DAY
                 , jLocalBeefManagement.CASTRATION_DATE
@@ -136,6 +139,7 @@ public class LocalBeefManagementJooqRepository {
                 .getSQL(ParamType.INLINED);
 
 
+        // 데이터 조회 및 매핑
         log.debug("sql = : {}", sql);
         List<LocalBeefManagement> localBeefManagements = new ArrayList<>();
         jdbcTemplate.queryForList(sql)
@@ -145,8 +149,8 @@ public class LocalBeefManagementJooqRepository {
                     String ENTITY_IDENTIFICATION_NUMBER = (String) stringObjectMap.get("ENTITY_IDENTIFICATION_NUMBER");
                     LocalBeefManagement localBeefManagement = LocalBeefManagement
                             .builder()
-                            .localBeefManagementPK(new LocalBeefManagementPK(ENTITY_MANAGEMENT_NUMBER, ENTITY_IDENTIFICATION_NUMBER))
-                            .birthDay( stringObjectMap.get("BIRTH_DAY") != null?  ((java.sql.Date) stringObjectMap.get("BIRTH_DAY")).toLocalDate(): null)
+                            .localBeefManagementPK(new LocalBeefManagementPK(ENTITY_IDENTIFICATION_NUMBER, ENTITY_MANAGEMENT_NUMBER))
+                            .birthDay(stringObjectMap.get("BIRTH_DAY") != null ? ((java.sql.Date) stringObjectMap.get("BIRTH_DAY")).toLocalDate() : null)
                             .earTagDate(stringObjectMap.get("EAR_TAG_DATE") != null ? ((java.sql.Date) stringObjectMap.get("EAR_TAG_DATE")).toLocalDate() : null)
                             .enterDate(stringObjectMap.get("ENTER_DATE") != null ? ((java.sql.Date) stringObjectMap.get("ENTER_DATE")).toLocalDate() : null)
                             .parentMomNo((String) stringObjectMap.get("PARENT_MOM_NO"))
@@ -157,14 +161,14 @@ public class LocalBeefManagementJooqRepository {
                             .createdTime(stringObjectMap.get("CREATED_TIME") != null ? ((java.sql.Timestamp) stringObjectMap.get("CREATED_TIME")).toLocalDateTime() : null)
                             .build();
 
-                    if ( stringObjectMap.get("calves_information") != null) {
+                    if (stringObjectMap.get("calves_information") != null) {
                         String[] calvesInformation = ((String) stringObjectMap.get("calves_information")).split("@@");
-                        localBeefManagement.setCalvesCount(calvesInformation[0]+"/"+calvesInformation[1]);
+                        localBeefManagement.setCalvesCount(calvesInformation[0] + "/" + calvesInformation[1]);
                         localBeefManagement.setExpectedDateChildbirth(LocalDateTime.parse(calvesInformation[2], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                     }
 
                     if (localBeefManagement.getBirthDay() != null) {
-                        Period period = Period.between(localBeefManagement.getBirthDay(),LocalDate.now());
+                        Period period = Period.between(localBeefManagement.getBirthDay(), LocalDate.now());
                         localBeefManagement.setNumberOfMonth(String.valueOf(period.getMonths()));
                     }
 
@@ -205,16 +209,25 @@ public class LocalBeefManagementJooqRepository {
         JCattleBuyInformation jCattleBuyInformation = JCattleBuyInformation.CATTLE_BUY_INFORMATION;
         JCattleSellStoreInformation jCattleSellStoreInformation = JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION;
 
-        if (!StringUtils.isEmpty(predicate.getLocalBeefManagementPK().getEntityManagementNumber())) {
-            conditions.add(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(predicate.getLocalBeefManagementPK().getEntityManagementNumber()));
-        }
+        //if (!StringUtils.isEmpty(predicate.getLocalBeefManagementPK().getEntityManagementNumber())) {
+        //    conditions.add(jLocalBeefManagement.ENTITY_MANAGEMENT_NUMBER.eq(predicate.getLocalBeefManagementPK().getEntityManagementNumber()));
+        //}
 
         if (!StringUtils.isEmpty(predicate.getLocalBeefManagementPK().getEntityIdentificationNumber())) {
-            conditions.add(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.eq(predicate.getLocalBeefManagementPK().getEntityIdentificationNumber()));
+            conditions.add(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.like("%" + predicate.getLocalBeefManagementPK().getEntityIdentificationNumber() + "%"));
         }
 
-        if (!StringUtils.isEmpty(predicate.getBirthDay())) {
-            conditions.add(jLocalBeefManagement.BIRTH_DAY.between(predicate.getBirthDay(), LocalDate.now()));
+        if (!StringUtils.isEmpty(predicate.getRoomNumber())) {
+            conditions.add(jLocalBeefManagement.ROOM_NUMBER.like("%" + predicate.getRoomNumber() + "%"));
+        }
+
+        if (!StringUtils.isEmpty(predicate.getBetweenBirthDate())) {
+
+            String[] betweenBirthDate = predicate.getBetweenBirthDate().split("@@");
+            LocalDate startDate = LocalDate.parse(betweenBirthDate[0],DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate endDate = LocalDate.parse(betweenBirthDate[1],DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+            conditions.add(jLocalBeefManagement.BIRTH_DAY.between(startDate, endDate.plusDays(1)));
         }
 
         if (!StringUtils.isEmpty(predicate.getGender())) {

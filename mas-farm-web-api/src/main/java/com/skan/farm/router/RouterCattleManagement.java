@@ -17,6 +17,7 @@ import com.skan.farm.utils.JsonUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.function.ServerResponse;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -64,8 +66,6 @@ public class RouterCattleManagement {
     @Bean
     RouterFunction<ServerResponse> RouterFunction() {
         return RouterFunctions.route(GET("/cattle/cattle_management_list"), request -> {
-
-
             Response<PageImpl<LocalBeefManagement>> response = new Response<>();
             try {
 
@@ -75,19 +75,31 @@ public class RouterCattleManagement {
                 var entityId = request.param("entityManagementNumber").orElse("");
                 var identityId = request.param("entityIdentificationNumber").orElse("");
 
-
                 // search parameter
-                var gender = request.param("entityIdentificationNumber").orElse("");
-                var numberOfMonth = request.param("entityIdentificationNumber").orElse("");
-                var roomNumber = request.param("entityIdentificationNumber").orElse("");
-                var birthDate = request.param("entityIdentificationNumber").orElse("");
+                var gender = request.param("gender");
+                var numberOfMonth = request.param("numberOfMonth").orElse("");
+                var roomNumber = request.param("roomNumber").orElse("");
+                var birthDate = request.param("birthDate").orElse("");
 
+                // 조회 조건 설정
+                LocalBeefManagement predicate = LocalBeefManagement
+                        .builder()
+                        .localBeefManagementPK(new LocalBeefManagementPK(identityId,entityId))
+                        .build();
+                gender.ifPresent(s -> {
+                    if (!s.equals(""))
+                        predicate.setGender(GenderCode.valueOf(s));
+                });
+                predicate.setNumberOfMonth(numberOfMonth);
+                predicate.setRoomNumber(roomNumber);
+
+                if (!birthDate.equals("")) predicate.setBetweenBirthDate(birthDate);
 
                 //Pageable pageable = PageRequest.of(page, size);
                 //return ServerResponse.ok().body(cattleManagementService.findAllPaging(pageable));
-                LocalBeefManagement localBeefManagement = LocalBeefManagement.builder().localBeefManagementPK(new LocalBeefManagementPK(entityId, identityId)).build();
+
                 PageableRequest pageable = new PageableRequest(page, size);
-                PageImpl<LocalBeefManagement> beefManagementPage = cattleManagementService.findAll(localBeefManagement, pageable);
+                PageImpl<LocalBeefManagement> beefManagementPage = cattleManagementService.findAll(predicate, pageable);
 
                 response.setDetail(new Success<>(beefManagementPage));
                 response.setStatus(Response.ResponseCode.SUCCESS);
@@ -101,7 +113,6 @@ public class RouterCattleManagement {
             return ServerResponse.ok().body(response);
 
         }).andRoute(GET("/cattle/detail"), request -> {
-
 
             Response<LocalBeefManagement> response = new Response<>();
             try {
@@ -124,7 +135,6 @@ public class RouterCattleManagement {
                 response.setStatus(Response.ResponseCode.ERROR);
                 response.setDetail(new Error<>());
             }
-
 
             return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(response);
         }).filter((request, next) -> {

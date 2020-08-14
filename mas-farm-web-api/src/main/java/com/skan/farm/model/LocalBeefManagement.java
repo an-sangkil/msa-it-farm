@@ -76,6 +76,8 @@ public class LocalBeefManagement implements Serializable {
      */
     private String roomNumber;
 
+    @Transient
+    private String betweenBirthDate;
 
     /**
      * 출생일, 태어난날.

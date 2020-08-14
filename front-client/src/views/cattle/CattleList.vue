@@ -15,7 +15,7 @@
                       <label for="input-identityId">identityId:</label>
                     </b-col>
                     <b-col sm="10">
-                      <b-form-input id="input-identityId"  type="number" placeholder="Enter your identityId" v-model="entityIdentificationNumber"></b-form-input>
+                      <b-form-input id="input-identityId" type="number" placeholder="Enter your identityId" v-model="entityIdentificationNumber"></b-form-input>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -25,17 +25,14 @@
                       <label for="input-gender">gender:</label>
                     </b-col>
                     <b-col sm="10">
-                      <select class="form-control" id="input-gender"  v-model="gender">
+                      <select class="form-control" id="input-gender" v-model="gender">
                         <option value="">ALL</option>
-                        <option value="M">Option Y</option>
-                        <option value="F">Option N</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
                       </select>
                     </b-col>
                   </b-row>
                 </b-col>
-              </b-row>
-
-              <b-row class="form-group" cols="12">
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
@@ -46,6 +43,9 @@
                     </b-col>
                   </b-row>
                 </b-col>
+              </b-row>
+
+              <b-row class="form-group" cols="12">
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
@@ -59,10 +59,20 @@
                 <b-col sm="4">
                   <b-row>
                     <b-col sm="2">
-                      <label for="input-birthDate" >birthDate</label>
+                      <label for="input-birthDate">birthDate</label>
                     </b-col>
                     <b-col sm="10">
-                      <date-picker v-model="birthDate" value-type="format" format="YYYY-MM-DD" placeholder="Select date range" range></date-picker>
+                      <date-picker v-model="birthDate" value-type="format" format="YYYY-MM-DD" placeholder="Select date range" range style="width: 100%"></date-picker>
+                    </b-col>
+                  </b-row>
+                </b-col>
+                <b-col sm="4">
+                  <b-row>
+                    <b-col sm="2">
+                      <label for="input-birthDate">-</label>
+                    </b-col>
+                    <b-col sm="10">
+
                     </b-col>
                   </b-row>
                 </b-col>
@@ -73,7 +83,7 @@
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0"></div>
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <b-button block variant="outline-info" type="button" @click="">search</b-button>
+                  <b-button block variant="outline-info" type="button" @click="searchCattle()">search</b-button>
                 </div>
               </div>
             </div>
@@ -111,7 +121,8 @@
                     v-bind:key="item.localBeefManagementPK.entityManagementNumber+item.localBeefManagementPK.entityIdentificationNumber">
                   <td v-on:click="detailView(item.localBeefManagementPK.entityManagementNumber,item.localBeefManagementPK.entityIdentificationNumber)" style="cursor: pointer">
                     <a href="javascript:void (0);">
-                      {{ `${item.localBeefManagementPK.entityIdentificationNumber.substring(0,3)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(3,7)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(7,11)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(11)}`}}
+                      {{
+                      `${item.localBeefManagementPK.entityIdentificationNumber.substring(0,3)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(3,7)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(7,11)}-${item.localBeefManagementPK.entityIdentificationNumber.substring(11)}`}}
                     </a>
                   </td>
                   <td>
@@ -164,7 +175,7 @@
 
 
   export default {
-    components:{
+    components: {
       DatePicker
     },
     created() {
@@ -179,9 +190,9 @@
       return {
         entityIdentificationNumber: '',
         gender: '',
-        numberOfMonth:'',
-        roomNumber:'',
-        birthDate:''
+        numberOfMonth: '',
+        roomNumber: '',
+        birthDate: ''
 
       }
     },
@@ -215,11 +226,29 @@
       },
       pagingMove: function (currentPage) {
 
+        let betweenBirthDate;
+        if (this.birthDate.length > 0 && this.birthDate[0] != null)
+          betweenBirthDate = this.birthDate[0] + "@@" + this.birthDate[1]
+
         let actionUrl = '/cattle/cattle_management_list?page=' + currentPage + '&size=20';
-        this.$store.dispatch('pagingAction', {actionUrl: actionUrl})
+        this.$store.dispatch('pagingAction', {
+          actionUrl: actionUrl,
+          parameters: {
+            entityIdentificationNumber: this.entityIdentificationNumber,
+            gender: this.gender,
+            numberOfMonth: this.numberOfMonth,
+            roomNumber: this.roomNumber,
+            birthDate: betweenBirthDate
+          },
+        })
       },
       detailView: function (entityNumber, identityNumber) {
         this.$router.push(`/cattle/cattleDetail?entityNumber=${entityNumber}&identityNumber=${identityNumber}`)
+
+      }
+      , searchCattle() {
+
+        this.pagingMove(0)
 
       }
     }
