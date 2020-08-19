@@ -1,12 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// Containers
-const TheContainer = () => import('../containers/TheContainer')
-
-// Views
-const Dashboard = () => import('../views/Dashboard')
-
 import CattleList from '../views/cattle/CattleList'
 import CattleForm from '../views/cattle/CattleForm'
 import CattleView from '../views/cattle/CattleView'
@@ -15,13 +9,18 @@ import DiaryForm from '../views/diary/DiaryForm'
 import DiaryView from '../views/diary/DiaryView'
 
 // Views - Pages
-import NotFound from "../components/common/NotFound";
+import NotFound from '../components/common/NotFound'
+
+// Containers
+const TheContainer = () => import('../containers/TheContainer')
+
+// Views
+const Dashboard = () => import('../views/Dashboard')
 
 const Page404 = () => import('../views/pages/Page404')
 const Page500 = () => import('../views/pages/Page500')
 const Login = () => import('../views/pages/Login')
 const Register = () => import('../views/pages/Register')
-
 
 Vue.use(VueRouter)
 
@@ -29,13 +28,12 @@ const routes = [
   {
     path: '/',
     name: 'LoginPage',
-    redirect: "/pages/login"
+    redirect: '/pages/login'
   },
   {
-    path: '*'
-    , component: NotFound
-  }
-  ,
+    path: '*',
+    component: NotFound
+  },
   {
     path: '/dashboard',
     name: 'HomePage',
@@ -52,7 +50,7 @@ const routes = [
         redirect: '/cattle/cattleList',
         name: 'Cattle',
         component: {
-          render(c) {
+          render (c) {
             return c('router-view')
           }
         },
@@ -66,8 +64,7 @@ const routes = [
             path: 'cattleForm',
             name: 'CattleForm',
             component: CattleForm
-          }
-          ,
+          },
           {
             path: 'cattleDetail',
             name: 'CattleView',
@@ -80,7 +77,7 @@ const routes = [
         redirect: '/diary/diaryList',
         name: 'Diary',
         component: {
-          render(c) {
+          render (c) {
             return c('router-view')
           }
         },
@@ -107,7 +104,7 @@ const routes = [
         redirect: '/base/cards',
         name: 'Base',
         component: {
-          render(c) {
+          render (c) {
             return c('router-view')
           }
         }
@@ -119,7 +116,7 @@ const routes = [
     redirect: '/pages/404',
     name: 'Pages',
     component: {
-      render(c) {
+      render (c) {
         return c('router-view')
       }
     },
@@ -158,13 +155,13 @@ const router = new VueRouter({
 
   // 추가분
   linkActiveClass: 'active',
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes
 })
 
-//router.beforeEach(async (to, from, next)=>{
-//alert('로그인 해주세요');
-//return next('/login');
-//})
+// router.beforeEach(async (to, from, next)=>{
+// alert('로그인 해주세요');
+// return next('/login');
+// })
 
 export default router

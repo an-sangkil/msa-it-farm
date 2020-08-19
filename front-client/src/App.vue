@@ -4,18 +4,16 @@
   <router-view></router-view>
 </template>
 
-
 <script>
-  export default {
-    name: 'App'
-  }
+export default {
+  name: 'App'
+}
 
-  // coreui 모듈 사용하지 않음
-  require('./vendors/@coreui/coreui/js/coreui.bundle.min.js')
-  require('./vendors/@coreui/icons/js/svgxuse.min.js')
-  //require('./vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js')
-  require('./vendors/@coreui/utils/js/coreui-utils.js')
-
+// coreui 모듈 사용하지 않음
+require('./vendors/@coreui/coreui/js/coreui.bundle.min.js')
+require('./vendors/@coreui/icons/js/svgxuse.min.js')
+// require('./vendors/@coreui/chartjs/js/coreui-chartjs.bundle.js')
+require('./vendors/@coreui/utils/js/coreui-utils.js')
 
 </script>
 

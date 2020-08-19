@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode development",
-    "test": "vue-cli-service serve --open --mode test --port 3000",
-    "local": "vue-cli-service serve --open --mode local --port 3000",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "local": "vue-cli-service serve --open --mode local --port 3000",
+    "test": "vue-cli-service serve --open --mode test --port 3000"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -16,6 +17,7 @@
     "core-js": "^3.6.5",
     "moment": "^2.27.0",
     "vue": "^2.6.11",
+    "vue-i18n": "^8.17.3",
     "vue-router": "^3.2.0",
     "vue-session": "^1.0.0",
     "vue2-datepicker": "^3.6.1",
@@ -29,18 +31,19 @@
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
+    "core-js": "~3.6.5",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
-    "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2",
-    "vue-template-compiler": "^2.6.11",
     "node-sass": "~4.14.1",
     "sass-loader": "~8.0.2",
-    "core-js": "~3.6.5"
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2",
+    "vue-cli-plugin-i18n": "~1.0.1",
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
