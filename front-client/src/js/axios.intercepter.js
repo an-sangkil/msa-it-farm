@@ -1,5 +1,12 @@
 import axios from "axios"
 
+/*
+ * Axios Interceptor
+ *  - Requester
+ *  - Response
+ */
+
+
 axios.interceptors.request.use((config)=>{
   config.headers.token = '';
   config.headers.refresh_token = ''
@@ -11,6 +18,7 @@ axios.interceptors.request.use((config)=>{
 
   return Promise.reject(error)
 })
+
 
 axios.interceptors.response.use((response)=>{
 

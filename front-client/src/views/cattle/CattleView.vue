@@ -480,7 +480,7 @@
     components: {DatePicker},
     data() {
       return {
-         entityIdentificationNumberView : ''
+        entityIdentificationNumberView: ''
         , entityManagementNumberView: ''
         , entityIdentificationNumber: ''
         , entityManagementNumber: ''
@@ -493,7 +493,7 @@
         , gender: 'MALE'
         , sellYn: 'N'
         , numberOfMonth: ''
-        , roomNumber:''
+        , roomNumber: ''
         , cattleBuyInformation: {
           buyStoreName: ''
           , buyDate: ''
@@ -524,9 +524,9 @@
     },
     computed: {},
     methods: {
-      localBeefDetail : function () {
+      localBeefDetail: function () {
 
-        let actionURL = `${this.$store.state.host}/cattle/detail?`
+        let actionURL = `${this.$store.state.HOST}/cattle/detail?`
         console.log(`localBeefDetail : ${actionURL}`)
 
         this.$http.get(actionURL, {
@@ -537,13 +537,13 @@
         }).then((res) => {
 
           console.log('rount response :', res)
-          let responseData = res.data.detail.data
+          let responseData = res.data.detail.contents
 
           this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
-          this.entityIdentificationNumberView = `${this.entityIdentificationNumber.substring(0,3)}-${this.entityIdentificationNumber.substring(3,7)}-${this.entityIdentificationNumber.substring(7,11)}-${this.entityIdentificationNumber.substring(11)}`
+          this.entityIdentificationNumberView = `${this.entityIdentificationNumber.substring(0, 3)}-${this.entityIdentificationNumber.substring(3, 7)}-${this.entityIdentificationNumber.substring(7, 11)}-${this.entityIdentificationNumber.substring(11)}`
 
           this.entityManagementNumber = responseData.localBeefManagementPK.entityManagementNumber
-          this.entityManagementNumberView = `${this.entityManagementNumber.substring(0,4)}-${this.entityManagementNumber.substring(4)}`
+          this.entityManagementNumberView = `${this.entityManagementNumber.substring(0, 4)}-${this.entityManagementNumber.substring(4)}`
 
           this.parentPapaNo = responseData.parentPapaNo
           this.parentMomNo = responseData.parentMomNo
@@ -554,7 +554,7 @@
           this.gender = responseData.gender
           this.sellYn = responseData.sellYn
           this.numberOfMonth = responseData.numberOfMonth
-          this.roomNumber  = responseData.roomNumber
+          this.roomNumber = responseData.roomNumber
 
           this.cattleBuyInformation = responseData.cattleBuyInformation
           this.cattleSellStoreInformation = responseData.cattleSellStoreInformation
@@ -562,7 +562,7 @@
           this.calvesManagementSet = responseData.calvesManagementSet
 
         }).catch((error) => {
-          console.log(error.message())
+          console.log(error.message)
         })
       },
       cattleModifyForm: function () {
@@ -574,24 +574,19 @@
         this.calvesManagement.calvesManagementPK.entityManagementNumber = this.entityManagementNumber
         this.calvesManagement.calvesManagementPK.entityIdentificationNumber = this.entityIdentificationNumber
 
-        this.$http.put(this.$store.state.host + '/cattle/childbirth/save', this.calvesManagement)
+        this.$http.put(this.$store.state.HOST + '/cattle/childbirth/save', this.calvesManagement)
           .then((res) => {
-
             console.log(res)
-
             if (res.data.status === "SUCCESS") {
-
-              this.$http.get(this.$store.state.host + '/cattle/childbirth/list', {
+              this.$http.get(this.$store.state.HOST + '/cattle/childbirth/list', {
                 params: {
                   entityManagementNumber: this.entityManagementNumber,
                   entityIdentificationNumber: this.entityIdentificationNumber
                 }
               }).then(({data}) => {
-                this.calvesManagementSet = data.detail.data
+                this.calvesManagementSet = data.detail.contents
               })
-
             }
-
           }).catch((error) => {
           console.log(error)
         })
@@ -599,7 +594,7 @@
       }
       , calvesDetail: function (entityNumber, identityNumber, seq) {
 
-        this.$http.get(this.$store.state.host + '/cattle/childbirth/detail', {
+        this.$http.get(this.$store.state.HOST + '/cattle/childbirth/detail', {
           params: {
             entityManagementNumber: entityNumber,
             entityIdentificationNumber: identityNumber,
@@ -608,7 +603,7 @@
         }).then(({data}) => {
 
 
-          this.calvesManagement = data.detail.data
+          this.calvesManagement = data.detail.contents
           this.$refs['calves-modal'].show()
 
 
@@ -618,12 +613,11 @@
         this.diseaseTreatment.diseaseTreatmentPK.entityManagementNumber = this.entityManagementNumber
         this.diseaseTreatment.diseaseTreatmentPK.entityIdentificationNumber = this.entityIdentificationNumber
 
-        this.$http.put(this.$store.state.host + '/cattle/disease_treatment/save', this.diseaseTreatment)
+        this.$http.put(this.$store.state.HOST + '/cattle/disease_treatment/save', this.diseaseTreatment)
           .then((res) => {
 
             if (res.data.status === "SUCCESS") {
-
-              this.$http.get(this.$store.state.host + '/cattle/disease_treatment/list', {
+              this.$http.get(this.$store.state.HOST + '/cattle/disease_treatment/list', {
                 params: {
                   entityManagementNumber: this.entityManagementNumber,
                   entityIdentificationNumber: this.entityIdentificationNumber
@@ -631,20 +625,17 @@
               }).then(({data}) => {
                 console.log('data =', data)
                 if (data.status === "SUCCESS") {
-                  this.diseaseTreatmentSet = data.detail.data
+                  this.diseaseTreatmentSet = data.detail.contents
                 }
-
               })
-
             }
-
           }).catch((error) => {
           console.log(error)
         })
 
       }, diseaseDetail: function (entityNumber, identityNumber, seq) {
 
-        this.$http.get(this.$store.state.host + '/cattle/disease_treatment/detail', {
+        this.$http.get(this.$store.state.HOST + '/cattle/disease_treatment/detail', {
           params: {
             entityManagementNumber: entityNumber,
             entityIdentificationNumber: identityNumber,
@@ -655,17 +646,23 @@
           if (data.status === 'SUCCESS') {
 
             debugger
-            this.diseaseTreatment = data.detail.data
+            this.diseaseTreatment = data.detail.contents
             this.$refs['disease-modal'].show()
           }
 
         })
       }, cattleList() {
+
         this.$router.go(-1)
+
       }, calvesResetModal() {
+
         this.calvesManagement = {calvesManagementPK: {}}
+
       }, diseaseResetModal() {
+
         this.diseaseTreatment = {diseaseTreatmentPK: {}}
+
       }
 
     }

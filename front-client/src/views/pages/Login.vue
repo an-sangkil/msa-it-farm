@@ -35,7 +35,7 @@
             <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
               <div class="card-body text-center">
                 <div>
-                  <h2>Sign up</h2>
+                  <h2>Sign up {{$t('message')}}</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   <button class="btn btn-lg btn-outline-light mt-3" type="button" v-on:click="registerForm()">Register Now!</button>
                 </div>
@@ -75,12 +75,14 @@
           password: this.$data.password
         }
 
-        this.$http.post(this.$store.state.host + "/account/sign_in", data)
+        this.$http.post(this.$store.state.HOST + "/account/sign_in", data)
           .then((res) => {
             console.log('data =', res.data)
             let data = res.data;
             if (data.status === 'SUCCESS') {
-              // TODO SESSION CREATION
+              let userDetails = data.detail.contents
+              console.log(userDetails)
+              this.$store.commit('createAuthentication', {auth: true , userDetails: userDetails })
               this.$router.push('/dashboard')
             } else {
               console.log(`login 실패 = ${this.$data.userId}`)
@@ -91,7 +93,7 @@
           console.log('login fail message ', error)
         });
       },
-      registerForm: function(){
+      registerForm: function () {
         this.$router.push('/pages/register')
       }
     }

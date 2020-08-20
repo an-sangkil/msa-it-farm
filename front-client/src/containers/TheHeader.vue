@@ -74,9 +74,9 @@
     <div class="c-subheader px-3">
       <!-- Breadcrumb-->
       <ol class="breadcrumb border-0 m-0">
-        <li class="breadcrumb-item">{{$store.state.home}}</li>
-        <li class="breadcrumb-item"><a href="#">{{$store.state.title}}</a></li>
-        <li class="breadcrumb-item active">{{$store.state.subtitle}}</li>
+        <li class="breadcrumb-item">{{$store.state.HOME}}</li>
+        <li class="breadcrumb-item"><a href="#">{{$store.state.TITLE}}</a></li>
+        <li class="breadcrumb-item active">{{$store.state.SUBTITLE}}</li>
         <!-- Breadcrumb Menu-->
       </ol>
     </div>

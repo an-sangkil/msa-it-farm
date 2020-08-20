@@ -7,10 +7,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    home: 'HOME',
-    title: 'View',
-    subtitle: 'Dashboard',
-    host: process.env.VUE_APP_API_SERVER_HOST,
+    HOME: 'HOME',
+    TITLE: 'View',
+    SUBTITLE: 'Dashboard',
+    HOST: process.env.VUE_APP_API_SERVER_HOST,
     pagingData: [],
     paginationValue: {},
     paginationObject: [],
@@ -19,17 +19,18 @@ export default new Vuex.Store({
     VARIANT: 'success',
     MESSAGE: 'save success',
     DISMISS_SECS: 5,
-    DISMISS_COUNT_DOWN: 0
+    DISMISS_COUNT_DOWN: 0,
+    IS_AUTH: false
   },
   mutations: {
     changeHome: (state, payload) => {
-      return state.home = payload.name
+      return state.HOME = payload.name
     },
     changeTitle: (state, payload) => {
-      return state.title = payload.name
+      return state.TITLE = payload.name
     },
     changeSubtitle: (state, payload) => {
-      return state.subtitle = payload.name
+      return state.SUBTITLE = payload.name
     },
     pagingProcess: function (state, payload) {
       try {
@@ -47,7 +48,7 @@ export default new Vuex.Store({
 
         const list = []
         for (let i = calculatorPagination.begin; i <= calculatorPagination.end; i++) {
-          const item = { value: i - 1, viewValue: i, active: pageNumber + 1 === i }
+          const item = {value: i - 1, viewValue: i, active: pageNumber + 1 === i}
           list.push(item)
         }
         state.paginationObject = list
@@ -55,29 +56,41 @@ export default new Vuex.Store({
         console.log('', e)
       }
     },
-    showAlert (state, { message, variant }) {
-      console.log('show alert 실행')
+    showAlert(state, {message, variant}) {
+
       state.DISMISS_COUNT_DOWN = state.DISMISS_SECS
       state.VARIANT = variant
       state.MESSAGE = message
     }
+    ,
+    createAuthentication: (state, {auth}) => {
+      state.IS_AUTH = auth
+    }
   },
+
   actions: {
-    pagingAction: (context, { actionUrl, parameters }) => {
+    pagingAction: (context, {actionUrl, parameters}) => {
       const state = context.state
       axios
-        .get(state.host + actionUrl,
+        .get(state.HOST + actionUrl,
           {
             params: parameters
           }
         )
         .then((res) => {
-          context.commit('pagingProcess', { data: res.data.detail.data })
+          context.commit('pagingProcess', {data: res.data.detail.contents})
         })
         .catch((error) => {
-
+          console.log('pagingAction error', e.messages)
         })
     }
   },
   modules: {}
+  ,
+  getters: {
+    isAuth: (state) => {
+      return state.IS_AUTH
+    }
+  }
+
 })

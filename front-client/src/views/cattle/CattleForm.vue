@@ -329,8 +329,6 @@
       let entityManagementNumber =  this.$route.query.entityNumber
       let entityIdentificationNumber =  this.$route.query.identityNumber
 
-      console.log("asdasdsad",entityManagementNumber)
-
       if (entityManagementNumber !== undefined) {
 
         this.detail(entityManagementNumber,entityIdentificationNumber)
@@ -359,15 +357,13 @@
           return false;
         }
 
-        console.log(data)
-
-        this.$http.put(this.$store.state.host + '/cattle/save', data)
+        this.$http.put(this.$store.state.HOST + '/cattle/save', data)
           .then((res) => {
 
             console.log(res)
             if (res.data.status === "SUCCESS") {
-              let entityNumber = res.data.detail.data.localBeefManagementPK.entityManagementNumber
-              let identityNumber = res.data.detail.data.localBeefManagementPK.entityIdentificationNumber
+              let entityNumber = res.data.detail.contents.localBeefManagementPK.entityManagementNumber
+              let identityNumber = res.data.detail.contents.localBeefManagementPK.entityIdentificationNumber
               this.$router.push(`/cattle/cattleDetail?entityNumber=${entityNumber}&identityNumber=${identityNumber}`)
               this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
             }
@@ -422,8 +418,8 @@
 
       },
       detail :function (entityNumber, identityNumber) {
-        let actionURL = `${this.$store.state.host}/cattle/detail?`
-        console.log(actionURL)
+        let actionURL = `${this.$store.state.HOST}/cattle/detail?`
+
         this.$http.get(actionURL, {
           params: {
             entityManagementNumber: entityNumber,
@@ -432,7 +428,7 @@
         }).then((res) => {
 
           console.log(res)
-          let responseData = res.data.detail.data
+          let responseData = res.data.detail.contents
 
           this.entityIdentificationNumber = responseData.localBeefManagementPK.entityIdentificationNumber
           this.identityNumberOne = this.entityIdentificationNumber.substring(0,3)

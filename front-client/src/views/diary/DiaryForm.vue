@@ -166,15 +166,15 @@
 
         console.log(data)
 
-        this.$http.put(this.$store.state.host + '/diary/save', data, {
+        this.$http.put(this.$store.state.HOST + '/diary/save', data, {
           headers: {"Content-Type": "application/json"}
         })
           .then((res) => {
             console.log(res.data)
             if (res.data.status === "SUCCESS") {
 
-              let uuid = res.data.detail.data.uuid
-              let seq = res.data.detail.data.seq
+              let uuid = res.data.detail.contents.uuid
+              let seq = res.data.detail.contents.seq
 
               this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
 
@@ -189,7 +189,7 @@
 
 
       }, scheduleDetailView: function () {
-        let actionURL = `${this.$store.state.host}/diary/detail?`
+        let actionURL = `${this.$store.state.HOST}/diary/detail?`
 
         console.log(actionURL)
         this.$http.get(actionURL, {
@@ -199,8 +199,7 @@
           }
         }).then((res) => {
 
-          let scheduleData = res.data.detail.data
-          scheduleData = res.data.detail.data
+          let scheduleData = res.data.detail.contents
           this.uuid = scheduleData.uuid
           this.seq = scheduleData.seq
           this.standardDate = scheduleData.standardDate

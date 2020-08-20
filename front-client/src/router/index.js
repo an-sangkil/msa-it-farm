@@ -10,6 +10,7 @@ import DiaryView from '../views/diary/DiaryView'
 
 // Views - Pages
 import NotFound from '../components/common/NotFound'
+import Store from '../store'
 
 // Containers
 const TheContainer = () => import('../containers/TheContainer')
@@ -24,11 +25,36 @@ const Register = () => import('../views/pages/Register')
 
 Vue.use(VueRouter)
 
+
+const rejectAuth = (to, from, next) => {
+  console.log('rejectAuth  Store.getters.isAuth : ', Store.getters.isAuth)
+  if (Store.getters.isAuth === true) {
+    alert('이미 로그인 되었습니다.')
+    next()
+  } else {
+    // 로그인 페이지로 이동
+    next('/');
+  }
+}
+
+const requireAuth = (to, from, next) => {
+
+  console.log('requireAuth  Store.getters.isAuth : ', Store.getters.isAuth)
+
+  if (Store.getters.isAuth === false) {
+    alert("로그인 필요한 기능 입니다.")
+    next('/')
+  } else {
+    next()
+  }
+}
+
 const routes = [
   {
     path: '/',
     name: 'LoginPage',
-    redirect: '/pages/login'
+    redirect: '/pages/login',
+    beforeEnter: rejectAuth,
   },
   {
     path: '*',
@@ -38,6 +64,7 @@ const routes = [
     path: '/dashboard',
     name: 'HomePage',
     redirect: '/dashboard/dashboardView',
+    beforeEnter: requireAuth,
     component: TheContainer,
     children: [
       {
@@ -50,7 +77,7 @@ const routes = [
         redirect: '/cattle/cattleList',
         name: 'Cattle',
         component: {
-          render (c) {
+          render(c) {
             return c('router-view')
           }
         },
@@ -77,7 +104,7 @@ const routes = [
         redirect: '/diary/diaryList',
         name: 'Diary',
         component: {
-          render (c) {
+          render(c) {
             return c('router-view')
           }
         },
@@ -104,7 +131,7 @@ const routes = [
         redirect: '/base/cards',
         name: 'Base',
         component: {
-          render (c) {
+          render(c) {
             return c('router-view')
           }
         }
@@ -116,7 +143,7 @@ const routes = [
     redirect: '/pages/404',
     name: 'Pages',
     component: {
-      render (c) {
+      render(c) {
         return c('router-view')
       }
     },
@@ -134,7 +161,8 @@ const routes = [
       {
         path: 'login',
         name: 'Login',
-        component: Login
+        component: Login,
+        beforEnter: rejectAuth
       },
       {
         path: 'register',
@@ -145,23 +173,18 @@ const routes = [
   }
 ]
 
-const requireAuth = () => (from, to, next) => {
-
-}
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
 
   // 추가분
   linkActiveClass: 'active',
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes
 })
 
-// router.beforeEach(async (to, from, next)=>{
-// alert('로그인 해주세요');
-// return next('/login');
-// })
+router.beforeEach(async (to, from, next) => {
+  next()
+})
 
 export default router

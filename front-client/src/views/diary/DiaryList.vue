@@ -237,7 +237,7 @@
 
         console.log(this.startDate, this.endDate)
 
-        this.$http.get(this.$store.state.host + '/diary/list', {
+        this.$http.get(this.$store.state.HOST + '/diary/list', {
           params: {
             start_date: this.startDate,
             end_date: this.endDate
@@ -245,7 +245,7 @@
         })
           .then((res) => {
             console.log(res.data)
-            this.scheduleData = res.data.detail.data
+            this.scheduleData = res.data.detail.contents
 
           }).catch((error) => {
           console.log(error)

@@ -40,8 +40,14 @@ vue init webpack frontend
 
 ### plug-in 설치 
 ```shell script
+# Vue bootstrap 
 npm install vue bootstrap-vue bootstrap
+# Date 라이브러리
 npm install moment --save
+# 달력(날짜) 라이브러리 
 npm install vue2-datepicker --save
+# 다국어 라이브러리 
 vue add i18n  
+# JWT 암호화 라이브러리
+npm install jsrsasign
 ```
