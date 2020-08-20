@@ -42,5 +42,6 @@ vue init webpack frontend
 ```shell script
 npm install vue bootstrap-vue bootstrap
 npm install moment --save
-npm install vue2-datepicker --save 
+npm install vue2-datepicker --save
+vue add i18n  
 ```
