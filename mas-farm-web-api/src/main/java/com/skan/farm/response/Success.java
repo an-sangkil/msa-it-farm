@@ -27,13 +27,13 @@ public class Success<T> extends AbstractResponseData<T> {
     super();
     // 성공시 기본 CODE 1000
     super.code = 1000;
-    super.data = t;
+    super.contents = t;
   }
 
   public Success(int code,T t) {
     super();
     super.code = code;
-    super.data = t;
+    super.contents = t;
   }
 
 }

@@ -26,6 +26,6 @@ public abstract class AbstractResponseData<T> {
   /**
    * 상세 데이터 정보
    */
-  protected T data;
+  protected T contents;
 
 }

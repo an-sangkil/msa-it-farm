@@ -26,13 +26,13 @@ public class Error<T> extends AbstractResponseData<T> {
     super();
     // 실패시 기본 CODE 2000
     super.code = 2000;
-    super.data = t;
+    super.contents = t;
   }
 
   public Error(int code,T t) {
     super();
     super.code = code;
-    super.data = t;
+    super.contents = t;
   }
 
 
