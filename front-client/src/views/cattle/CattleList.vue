@@ -107,6 +107,7 @@
                   <th>관리번호</th>
                   <th>사육방</th>
                   <th>분만횟수</th>
+                  <th>수정횟수</th>
                   <th>분만예정일</th>
                   <th>암수구분</th>
                   <th>생년월일</th>
@@ -131,7 +132,8 @@
                     </a>
                   </td>
                   <td>{{ item.roomNumber == null ? '-':item.roomNumber}}</td>
-                  <td>{{ item.calvesCount}}</td>
+                  <td>{{ item.calvesCount-1}}</td>
+                  <td>{{ item.inseminationCount}}</td>
                   <td>{{ item.expectedDateChildbirth }}</td>
                   <td>{{ item.gender }}</td>
                   <td>{{ item.birthDay }}</td>

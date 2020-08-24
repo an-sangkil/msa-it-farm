@@ -132,10 +132,16 @@ public class LocalBeefManagement implements Serializable {
     private Boolean deleteYn;
 
     /**
-     * 수정/분만
+     * 분만 횟수
      */
     @Transient
     private String calvesCount;
+
+    /**
+     * 수정 횟수
+     */
+    @Transient
+    private String inseminationCount;
 
     /** 개월수 */
     @Transient
