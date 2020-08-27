@@ -12,7 +12,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">standardDate</label>
+                    <label class="col-md-3 col-form-label">날짜</label>
                     <div class="col-md-9">
                       <input class="form-control" id="uuid" type="hidden" name="text-input" v-model="uuid">
                       <input class="form-control" id="seq" type="hidden" name="text-input" v-model="seq">
@@ -24,7 +24,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">todayWeatherCode</label>
+                    <label class="col-md-3 col-form-label">날씨</label>
                     <div class="col-md-9">
                       <b-form-select v-model="todayWeatherCode" :options="weatherOptions"></b-form-select>
                       <span class="help-block">This is a weather Options </span>
@@ -34,7 +34,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">minimumTemperature</label>
+                    <label class="col-md-3 col-form-label">최저온도</label>
                     <div class="col-md-9 row">
                       <div class="col-md-6">
                         <b-form-select v-model="minTemperatureType" :options="temperatureOption"></b-form-select>
@@ -47,7 +47,7 @@
                     </div>
                   </div>
                   <div class="form-group col-md-4 row">
-                    <label class="col-md-3 col-form-label">maximumTemperature</label>
+                    <label class="col-md-3 col-form-label">최고온도</label>
                     <div class="col-md-9 row">
                       <div class="col-md-6">
                         <b-form-select v-model="maxTemperatureType" :options="temperatureOption"></b-form-select>
@@ -64,7 +64,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12 row">
-                    <label class="col-md-1 col-form-label">subject</label>
+                    <label class="col-md-1 col-form-label">제목</label>
                     <div class="col-md-11">
                       <input class="form-control" id="text-input1" type="text" name="text-input" placeholder="subject" v-model="subject">
                       <span class="help-block">This is a help text</span>
@@ -74,7 +74,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-12 row">
-                    <label class="col-md-1 col-form-label">content</label>
+                    <label class="col-md-1 col-form-label">내용</label>
                     <div class="col-md-11">
                       <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Content.." v-model="content"></textarea>
                     </div>
@@ -87,7 +87,10 @@
               <!--<button class="btn btn-sm btn-info" > Submit</button>-->
               <div class="row justify-content-end">
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                  <button class="btn btn-block btn-outline-info" type="submit" v-on:click="scheduleSave()">submit</button>
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="$router.go(-1)">취소</button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="scheduleSave()">저장</button>
                 </div>
               </div>
               <!--<button class="btn btn-sm btn-danger" type="reset"> Reset</button>-->

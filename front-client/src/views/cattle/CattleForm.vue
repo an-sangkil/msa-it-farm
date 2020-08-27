@@ -11,7 +11,7 @@
               <form class="form-horizontal" action="" method="post" enctype="multipart/form-data" v-on:submit.prevent="cattleSave">
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="entityIdentificationNumber1"><span style="color: #ff0000">*</span> identificationNumber</label>
+                    <label class="col-md-3 col-form-label" for="entityIdentificationNumber1"><span style="color: #ff0000">*</span> 개체식별번호</label>
                     <div class="col-md-9">
                       <b-row>
                         <b-col sm="3"><input class="form-control" id="entityIdentificationNumber1" type="number"  placeholder="Text" v-model="identityNumberOne"  v-bind:readonly="isReadonly" min="0" max="999"></b-col>
@@ -22,7 +22,7 @@
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label"><span style="color: red">*</span> entityNumber</label>
+                    <label class="col-md-3 col-form-label"><span style="color: red">*</span> 관리번호</label>
                     <div class="col-md-9">
                       <input class="form-control" id="entityManagementNumber" type="number" name="entityManagementNumber" placeholder="Text" v-model="entityManagementNumber" readonly><span class="help-block">This is a help text</span>
                     </div>
@@ -31,13 +31,13 @@
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">parentPapaNo</label>
+                    <label class="col-md-3 col-form-label">부 개체번호</label>
                     <div class="col-md-9">
                       <input class="form-control" id="parentPapaNo" type="number" name="parentPapaNo" placeholder="Text" v-model="parentPapaNo"><span class="help-block">This is a help text</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">parentMomNo</label>
+                    <label class="col-md-3 col-form-label">모 개체번호</label>
                     <div class="col-md-9">
                       <input class="form-control" id="parentMomNo" type="number" name="parentMomNo" placeholder="Text" v-model="parentMomNo"><span class="help-block">This is a help text</span>
                     </div>
@@ -46,14 +46,14 @@
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" >birthDay</label>
+                    <label class="col-md-3 col-form-label" >태어난날</label>
                     <div class="col-md-9">
                       <date-picker v-model="birthDay" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select birthDay" style="width: 100%"></date-picker>
                       <span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" >enter Date</label>
+                    <label class="col-md-3 col-form-label" >입식일</label>
                     <div class="col-md-9">
                       <date-picker v-model="enterDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select enterDate" style="width: 100%"></date-picker>
                       <span class="help-block">Please enter a valid date</span>
@@ -63,14 +63,14 @@
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" >earTagDate</label>
+                    <label class="col-md-3 col-form-label" >귀표장착일</label>
                     <div class="col-md-9">
                       <date-picker v-model="earTagDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select earTagDate" style="width: 100%"></date-picker>
                       <span class="help-block">Please enter a valid date</span>
                     </div>
                   </div>
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" >castrationDate</label>
+                    <label class="col-md-3 col-form-label" >거세일</label>
                     <div class="col-md-9">
                       <date-picker v-model="castrationDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="Select castrationDate" style="width: 100%"></date-picker>
                       <span class="help-block">Please enter a valid date</span>
@@ -82,7 +82,7 @@
                 <div class="row">
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">gender</label>
+                    <label class="col-md-3 col-form-label">성별</label>
                     <div class="col-md-9 col-form-label">
                       <div class="form-check form-check-inline mr-1">
                         <input class="form-check-input" id="gender1" type="radio" value="MALE" name="gender" v-model="gender">
@@ -96,11 +96,11 @@
                   </div>
 
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label">sellYn</label>
+                    <label class="col-md-3 col-form-label">판매여부</label>
                     <div class="col-md-9">
                       <select class="form-control" id="sellYn" name="sellYn" v-model="sellYn">
-                        <option value="Y">Option Y</option>
-                        <option value="N">Option N</option>
+                        <option value="Y">O</option>
+                        <option value="N">X</option>
                       </select>
                     </div>
                   </div>
@@ -108,7 +108,7 @@
 
                 <div class="row">
                   <div class="form-group col-md-6 row">
-                    <label class="col-md-3 col-form-label" for="roomNumber">roomNumber</label>
+                    <label class="col-md-3 col-form-label" for="roomNumber">사육방</label>
                     <div class="col-md-9">
                       <b-input v-model="roomNumber" id="roomNumber"></b-input>
                       <span class="help-block">Please enter a valid roomNumber</span>
@@ -145,13 +145,13 @@
 
               <div class="row">
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">buyStoreName</label>
+                  <label class="col-md-3 col-form-label">구입처</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleBuyInformation.buyStoreName">
                   </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">buyDate</label>
+                  <label class="col-md-3 col-form-label">구입일</label>
                   <div class="col-md-9">
                     <date-picker v-model="cattleBuyInformation.buyDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="buyDate"></date-picker>
                   </div>
@@ -160,13 +160,13 @@
 
               <div class="row">
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">buySellPhoneNumber</label>
+                  <label class="col-md-3 col-form-label">전화번호(개인)</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleBuyInformation.buySellPhoneNumber">
                   </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">buyPhoneNumber</label>
+                  <label class="col-md-3 col-form-label">전화번호(사무실)</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleBuyInformation.buyPhoneNumber">
                   </div>
@@ -175,7 +175,7 @@
 
               <div class="row">
                 <div class="form-group col-md-12 row">
-                  <label class="col-md-2 col-form-label">buyNote</label>
+                  <label class="col-md-2 col-form-label">구입내역</label>
                   <div class="col-md-10">
                     <input class="form-control" type="text" v-model="cattleBuyInformation.buyNote">
                   </div>
@@ -199,13 +199,13 @@
 
               <div class="row">
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">storeName</label>
+                  <label class="col-md-3 col-form-label">판매처</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleSellStoreInformation.storeName">
                   </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">sellDate</label>
+                  <label class="col-md-3 col-form-label">판매일자</label>
                   <div class="col-md-9">
                     <date-picker v-model="cattleSellStoreInformation.sellDate" value-type="format" format="YYYY-MM-DD" type="date" placeholder="sellDate" style="width: 100%"></date-picker>
                   </div>
@@ -214,13 +214,13 @@
 
               <div class="row">
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">sellNote</label>
+                  <label class="col-md-3 col-form-label">판매정보</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleSellStoreInformation.sellNote">
                   </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">sellPhoneNumber</label>
+                  <label class="col-md-3 col-form-label">판매자 전화번호</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleSellStoreInformation.sellPhoneNumber">
                   </div>
@@ -229,13 +229,13 @@
 
               <div class="row">
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">sellingPrice</label>
+                  <label class="col-md-3 col-form-label">판매가격</label>
                   <div class="col-md-9">
                     <input class="form-control" type="number" v-model="cattleSellStoreInformation.sellingPrice">
                   </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">liveweight</label>
+                  <label class="col-md-3 col-form-label">생체중</label>
                   <div class="col-md-9">
                     <input class="form-control" type="number" v-model="cattleSellStoreInformation.liveweight">
                   </div>
@@ -244,13 +244,13 @@
 
               <div class="row">
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">dressedWeight</label>
+                  <label class="col-md-3 col-form-label">도체중</label>
                   <div class="col-md-9">
                     <input class="form-control" type="number" v-model="cattleSellStoreInformation.dressedWeight">
                   </div>
                 </div>
                 <div class="form-group col-md-6 row">
-                  <label class="col-md-3 col-form-label">beefGrade</label>
+                  <label class="col-md-3 col-form-label">등급</label>
                   <div class="col-md-9">
                     <input class="form-control" type="text" v-model="cattleSellStoreInformation.beefGrade">
                   </div>
