@@ -83,7 +83,7 @@ public class DiseaseTreatment implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate cureDate;
 
-	/** 질병 명. */
+	/** 질병 명(증상). */
 	private String diseaseName;
 
 	/** 약재명. */
@@ -94,6 +94,9 @@ public class DiseaseTreatment implements Serializable {
 
 	/** 투여방법(근육주사, 피하 주사). */
 	private String injectionMethod;
+
+	/** 비고 */
+	private String remark;
 
 	/** 휴약 기간 만료일. */
 	@JsonDeserialize(using = LocalDateDeserializer.class)

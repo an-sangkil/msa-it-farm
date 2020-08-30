@@ -91,7 +91,7 @@ public class RouterCattleManagement {
                         predicate.setGender(GenderCode.valueOf(s));
                 });
                 predicate.setNumberOfMonth(numberOfMonth);
-                predicate.setRoomNumber(roomNumber);
+                predicate.setLocation(roomNumber);
 
                 if (!birthDate.equals("")) predicate.setBetweenBirthDate(birthDate);
 

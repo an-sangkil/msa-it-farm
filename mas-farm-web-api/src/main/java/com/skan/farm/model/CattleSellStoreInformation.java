@@ -84,6 +84,11 @@ public class CattleSellStoreInformation implements Serializable {
 	private String beefGrade;
 
 	/**
+	 * 개월수(팔린 날짜 당일의 개월수)
+	 */
+	private String numberOfMonth;
+
+	/**
 	 * 생성일시.
 	 */
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)

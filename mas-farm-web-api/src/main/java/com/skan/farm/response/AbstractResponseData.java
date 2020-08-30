@@ -2,6 +2,7 @@ package com.skan.farm.response;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <pre>
@@ -16,6 +17,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public abstract class AbstractResponseData<T> {
 
   /**

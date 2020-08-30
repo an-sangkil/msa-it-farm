@@ -18,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Setter
 @Slf4j
-@ToString
+@ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Response<T> {
+public class Response<T> extends AbstractResponse{
 
 
     /**
@@ -57,6 +57,28 @@ public class Response<T> {
         this.detail = detail;
     }
 
+    public Response<T> OK(T t){
+        this.setStatus(ResponseCode.SUCCESS);
+        this.setDetail(new Success<>(t));
+        return this;
+    }
+
+    public Response<T> OK(){
+        this.setStatus(ResponseCode.SUCCESS);
+        return this;
+    }
+
+    public Response<T> ERROR(T t){
+        this.setStatus(ResponseCode.SUCCESS);
+        this.setDetail(new Error<>(t));
+        return this;
+    }
+
+    public Response<T> ERROR(){
+        this.setStatus(ResponseCode.SUCCESS);
+        return this;
+    }
+
     /**
      * 응답 코드
      */
@@ -70,5 +92,7 @@ public class Response<T> {
             return code;
         }
     }
+
+
 
 }

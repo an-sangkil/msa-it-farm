@@ -125,6 +125,8 @@ logging:
     com.skan: debug
     org.springframework : info
     org.hibernate.type.descriptor.sql: trace
+    org.jooq.tools.LoggerListener: debug
+    org.jooq: debug
     web: info
 
 ---

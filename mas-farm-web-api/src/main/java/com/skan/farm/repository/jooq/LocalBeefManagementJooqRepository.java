@@ -74,7 +74,7 @@ public class LocalBeefManagementJooqRepository {
         log.debug("sql = : {}", sql);
         Integer totalCount = jdbcTemplate.queryForObject(sql, Integer.class);
 
-        // 분만정보(수정횟수..etc)
+        //'/?분만정보(수정횟수..etc)
         Field<String> calves = dslContext.select(
                 DSL.concat(
                         jCalvesManagement.FERTILIZATION_INDEX, DSL.concat("@@")
@@ -157,7 +157,7 @@ public class LocalBeefManagementJooqRepository {
                             .parentPapaNo((String) stringObjectMap.get("PARENT_PAPA_NO"))
                             .sellYn((String) stringObjectMap.get("SELL_YN"))
                             .gender(stringObjectMap.get("GENDER") != null ? GenderCode.valueOf(stringObjectMap.get("GENDER").toString()) : GenderCode.MALE)
-                            .roomNumber((String) stringObjectMap.get("ROOM_NUMBER"))
+                            .location((String) stringObjectMap.get("ROOM_NUMBER"))
                             .createdTime(stringObjectMap.get("CREATED_TIME") != null ? ((java.sql.Timestamp) stringObjectMap.get("CREATED_TIME")).toLocalDateTime() : null)
                             .build();
 
@@ -219,8 +219,8 @@ public class LocalBeefManagementJooqRepository {
             conditions.add(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER.like("%" + predicate.getLocalBeefManagementPK().getEntityIdentificationNumber() + "%"));
         }
 
-        if (!StringUtils.isEmpty(predicate.getRoomNumber())) {
-            conditions.add(jLocalBeefManagement.ROOM_NUMBER.like("%" + predicate.getRoomNumber() + "%"));
+        if (!StringUtils.isEmpty(predicate.getLocation())) {
+            conditions.add(jLocalBeefManagement.ROOM_NUMBER.like("%" + predicate.getLocation() + "%"));
         }
 
         if (!StringUtils.isEmpty(predicate.getBetweenBirthDate())) {
