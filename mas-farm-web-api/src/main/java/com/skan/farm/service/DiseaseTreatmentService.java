@@ -1,6 +1,6 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.DiseaseTreatment;
+import com.skan.farm.domain.entity.DiseaseTreatment;
 import com.skan.farm.repository.jpa.DiseaseTreatmentJpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

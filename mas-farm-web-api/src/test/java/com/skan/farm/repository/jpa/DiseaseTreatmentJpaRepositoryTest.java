@@ -1,9 +1,9 @@
 package com.skan.farm.repository.jpa;
 
 import com.skan.farm.code.GenderCode;
-import com.skan.farm.model.DiseaseTreatment;
-import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.domain.entity.DiseaseTreatment;
+import com.skan.farm.domain.entity.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import com.skan.farm.repository.TestCodeGeneration;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <pre>

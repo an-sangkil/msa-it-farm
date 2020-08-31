@@ -1,4 +1,4 @@
-package com.skan.farm.model;
+package com.skan.farm.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -10,14 +10,12 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * 일정관리 테이블 모델 클래스.
@@ -34,17 +32,24 @@ import java.util.Date;
 public class Diary implements Serializable {
 
     @Builder
-    public Diary(String uuid, Short seq, LocalDate standardDate, String subject, String content, String todayWeatherCode, Short minimumTemperature, Short maximumTemperature, String publicYn) {
+    public Diary(String uuid, Short seq, LocalDate standardDate, String subject, String todayContent, String tomorrowTodo, String todayWeatherCode, String minTemperatureType, Short minimumTemperature, String maxTemperatureType, Short maximumTemperature, LocalDateTime createdTime, LocalDateTime modifiedTime, String publicYn, String userId) {
         this.uuid = uuid;
         this.seq = seq;
         this.standardDate = standardDate;
         this.subject = subject;
-        this.content = content;
+        this.todayContent = todayContent;
+        this.tomorrowTodo = tomorrowTodo;
         this.todayWeatherCode = todayWeatherCode;
+        this.minTemperatureType = minTemperatureType;
         this.minimumTemperature = minimumTemperature;
+        this.maxTemperatureType = maxTemperatureType;
         this.maximumTemperature = maximumTemperature;
+        this.createdTime = createdTime;
+        this.modifiedTime = modifiedTime;
         this.publicYn = publicYn;
+        this.userId = userId;
     }
+
 
     /**
      * uuid.
@@ -75,14 +80,23 @@ public class Diary implements Serializable {
     private String subject;
 
     /**
-     * 내용.
+     *  오늘 한일 내용.
      */
-    private String content;
+    @Column(length = 2048)
+    private String todayContent;
+
+
+    /**
+     *  오늘 내일 할일 .
+     */
+    @Column(length = 2048)
+    private String tomorrowTodo;
 
 
     /**
      * 오늘 날씨.
      */
+    @Column(length = 16)
     private String todayWeatherCode;
 
     /**
@@ -94,6 +108,7 @@ public class Diary implements Serializable {
     /**
      * 최저 기온.
      */
+    @Column(length = 16)
     private Short minimumTemperature;
 
     /**
@@ -106,6 +121,7 @@ public class Diary implements Serializable {
     /**
      * 최고온도.
      */
+    @Column(length = 16)
     private Short maximumTemperature;
 
     /**
@@ -146,6 +162,12 @@ public class Diary implements Serializable {
      */
     @Transient
     private GroupMember groupMember;
+
+    /**
+     * 사용자 아이디.
+     */
+    @Column(unique = true,length = 32)
+    private String userId;
 
 
 }

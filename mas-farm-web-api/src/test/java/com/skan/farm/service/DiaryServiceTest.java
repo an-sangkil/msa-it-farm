@@ -1,6 +1,6 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.Diary;
+import com.skan.farm.domain.entity.Diary;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +37,8 @@ class DiaryServiceTest {
                 .uuid(UUID.randomUUID().toString())
                 .standardDate(LocalDate.now())
                 .subject("zzzz")
-                .content("ggggg")
+                .today_content("ggggg")
+                .tomorrow_todo("lll")
                 .build();
         diaryService.diarySave(diary);
     }
@@ -48,7 +49,8 @@ class DiaryServiceTest {
         Diary diary = Diary.builder()
                 .uuid("4d96f3dc-1fc2-4de2-b23d-decec26049d9")
                 .subject("zzzzlllllllllll")
-                .content("수정 수정 ")
+                .today_content("수정 수정 ")
+                .tomorrow_todo("내일 할일 수정수정 ")
                 .build();
         diaryService.diarySave(diary);
     }

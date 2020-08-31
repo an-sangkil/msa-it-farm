@@ -1,7 +1,7 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.CattleBuyInformation;
-import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.domain.entity.CattleBuyInformation;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

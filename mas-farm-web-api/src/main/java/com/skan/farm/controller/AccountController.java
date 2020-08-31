@@ -1,6 +1,6 @@
 package com.skan.farm.controller;
 
-import com.skan.farm.model.Users;
+import com.skan.farm.domain.entity.Users;
 import com.skan.farm.repository.jpa.UserJpaRepository;
 import com.skan.farm.response.Error;
 import com.skan.farm.response.Response;

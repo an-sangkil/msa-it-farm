@@ -1,7 +1,10 @@
 package com.skan.farm.router;
 
 import com.skan.farm.code.GenderCode;
-import com.skan.farm.model.*;
+import com.skan.farm.domain.entity.CalvesManagement;
+import com.skan.farm.domain.entity.DiseaseTreatment;
+import com.skan.farm.domain.entity.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import com.skan.farm.paging.PageImpl;
 import com.skan.farm.paging.PageableRequest;
 import com.skan.farm.repository.jpa.CalvesManagementJpaRepository;
@@ -17,7 +20,6 @@ import com.skan.farm.utils.JsonUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -28,9 +30,7 @@ import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;

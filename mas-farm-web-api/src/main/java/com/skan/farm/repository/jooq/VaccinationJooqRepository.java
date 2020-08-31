@@ -1,7 +1,6 @@
 package com.skan.farm.repository.jooq;
 
-import com.skan.farm.domain.model.SalesStatus;
-import com.skan.farm.model.Vaccination;
+import com.skan.farm.domain.entity.Vaccination;
 import com.skan.farm.paging.PageImpl;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;

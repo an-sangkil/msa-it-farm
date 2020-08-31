@@ -1,14 +1,12 @@
 package com.skan.farm.utils;
 
 import com.skan.farm.code.GenderCode;
-import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.domain.entity.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 class JsonUtilsTest {

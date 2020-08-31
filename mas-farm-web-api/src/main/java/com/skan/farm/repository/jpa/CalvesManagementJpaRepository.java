@@ -1,6 +1,6 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.CalvesManagement;
+import com.skan.farm.domain.entity.CalvesManagement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

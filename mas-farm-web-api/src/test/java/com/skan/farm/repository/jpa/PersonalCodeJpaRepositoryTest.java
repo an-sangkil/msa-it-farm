@@ -1,10 +1,9 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.PersonalCode;
+import com.skan.farm.domain.entity.PersonalCode;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.parallel.Execution;
 
 /**
  * <pre>

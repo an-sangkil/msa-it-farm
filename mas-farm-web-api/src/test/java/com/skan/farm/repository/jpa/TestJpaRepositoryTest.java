@@ -1,6 +1,6 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.Users;
+import com.skan.farm.domain.entity.Users;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;

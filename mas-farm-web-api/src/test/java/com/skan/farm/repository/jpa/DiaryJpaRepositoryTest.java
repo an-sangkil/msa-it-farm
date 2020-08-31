@@ -1,6 +1,6 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.Diary;
+import com.skan.farm.domain.entity.Diary;
 import com.skan.farm.repository.TestCodeGeneration;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.AllArgsConstructor;

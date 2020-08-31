@@ -1,16 +1,13 @@
 package com.skan.farm.router;
 
-import com.skan.farm.model.Users;
-import org.jooq.User;
+import com.skan.farm.domain.entity.Users;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.function.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.IntStream;
 
 /**

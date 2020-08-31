@@ -1,6 +1,6 @@
 package com.skan.farm.controller;
 
-import com.skan.farm.model.Diary;
+import com.skan.farm.domain.entity.Diary;
 import com.skan.farm.response.Error;
 import com.skan.farm.response.Response;
 import com.skan.farm.response.Success;

@@ -1,6 +1,6 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.Diary;
+import com.skan.farm.domain.entity.Diary;
 import com.skan.farm.repository.jpa.DiaryJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

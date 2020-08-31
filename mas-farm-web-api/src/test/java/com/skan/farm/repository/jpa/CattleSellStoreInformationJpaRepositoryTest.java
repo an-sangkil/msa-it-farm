@@ -1,9 +1,9 @@
 package com.skan.farm.repository.jpa;
 
 import com.skan.farm.code.GenderCode;
-import com.skan.farm.model.CattleSellStoreInformation;
-import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.domain.entity.CattleSellStoreInformation;
+import com.skan.farm.domain.entity.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import com.skan.farm.repository.TestCodeGeneration;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <pre>

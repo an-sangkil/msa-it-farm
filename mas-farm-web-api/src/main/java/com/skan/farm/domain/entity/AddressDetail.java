@@ -1,4 +1,4 @@
-package com.skan.farm.model;
+package com.skan.farm.domain.entity;
 
 import lombok.Getter;
 import lombok.Setter;

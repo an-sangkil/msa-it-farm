@@ -1,16 +1,13 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.Users;
+import com.skan.farm.domain.entity.Users;
 import com.skan.farm.repository.TestCodeGeneration;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <pre>
