@@ -32,13 +32,13 @@ import java.time.LocalDateTime;
 public class Diary implements Serializable {
 
     @Builder
-    public Diary(String uuid, Short seq, LocalDate standardDate, String subject, String today_content, String tomorrow_todo, String todayWeatherCode, String minTemperatureType, Short minimumTemperature, String maxTemperatureType, Short maximumTemperature, LocalDateTime createdTime, LocalDateTime modifiedTime, String publicYn, String userId) {
+    public Diary(String uuid, Short seq, LocalDate standardDate, String subject, String todayContent, String tomorrowTodo, String todayWeatherCode, String minTemperatureType, Short minimumTemperature, String maxTemperatureType, Short maximumTemperature, LocalDateTime createdTime, LocalDateTime modifiedTime, String publicYn, String userId) {
         this.uuid = uuid;
         this.seq = seq;
         this.standardDate = standardDate;
         this.subject = subject;
-        this.today_content = today_content;
-        this.tomorrow_todo = tomorrow_todo;
+        this.todayContent = todayContent;
+        this.tomorrowTodo = tomorrowTodo;
         this.todayWeatherCode = todayWeatherCode;
         this.minTemperatureType = minTemperatureType;
         this.minimumTemperature = minimumTemperature;
@@ -83,14 +83,14 @@ public class Diary implements Serializable {
      *  오늘 한일 내용.
      */
     @Column(length = 2048)
-    private String today_content;
+    private String todayContent;
 
 
     /**
      *  오늘 내일 할일 .
      */
     @Column(length = 2048)
-    private String tomorrow_todo ;
+    private String tomorrowTodo;
 
 
     /**

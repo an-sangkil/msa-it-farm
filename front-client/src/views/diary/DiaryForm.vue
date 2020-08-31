@@ -76,7 +76,7 @@
                   <div class="form-group col-md-12 row">
                     <label class="col-md-1 col-form-label">내용</label>
                     <div class="col-md-11">
-                      <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Content.." v-model="content"></textarea>
+                      <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Content.." v-model="todayContent"></textarea>
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,8 @@
         seq: '',
         standardDate: '',
         subject: '',
-        content: '',
+        todayContent: '',
+        tomorrowTodo: '',
         todayWeatherCode: '',
         minTemperatureType: '',
         maxTemperatureType: '',

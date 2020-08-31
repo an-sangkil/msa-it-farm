@@ -21,7 +21,7 @@
 
                       <button class="btn btn-outline-info dropdown-toggle" :class="{active:searchDateType.active_three_month}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">월별</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin: 0px;">
-                        <div v-for="value in 12">
+                        <div v-for="value in 12" >
                           <a class="dropdown-item" href="#" @click="diaryPeriodCalculation(value)">{{value}}월</a>
                         </div>
 
