@@ -1,6 +1,6 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.Diary;
+import com.skan.farm.domain.entity.Diary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

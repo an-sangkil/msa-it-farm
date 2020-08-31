@@ -1,11 +1,9 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.CalvesManagement;
+import com.skan.farm.domain.entity.CalvesManagement;
 import com.skan.farm.repository.jooq.CalvesManagementJooqRepository;
 import com.skan.farm.repository.jpa.CalvesManagementJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

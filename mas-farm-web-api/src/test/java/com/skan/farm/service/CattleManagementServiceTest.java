@@ -1,6 +1,6 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagement;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @TestNonConfiguration

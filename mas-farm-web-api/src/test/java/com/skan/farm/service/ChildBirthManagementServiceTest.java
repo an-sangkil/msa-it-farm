@@ -1,6 +1,6 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.CalvesManagement;
+import com.skan.farm.domain.entity.CalvesManagement;
 import com.skan.farm.repository.TestNonConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * <pre>

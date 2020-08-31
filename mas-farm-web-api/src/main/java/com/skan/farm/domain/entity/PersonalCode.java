@@ -1,4 +1,4 @@
-package com.skan.farm.model;
+package com.skan.farm.domain.entity;
 
 import lombok.Data;
 import lombok.ToString;
@@ -7,9 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 개인코드 모델 클래스.

@@ -1,11 +1,10 @@
 package com.skan.farm.service;
 
-import com.skan.farm.model.CalvesManagement;
-import com.skan.farm.model.DiseaseTreatment;
-import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.domain.entity.CalvesManagement;
+import com.skan.farm.domain.entity.DiseaseTreatment;
+import com.skan.farm.domain.entity.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import com.skan.farm.paging.PageImpl;
-import com.skan.farm.paging.Page;
 import com.skan.farm.repository.jooq.LocalBeefManagementJooqRepository;
 import com.skan.farm.repository.jpa.LocalBeefManagementJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

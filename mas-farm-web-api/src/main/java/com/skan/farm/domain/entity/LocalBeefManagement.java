@@ -1,4 +1,4 @@
-package com.skan.farm.model;
+package com.skan.farm.domain.entity;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -109,10 +109,6 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 거세일.
      */
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate castrationDate;
 
     /**
@@ -152,6 +148,11 @@ public class LocalBeefManagement implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime expectedDateChildbirth;
 
+    /**
+     * 사용자 아이디.
+     */
+    @Column(unique = true,length = 32)
+    private String userId;
 
 
     /**

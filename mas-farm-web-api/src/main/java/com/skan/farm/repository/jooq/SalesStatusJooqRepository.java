@@ -3,14 +3,11 @@ package com.skan.farm.repository.jooq;
 import com.skan.farm.domain.model.SalesStatus;
 import com.skan.farm.domain.tables.JCattleSellStoreInformation;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
-import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.model.Users;
 import com.skan.farm.paging.PageImpl;
 import com.skan.farm.paging.Pageable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

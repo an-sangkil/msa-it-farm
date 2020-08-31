@@ -1,4 +1,4 @@
-package com.skan.farm.model;
+package com.skan.farm.domain.entity;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -1,6 +1,6 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.CommonCode;
+import com.skan.farm.domain.entity.CommonCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

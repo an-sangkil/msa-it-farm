@@ -1,6 +1,6 @@
 package com.skan.farm.repository;
 
-import com.skan.farm.model.Users;
+import com.skan.farm.domain.entity.Users;
 import io.r2dbc.spi.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.r2dbc.connectionfactory.R2dbcTransactionManager;

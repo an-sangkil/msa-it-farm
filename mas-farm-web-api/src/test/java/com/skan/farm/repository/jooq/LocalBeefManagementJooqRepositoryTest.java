@@ -1,6 +1,6 @@
 package com.skan.farm.repository.jooq;
 
-import com.skan.farm.model.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagement;
 import com.skan.farm.paging.PageImpl;
 import com.skan.farm.paging.PageableRequest;
 import lombok.RequiredArgsConstructor;

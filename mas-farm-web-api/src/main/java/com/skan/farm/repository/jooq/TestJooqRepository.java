@@ -1,7 +1,7 @@
 package com.skan.farm.repository.jooq;
 
 import com.skan.farm.domain.tables.JUsers;
-import com.skan.farm.model.Users;
+import com.skan.farm.domain.entity.Users;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;

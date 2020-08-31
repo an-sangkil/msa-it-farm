@@ -1,9 +1,8 @@
 package com.skan.farm.repository.jpa;
 
-import com.skan.farm.model.LocalBeefManagement;
-import com.skan.farm.model.LocalBeefManagementPK;
+import com.skan.farm.domain.entity.LocalBeefManagement;
+import com.skan.farm.domain.entity.LocalBeefManagementPK;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 /**
  * <pre>

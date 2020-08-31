@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -21,6 +24,8 @@ import java.time.LocalDate;
  * @version Copyright (C) 2020 by SKAN . All right reserved.
  * @since 2020-08-24
  */
+@Getter @Setter
+@ToString
 public class ObservationDiary {
 
     /**
