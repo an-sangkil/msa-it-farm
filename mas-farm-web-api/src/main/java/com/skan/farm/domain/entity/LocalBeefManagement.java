@@ -154,6 +154,8 @@ public class LocalBeefManagement implements Serializable {
     @Column(unique = true,length = 32)
     private String userId;
 
+    // 어미젖 상태
+    // 송아지 케어 성숙도(단계)
 
     /**
      * 생성일시.
