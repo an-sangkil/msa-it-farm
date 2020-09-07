@@ -8,20 +8,26 @@ import com.skan.farm.domain.tables.JCalvesManagement;
 import com.skan.farm.domain.tables.JCattleBuyInformation;
 import com.skan.farm.domain.tables.JCattleSellStoreInformation;
 import com.skan.farm.domain.tables.JCommonCode;
+import com.skan.farm.domain.tables.JDiary;
+import com.skan.farm.domain.tables.JDiseaseDetail;
 import com.skan.farm.domain.tables.JDiseaseTreatment;
 import com.skan.farm.domain.tables.JLocalBeefManagement;
+import com.skan.farm.domain.tables.JOestrus;
 import com.skan.farm.domain.tables.JPersonalCode;
-import com.skan.farm.domain.tables.JSchedule;
 import com.skan.farm.domain.tables.JUsers;
+import com.skan.farm.domain.tables.JVaccination;
 import com.skan.farm.domain.tables.records.JCalvesManagementRecord;
 import com.skan.farm.domain.tables.records.JCattleBuyInformationRecord;
 import com.skan.farm.domain.tables.records.JCattleSellStoreInformationRecord;
 import com.skan.farm.domain.tables.records.JCommonCodeRecord;
+import com.skan.farm.domain.tables.records.JDiaryRecord;
+import com.skan.farm.domain.tables.records.JDiseaseDetailRecord;
 import com.skan.farm.domain.tables.records.JDiseaseTreatmentRecord;
 import com.skan.farm.domain.tables.records.JLocalBeefManagementRecord;
+import com.skan.farm.domain.tables.records.JOestrusRecord;
 import com.skan.farm.domain.tables.records.JPersonalCodeRecord;
-import com.skan.farm.domain.tables.records.JScheduleRecord;
 import com.skan.farm.domain.tables.records.JUsersRecord;
+import com.skan.farm.domain.tables.records.JVaccinationRecord;
 
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
@@ -49,12 +55,17 @@ public class Keys {
     public static final UniqueKey<JCattleBuyInformationRecord> KEY_CATTLE_BUY_INFORMATION_PRIMARY = UniqueKeys0.KEY_CATTLE_BUY_INFORMATION_PRIMARY;
     public static final UniqueKey<JCattleSellStoreInformationRecord> KEY_CATTLE_SELL_STORE_INFORMATION_PRIMARY = UniqueKeys0.KEY_CATTLE_SELL_STORE_INFORMATION_PRIMARY;
     public static final UniqueKey<JCommonCodeRecord> KEY_COMMON_CODE_PRIMARY = UniqueKeys0.KEY_COMMON_CODE_PRIMARY;
+    public static final UniqueKey<JDiaryRecord> KEY_DIARY_PRIMARY = UniqueKeys0.KEY_DIARY_PRIMARY;
+    public static final UniqueKey<JDiaryRecord> KEY_DIARY_UK_91965AQPM84YUAHJJGBQYJX8A = UniqueKeys0.KEY_DIARY_UK_91965AQPM84YUAHJJGBQYJX8A;
+    public static final UniqueKey<JDiseaseDetailRecord> KEY_DISEASE_DETAIL_PRIMARY = UniqueKeys0.KEY_DISEASE_DETAIL_PRIMARY;
     public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = UniqueKeys0.KEY_DISEASE_TREATMENT_PRIMARY;
     public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY;
+    public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R = UniqueKeys0.KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R;
+    public static final UniqueKey<JOestrusRecord> KEY_OESTRUS_PRIMARY = UniqueKeys0.KEY_OESTRUS_PRIMARY;
     public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = UniqueKeys0.KEY_PERSONAL_CODE_PRIMARY;
-    public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_PRIMARY = UniqueKeys0.KEY_SCHEDULE_PRIMARY;
     public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = UniqueKeys0.KEY_USERS_PRIMARY;
     public static final UniqueKey<JUsersRecord> KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF = UniqueKeys0.KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF;
+    public static final UniqueKey<JVaccinationRecord> KEY_VACCINATION_PRIMARY = UniqueKeys0.KEY_VACCINATION_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -77,12 +88,17 @@ public class Keys {
         public static final UniqueKey<JCattleBuyInformationRecord> KEY_CATTLE_BUY_INFORMATION_PRIMARY = Internal.createUniqueKey(JCattleBuyInformation.CATTLE_BUY_INFORMATION, "KEY_cattle_buy_information_PRIMARY", new TableField[] { JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JCattleSellStoreInformationRecord> KEY_CATTLE_SELL_STORE_INFORMATION_PRIMARY = Internal.createUniqueKey(JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION, "KEY_cattle_sell_store_information_PRIMARY", new TableField[] { JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JCommonCodeRecord> KEY_COMMON_CODE_PRIMARY = Internal.createUniqueKey(JCommonCode.COMMON_CODE, "KEY_common_code_PRIMARY", new TableField[] { JCommonCode.COMMON_CODE.CODE }, true);
-        public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = Internal.createUniqueKey(JDiseaseTreatment.DISEASE_TREATMENT, "KEY_disease_treatment_PRIMARY", new TableField[] { JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_IDENTIFICATION_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_MANAGEMENT_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.SEQ }, true);
+        public static final UniqueKey<JDiaryRecord> KEY_DIARY_PRIMARY = Internal.createUniqueKey(JDiary.DIARY, "KEY_diary_PRIMARY", new TableField[] { JDiary.DIARY.UUID }, true);
+        public static final UniqueKey<JDiaryRecord> KEY_DIARY_UK_91965AQPM84YUAHJJGBQYJX8A = Internal.createUniqueKey(JDiary.DIARY, "KEY_diary_UK_91965aqpm84yuahjjgbqyjx8a", new TableField[] { JDiary.DIARY.USER_ID }, true);
+        public static final UniqueKey<JDiseaseDetailRecord> KEY_DISEASE_DETAIL_PRIMARY = Internal.createUniqueKey(JDiseaseDetail.DISEASE_DETAIL, "KEY_disease_detail_PRIMARY", new TableField[] { JDiseaseDetail.DISEASE_DETAIL.DAY, JDiseaseDetail.DISEASE_DETAIL.ENTITY_IDENTIFICATION_NUMBER, JDiseaseDetail.DISEASE_DETAIL.ENTITY_MANAGEMENT_NUMBER, JDiseaseDetail.DISEASE_DETAIL.SEQ }, true);
+        public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = Internal.createUniqueKey(JDiseaseTreatment.DISEASE_TREATMENT, "KEY_disease_treatment_PRIMARY", new TableField[] { JDiseaseTreatment.DISEASE_TREATMENT.DAY, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_IDENTIFICATION_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT, "KEY_local_beef_management_PRIMARY", new TableField[] { JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER }, true);
+        public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R = Internal.createUniqueKey(JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT, "KEY_local_beef_management_UK_3bxco9dxgolpq8r9jphai7v9r", new TableField[] { JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.USER_ID }, true);
+        public static final UniqueKey<JOestrusRecord> KEY_OESTRUS_PRIMARY = Internal.createUniqueKey(JOestrus.OESTRUS, "KEY_oestrus_PRIMARY", new TableField[] { JOestrus.OESTRUS.ENTITY_IDENTIFICATION_NUMBER, JOestrus.OESTRUS.ENTITY_MANAGEMENT_NUMBER, JOestrus.OESTRUS.SEQ }, true);
         public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = Internal.createUniqueKey(JPersonalCode.PERSONAL_CODE, "KEY_personal_code_PRIMARY", new TableField[] { JPersonalCode.PERSONAL_CODE.CODE }, true);
-        public static final UniqueKey<JScheduleRecord> KEY_SCHEDULE_PRIMARY = Internal.createUniqueKey(JSchedule.SCHEDULE, "KEY_schedule_PRIMARY", new TableField[] { JSchedule.SCHEDULE.UUID }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = Internal.createUniqueKey(JUsers.USERS, "KEY_users_PRIMARY", new TableField[] { JUsers.USERS.UUID }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_UK_6EFS5VMCE86YMF5Q7LMVN2UUF = Internal.createUniqueKey(JUsers.USERS, "KEY_users_UK_6efs5vmce86ymf5q7lmvn2uuf", new TableField[] { JUsers.USERS.USER_ID }, true);
+        public static final UniqueKey<JVaccinationRecord> KEY_VACCINATION_PRIMARY = Internal.createUniqueKey(JVaccination.VACCINATION, "KEY_vaccination_PRIMARY", new TableField[] { JVaccination.VACCINATION.DAY, JVaccination.VACCINATION.ENTITY_IDENTIFICATION_NUMBER, JVaccination.VACCINATION.ENTITY_MANAGEMENT_NUMBER, JVaccination.VACCINATION.SEQ }, true);
     }
 
     private static class ForeignKeys0 {

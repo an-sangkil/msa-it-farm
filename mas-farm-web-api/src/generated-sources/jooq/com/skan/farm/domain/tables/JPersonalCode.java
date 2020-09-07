@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
 
-    private static final long serialVersionUID = -796772195;
+    private static final long serialVersionUID = -524889795;
 
     /**
      * The reference instance of <code>naive-it-farm.personal_code</code>
@@ -50,7 +50,7 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
     /**
      * The column <code>naive-it-farm.personal_code.code</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JPersonalCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(128).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.personal_code.code_comments</code>.
@@ -80,7 +80,7 @@ public class JPersonalCode extends TableImpl<JPersonalCodeRecord> {
     /**
      * The column <code>naive-it-farm.personal_code.upper_code</code>.
      */
-    public final TableField<JPersonalCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<JPersonalCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(128), this, "");
 
     /**
      * Create a <code>naive-it-farm.personal_code</code> table reference

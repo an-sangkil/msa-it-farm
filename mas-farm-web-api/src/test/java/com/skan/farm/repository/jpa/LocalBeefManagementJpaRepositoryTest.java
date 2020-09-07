@@ -60,12 +60,16 @@ class LocalBeefManagementJpaRepositoryTest implements TestCodeGeneration {
     public void save() {
 
 
+        LocalBeefManagementPK localBeefManagementPK =new LocalBeefManagementPK(entityNumber, identityNumber);
         LocalBeefManagement localBeefManagement = LocalBeefManagement.builder()
                 .localBeefManagementPK(new LocalBeefManagementPK(entityNumber, identityNumber))
                 .birthDay(LocalDate.now())
                 .gender(GenderCode.FEMALE)
                 .build();
 
+        // 1:1 매핑되는 연관관계의 데이터
+        //localBeefManagement.setCattleSellStoreInformation( CattleSellStoreInformation.builder().localBeefManagementPK(localBeefManagementPK).build());
+        //localBeefManagement.setCattleBuyInformation(CattleBuyInformation.builder().cattleBuyInformationPK(localBeefManagementPK).build());
 
         this.localBeefManagementJpaRepository.save(localBeefManagement);
     }

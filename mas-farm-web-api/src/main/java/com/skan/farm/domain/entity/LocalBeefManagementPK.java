@@ -33,14 +33,14 @@ public class LocalBeefManagementPK implements Serializable {
     /**
      * 개체식별번호.
      */
-    @Column(length = 32)
+    @Column(length = 12)
     private String entityIdentificationNumber;
 
 
     /**
      * 개체관리번호. ( 일련번호 8자리)
      */
-    @Column(length = 32)
+    @Column(length = 8)
     private String entityManagementNumber;
 
 

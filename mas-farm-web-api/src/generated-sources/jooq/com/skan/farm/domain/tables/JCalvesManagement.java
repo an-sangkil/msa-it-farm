@@ -16,7 +16,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row12;
+import org.jooq.Row14;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
 
-    private static final long serialVersionUID = 1910501130;
+    private static final long serialVersionUID = -963970205;
 
     /**
      * The reference instance of <code>naive-it-farm.calves_management</code>
@@ -50,12 +50,12 @@ public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
     /**
      * The column <code>naive-it-farm.calves_management.entity_identification_number</code>.
      */
-    public final TableField<JCalvesManagementRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JCalvesManagementRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(12).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.calves_management.entity_management_number</code>.
      */
-    public final TableField<JCalvesManagementRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JCalvesManagementRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.calves_management.seq</code>.
@@ -66,6 +66,11 @@ public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
      * The column <code>naive-it-farm.calves_management.calving_date</code>.
      */
     public final TableField<JCalvesManagementRecord, LocalDateTime> CALVING_DATE = createField(DSL.name("calving_date"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
+
+    /**
+     * The column <code>naive-it-farm.calves_management.created_time</code>.
+     */
+    public final TableField<JCalvesManagementRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
      * The column <code>naive-it-farm.calves_management.entity_identification_number_child</code>.
@@ -93,6 +98,11 @@ public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
     public final TableField<JCalvesManagementRecord, Short> FERTILIZATION_INDEX = createField(DSL.name("fertilization_index"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
 
     /**
+     * The column <code>naive-it-farm.calves_management.modified_time</code>.
+     */
+    public final TableField<JCalvesManagementRecord, LocalDateTime> MODIFIED_TIME = createField(DSL.name("modified_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
+
+    /**
      * The column <code>naive-it-farm.calves_management.nothing_special</code>.
      */
     public final TableField<JCalvesManagementRecord, String> NOTHING_SPECIAL = createField(DSL.name("nothing_special"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
@@ -100,7 +110,7 @@ public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
     /**
      * The column <code>naive-it-farm.calves_management.sperm_no</code>.
      */
-    public final TableField<JCalvesManagementRecord, Long> SPERM_NO = createField(DSL.name("sperm_no"), org.jooq.impl.SQLDataType.BIGINT, this, "");
+    public final TableField<JCalvesManagementRecord, String> SPERM_NO = createField(DSL.name("sperm_no"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>naive-it-farm.calves_management.years</code>.
@@ -195,11 +205,11 @@ public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row12 type methods
+    // Row14 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row12<String, String, Short, LocalDateTime, String, String, LocalDateTime, LocalDateTime, Short, String, Long, String> fieldsRow() {
-        return (Row12) super.fieldsRow();
+    public Row14<String, String, Short, LocalDateTime, LocalDateTime, String, String, LocalDateTime, LocalDateTime, Short, LocalDateTime, String, String, String> fieldsRow() {
+        return (Row14) super.fieldsRow();
     }
 }

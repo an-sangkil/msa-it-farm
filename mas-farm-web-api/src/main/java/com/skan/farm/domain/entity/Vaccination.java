@@ -11,7 +11,6 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,7 +40,9 @@ public class Vaccination {
     @EqualsAndHashCode
     public static class VaccinationPK implements Serializable {
 
-        // 날짜
+        /**
+         * 접종 날짜
+         */
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
         @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,8 +52,18 @@ public class Vaccination {
         /**
          * 개체식별번호.
          */
-        @Column(length = 32)
+        @Column(length = 12)
         private String entityIdentificationNumber;
+
+        /**
+         * 개체관리번호
+         */
+        @Column(length = 8)
+        private String entityManagementNumber;
+        /**
+         * 순번
+         */
+        private Short seq;
     }
 
     @EmbeddedId
@@ -67,7 +78,7 @@ public class Vaccination {
     private String location;
 
     // 비고
-    @Column(length = 1024)
+    @Column(length = 512)
     private String remark;
 
     /**

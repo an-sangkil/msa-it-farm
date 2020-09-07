@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JCommonCode extends TableImpl<JCommonCodeRecord> {
 
-    private static final long serialVersionUID = -1632800589;
+    private static final long serialVersionUID = -119951231;
 
     /**
      * The reference instance of <code>naive-it-farm.common_code</code>
@@ -50,7 +50,7 @@ public class JCommonCode extends TableImpl<JCommonCodeRecord> {
     /**
      * The column <code>naive-it-farm.common_code.code</code>.
      */
-    public final TableField<JCommonCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JCommonCodeRecord, String> CODE = createField(DSL.name("code"), org.jooq.impl.SQLDataType.VARCHAR(32).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.common_code.code_comment</code>.
@@ -75,7 +75,7 @@ public class JCommonCode extends TableImpl<JCommonCodeRecord> {
     /**
      * The column <code>naive-it-farm.common_code.upper_code</code>.
      */
-    public final TableField<JCommonCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<JCommonCodeRecord, String> UPPER_CODE = createField(DSL.name("upper_code"), org.jooq.impl.SQLDataType.VARCHAR(32), this, "");
 
     /**
      * Create a <code>naive-it-farm.common_code</code> table reference

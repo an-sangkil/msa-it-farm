@@ -17,6 +17,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * 질병 및 치료 모델 클래스.
@@ -55,21 +56,27 @@ public class DiseaseTreatment implements Serializable {
 	@NoArgsConstructor
 	public static class DiseaseTreatmentPK implements Serializable {
 		/**
-		 * 개체관리번호.
+		 * 개체식별번호.
 		 */
-		@Column(length = 32)
+		@Column(length = 12)
+		private String entityIdentificationNumber;
+
+
+		/**
+		 * 개체관리번호. ( 일련번호 8자리)
+		 */
+		@Column(length = 8)
 		private String entityManagementNumber;
 
 		/**
-		 * 개체식별번호.
+		 * 날짜
 		 */
-		@Column(length = 32)
-		private String entityIdentificationNumber;
+		@JsonDeserialize(using = LocalDateDeserializer.class)
+		@JsonSerialize(using = LocalDateSerializer.class)
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		@JsonFormat(pattern = "yyyy-MM-dd")
+		private LocalDate day;
 
-		/**
-		 * 순번.
-		 */
-		private Short seq;
 	}
 
 	@EmbeddedId
@@ -138,5 +145,10 @@ public class DiseaseTreatment implements Serializable {
 	})
 	@JsonBackReference("diseaseTreatmentSet")
 	private LocalBeefManagement localBeefManagement;
+
+
+	@OneToMany(mappedBy = "diseaseTreatment" , fetch = FetchType.LAZY)
+	@JsonManagedReference("diseaseDetails")
+	private Set<DiseaseDetail> diseaseDetails;
 
 }

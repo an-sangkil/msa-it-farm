@@ -9,6 +9,7 @@ import com.skan.farm.domain.Keys;
 import com.skan.farm.domain.tables.records.JCattleSellStoreInformationRecord;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row10;
+import org.jooq.Row13;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -32,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInformationRecord> {
 
-    private static final long serialVersionUID = -1009057910;
+    private static final long serialVersionUID = 1407262901;
 
     /**
      * The reference instance of <code>naive-it-farm.cattle_sell_store_information</code>
@@ -50,17 +51,22 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
     /**
      * The column <code>naive-it-farm.cattle_sell_store_information.entity_identification_number</code>.
      */
-    public final TableField<JCattleSellStoreInformationRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JCattleSellStoreInformationRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(12).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.cattle_sell_store_information.entity_management_number</code>.
      */
-    public final TableField<JCattleSellStoreInformationRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JCattleSellStoreInformationRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.cattle_sell_store_information.beef_grade</code>.
      */
     public final TableField<JCattleSellStoreInformationRecord, String> BEEF_GRADE = createField(DSL.name("beef_grade"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>naive-it-farm.cattle_sell_store_information.created_time</code>.
+     */
+    public final TableField<JCattleSellStoreInformationRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
      * The column <code>naive-it-farm.cattle_sell_store_information.dressed_weight</code>.
@@ -71,6 +77,16 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
      * The column <code>naive-it-farm.cattle_sell_store_information.liveweight</code>.
      */
     public final TableField<JCattleSellStoreInformationRecord, Short> LIVEWEIGHT = createField(DSL.name("liveweight"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
+
+    /**
+     * The column <code>naive-it-farm.cattle_sell_store_information.modified_time</code>.
+     */
+    public final TableField<JCattleSellStoreInformationRecord, LocalDateTime> MODIFIED_TIME = createField(DSL.name("modified_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
+
+    /**
+     * The column <code>naive-it-farm.cattle_sell_store_information.number_of_month</code>.
+     */
+    public final TableField<JCattleSellStoreInformationRecord, String> NUMBER_OF_MONTH = createField(DSL.name("number_of_month"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>naive-it-farm.cattle_sell_store_information.sell_date</code>.
@@ -181,11 +197,11 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
     }
 
     // -------------------------------------------------------------------------
-    // Row10 type methods
+    // Row13 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row10<String, String, String, Short, Short, LocalDate, String, String, Integer, String> fieldsRow() {
-        return (Row10) super.fieldsRow();
+    public Row13<String, String, String, LocalDateTime, Short, Short, LocalDateTime, String, LocalDate, String, String, Integer, String> fieldsRow() {
+        return (Row13) super.fieldsRow();
     }
 }

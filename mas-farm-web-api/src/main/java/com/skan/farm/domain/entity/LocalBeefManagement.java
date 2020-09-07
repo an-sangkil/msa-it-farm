@@ -109,6 +109,10 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 거세일.
      */
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate castrationDate;
 
     /**
@@ -191,7 +195,7 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
-            , optional = false)
+            , optional = true)
     @JsonManagedReference("cattleBuyInformation")
     private CattleBuyInformation cattleBuyInformation;
 
@@ -201,7 +205,7 @@ public class LocalBeefManagement implements Serializable {
     @OneToOne(mappedBy = "localBeefManagement"
             , cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
             , fetch = FetchType.LAZY
-            , optional = false)
+            , optional = true)
     @JsonManagedReference("cattleSellStoreInformation")
     private CattleSellStoreInformation cattleSellStoreInformation;
 
