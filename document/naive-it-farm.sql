@@ -2,7 +2,6 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Tables */
 
-DROP TABLE IF EXISTS address_detail;
 DROP TABLE IF EXISTS anniversary;
 DROP TABLE IF EXISTS email;
 DROP TABLE IF EXISTS phone;
@@ -12,6 +11,7 @@ DROP TABLE IF EXISTS cattle_buy_information;
 DROP TABLE IF EXISTS cattle_sell_store_information;
 DROP TABLE IF EXISTS common_code;
 DROP TABLE IF EXISTS diary;
+DROP TABLE IF EXISTS treatment_detail;
 DROP TABLE IF EXISTS disease_treatment;
 DROP TABLE IF EXISTS household_ledger;
 DROP TABLE IF EXISTS oestrus;
@@ -25,19 +25,6 @@ DROP TABLE IF EXISTS users;
 
 /* Create Tables */
 
-CREATE TABLE address_detail
-(
-	-- 관리 번호
-	management_number bigint NOT NULL COMMENT '관리 번호',
-	hm_ad_no bigint NOT NULL,
-	hm_type varchar(12),
-	hm_add_info varchar(128),
-	-- 사용자 아이디
-	user_id varchar(16) NOT NULL COMMENT '사용자 아이디',
-	PRIMARY KEY (management_number, hm_ad_no, user_id)
-);
-
-
 CREATE TABLE address_management
 (
 	-- 사용자 아이디
@@ -48,6 +35,9 @@ CREATE TABLE address_management
 	user_name varchar(32) COMMENT '주소록 사용자 이름',
 	-- 메모
 	memo text COMMENT '메모',
+	-- 주소정보
+	address varchar(128) COMMENT '주소정보',
+	address_detail varchar(128),
 	PRIMARY KEY (user_id, management_number)
 );
 
@@ -55,15 +45,16 @@ CREATE TABLE address_management
 CREATE TABLE anniversary
 (
 	-- 관리 번호
-	hm_mg_no bigint NOT NULL COMMENT '관리 번호',
-	hm_am_no bigint NOT NULL,
+	management_number bigint NOT NULL COMMENT '관리 번호',
+	-- 순번
+	seq smallint NOT NULL COMMENT '순번',
 	-- 날짜
 	day date COMMENT '날짜',
 	-- 생일/기념일/기타/직접 입력
-	hm_type varchar(32) COMMENT '생일/기념일/기타/직접 입력',
+	type varchar(32) COMMENT '생일/기념일/기타/직접 입력',
 	-- 사용자 아이디
 	user_id varchar(16) NOT NULL COMMENT '사용자 아이디',
-	PRIMARY KEY (hm_mg_no, hm_am_no, user_id)
+	PRIMARY KEY (management_number, seq, user_id)
 );
 
 
@@ -95,6 +86,12 @@ CREATE TABLE calves_management
 	entity_management_number_child varchar(24) COMMENT '개체관리번호(자식)',
 	-- 삭제여부
 	delete_yn boolean COMMENT '삭제여부',
+	-- 분만당시 개월수
+	number_of_month smallint COMMENT '분만당시 개월수',
+	-- 생성시간
+	created_time timestamp COMMENT '생성시간',
+	-- 수정시간
+	modified_time timestamp COMMENT '수정시간',
 	PRIMARY KEY (entity_identification_number, entity_management_number, seq)
 );
 
@@ -120,18 +117,25 @@ CREATE TABLE cattle_sell_store_information
 	entity_identification_number varchar(24) NOT NULL,
 	-- 개체관리번호
 	entity_management_number varchar(24) NOT NULL COMMENT '개체관리번호',
+	-- 판매당시 개월수
+	number_of_month smallint COMMENT '판매당시 개월수',
 	store_name varchar(256) NOT NULL,
-	sell_date date NOT NULL,
+	-- 판매일/도태일자
+	sell_date date NOT NULL COMMENT '판매일/도태일자',
 	sell_note varchar(512),
 	sell_phone_number varchar(11),
 	-- 판매가격
 	selling_price int COMMENT '판매가격',
 	-- 생체중(살아있는생물의무게)
-	liveweight smallint COMMENT '생체중(살아있는생물의무게)',
+	live_weight smallint COMMENT '생체중(살아있는생물의무게)',
 	-- 도체중( 도살한 가축의 가죽, 머리, 발목, 내장 따위를 떼어 낸 나머지 몸뚱이의 체중.)
 	dressed_weight smallint COMMENT '도체중( 도살한 가축의 가죽, 머리, 발목, 내장 따위를 떼어 낸 나머지 몸뚱이의 체중.)',
 	-- 1++A, 1++B
 	beef_grade varchar(0) COMMENT '1++A, 1++B',
+	-- 생성일시
+	created_time timestamp COMMENT '생성일시',
+	-- 수정시간
+	modified_time timestamp COMMENT '수정시간',
 	PRIMARY KEY (entity_identification_number, entity_management_number)
 );
 
@@ -197,8 +201,6 @@ CREATE TABLE disease_treatment
 	entity_identification_number varchar(24) NOT NULL,
 	-- 개체관리번호
 	entity_management_number varchar(24) NOT NULL COMMENT '개체관리번호',
-	-- 순번
-	seq smallint NOT NULL COMMENT '순번',
 	-- 치료_날짜
 	cure_date date NOT NULL COMMENT '치료_날짜',
 	-- 질병 명
@@ -213,15 +215,15 @@ CREATE TABLE disease_treatment
 	injection_method varchar(256) COMMENT '투여방법(근육주사, 피하 주사 )',
 	-- 휴약 기간 만료일
 	withdrawal_period_expiration_date date COMMENT '휴약 기간 만료일',
-	-- 기본 'N' N(미분실)/Y(분실)
-	needle_lose_yn varchar(1) DEFAULT 'N' COMMENT '기본 ''N'' N(미분실)/Y(분실)',
 	-- 치료 당시의 개월수
 	cure_number_of_month smallint COMMENT '치료 당시의 개월수',
+	-- 비고
+	remark varchar(512) COMMENT '비고',
 	-- 생성일시
 	created_time timestamp COMMENT '생성일시',
 	-- 수정시간
 	modified_time timestamp COMMENT '수정시간',
-	PRIMARY KEY (entity_identification_number, entity_management_number, seq)
+	PRIMARY KEY (entity_identification_number, entity_management_number, cure_date)
 );
 
 
@@ -229,11 +231,13 @@ CREATE TABLE email
 (
 	-- 관리 번호
 	management_number bigint NOT NULL COMMENT '관리 번호',
-	hm_em_no bigint NOT NULL,
-	hm_email varchar(32),
+	-- 순번
+	seq smallint NOT NULL COMMENT '순번',
 	-- 사용자 아이디
 	user_id varchar(16) NOT NULL COMMENT '사용자 아이디',
-	PRIMARY KEY (management_number, hm_em_no, user_id)
+	-- 이메일
+	email varchar(32) COMMENT '이메일',
+	PRIMARY KEY (management_number, seq, user_id)
 );
 
 
@@ -268,20 +272,24 @@ CREATE TABLE local_beef_management
 	castration_date timestamp,
 	-- Cow 암소  / Bull 수소
 	gender varchar(4) COMMENT 'Cow 암소  / Bull 수소',
+	-- 젖 상태(어미)
+	udder_level varchar(16) COMMENT '젖 상태(어미)',
+	-- 송아지 케어 숙련도
+	calf_care_skill_level varchar(16) COMMENT '송아지 케어 숙련도',
 	-- Y(판매됨) /N(미판매)
 	sell_yn varchar(1) COMMENT 'Y(판매됨) /N(미판매)',
 	-- 삭제여부
 	delete_yn boolean COMMENT '삭제여부',
 	-- 사용자 아이디
 	user_id varchar(16) COMMENT '사용자 아이디',
-	-- 개월수 (팔렸을때 혹은 도축 기준)
-	number_of_month smallint COMMENT '개월수 (팔렸을때 혹은 도축 기준)',
+	-- 현재 월령(개월수)
+	number_of_month smallint COMMENT '현재 월령(개월수)',
 	-- 위치 
 	location varchar(64) COMMENT '위치 ',
-	-- 수정시간
-	modified_time timestamp COMMENT '수정시간',
 	-- 생성일시
 	created_time timestamp COMMENT '생성일시',
+	-- 수정시간
+	modified_time timestamp COMMENT '수정시간',
 	PRIMARY KEY (entity_management_number, entity_identification_number)
 );
 
@@ -297,7 +305,13 @@ CREATE TABLE oestrus
 	oestus_datetime timestamp COMMENT '발정일시(24시)',
 	-- 증상(증후)
 	symptom varchar(248) COMMENT '증상(증후)',
-	PRIMARY KEY (seq, entity_management_number)
+	-- 비고
+	remark varchar(512) COMMENT '비고',
+	-- 생성일시
+	created_time timestamp COMMENT '생성일시',
+	-- 수정시간
+	modified_time timestamp COMMENT '수정시간',
+	PRIMARY KEY (seq, entity_management_number, entity_identification_number)
 );
 
 
@@ -324,12 +338,38 @@ CREATE TABLE phone
 (
 	-- 관리 번호
 	management_number bigint NOT NULL COMMENT '관리 번호',
-	hm_pho_no bigint NOT NULL,
+	-- 순번
+	seq smallint NOT NULL COMMENT '순번',
 	phone_number varchar(12),
 	type varchar(12),
 	-- 사용자 아이디
 	user_id varchar(16) NOT NULL COMMENT '사용자 아이디',
-	PRIMARY KEY (management_number, hm_pho_no, user_id)
+	PRIMARY KEY (management_number, seq, user_id)
+);
+
+
+CREATE TABLE treatment_detail
+(
+	entity_identification_number varchar(24) NOT NULL,
+	-- 개체관리번호
+	entity_management_number varchar(24) NOT NULL COMMENT '개체관리번호',
+	-- 치료_날짜
+	cure_date date NOT NULL COMMENT '치료_날짜',
+	-- 같은날의 순번
+	seq smallint NOT NULL COMMENT '같은날의 순번',
+	-- 약재명
+	medication_name varchar(64) COMMENT '약재명',
+	-- 투여방법(근육주사, 피하 주사 )
+	injection_method varchar(256) COMMENT '투여방법(근육주사, 피하 주사 )',
+	-- 기본 'N' N(미분실)/Y(분실)
+	needle_lose_yn varchar(1) COMMENT '기본 ''N'' N(미분실)/Y(분실)',
+	-- 휴약 기간 만료일
+	withdrawal_period_expiration_date date COMMENT '휴약 기간 만료일',
+	-- 생성일시
+	created_time timestamp COMMENT '생성일시',
+	-- 수정시간
+	modified_time timestamp COMMENT '수정시간',
+	PRIMARY KEY (entity_identification_number, entity_management_number, cure_date, seq)
 );
 
 
@@ -379,6 +419,12 @@ CREATE TABLE vaccination
 	day date NOT NULL COMMENT '날짜',
 	-- 예방접종 종류
 	vaccination_type varbinary(32) COMMENT '예방접종 종류',
+	-- 비고
+	remark varchar(512) COMMENT '비고',
+	-- 생성일시
+	created_time timestamp COMMENT '생성일시',
+	-- 수정시간
+	modified_time timestamp COMMENT '수정시간',
 	PRIMARY KEY (entity_management_number, entity_identification_number, day)
 );
 
@@ -386,16 +432,8 @@ CREATE TABLE vaccination
 
 /* Create Foreign Keys */
 
-ALTER TABLE address_detail
-	ADD FOREIGN KEY (management_number, user_id)
-	REFERENCES address_management (management_number, user_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
 ALTER TABLE anniversary
-	ADD FOREIGN KEY (hm_mg_no, user_id)
+	ADD FOREIGN KEY (management_number, user_id)
 	REFERENCES address_management (management_number, user_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -421,6 +459,14 @@ ALTER TABLE phone
 ALTER TABLE common_code
 	ADD FOREIGN KEY (upper_code)
 	REFERENCES common_code (code)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE treatment_detail
+	ADD FOREIGN KEY (entity_identification_number, entity_management_number, cure_date)
+	REFERENCES disease_treatment (entity_identification_number, entity_management_number, cure_date)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
