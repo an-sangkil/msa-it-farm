@@ -19,6 +19,7 @@ import com.skan.farm.service.DiseaseTreatmentService;
 import com.skan.farm.utils.JsonUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.type.CalendarType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -231,9 +233,9 @@ public class RouterCattleManagement {
 
                 var entityId = request.param("entityManagementNumber").orElseThrow();
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
-                var seq = request.param("seq").orElseThrow();
+                var day = request.param("day").orElseThrow();
 
-                DiseaseTreatment diseaseTreatment = this.diseaseTreatmentJpaRepository.findById(new DiseaseTreatment.DiseaseTreatmentPK(entityId,identityId, Short.valueOf(seq))).orElseThrow();
+                DiseaseTreatment diseaseTreatment = this.diseaseTreatmentJpaRepository.findById(new DiseaseTreatment.DiseaseTreatmentPK(entityId,identityId, LocalDate.parse(day, DateTimeFormatter.ofPattern("yyyy-MM-dd")))).orElseThrow();
 
                 response.setDetail(new Success<>(diseaseTreatment));
                 response.setMessage("disease treatment detail  success ");
@@ -296,12 +298,12 @@ public class RouterCattleManagement {
 
             var entityId = request.param("entityManagementNumber").orElseThrow();
             var identityId = request.param("entityIdentificationNumber").orElseThrow();
-            var seq = request.param("seq").orElseThrow();
+            var day = request.param("day").orElseThrow();
 
             Response<DiseaseTreatment> response = new Response<>();
 
             try {
-                this.diseaseTreatmentJpaRepository.deleteById(new DiseaseTreatment.DiseaseTreatmentPK(entityId, identityId, Short.valueOf(seq)));
+                this.diseaseTreatmentJpaRepository.deleteById(new DiseaseTreatment.DiseaseTreatmentPK(entityId, identityId,  LocalDate.parse(day, DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 
                 response.setMessage("disease treatment delete success ");
                 response.setStatus(Response.ResponseCode.SUCCESS);

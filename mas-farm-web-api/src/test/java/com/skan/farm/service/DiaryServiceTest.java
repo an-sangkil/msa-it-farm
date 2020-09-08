@@ -37,8 +37,8 @@ class DiaryServiceTest {
                 .uuid(UUID.randomUUID().toString())
                 .standardDate(LocalDate.now())
                 .subject("zzzz")
-                .today_content("ggggg")
-                .tomorrow_todo("lll")
+                .todayContent("ggggg")
+                .tomorrowTodo("lll")
                 .build();
         diaryService.diarySave(diary);
     }
@@ -47,10 +47,10 @@ class DiaryServiceTest {
     @Test
     void scheduleUpdate() {
         Diary diary = Diary.builder()
-                .uuid("4d96f3dc-1fc2-4de2-b23d-decec26049d9")
+                .uuid("76f3031d-daae-453a-a99f-2d537a981a7a")
                 .subject("zzzzlllllllllll")
-                .today_content("수정 수정 ")
-                .tomorrow_todo("내일 할일 수정수정 ")
+                .todayContent("수정 수정 ")
+                .tomorrowTodo("내일 할일 수정수정 ")
                 .build();
         diaryService.diarySave(diary);
     }

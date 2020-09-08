@@ -41,19 +41,21 @@ public class Oestrus {
         /**
          * 개체식별번호.
          */
-        @Column(length = 32)
+        @Column(length = 12)
         private String entityIdentificationNumber;
+
+
+        /**
+         * 개체관리번호. ( 일련번호 8자리)
+         */
+        @Column(length = 8)
+        private String entityManagementNumber;
+
         private Short seq;
 
     }
 
     @EmbeddedId OestrusPK oestrusPK;
-
-    /**
-     * 개체관리번호. ( 일련번호 8자리)
-     */
-    @Column(length = 32)
-    private String entityManagementNumber;
 
     /**
      * 날짜 (발정 일시)
@@ -64,9 +66,11 @@ public class Oestrus {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime oestrusDatetime;
 
-    // 위치
-    //@Column(length = 64)
-    //private String location;
+    /**
+     * 발정 당시의 개월 수
+     */
+    private Short ageOfMonth;
+
 
     // 증상 (증후)
     @Column(length = 512)

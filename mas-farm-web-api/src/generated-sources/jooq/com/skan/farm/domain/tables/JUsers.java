@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JUsers extends TableImpl<JUsersRecord> {
 
-    private static final long serialVersionUID = -336303428;
+    private static final long serialVersionUID = -275436554;
 
     /**
      * The reference instance of <code>naive-it-farm.users</code>
@@ -50,7 +50,7 @@ public class JUsers extends TableImpl<JUsersRecord> {
     /**
      * The column <code>naive-it-farm.users.uuid</code>.
      */
-    public final TableField<JUsersRecord, String> UUID = createField(DSL.name("uuid"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JUsersRecord, String> UUID = createField(DSL.name("uuid"), org.jooq.impl.SQLDataType.VARCHAR(128).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.users.description</code>.
@@ -110,7 +110,7 @@ public class JUsers extends TableImpl<JUsersRecord> {
     /**
      * The column <code>naive-it-farm.users.user_id</code>.
      */
-    public final TableField<JUsersRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<JUsersRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(32), this, "");
 
     /**
      * The column <code>naive-it-farm.users.user_name</code>.

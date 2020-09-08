@@ -152,18 +152,6 @@ public class Diary implements Serializable {
     private String publicYn;
 
     /**
-     * 그룹관리.
-     */
-    @Transient
-    private GroupManagement groupManagement;
-
-    /**
-     * 그룹멤버.
-     */
-    @Transient
-    private GroupMember groupMember;
-
-    /**
      * 사용자 아이디.
      */
     @Column(unique = true,length = 32)

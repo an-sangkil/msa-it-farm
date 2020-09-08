@@ -59,16 +59,17 @@ public class CalvesManagement {
         }
 
         /**
-         * 개체관리번호.
-         */
-        @Column(length = 32)
-        private String entityManagementNumber;
-
-        /**
          * 개체식별번호.
          */
-        @Column(length = 32)
+        @Column(length = 12)
         private String entityIdentificationNumber;
+
+
+        /**
+         * 개체관리번호. ( 일련번호 8자리)
+         */
+        @Column(length = 8)
+        private String entityManagementNumber;
 
         /**
          * 순번.

@@ -18,16 +18,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public abstract class AbstractResponseData<T> {
+public abstract class AbstractResponseData {
 
   /**
    * 상세 코드 값
    */
   protected int code;
 
-  /**
-   * 상세 데이터 정보
-   */
-  protected T contents;
+
 
 }

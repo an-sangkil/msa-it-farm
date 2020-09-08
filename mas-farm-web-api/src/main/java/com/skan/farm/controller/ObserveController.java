@@ -44,7 +44,7 @@ public class ObserveController {
         try {
 
             PageableRequest pageableRequest = new PageableRequest(page,size);
-            PageImpl<List<ObservationDiary>> salesStatusPage = (PageImpl<List<ObservationDiary>>) observeJooqRepository.findByAll(requestObservationDiary,pageableRequest);
+            PageImpl<ObservationDiary> salesStatusPage = (PageImpl<ObservationDiary>) observeJooqRepository.findByAll(requestObservationDiary,pageableRequest);
             return new Response<>().OK(salesStatusPage);
 
         }catch (Exception e) {

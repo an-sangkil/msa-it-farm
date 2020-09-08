@@ -1,6 +1,7 @@
 package com.skan.farm.repository.jooq;
 
-import com.skan.farm.domain.model.SalesStatus;
+import com.skan.farm.domain.model.ObservationDiary;
+import com.skan.farm.paging.PageImpl;
 import com.skan.farm.paging.PageableRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestConstructor;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,28 +20,21 @@ import static org.junit.jupiter.api.Assertions.*;
  * </pre>
  *
  * @author skan
- * @version Copyright (C) 2020 by SKAN . All right reserved.
- * @since 2020-08-28
+ * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
+ * @since 2020-09-08
  */
 @Slf4j
 @SpringBootTest
 @ActiveProfiles("test")
 @RequiredArgsConstructor
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-class SalesStatusJooqRepositoryTest {
+class ObserveJooqRepositoryTest {
 
-
-    final SalesStatusJooqRepository salesStatusJooqRepository;
+    final ObserveJooqRepository observeJooqRepository;
 
     @Test
     void findByAll() {
-        PageableRequest pageable = new PageableRequest(0, 100);
-
-        SalesStatus predicate = new SalesStatus();
-        predicate.setBirthDay(LocalDate.of(2020,9,8));
-
-        salesStatusJooqRepository.findByAll(predicate, pageable);
-
-
+        PageImpl<ObservationDiary> observationDiaryPage = (PageImpl<ObservationDiary>) observeJooqRepository.findByAll(null,new PageableRequest(0,100));
+        log.debug("observationDiaryPage = {}", observationDiaryPage);
     }
 }

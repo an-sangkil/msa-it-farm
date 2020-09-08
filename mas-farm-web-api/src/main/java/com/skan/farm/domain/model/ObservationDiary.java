@@ -41,20 +41,23 @@ public class ObservationDiary {
     /**
      * 개체관리번호.
      */
-    @Column(length = 32)
     private String entityManagementNumber;
 
     /**
      * 개체식별번호.
      */
-    @Column(length = 32)
     private String entityIdentificationNumber;
 
-    //월령(현재 개월수)
-    private Short cureNumberOfMonth;
+    /**
+     * 월령(치료 당시의 개월수 )
+     */
+    private Short cureAgeOfMonth;
 
-    //월령(치료 당시의 개월수 )
-    private Short numberOfMonth;
+
+    /**
+     * 월령(현재 개월수)
+     */
+    private Short ageOfMonth;
 
     /**
      * 질병 명(증상).

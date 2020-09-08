@@ -1,6 +1,7 @@
 package com.skan.farm.repository.jpa;
 
 import com.skan.farm.code.GenderCode;
+import com.skan.farm.domain.entity.DiseaseDetail;
 import com.skan.farm.domain.entity.DiseaseTreatment;
 import com.skan.farm.domain.entity.LocalBeefManagement;
 import com.skan.farm.domain.entity.LocalBeefManagementPK;
@@ -36,39 +37,44 @@ class DiseaseTreatmentJpaRepositoryTest implements TestCodeGeneration {
 
     final LocalBeefManagementJpaRepository localBeefManagementJpaRepository;
     final DiseaseTreatmentJpaRepository diseaseTreatmentJpaRepository;
+    final LocalDate toDay  = LocalDate.now();
+
+    String entityNumber = "1111";
+    String identityNumber = "2222";
 
     @Test
-    @Override
-    public void saveSelect() {
+    public void saveAndSaveAll() {
 
-        String entityNumber = "1111";
-        String identityNumber = "2222";
+
+
 
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
         localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK(entityNumber, identityNumber));
         localBeefManagement.setBirthDay(LocalDate.now());
         localBeefManagement.setGender(GenderCode.FEMALE);
-
         localBeefManagementJpaRepository.save(localBeefManagement);
 
+
         DiseaseTreatment diseaseTreatment1 = new DiseaseTreatment();
-        diseaseTreatment1.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, (short) 1));
+        diseaseTreatment1.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, toDay));
         diseaseTreatment1.setDiseaseName("감기");
 
         DiseaseTreatment diseaseTreatment2 = new DiseaseTreatment();
-        diseaseTreatment2.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, (short) 1));
+        diseaseTreatment2.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, toDay));
         diseaseTreatment2.setDiseaseName("감기");
 
         diseaseTreatmentJpaRepository.saveAll(Stream.of(diseaseTreatment1, diseaseTreatment2).collect(Collectors.toList()));
 
     }
 
+    @Override
+    public void saveSelect() {
+
+    }
+
     @Test
     @Override
     public void save() {
-
-        String entityNumber = "1111";
-        String identityNumber = "2222";
 
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
         localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK(entityNumber, identityNumber));
@@ -80,7 +86,7 @@ class DiseaseTreatmentJpaRepositoryTest implements TestCodeGeneration {
         List<DiseaseTreatment> diseaseTreatments = new ArrayList<>();
         IntStream.rangeClosed(1,3).forEach(value -> {
             DiseaseTreatment diseaseTreatment1 = new DiseaseTreatment();
-            diseaseTreatment1.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, (short) value));
+            diseaseTreatment1.setDiseaseTreatmentPK(new DiseaseTreatment.DiseaseTreatmentPK(entityNumber, identityNumber, toDay));
             diseaseTreatment1.setDiseaseName("감기"+ value);
 
             diseaseTreatments.add(diseaseTreatment1);
@@ -114,6 +120,18 @@ class DiseaseTreatmentJpaRepositoryTest implements TestCodeGeneration {
 
     @Override
     public void delete() {
+
+    }
+
+    @Test
+    void selectDiseaseDetail () {
+
+        diseaseTreatmentJpaRepository.findAll()
+                .forEach(diseaseTreatment -> {
+                    System.out.println(String.format("diseaseTreatment.getLocalBeefManagement() = %s", diseaseTreatment.getLocalBeefManagement().toString()));
+
+                    System.out.println(diseaseTreatment.getDiseaseDetails());
+                });
 
     }
 }

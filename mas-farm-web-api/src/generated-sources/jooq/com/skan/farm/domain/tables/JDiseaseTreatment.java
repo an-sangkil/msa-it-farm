@@ -9,6 +9,7 @@ import com.skan.farm.domain.Keys;
 import com.skan.farm.domain.tables.records.JDiseaseTreatmentRecord;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JDiseaseTreatment extends TableImpl<JDiseaseTreatmentRecord> {
 
-    private static final long serialVersionUID = -2105169497;
+    private static final long serialVersionUID = 1883039022;
 
     /**
      * The reference instance of <code>naive-it-farm.disease_treatment</code>
@@ -48,19 +49,24 @@ public class JDiseaseTreatment extends TableImpl<JDiseaseTreatmentRecord> {
     }
 
     /**
+     * The column <code>naive-it-farm.disease_treatment.day</code>.
+     */
+    public final TableField<JDiseaseTreatmentRecord, LocalDate> DAY = createField(DSL.name("day"), org.jooq.impl.SQLDataType.LOCALDATE.nullable(false), this, "");
+
+    /**
      * The column <code>naive-it-farm.disease_treatment.entity_identification_number</code>.
      */
-    public final TableField<JDiseaseTreatmentRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JDiseaseTreatmentRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(12).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.disease_treatment.entity_management_number</code>.
      */
-    public final TableField<JDiseaseTreatmentRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JDiseaseTreatmentRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "");
 
     /**
-     * The column <code>naive-it-farm.disease_treatment.seq</code>.
+     * The column <code>naive-it-farm.disease_treatment.created_time</code>.
      */
-    public final TableField<JDiseaseTreatmentRecord, Short> SEQ = createField(DSL.name("seq"), org.jooq.impl.SQLDataType.SMALLINT.nullable(false), this, "");
+    public final TableField<JDiseaseTreatmentRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
      * The column <code>naive-it-farm.disease_treatment.cure_date</code>.
@@ -73,24 +79,14 @@ public class JDiseaseTreatment extends TableImpl<JDiseaseTreatmentRecord> {
     public final TableField<JDiseaseTreatmentRecord, String> DISEASE_NAME = createField(DSL.name("disease_name"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.disease_treatment.fertilization_index</code>.
+     * The column <code>naive-it-farm.disease_treatment.modified_time</code>.
      */
-    public final TableField<JDiseaseTreatmentRecord, Short> FERTILIZATION_INDEX = createField(DSL.name("fertilization_index"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
+    public final TableField<JDiseaseTreatmentRecord, LocalDateTime> MODIFIED_TIME = createField(DSL.name("modified_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
-     * The column <code>naive-it-farm.disease_treatment.injection_method</code>.
+     * The column <code>naive-it-farm.disease_treatment.remark</code>.
      */
-    public final TableField<JDiseaseTreatmentRecord, String> INJECTION_METHOD = createField(DSL.name("injection_method"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>naive-it-farm.disease_treatment.medication_name</code>.
-     */
-    public final TableField<JDiseaseTreatmentRecord, String> MEDICATION_NAME = createField(DSL.name("medication_name"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
-
-    /**
-     * The column <code>naive-it-farm.disease_treatment.needle_lose_yn</code>.
-     */
-    public final TableField<JDiseaseTreatmentRecord, String> NEEDLE_LOSE_YN = createField(DSL.name("needle_lose_yn"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<JDiseaseTreatmentRecord, String> REMARK = createField(DSL.name("remark"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>naive-it-farm.disease_treatment.treatment_details</code>.
@@ -98,9 +94,14 @@ public class JDiseaseTreatment extends TableImpl<JDiseaseTreatmentRecord> {
     public final TableField<JDiseaseTreatmentRecord, String> TREATMENT_DETAILS = createField(DSL.name("treatment_details"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.disease_treatment.withdrawal_period_expiration_date</code>.
+     * The column <code>naive-it-farm.disease_treatment.cure_age_of_month</code>.
      */
-    public final TableField<JDiseaseTreatmentRecord, LocalDate> WITHDRAWAL_PERIOD_EXPIRATION_DATE = createField(DSL.name("withdrawal_period_expiration_date"), org.jooq.impl.SQLDataType.LOCALDATE, this, "");
+    public final TableField<JDiseaseTreatmentRecord, Short> CURE_AGE_OF_MONTH = createField(DSL.name("cure_age_of_month"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
+
+    /**
+     * The column <code>naive-it-farm.disease_treatment.symptom</code>.
+     */
+    public final TableField<JDiseaseTreatmentRecord, String> SYMPTOM = createField(DSL.name("symptom"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>naive-it-farm.disease_treatment</code> table reference
@@ -190,7 +191,7 @@ public class JDiseaseTreatment extends TableImpl<JDiseaseTreatmentRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row11<String, String, Short, LocalDate, String, Short, String, String, String, String, LocalDate> fieldsRow() {
+    public Row11<LocalDate, String, String, LocalDateTime, LocalDate, String, LocalDateTime, String, String, Short, String> fieldsRow() {
         return (Row11) super.fieldsRow();
     }
 }

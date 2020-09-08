@@ -103,7 +103,7 @@ public class LocalBeefManagementJooqRepository {
                 , jLocalBeefManagement.PARENT_MOM_NO
                 , jLocalBeefManagement.PARENT_PAPA_NO
                 , jLocalBeefManagement.GENDER
-                , jLocalBeefManagement.ROOM_NUMBER
+                , jLocalBeefManagement.LOCATION
                 , jLocalBeefManagement.SELL_YN
                 , jCattleBuyInformation.BUY_DATE
                 , jCattleBuyInformation.BUY_NOTE
@@ -219,7 +219,7 @@ public class LocalBeefManagementJooqRepository {
         }
 
         if (!StringUtils.isEmpty(predicate.getLocation())) {
-            conditions.add(jLocalBeefManagement.ROOM_NUMBER.like("%" + predicate.getLocation() + "%"));
+            conditions.add(jLocalBeefManagement.LOCATION.like("%" + predicate.getLocation() + "%"));
         }
 
         if (!StringUtils.isEmpty(predicate.getBetweenBirthDate())) {

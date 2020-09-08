@@ -28,10 +28,10 @@ public class DiseaseTreatmentService {
 
     public DiseaseTreatment save (DiseaseTreatment diseaseTreatment) {
 
-        if (StringUtils.isEmpty(diseaseTreatment.getDiseaseTreatmentPK().getSeq())) {
+        /*if (StringUtils.isEmpty(diseaseTreatment.getDiseaseTreatmentPK().getSeq())) {
             long count = diseaseTreatmentJpaRepository.countByDiseaseTreatmentPK_EntityManagementNumberAndDiseaseTreatmentPK_EntityIdentificationNumber(diseaseTreatment.getDiseaseTreatmentPK().getEntityManagementNumber(),diseaseTreatment.getDiseaseTreatmentPK().getEntityIdentificationNumber());
             diseaseTreatment.getDiseaseTreatmentPK().setSeq((short) (count+1));
-        }
+        }*/
         diseaseTreatmentJpaRepository.save(diseaseTreatment);
 
         return diseaseTreatment;

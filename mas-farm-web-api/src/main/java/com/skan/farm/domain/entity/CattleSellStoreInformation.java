@@ -84,9 +84,9 @@ public class CattleSellStoreInformation implements Serializable {
 	private String beefGrade;
 
 	/**
-	 * 개월수(팔린 날짜 당일의 개월수)
+	 * 판매당시의 개월수
 	 */
-	private String numberOfMonth;
+	private String ageOfMonth;
 
 	/**
 	 * 생성일시.
@@ -109,6 +109,7 @@ public class CattleSellStoreInformation implements Serializable {
 	@UpdateTimestamp
 	private LocalDateTime modifiedTime;
 
+	/** 한우(암소/수소) 개체관리기록부. */
 	@MapsId("localBeefManagementPK")
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumns({
@@ -116,7 +117,6 @@ public class CattleSellStoreInformation implements Serializable {
 			@JoinColumn(name = "entityManagementNumber", referencedColumnName = "entityManagementNumber"),
 	})
 	@JsonBackReference("cattleSellStoreInformation")
-	/** 한우(암소/수소) 개체관리기록부. */
 	private LocalBeefManagement localBeefManagement;
 
 }

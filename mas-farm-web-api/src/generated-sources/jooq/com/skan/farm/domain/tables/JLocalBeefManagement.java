@@ -17,7 +17,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row14;
+import org.jooq.Row15;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> {
 
-    private static final long serialVersionUID = 1668399136;
+    private static final long serialVersionUID = 1100192504;
 
     /**
      * The reference instance of <code>naive-it-farm.local_beef_management</code>
@@ -51,12 +51,12 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     /**
      * The column <code>naive-it-farm.local_beef_management.entity_identification_number</code>.
      */
-    public final TableField<JLocalBeefManagementRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JLocalBeefManagementRecord, String> ENTITY_IDENTIFICATION_NUMBER = createField(DSL.name("entity_identification_number"), org.jooq.impl.SQLDataType.VARCHAR(12).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.local_beef_management.entity_management_number</code>.
      */
-    public final TableField<JLocalBeefManagementRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
+    public final TableField<JLocalBeefManagementRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "");
 
     /**
      * The column <code>naive-it-farm.local_beef_management.birth_day</code>.
@@ -74,6 +74,11 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     public final TableField<JLocalBeefManagementRecord, LocalDateTime> CREATED_TIME = createField(DSL.name("created_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
+     * The column <code>naive-it-farm.local_beef_management.delete_yn</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, Boolean> DELETE_YN = createField(DSL.name("delete_yn"), org.jooq.impl.SQLDataType.BIT, this, "");
+
+    /**
      * The column <code>naive-it-farm.local_beef_management.ear_tag_date</code>.
      */
     public final TableField<JLocalBeefManagementRecord, LocalDate> EAR_TAG_DATE = createField(DSL.name("ear_tag_date"), org.jooq.impl.SQLDataType.LOCALDATE, this, "");
@@ -87,6 +92,11 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
      * The column <code>naive-it-farm.local_beef_management.gender</code>.
      */
     public final TableField<JLocalBeefManagementRecord, String> GENDER = createField(DSL.name("gender"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>naive-it-farm.local_beef_management.location</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, String> LOCATION = createField(DSL.name("location"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>naive-it-farm.local_beef_management.modified_time</code>.
@@ -109,14 +119,9 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     public final TableField<JLocalBeefManagementRecord, String> SELL_YN = createField(DSL.name("sell_yn"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.local_beef_management.delete_yn</code>.
+     * The column <code>naive-it-farm.local_beef_management.user_id</code>.
      */
-    public final TableField<JLocalBeefManagementRecord, Boolean> DELETE_YN = createField(DSL.name("delete_yn"), org.jooq.impl.SQLDataType.BIT, this, "");
-
-    /**
-     * The column <code>naive-it-farm.local_beef_management.room_number</code>.
-     */
-    public final TableField<JLocalBeefManagementRecord, String> ROOM_NUMBER = createField(DSL.name("room_number"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+    public final TableField<JLocalBeefManagementRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(32), this, "");
 
     /**
      * Create a <code>naive-it-farm.local_beef_management</code> table reference
@@ -163,7 +168,7 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
 
     @Override
     public List<UniqueKey<JLocalBeefManagementRecord>> getKeys() {
-        return Arrays.<UniqueKey<JLocalBeefManagementRecord>>asList(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY);
+        return Arrays.<UniqueKey<JLocalBeefManagementRecord>>asList(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, Keys.KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R);
     }
 
     @Override
@@ -193,11 +198,11 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     }
 
     // -------------------------------------------------------------------------
-    // Row14 type methods
+    // Row15 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row14<String, String, LocalDate, LocalDate, LocalDateTime, LocalDate, LocalDate, String, LocalDateTime, String, String, String, Boolean, String> fieldsRow() {
-        return (Row14) super.fieldsRow();
+    public Row15<String, String, LocalDate, LocalDate, LocalDateTime, Boolean, LocalDate, LocalDate, String, String, LocalDateTime, String, String, String, String> fieldsRow() {
+        return (Row15) super.fieldsRow();
     }
 }
