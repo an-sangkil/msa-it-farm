@@ -30,14 +30,26 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Getter@Setter
+@NoArgsConstructor
 @ToString
 public class Vaccination {
 
+    @Builder
+    public Vaccination(VaccinationPK vaccinationPK, String vaccinationType, String location, String remark, LocalDateTime createdTime, LocalDateTime modifiedTime) {
+        this.vaccinationPK = vaccinationPK;
+        this.vaccinationType = vaccinationType;
+        this.location = location;
+        this.remark = remark;
+        this.createdTime = createdTime;
+        this.modifiedTime = modifiedTime;
+    }
+
+    @ToString
     @Embeddable
     @Getter@Setter
-    @RequiredArgsConstructor
-    @ToString
     @EqualsAndHashCode
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class VaccinationPK implements Serializable {
 
         /**

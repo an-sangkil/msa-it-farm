@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JDiseaseDetail extends TableImpl<JDiseaseDetailRecord> {
 
-    private static final long serialVersionUID = 223282255;
+    private static final long serialVersionUID = 616928843;
 
     /**
      * The reference instance of <code>naive-it-farm.disease_detail</code>
@@ -144,6 +144,15 @@ public class JDiseaseDetail extends TableImpl<JDiseaseDetailRecord> {
     @Override
     public List<UniqueKey<JDiseaseDetailRecord>> getKeys() {
         return Arrays.<UniqueKey<JDiseaseDetailRecord>>asList(Keys.KEY_DISEASE_DETAIL_PRIMARY);
+    }
+
+    @Override
+    public List<ForeignKey<JDiseaseDetailRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<JDiseaseDetailRecord, ?>>asList(Keys.FKLGNNUJ2T4AQQGTYDRF6H297E0);
+    }
+
+    public JDiseaseTreatment diseaseTreatment() {
+        return new JDiseaseTreatment(this, Keys.FKLGNNUJ2T4AQQGTYDRF6H297E0);
     }
 
     @Override

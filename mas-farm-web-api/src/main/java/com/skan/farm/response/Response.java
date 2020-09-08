@@ -49,9 +49,9 @@ public class Response<T> extends AbstractResponse{
      * {@link Success<T> 성공 데이터 }.
      * {@link Error<T> 성공 데이터 }.
      */
-    private AbstractResponseData<T> detail;
+    private AbstractResponseData detail;
 
-    public Response(int code, ResponseCode status, AbstractResponseData<T> detail) {
+    public Response(int code, ResponseCode status, AbstractResponseData detail) {
         this.code = code;
         this.status = status;
         this.detail = detail;

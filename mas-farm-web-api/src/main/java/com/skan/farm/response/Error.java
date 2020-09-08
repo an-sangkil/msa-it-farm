@@ -12,30 +12,34 @@ import lombok.ToString;
  * </pre>
  *
  * @author skan
- * @version Copyright (C) 2018 by Mezzomedia. All right reserved.
+ * @version Copyright (C) 2018 by skan. All right reserved.
  * @since 2018-11-07
  */
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class Error<T> extends AbstractResponseData<T> {
+public class Error<T> extends AbstractResponseData {
 
-  public Error() {
-    super.code = 2000;
-  }
+    private T contents;
 
-  public Error(T t) {
-    super();
-    // 실패시 기본 CODE 2000
-    super.code = 2000;
-    super.contents = t;
-  }
+    public Error() {
+        super.code = 2000;
+    }
 
-  public Error(int code,T t) {
-    super();
-    super.code = code;
-    super.contents = t;
-  }
+
+    public Error(T t) {
+        super();
+
+        // 실패시 기본 CODE 2000
+        super.code = 2000;
+        this.contents = t;
+    }
+
+    public Error(int code, T t) {
+        super();
+        super.code = code;
+        this.contents = t;
+    }
 
 
 }

@@ -1,6 +1,9 @@
 package com.skan.farm.service;
 
 import com.skan.farm.domain.entity.Vaccination;
+import com.skan.farm.paging.Page;
+import com.skan.farm.paging.Pageable;
+import com.skan.farm.repository.jooq.VaccinationJooqRepository;
 import com.skan.farm.repository.jpa.VaccinationJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,14 +16,19 @@ import org.springframework.stereotype.Service;
  * </pre>
  *
  * @author skan
- * @version Copyright (C) 2020 by CJENM|Mezzomedia. All right reserved.
+ * @version Copyright (C) 2020 by skan. All right reserved.
  * @since 2020-09-07
  */
 @Service
 @RequiredArgsConstructor
 public class VaccinationService {
 
-    VaccinationJpaRepository vaccinationJpaRepository;
+    final VaccinationJpaRepository vaccinationJpaRepository;
+    final VaccinationJooqRepository vaccinationJooqRepository;
+
+    public Page<Vaccination> vaccinationPage (Vaccination predicateVaccination, Pageable pageable) {
+        return vaccinationJooqRepository.findByPaging(predicateVaccination,pageable);
+    }
 
     public Vaccination save(Vaccination vaccination) {
 

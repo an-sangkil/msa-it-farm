@@ -84,7 +84,7 @@ public class SalesStatus {
     /**
      * 개월수(팔린 날짜 당일의 개월수)
      */
-    private String numberOfMonth;
+    private String ageOfMonth;
 
     /** 생체중(살아있는생물의무게). */
     private Short liveweight;

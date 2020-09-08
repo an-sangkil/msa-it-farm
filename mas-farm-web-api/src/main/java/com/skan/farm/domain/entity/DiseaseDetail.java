@@ -39,13 +39,13 @@ public class DiseaseDetail {
 
     @Builder
     public DiseaseDetail(DiseaseDetailPK diseaseDetailPK,String medicationName, String injectionMethod, LocalDate withdrawalPeriodExpirationDate, String needleLoseYn, LocalDateTime createdTime, LocalDateTime modifiedTime) {
+        this.diseaseDetailPK = diseaseDetailPK;
         this.medicationName = medicationName;
         this.injectionMethod = injectionMethod;
         this.withdrawalPeriodExpirationDate = withdrawalPeriodExpirationDate;
         this.needleLoseYn = needleLoseYn;
         this.createdTime = createdTime;
         this.modifiedTime = modifiedTime;
-        this.diseaseDetailPK = diseaseDetailPK;
     }
 
     @Getter@Setter
@@ -77,7 +77,6 @@ public class DiseaseDetail {
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         @JsonFormat(pattern = "yyyy-MM-dd")
         private LocalDate day;
-
 
 
         /** 순번. */
@@ -128,7 +127,7 @@ public class DiseaseDetail {
     }
 
     @MapsId("DiseaseTreatmentPK")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="entityIdentificationNumber" , referencedColumnName = "entityIdentificationNumber")
     @JoinColumn(name="entityManagementNumber" , referencedColumnName = "entityManagementNumber")
     @JoinColumn(name="day" , referencedColumnName = "day")

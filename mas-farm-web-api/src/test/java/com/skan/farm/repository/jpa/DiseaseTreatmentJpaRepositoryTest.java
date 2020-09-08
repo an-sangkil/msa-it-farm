@@ -43,8 +43,7 @@ class DiseaseTreatmentJpaRepositoryTest implements TestCodeGeneration {
     String identityNumber = "2222";
 
     @Test
-    @Override
-    public void saveSelect() {
+    public void saveAndSaveAll() {
 
 
 
@@ -68,11 +67,14 @@ class DiseaseTreatmentJpaRepositoryTest implements TestCodeGeneration {
 
     }
 
+    @Override
+    public void saveSelect() {
+
+    }
+
     @Test
     @Override
     public void save() {
-
-
 
         LocalBeefManagement localBeefManagement = new LocalBeefManagement();
         localBeefManagement.setLocalBeefManagementPK(new LocalBeefManagementPK(entityNumber, identityNumber));

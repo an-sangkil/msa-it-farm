@@ -37,18 +37,13 @@ public class DiseaseTreatment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Builder
-	public DiseaseTreatment(LocalBeefManagement localBeefManagement, DiseaseTreatmentPK diseaseTreatmentPK,  LocalDate cureDate, String diseaseName, String medicationName, String treatmentDetails, String injectionMethod, LocalDate withdrawalPeriodExpirationDate, String needleLoseYn) {
+	public DiseaseTreatment(LocalBeefManagement localBeefManagement, DiseaseTreatmentPK diseaseTreatmentPK,  LocalDate cureDate, String diseaseName, String treatmentDetails) {
 		this.localBeefManagement = localBeefManagement;
 		this.diseaseTreatmentPK = diseaseTreatmentPK;
 		this.cureDate = cureDate;
 		this.diseaseName = diseaseName;
-		this.medicationName = medicationName;
 		this.treatmentDetails = treatmentDetails;
-		this.injectionMethod = injectionMethod;
-		this.withdrawalPeriodExpirationDate = withdrawalPeriodExpirationDate;
-		this.needleLoseYn = needleLoseYn;
 	}
-
 
 	@Embeddable
 	@Data
@@ -82,7 +77,6 @@ public class DiseaseTreatment implements Serializable {
 	@EmbeddedId
 	DiseaseTreatmentPK diseaseTreatmentPK;
 
-
 	/** 치료_날짜. */
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
@@ -90,30 +84,25 @@ public class DiseaseTreatment implements Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate cureDate;
 
-	/** 질병 명(증상). */
+	/** 질병 명 */
 	private String diseaseName;
 
-	/** 약재명. */
-	private String medicationName;
+	/** 증상 및 증후  */
+	private String symptom;
 
-	/** 치료내역. */
+	/** 치료내역 및 방법 (상세 치료내역) */
 	private String treatmentDetails;
 
-	/** 투여방법(근육주사, 피하 주사). */
-	private String injectionMethod;
+	/**
+	 * 치료 당시의 개월수
+	 */
+	private Short cureAgeOfMonth;
 
 	/** 비고 */
 	private String remark;
 
-	/** 휴약 기간 만료일. */
-	@JsonDeserialize(using = LocalDateDeserializer.class)
-	@JsonSerialize(using = LocalDateSerializer.class)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate withdrawalPeriodExpirationDate;
 
-	/** 주사침분실여부. */
-	private String needleLoseYn;
+
 
 	/**
 	 * 생성일시.
@@ -147,6 +136,9 @@ public class DiseaseTreatment implements Serializable {
 	private LocalBeefManagement localBeefManagement;
 
 
+	/**
+	 * 상세 치료 처방 내역
+	 */
 	@OneToMany(mappedBy = "diseaseTreatment" , fetch = FetchType.LAZY)
 	@JsonManagedReference("diseaseDetails")
 	private Set<DiseaseDetail> diseaseDetails;

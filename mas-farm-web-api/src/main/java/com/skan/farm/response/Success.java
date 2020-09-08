@@ -18,24 +18,26 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class Success<T> extends AbstractResponseData<T> {
+public class Success<T> extends AbstractResponseData {
 
-  public Success() {
-    // 성공시 기본 CODE 1000
-    super.code = 1000;
-  }
+    private T contents;
 
-  public Success(T t) {
-    super();
-    // 성공시 기본 CODE 1000
-    super.code = 1000;
-    super.contents = t;
-  }
+    public Success() {
+        // 성공시 기본 CODE 1000
+        super.code = 1000;
+    }
 
-  public Success(int code,T t) {
-    super();
-    super.code = code;
-    super.contents = t;
-  }
+    public Success(T t) {
+        super();
+        // 성공시 기본 CODE 1000
+        super.code = 1000;
+        this.contents = t;
+    }
+
+    public Success(int code, T t) {
+        super();
+        super.code = code;
+        this.contents = t;
+    }
 
 }
