@@ -29,16 +29,6 @@ import java.time.LocalDate;
 public class ObservationDiary {
 
     /**
-     * 치료_날짜.
-     */
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate cureDate;
-
-
-    /**
      * 개체관리번호.
      */
     private String entityManagementNumber;
@@ -47,6 +37,16 @@ public class ObservationDiary {
      * 개체식별번호.
      */
     private String entityIdentificationNumber;
+
+    /**
+     * 치료_날짜.
+     */
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate cureDate;
+
 
     /**
      * 월령(치료 당시의 개월수 )

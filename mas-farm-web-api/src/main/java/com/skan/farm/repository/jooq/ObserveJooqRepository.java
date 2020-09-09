@@ -3,15 +3,19 @@ package com.skan.farm.repository.jooq;
 import com.skan.farm.domain.model.ObservationDiary;
 import com.skan.farm.domain.tables.JDiseaseDetail;
 import com.skan.farm.domain.tables.JDiseaseTreatment;
+import com.skan.farm.domain.tables.JLocalBeefManagement;
 import com.skan.farm.paging.Page;
 import com.skan.farm.paging.PageImpl;
 import com.skan.farm.paging.Pageable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,14 +40,17 @@ public class ObserveJooqRepository {
 
         JDiseaseTreatment jDiseaseTreatment = JDiseaseTreatment.DISEASE_TREATMENT;
         JDiseaseDetail jDiseaseDetail = JDiseaseDetail.DISEASE_DETAIL;
+        JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
 
         List<ObservationDiary> observationDiaries = dslContext
                 .select(
-                        jDiseaseTreatment.DISEASE_NAME,
-                        jDiseaseTreatment.TREATMENT_DETAILS,
-                        jDiseaseTreatment.CURE_AGE_OF_MONTH,
-                        jDiseaseTreatment.SYMPTOM,
-                        jDiseaseDetail.asterisk()
+                        jDiseaseTreatment.asterisk(),
+                        jDiseaseDetail.INJECTION_METHOD,
+                        jDiseaseDetail.MEDICATION_NAME,
+                        jDiseaseDetail.DAY,
+                        jDiseaseDetail.NEEDLE_LOSE_YN,
+                        jDiseaseDetail.WITHDRAWAL_PERIOD_EXPIRATION_DATE,
+                        jLocalBeefManagement.LOCATION
                 )
                 .from(jDiseaseTreatment)
                 .leftOuterJoin(jDiseaseDetail)
@@ -53,7 +60,9 @@ public class ObserveJooqRepository {
                         jDiseaseTreatment.DAY.eq(jDiseaseDetail.DAY)
 
                 )
-                .where()
+                .leftOuterJoin(jLocalBeefManagement)
+                .on(jDiseaseTreatment.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER))
+                .where(this.observationDiaryCondition(predicateObserve))
                 .limit(pageable.getPageSize())
                 .offset(pageable.getOffset())
                 .fetchInto(ObservationDiary.class);
@@ -64,5 +73,19 @@ public class ObserveJooqRepository {
 
 
         return new PageImpl<ObservationDiary>(pageable, observationDiaries, 0);
+    }
+
+    private List<Condition> observationDiaryCondition(ObservationDiary predicate) {
+
+        JDiseaseTreatment jDiseaseTreatment = JDiseaseTreatment.DISEASE_TREATMENT;
+        JDiseaseDetail jDiseaseDetail = JDiseaseDetail.DISEASE_DETAIL;
+        JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
+
+        List<Condition> conditions = new ArrayList<>();
+        if(!StringUtils.isEmpty(predicate.getAgeOfMonth())){
+            conditions.add(jLocalBeefManagement.AGE_OF_MONTH.ge(predicate.getAgeOfMonth()));
+        }
+
+        return conditions;
     }
 }

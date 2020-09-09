@@ -34,7 +34,10 @@ class ObserveJooqRepositoryTest {
 
     @Test
     void findByAll() {
-        PageImpl<ObservationDiary> observationDiaryPage = (PageImpl<ObservationDiary>) observeJooqRepository.findByAll(null,new PageableRequest(0,100));
+
+        ObservationDiary predicate = new ObservationDiary();
+        predicate.setAgeOfMonth((short) 10);
+        PageImpl<ObservationDiary> observationDiaryPage = (PageImpl<ObservationDiary>) observeJooqRepository.findByAll(predicate,new PageableRequest(0,100));
         log.debug("observationDiaryPage = {}", observationDiaryPage);
     }
 }

@@ -144,6 +144,9 @@ public class LocalBeefManagement implements Serializable {
     private String inseminationCount;
 
     /** 개월수 */
+    private Short ageOfMonth;
+
+    /** 개월수 */
     @Transient
     private String numberOfMonth;
 
@@ -155,11 +158,19 @@ public class LocalBeefManagement implements Serializable {
     /**
      * 사용자 아이디.
      */
-    @Column(unique = true,length = 32)
+    @Column(length = 32)
     private String userId;
 
-    // 어미젖 상태
-    // 송아지 케어 성숙도(단계)
+    /**
+     * 어미젖 상태
+     */
+    @Column(length = 16)
+    private String udderQuality;
+
+    /**
+     * 송아지 케어 성숙도(단계)
+     */
+    private Short calfCareSkillLevel;
 
     /**
      * 생성일시.
