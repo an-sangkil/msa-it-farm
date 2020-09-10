@@ -17,7 +17,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row13;
+import org.jooq.Row14;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInformationRecord> {
 
-    private static final long serialVersionUID = -541049851;
+    private static final long serialVersionUID = 1402766679;
 
     /**
      * The reference instance of <code>naive-it-farm.cattle_sell_store_information</code>
@@ -57,11 +57,6 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
      * The column <code>naive-it-farm.cattle_sell_store_information.entity_management_number</code>.
      */
     public final TableField<JCattleSellStoreInformationRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "");
-
-    /**
-     * The column <code>naive-it-farm.cattle_sell_store_information.age_of_month</code>.
-     */
-    public final TableField<JCattleSellStoreInformationRecord, String> AGE_OF_MONTH = createField(DSL.name("age_of_month"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * The column <code>naive-it-farm.cattle_sell_store_information.beef_grade</code>.
@@ -89,6 +84,11 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
     public final TableField<JCattleSellStoreInformationRecord, LocalDateTime> MODIFIED_TIME = createField(DSL.name("modified_time"), org.jooq.impl.SQLDataType.LOCALDATETIME, this, "");
 
     /**
+     * The column <code>naive-it-farm.cattle_sell_store_information.number_of_month</code>.
+     */
+    public final TableField<JCattleSellStoreInformationRecord, String> NUMBER_OF_MONTH = createField(DSL.name("number_of_month"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+
+    /**
      * The column <code>naive-it-farm.cattle_sell_store_information.sell_date</code>.
      */
     public final TableField<JCattleSellStoreInformationRecord, LocalDate> SELL_DATE = createField(DSL.name("sell_date"), org.jooq.impl.SQLDataType.LOCALDATE, this, "");
@@ -112,6 +112,11 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
      * The column <code>naive-it-farm.cattle_sell_store_information.store_name</code>.
      */
     public final TableField<JCattleSellStoreInformationRecord, String> STORE_NAME = createField(DSL.name("store_name"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
+
+    /**
+     * The column <code>naive-it-farm.cattle_sell_store_information.age_of_month</code>.
+     */
+    public final TableField<JCattleSellStoreInformationRecord, String> AGE_OF_MONTH = createField(DSL.name("age_of_month"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
      * Create a <code>naive-it-farm.cattle_sell_store_information</code> table reference
@@ -197,11 +202,11 @@ public class JCattleSellStoreInformation extends TableImpl<JCattleSellStoreInfor
     }
 
     // -------------------------------------------------------------------------
-    // Row13 type methods
+    // Row14 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row13<String, String, String, String, LocalDateTime, Short, Short, LocalDateTime, LocalDate, String, String, Integer, String> fieldsRow() {
-        return (Row13) super.fieldsRow();
+    public Row14<String, String, String, LocalDateTime, Short, Short, LocalDateTime, String, LocalDate, String, String, Integer, String, String> fieldsRow() {
+        return (Row14) super.fieldsRow();
     }
 }

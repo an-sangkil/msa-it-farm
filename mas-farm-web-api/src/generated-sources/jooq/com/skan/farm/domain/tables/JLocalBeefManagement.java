@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> {
 
-    private static final long serialVersionUID = 1086619473;
+    private static final long serialVersionUID = -895156135;
 
     /**
      * The reference instance of <code>naive-it-farm.local_beef_management</code>
@@ -59,19 +59,9 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     public final TableField<JLocalBeefManagementRecord, String> ENTITY_MANAGEMENT_NUMBER = createField(DSL.name("entity_management_number"), org.jooq.impl.SQLDataType.VARCHAR(8).nullable(false), this, "");
 
     /**
-     * The column <code>naive-it-farm.local_beef_management.age_of_month</code>.
-     */
-    public final TableField<JLocalBeefManagementRecord, Short> AGE_OF_MONTH = createField(DSL.name("age_of_month"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
-
-    /**
      * The column <code>naive-it-farm.local_beef_management.birth_day</code>.
      */
     public final TableField<JLocalBeefManagementRecord, LocalDate> BIRTH_DAY = createField(DSL.name("birth_day"), org.jooq.impl.SQLDataType.LOCALDATE, this, "");
-
-    /**
-     * The column <code>naive-it-farm.local_beef_management.calf_care_skill_level</code>.
-     */
-    public final TableField<JLocalBeefManagementRecord, Short> CALF_CARE_SKILL_LEVEL = createField(DSL.name("calf_care_skill_level"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
 
     /**
      * The column <code>naive-it-farm.local_beef_management.castration_date</code>.
@@ -129,14 +119,24 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     public final TableField<JLocalBeefManagementRecord, String> SELL_YN = createField(DSL.name("sell_yn"), org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>naive-it-farm.local_beef_management.udder_quality</code>.
-     */
-    public final TableField<JLocalBeefManagementRecord, String> UDDER_QUALITY = createField(DSL.name("udder_quality"), org.jooq.impl.SQLDataType.VARCHAR(16), this, "");
-
-    /**
      * The column <code>naive-it-farm.local_beef_management.user_id</code>.
      */
     public final TableField<JLocalBeefManagementRecord, String> USER_ID = createField(DSL.name("user_id"), org.jooq.impl.SQLDataType.VARCHAR(32), this, "");
+
+    /**
+     * The column <code>naive-it-farm.local_beef_management.age_of_month</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, Short> AGE_OF_MONTH = createField(DSL.name("age_of_month"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
+
+    /**
+     * The column <code>naive-it-farm.local_beef_management.calf_care_skill_level</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, Short> CALF_CARE_SKILL_LEVEL = createField(DSL.name("calf_care_skill_level"), org.jooq.impl.SQLDataType.SMALLINT, this, "");
+
+    /**
+     * The column <code>naive-it-farm.local_beef_management.udder_quality</code>.
+     */
+    public final TableField<JLocalBeefManagementRecord, String> UDDER_QUALITY = createField(DSL.name("udder_quality"), org.jooq.impl.SQLDataType.VARCHAR(16), this, "");
 
     /**
      * Create a <code>naive-it-farm.local_beef_management</code> table reference
@@ -183,7 +183,7 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
 
     @Override
     public List<UniqueKey<JLocalBeefManagementRecord>> getKeys() {
-        return Arrays.<UniqueKey<JLocalBeefManagementRecord>>asList(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY);
+        return Arrays.<UniqueKey<JLocalBeefManagementRecord>>asList(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, Keys.KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R);
     }
 
     @Override
@@ -217,7 +217,7 @@ public class JLocalBeefManagement extends TableImpl<JLocalBeefManagementRecord> 
     // -------------------------------------------------------------------------
 
     @Override
-    public Row18<String, String, Short, LocalDate, Short, LocalDate, LocalDateTime, Boolean, LocalDate, LocalDate, String, String, LocalDateTime, String, String, String, String, String> fieldsRow() {
+    public Row18<String, String, LocalDate, LocalDate, LocalDateTime, Boolean, LocalDate, LocalDate, String, String, LocalDateTime, String, String, String, String, Short, Short, String> fieldsRow() {
         return (Row18) super.fieldsRow();
     }
 }

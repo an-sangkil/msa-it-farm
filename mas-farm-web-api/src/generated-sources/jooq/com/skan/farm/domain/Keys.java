@@ -60,6 +60,7 @@ public class Keys {
     public static final UniqueKey<JDiseaseDetailRecord> KEY_DISEASE_DETAIL_PRIMARY = UniqueKeys0.KEY_DISEASE_DETAIL_PRIMARY;
     public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = UniqueKeys0.KEY_DISEASE_TREATMENT_PRIMARY;
     public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = UniqueKeys0.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY;
+    public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R = UniqueKeys0.KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R;
     public static final UniqueKey<JOestrusRecord> KEY_OESTRUS_PRIMARY = UniqueKeys0.KEY_OESTRUS_PRIMARY;
     public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = UniqueKeys0.KEY_PERSONAL_CODE_PRIMARY;
     public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = UniqueKeys0.KEY_USERS_PRIMARY;
@@ -71,6 +72,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FKBTDOIJOBJ7F4J74YLOXQ3X8KA = ForeignKeys0.FKBTDOIJOBJ7F4J74YLOXQ3X8KA;
+    public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FK6EMEBSP37XCSESP63XU8DHGDH = ForeignKeys0.FK6EMEBSP37XCSESP63XU8DHGDH;
     public static final ForeignKey<JCattleBuyInformationRecord, JLocalBeefManagementRecord> FK10C3F92T20D0IDC02YDWEXMP9 = ForeignKeys0.FK10C3F92T20D0IDC02YDWEXMP9;
     public static final ForeignKey<JCattleSellStoreInformationRecord, JLocalBeefManagementRecord> FK7LCCG28LA9RJ67746F63RJHTF = ForeignKeys0.FK7LCCG28LA9RJ67746F63RJHTF;
     public static final ForeignKey<JCommonCodeRecord, JCommonCodeRecord> FKC4P1HKO5VS86OID1LTDGX7S7D = ForeignKeys0.FKC4P1HKO5VS86OID1LTDGX7S7D;
@@ -92,6 +94,7 @@ public class Keys {
         public static final UniqueKey<JDiseaseDetailRecord> KEY_DISEASE_DETAIL_PRIMARY = Internal.createUniqueKey(JDiseaseDetail.DISEASE_DETAIL, "KEY_disease_detail_PRIMARY", new TableField[] { JDiseaseDetail.DISEASE_DETAIL.DAY, JDiseaseDetail.DISEASE_DETAIL.ENTITY_IDENTIFICATION_NUMBER, JDiseaseDetail.DISEASE_DETAIL.ENTITY_MANAGEMENT_NUMBER, JDiseaseDetail.DISEASE_DETAIL.SEQ }, true);
         public static final UniqueKey<JDiseaseTreatmentRecord> KEY_DISEASE_TREATMENT_PRIMARY = Internal.createUniqueKey(JDiseaseTreatment.DISEASE_TREATMENT, "KEY_disease_treatment_PRIMARY", new TableField[] { JDiseaseTreatment.DISEASE_TREATMENT.DAY, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_IDENTIFICATION_NUMBER, JDiseaseTreatment.DISEASE_TREATMENT.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY = Internal.createUniqueKey(JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT, "KEY_local_beef_management_PRIMARY", new TableField[] { JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER }, true);
+        public static final UniqueKey<JLocalBeefManagementRecord> KEY_LOCAL_BEEF_MANAGEMENT_UK_3BXCO9DXGOLPQ8R9JPHAI7V9R = Internal.createUniqueKey(JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT, "KEY_local_beef_management_UK_3bxco9dxgolpq8r9jphai7v9r", new TableField[] { JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT.USER_ID }, true);
         public static final UniqueKey<JOestrusRecord> KEY_OESTRUS_PRIMARY = Internal.createUniqueKey(JOestrus.OESTRUS, "KEY_oestrus_PRIMARY", new TableField[] { JOestrus.OESTRUS.ENTITY_IDENTIFICATION_NUMBER, JOestrus.OESTRUS.ENTITY_MANAGEMENT_NUMBER, JOestrus.OESTRUS.SEQ }, true);
         public static final UniqueKey<JPersonalCodeRecord> KEY_PERSONAL_CODE_PRIMARY = Internal.createUniqueKey(JPersonalCode.PERSONAL_CODE, "KEY_personal_code_PRIMARY", new TableField[] { JPersonalCode.PERSONAL_CODE.CODE }, true);
         public static final UniqueKey<JUsersRecord> KEY_USERS_PRIMARY = Internal.createUniqueKey(JUsers.USERS, "KEY_users_PRIMARY", new TableField[] { JUsers.USERS.UUID }, true);
@@ -101,6 +104,7 @@ public class Keys {
 
     private static class ForeignKeys0 {
         public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FKBTDOIJOBJ7F4J74YLOXQ3X8KA = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCalvesManagement.CALVES_MANAGEMENT, "FKbtdoijobj7f4j74yloxq3x8ka", new TableField[] { JCalvesManagement.CALVES_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER, JCalvesManagement.CALVES_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER }, true);
+        public static final ForeignKey<JCalvesManagementRecord, JLocalBeefManagementRecord> FK6EMEBSP37XCSESP63XU8DHGDH = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCalvesManagement.CALVES_MANAGEMENT, "FK6emebsp37xcsesp63xu8dhgdh", new TableField[] { JCalvesManagement.CALVES_MANAGEMENT.ENTITY_IDENTIFICATION_NUMBER_CHILD, JCalvesManagement.CALVES_MANAGEMENT.ENTITY_MANAGEMENT_NUMBER_CHILD }, true);
         public static final ForeignKey<JCattleBuyInformationRecord, JLocalBeefManagementRecord> FK10C3F92T20D0IDC02YDWEXMP9 = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCattleBuyInformation.CATTLE_BUY_INFORMATION, "FK10c3f92t20d0idc02ydwexmp9", new TableField[] { JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleBuyInformation.CATTLE_BUY_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final ForeignKey<JCattleSellStoreInformationRecord, JLocalBeefManagementRecord> FK7LCCG28LA9RJ67746F63RJHTF = Internal.createForeignKey(Keys.KEY_LOCAL_BEEF_MANAGEMENT_PRIMARY, JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION, "FK7lccg28la9rj67746f63rjhtf", new TableField[] { JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_IDENTIFICATION_NUMBER, JCattleSellStoreInformation.CATTLE_SELL_STORE_INFORMATION.ENTITY_MANAGEMENT_NUMBER }, true);
         public static final ForeignKey<JCommonCodeRecord, JCommonCodeRecord> FKC4P1HKO5VS86OID1LTDGX7S7D = Internal.createForeignKey(Keys.KEY_COMMON_CODE_PRIMARY, JCommonCode.COMMON_CODE, "FKc4p1hko5vs86oid1ltdgx7s7d", new TableField[] { JCommonCode.COMMON_CODE.UPPER_CODE }, true);

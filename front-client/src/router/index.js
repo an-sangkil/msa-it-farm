@@ -28,13 +28,13 @@ Vue.use(VueRouter)
 
 const rejectAuth = (to, from, next) => {
   console.log('rejectAuth  Store.getters.isAuth : ', Store.getters.isAuth)
-  if (Store.getters.isAuth === true) {
-    alert('이미 로그인 되었습니다.')
-    next()
-  } else {
-    // 로그인 페이지로 이동
-    next('/');
-  }
+  // if (Store.getters.isAuth === true) {
+  //   alert('이미 로그인 되었습니다.')
+  //   next()
+  // } else {
+  //   // 로그인 페이지로 이동
+  //   next('/');
+  // }
 }
 
 const requireAuth = (to, from, next) => {
