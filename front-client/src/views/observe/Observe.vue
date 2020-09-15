@@ -26,7 +26,15 @@
               </div>
             </div>
             <div class="card-body">
-              <grid :data="gridProps.data" :columns="gridProps.columns" :rowHeaders="gridProps.rowHeaders" :pageOptions="gridProps.pageOptions" />
+              <grid
+                ref="tuiGrid"
+                :data="gridProps.data"
+                :columns="gridProps.columns"
+                :rowHeaders="gridProps.rowHeaders"
+                :columnOptions="gridProps.columnOptions"
+              ></grid>
+
+             <!-- <grid ref="tuiGrid" :data="rows" :columns="columns"/>-->
             </div>
           </div>
         </div>
@@ -36,72 +44,149 @@
 </template>
 <script>
   import 'tui-grid/dist/tui-grid.css';
-  import { Grid } from '@toast-ui/vue-grid';
+  import {Grid} from '@toast-ui/vue-grid';
   import 'tui-pagination/dist/tui-pagination.css';
   import TuiGrid from 'tui-grid';
 
   TuiGrid.setLanguage('ko');
   TuiGrid.applyTheme('striped');
 
+
   export default {
     components: {
       grid: Grid
+
+    },
+    data() {
+      return {
+        rows: [],
+        columns: []
+      }
+    },
+    mounted() {
+      // this.$refs.tuiGrid.invoke('use', 'Net', {
+      //   perPage: 10,
+      //   api: { readData: 'api/readData' }
+      // });
+      console.log(this.$refs.tuiGrid.getRootElement())
+      this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
+        .then(({data}) => {
+          console.log(data)
+          let contents = data.detail.contents.contents
+          var observeData = []
+          for (let x of contents) {
+            console.log(x.entityManagementNumber)
+            observeData.push({'name': x.entityManagementNumber})
+          }
+          this.$refs.tuiGrid.invoke('resetData', observeData);
+        })
+
+
     },
     created() {
+
       this.gridProps = {
-        scrollX: false,
-        scrollY: false,
-        minBodyHeight: 30,
+        scrollX: true,
+        scrollY: true,
         rowHeaders: ['rowNum'],
         pageOptions: {
-          useClient:true,
           perPage: 5
+          , useClient: true
         },
-        data: [
-          // for rowData prop
-          {
-            name: 'Beautiful Lies',
-            artist: 'Birdy'
-          },
-          {
-            name: 'X',
-            artist: 'Ed Sheeran'
-          },
-          {
-            name: 'Beautiful Lies',
-            artist: 'Birdy'
-          },
-          {
-            name: 'X',
-            artist: 'Ed Sheeran'
-          },
-          {
-            name: 'Beautiful Lies',
-            artist: 'Birdy'
-          },
-          {
-            name: 'X',
-            artist: 'Ed Sheeran'
-          }
-
-        ],
-        columns: [
-          // for columnData prop
+        data:[]
+        // {
+        //   api: {
+        //     readData: {
+        //       url: `${this.$store.state.HOST }/observation.diary/list`
+        //       , method: 'get'
+        //       , initParams: {
+        //         page:0
+        //         ,size:50
+        //       }
+        //     }
+        //   }
+        //   //,hideLoadingBar: true
+        // }
+        ,
+        columns:[ // for columnData prop
           {
             header: 'Name',
             name: 'name',
-            sortingType:'desc',
+            sortingType: 'desc',
             sortable: true
           },
           {
-            header: 'Artist',
+            header: 'Artist1',
             name: 'artist'
-          }
-        ]
+          }]
       };
+
+
+      //TuiGrid.getRootElement();
+
+      this.observeList()
+
+    }
+
+    , methods: {
+      observeList() {
+        this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
+          .then(({data}) => {
+            console.log(data)
+            let contents = data.detail.contents.contents
+            var observeData = []
+            for (let x of contents) {
+              console.log(x.entityManagementNumber)
+              observeData.push({'name': x.entityManagementNumber})
+            }
+
+          })
+
+
+        //
+        // this.gridProps.data = {
+        //   "result": true,
+        //   "data": {
+        //     "contents": [{"name":1234}]
+        //   }
+          // ,"pagination": {
+          //   "page": 1,
+          //   "totalCount": 100
+          // }
+        // }
+
+        // this.gridProps.columns=[ // for columnData prop
+        //   {
+        //     header: 'Name',
+        //     name: 'name',
+        //     sortingType: 'desc',
+        //     sortable: true
+        //   },
+        //   {
+        //     header: 'Artist1',
+        //     name: 'artist'
+        //   }]
+
+
+
+        this.columns=[ // for columnData prop
+          {
+            header: 'Name',
+            name: 'name',
+            sortingType: 'desc',
+            sortable: true
+          },
+          {
+            header: 'Artist1',
+            name: 'artist'
+          }]
+
+
+
+      },
+
     }
   };
-
 
 </script>
 
