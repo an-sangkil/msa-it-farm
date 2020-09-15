@@ -11,11 +11,13 @@
     "test": "vue-cli-service serve --open --mode test --port 3000"
   },
   "dependencies": {
+    "@toast-ui/vue-grid": "^4.15.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.16.0",
     "core-js": "^3.6.5",
     "moment": "^2.27.0",
+    "tui-pagination": "^3.4.0",
     "vue": "^2.6.11",
     "vue-i18n": "^8.17.3",
     "vue-router": "^3.2.0",

@@ -7,6 +7,7 @@ import CattleView from '../views/cattle/CattleView'
 import DiaryList from '../views/diary/DiaryList'
 import DiaryForm from '../views/diary/DiaryForm'
 import DiaryView from '../views/diary/DiaryView'
+import ObserveList from '../views/observe/Observe'
 
 // Views - Pages
 import NotFound from '../components/common/NotFound'
@@ -25,28 +26,39 @@ const Register = () => import('../views/pages/Register')
 
 Vue.use(VueRouter)
 
-
+/**
+ * 이미 로그인된 사용자 체크
+ * @param to
+ * @param from
+ * @param next
+ */
 const rejectAuth = (to, from, next) => {
   console.log('rejectAuth  Store.getters.isAuth : ', Store.getters.isAuth)
   // if (Store.getters.isAuth === true) {
   //   alert('이미 로그인 되었습니다.')
-  //   next()
+    next()
   // } else {
   //   // 로그인 페이지로 이동
   //   next('/');
   // }
 }
 
+/**
+ * 사용자 정보 체크
+ * @param to
+ * @param from
+ * @param next
+ */
 const requireAuth = (to, from, next) => {
 
   console.log('requireAuth  Store.getters.isAuth : ', Store.getters.isAuth)
 
-  if (Store.getters.isAuth === false) {
-    alert("로그인 필요한 기능 입니다.")
-    next('/')
-  } else {
+  // if (Store.getters.isAuth === false) {
+  //   alert("로그인 필요한 기능 입니다.")
+  //   next('/')
+  // } else {
     next()
-  }
+  // }
 }
 
 const routes = [
@@ -123,6 +135,23 @@ const routes = [
             path: 'diaryDetail',
             name: 'DiaryView',
             component: DiaryView
+          }
+        ]
+      },
+      {
+        path: '/observe',
+        redirect: '/observe/observeList',
+        name: 'Observe',
+        component: {
+          render(c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: 'observeList',
+            name: 'ObserveList',
+            component: ObserveList
           }
         ]
       },
