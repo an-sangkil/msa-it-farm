@@ -32,7 +32,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
 
-    private static final long serialVersionUID = -963970205;
+    private static final long serialVersionUID = 1350583259;
 
     /**
      * The reference instance of <code>naive-it-farm.calves_management</code>
@@ -167,15 +167,11 @@ public class JCalvesManagement extends TableImpl<JCalvesManagementRecord> {
 
     @Override
     public List<ForeignKey<JCalvesManagementRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<JCalvesManagementRecord, ?>>asList(Keys.FKBTDOIJOBJ7F4J74YLOXQ3X8KA, Keys.FK6EMEBSP37XCSESP63XU8DHGDH);
+        return Arrays.<ForeignKey<JCalvesManagementRecord, ?>>asList(Keys.FKBTDOIJOBJ7F4J74YLOXQ3X8KA);
     }
 
-    public JLocalBeefManagement fkbtdoijobj7f4j74yloxq3x8ka() {
+    public JLocalBeefManagement localBeefManagement() {
         return new JLocalBeefManagement(this, Keys.FKBTDOIJOBJ7F4J74YLOXQ3X8KA);
-    }
-
-    public JLocalBeefManagement fk6emebsp37xcsesp63xu8dhgdh() {
-        return new JLocalBeefManagement(this, Keys.FK6EMEBSP37XCSESP63XU8DHGDH);
     }
 
     @Override

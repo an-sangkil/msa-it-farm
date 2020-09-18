@@ -31,10 +31,10 @@
                 :data="gridProps.data"
                 :columns="gridProps.columns"
                 :rowHeaders="gridProps.rowHeaders"
-                :columnOptions="gridProps.columnOptions"
+                :pageOptions="gridProps.pageOptions"
               ></grid>
 
-             <!-- <grid ref="tuiGrid" :data="rows" :columns="columns"/>-->
+              <!-- <grid ref="tuiGrid" :data="rows" :columns="columns"/>-->
             </div>
           </div>
         </div>
@@ -64,22 +64,13 @@
       }
     },
     mounted() {
+
       // this.$refs.tuiGrid.invoke('use', 'Net', {
       //   perPage: 10,
       //   api: { readData: 'api/readData' }
       // });
-      console.log(this.$refs.tuiGrid.getRootElement())
-      this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
-        .then(({data}) => {
-          console.log(data)
-          let contents = data.detail.contents.contents
-          var observeData = []
-          for (let x of contents) {
-            console.log(x.entityManagementNumber)
-            observeData.push({'name': x.entityManagementNumber})
-          }
-          this.$refs.tuiGrid.invoke('resetData', observeData);
-        })
+
+      this.observeList()
 
 
     },
@@ -93,7 +84,7 @@
           perPage: 5
           , useClient: true
         },
-        data:[]
+        data: []
         // {
         //   api: {
         //     readData: {
@@ -108,7 +99,7 @@
         //   //,hideLoadingBar: true
         // }
         ,
-        columns:[ // for columnData prop
+        columns: [ // for columnData prop
           {
             header: 'Name',
             name: 'name',
@@ -120,68 +111,43 @@
             name: 'artist'
           }]
       };
-
-
-      //TuiGrid.getRootElement();
-
-      this.observeList()
-
     }
-
     , methods: {
       observeList() {
-        this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
-          .then(({data}) => {
-            console.log(data)
-            let contents = data.detail.contents.contents
-            var observeData = []
-            for (let x of contents) {
-              console.log(x.entityManagementNumber)
-              observeData.push({'name': x.entityManagementNumber})
-            }
-
-          })
-
-
-        //
         // this.gridProps.data = {
         //   "result": true,
         //   "data": {
         //     "contents": [{"name":1234}]
         //   }
-          // ,"pagination": {
-          //   "page": 1,
-          //   "totalCount": 100
-          // }
+        // ,"pagination": {
+        //   "page": 1,
+        //   "totalCount": 100
+        // }
         // }
 
-        // this.gridProps.columns=[ // for columnData prop
-        //   {
-        //     header: 'Name',
-        //     name: 'name',
-        //     sortingType: 'desc',
-        //     sortable: true
-        //   },
-        //   {
-        //     header: 'Artist1',
-        //     name: 'artist'
-        //   }]
+        console.log(this.$refs.tuiGrid.getRootElement())
+        this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
+          .then(({data}) => {
+            console.log(data)
+            let contents = data.detail.contents.contents
+            let observeData = []
+            for (let x of contents) {
+              observeData.push({'name': x.entityManagementNumber})
+            }
 
+            let pageable = data.detail.contents;
+            console.log(pageable)
 
+            let option = {
+              pageState: {
+                page: 1
+                , totalCount: pageable.totalElements
+                , perPage: 10
+              }
+            }
 
-        this.columns=[ // for columnData prop
-          {
-            header: 'Name',
-            name: 'name',
-            sortingType: 'desc',
-            sortable: true
-          },
-          {
-            header: 'Artist1',
-            name: 'artist'
-          }]
-
-
+            this.$refs.tuiGrid.invoke('resetData', observeData, option)
+          })
 
       },
 

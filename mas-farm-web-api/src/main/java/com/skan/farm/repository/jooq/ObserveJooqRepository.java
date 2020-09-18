@@ -42,6 +42,24 @@ public class ObserveJooqRepository {
         JDiseaseDetail jDiseaseDetail = JDiseaseDetail.DISEASE_DETAIL;
         JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
 
+
+        Long totalCount = dslContext
+                .selectCount()
+                .from(jDiseaseTreatment)
+                .leftOuterJoin(jDiseaseDetail)
+                .on(
+                        jDiseaseTreatment.ENTITY_IDENTIFICATION_NUMBER.eq(jDiseaseDetail.ENTITY_IDENTIFICATION_NUMBER),
+                        jDiseaseTreatment.ENTITY_MANAGEMENT_NUMBER.eq(jDiseaseDetail.ENTITY_MANAGEMENT_NUMBER),
+                        jDiseaseTreatment.DAY.eq(jDiseaseDetail.DAY)
+
+                )
+                .leftOuterJoin(jLocalBeefManagement)
+                .on(jDiseaseTreatment.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER))
+                .limit(pageable.getPageSize())
+                .offset(pageable.getOffset())
+                .fetchOne(0, Long.class);
+
+
         List<ObservationDiary> observationDiaries = dslContext
                 .select(
                         jDiseaseTreatment.asterisk(),
@@ -72,7 +90,7 @@ public class ObserveJooqRepository {
         });
 
 
-        return new PageImpl<ObservationDiary>(pageable, observationDiaries, 0);
+        return new PageImpl<ObservationDiary>(pageable, observationDiaries, totalCount.intValue());
     }
 
     private List<Condition> observationDiaryCondition(ObservationDiary predicate) {
@@ -82,7 +100,7 @@ public class ObserveJooqRepository {
         JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
 
         List<Condition> conditions = new ArrayList<>();
-        if(!StringUtils.isEmpty(predicate.getAgeOfMonth())){
+        if (!StringUtils.isEmpty(predicate.getAgeOfMonth())) {
             conditions.add(jLocalBeefManagement.AGE_OF_MONTH.ge(predicate.getAgeOfMonth()));
         }
 

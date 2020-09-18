@@ -74,7 +74,7 @@ class DiseaseDetailJpaRepositoryTest {
         diseaseTreatmentJpaRepository.saveAll(diseaseTreatments);
 
         List<DiseaseDetail> diseaseDetails = new ArrayList<>();
-        IntStream.rangeClosed(1, 10).forEach(value -> {
+        IntStream.rangeClosed(1, 1000).forEach(value -> {
             DiseaseDetail diseaseDetail = DiseaseDetail.builder()
                     .diseaseDetailPK(new DiseaseDetail.DiseaseDetailPK(identityNumber, entityNumber, toDay, (short) value))
                     .medicationName("타이로펜" + value)

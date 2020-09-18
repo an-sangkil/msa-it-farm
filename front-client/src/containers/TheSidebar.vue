@@ -40,6 +40,15 @@
         Diary</a>
         </router-link>
       </li>
+      <li class="c-sidebar-nav-item">
+        <router-link v-bind:to="'/observe/observeList'">
+          <a class="c-sidebar-nav-link" href="#">
+            <svg class="c-sidebar-nav-icon">
+              <use xlink:href="../vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+            </svg>
+            Observe</a>
+        </router-link>
+      </li>
 
 
       <li class="c-sidebar-nav-title">Components</li>
