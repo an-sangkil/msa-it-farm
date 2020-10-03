@@ -1,3 +1,5 @@
+
+drop schema `naive-it-farm`;
 CREATE SCHEMA `naive-it-farm` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 
 
