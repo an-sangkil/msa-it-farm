@@ -98,7 +98,7 @@ public class ObserveJooqRepository {
         JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
 
         List<Condition> conditions = new ArrayList<>();
-        if(!StringUtils.isEmpty(predicate.getAgeOfMonth())){
+        if (!StringUtils.isEmpty(predicate.getAgeOfMonth())) {
             conditions.add(jLocalBeefManagement.AGE_OF_MONTH.ge(predicate.getAgeOfMonth()));
         }
 
