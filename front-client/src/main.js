@@ -5,16 +5,18 @@ import store from './store'
 import axios from './js/axios.intercepter'
 import VueSession from 'vue-session'
 import { BootstrapVue, ToastPlugin, IconsPlugin, FormInputPlugin, BToast } from 'bootstrap-vue'
-
+import CKEditor from '@ckeditor/ckeditor5-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import './css/style.css'
 import i18n from './i18n'
+import './css/style.css'
+
 Vue.component('b-toast', BToast)
 Vue.use(ToastPlugin)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(FormInputPlugin)
+Vue.use(CKEditor)
 
 // 세션 옵션
 const sessionOptions = {

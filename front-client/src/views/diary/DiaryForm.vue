@@ -76,7 +76,7 @@
                   <div class="form-group col-md-12 row">
                     <label class="col-md-1 col-form-label">내용</label>
                     <div class="col-md-11">
-                      <textarea class="form-control" id="textarea-input" name="textarea-input" rows="9" placeholder="Content.." v-model="todayContent"></textarea>
+                      <ckeditor :editor="editor" v-model="editorData" :config="editorConfig" class="ck-editor__editable_inline"></ckeditor>
                     </div>
                   </div>
                 </div>
@@ -106,123 +106,164 @@
   </div>
 </template>
 <script>
-  import DatePicker from 'vue2-datepicker';
-  import 'vue2-datepicker/index.css';
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
 
-  export default {
-    created() {
+//import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/base64uploadadapter';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-      this.$store.commit('changeHome', {name: 'Home'})
-      this.$store.commit('changeTitle', {name: 'Schedule'})
-      this.$store.commit('changeSubtitle', {name: 'Form'})
+export default {
+  created() {
 
-    },
-    components: {
-      DatePicker
-    }, data() {
-      return {
-        uuid: '',
-        seq: '',
-        standardDate: '',
-        subject: '',
-        todayContent: '',
-        tomorrowTodo: '',
-        todayWeatherCode: '',
-        minTemperatureType: '',
-        maxTemperatureType: '',
-        minimumTemperature: '',
-        maximumTemperature: '',
-        weatherOptions: [
-          {value: '', text: '선택하세요'},
-          {value: 'SUNNY', text: '맑음'},
-          {value: 'CLOUDY', text: '흐림'}
-        ],
-        temperatureOption: [
-          {value: '', text: '선택하세요'},
-          {value: 'PLUS_DEGREES', text: '영상'},
-          {value: 'MINUS_DEGREES', text: '영하'}
-        ],
 
+    this.$store.commit('changeHome', {name: 'Home'})
+    this.$store.commit('changeTitle', {name: 'Schedule'})
+    this.$store.commit('changeSubtitle', {name: 'Form'})
+
+  },
+  components: {
+    DatePicker
+  }, data() {
+    return {
+      uuid: '',
+      seq: '',
+      standardDate: '',
+      subject: '',
+      todayContent: '',
+      tomorrowTodo: '',
+      todayWeatherCode: '',
+      minTemperatureType: '',
+      maxTemperatureType: '',
+      minimumTemperature: '',
+      maximumTemperature: '',
+      weatherOptions: [
+        {value: '', text: '선택하세요'},
+        {value: 'SUNNY', text: '맑음'},
+        {value: 'CLOUDY', text: '흐림'}
+      ],
+      temperatureOption: [
+        {value: '', text: '선택하세요'},
+        {value: 'PLUS_DEGREES', text: '영상'},
+        {value: 'MINUS_DEGREES', text: '영하'}
+      ],
+
+      editor: ClassicEditor,
+      editorData: '',
+      editorConfig: {
+        initialData: '<p>Content of the editor.1</p>',
+        //plugins: [Base64UploadAdapter],
+        toolbar: {
+          items: [
+            'heading',
+            '|',
+            'alignment',                                                 // <--- ADDED
+            'bold',
+            'italic',
+            'link',
+            'bulletedList',
+            'numberedList',
+            'imageUpload',
+            'blockQuote',
+            'undo',
+            'redo'
+          ]
+        },
+        image: {
+          toolbar: [
+            'imageStyle:full',
+            'imageStyle:side',
+            '|',
+            'imageTextAlternative'
+          ]
+        },
+        // This value must be kept in sync with the language defined in webpack.config.js.
+        language: 'en'
       }
-    },
-    mounted() {
-      let uuid = this.$route.query.uuid
-      if (uuid !== undefined) {
-        this.scheduleDetailView()
-      }
-    },
-    computed: {},
-    methods: {
-      scheduleSave: function () {
 
-        let data = JSON.stringify({
-          uuid: this.uuid,
-          seq: this.seq,
-          standardDate: this.standardDate,
-          subject: this.subject,
-          content: this.content,
-          todayWeatherCode: this.todayWeatherCode,
-          minTemperatureType: this.minTemperatureType,
-          maxTemperatureType: this.maxTemperatureType,
-          minimumTemperature: this.minimumTemperature,
-          maximumTemperature: this.maximumTemperature
-        })
+    }
+  },
+  mounted() {
+    let uuid = this.$route.query.uuid
+    if (uuid !== undefined) {
+      this.scheduleDetailView()
+    }
+  },
+  computed: {},
+  methods: {
+    scheduleSave: function () {
 
-        console.log(data)
+      // 저장 파일 JSON 생성
+      let data = JSON.stringify({
+        uuid: this.uuid,
+        seq: this.seq,
+        standardDate: this.standardDate,
+        subject: this.subject,
+        todayContent: this.todayContent,
+        todayWeatherCode: this.todayWeatherCode,
+        minTemperatureType: this.minTemperatureType,
+        maxTemperatureType: this.maxTemperatureType,
+        minimumTemperature: this.minimumTemperature,
+        maximumTemperature: this.maximumTemperature
+      })
 
-        this.$http.put(this.$store.state.HOST + '/diary/save', data, {
-          headers: {"Content-Type": "application/json"}
-        })
-          .then((res) => {
-            console.log(res.data)
-            if (res.data.status === "SUCCESS") {
+      console.log(data)
 
-              let uuid = res.data.detail.contents.uuid
-              let seq = res.data.detail.contents.seq
+      this.$http.put(this.$store.state.HOST + '/diary/save', data, {
+        headers: {"Content-Type": "application/json"}
+      })
+        .then((res) => {
+          console.log(res.data)
+          if (res.data.status === "SUCCESS") {
 
-              this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
+            let uuid = res.data.detail.contents.uuid
+            let seq = res.data.detail.contents.seq
 
-              let actionURL = `/diary/diaryDetail?uuid=${uuid}&seq=${seq}`
-              this.$router.push(actionURL)
+            this.$store.commit("showAlert", {message: 'save success', variant: 'success'})
 
-            }
+            let actionURL = `/diary/diaryDetail?uuid=${uuid}&seq=${seq}`
+            this.$router.push(actionURL)
 
-          }).catch((error) => {
-          console.log(error)
-        })
-
-
-      }, scheduleDetailView: function () {
-        let actionURL = `${this.$store.state.HOST}/diary/detail?`
-
-        console.log(actionURL)
-        this.$http.get(actionURL, {
-          params: {
-            uuid: this.$route.query.uuid
-            , seq: this.$route.query.seq
           }
-        }).then((res) => {
 
-          let scheduleData = res.data.detail.contents
-          this.uuid = scheduleData.uuid
-          this.seq = scheduleData.seq
-          this.standardDate = scheduleData.standardDate
-          this.subject = scheduleData.subject
-          this.content = scheduleData.content
-          this.todayWeatherCode = scheduleData.todayWeatherCode
-          this.minTemperatureType = scheduleData.minTemperatureType,
+        }).catch((error) => {
+        console.log(error)
+      })
+
+
+    }, scheduleDetailView: function () {
+      let actionURL = `${this.$store.state.HOST}/diary/detail?`
+
+      console.log(actionURL)
+      this.$http.get(actionURL, {
+        params: {
+          uuid: this.$route.query.uuid
+          , seq: this.$route.query.seq
+        }
+      }).then((res) => {
+
+        let scheduleData = res.data.detail.contents
+        this.uuid = scheduleData.uuid
+        this.seq = scheduleData.seq
+        this.standardDate = scheduleData.standardDate
+        this.subject = scheduleData.subject
+        this.todayContent = scheduleData.todayContent
+        this.editorData = scheduleData.todayContent
+        this.todayWeatherCode = scheduleData.todayWeatherCode
+        this.minTemperatureType = scheduleData.minTemperatureType,
           this.maxTemperatureType = scheduleData.maxTemperatureType,
 
           this.minimumTemperature = scheduleData.minimumTemperature
-          this.maximumTemperature = scheduleData.maximumTemperature
+        this.maximumTemperature = scheduleData.maximumTemperature
 
-        })
-      }
+      })
     }
   }
+}
 
 </script>
 
 <style scoped="scoped">
-
+.ck-editor .ck-editor__main .ck-content {
+  min-height: 500px;
+}
 </style>
