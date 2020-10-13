@@ -187,7 +187,7 @@
               <table class="table table-responsive-sm">
                 <thead>
                 <tr>
-                  <th>번호</th>
+                  <th>날짜</th>
                   <th>치료날짜</th>
                   <th>질병 명</th>
                   <th>약물 명</th>
@@ -201,11 +201,11 @@
                 <tbody>
 
                 <tr v-for="item in this.diseaseTreatmentSet"
-                    v-bind:key="item.diseaseTreatmentPK.entityManagementNumber+item.diseaseTreatmentPK.entityIdentificationNumber+item.diseaseTreatmentPK.seq"
-                    v-on:click="diseaseDetail(item.diseaseTreatmentPK.entityManagementNumber,item.diseaseTreatmentPK.entityIdentificationNumber,item.diseaseTreatmentPK.seq)"
+                    v-bind:key="item.diseaseTreatmentPK.entityManagementNumber+item.diseaseTreatmentPK.entityIdentificationNumber+item.diseaseTreatmentPK.day"
+                    v-on:click="diseaseDetail(item.diseaseTreatmentPK.entityManagementNumber,item.diseaseTreatmentPK.entityIdentificationNumber,item.diseaseTreatmentPK.day)"
                     style="cursor: pointer"
                 >
-                  <td>{{item.diseaseTreatmentPK.seq}}</td>
+                  <td>{{item.diseaseTreatmentPK.day}}</td>
                   <td>{{item.cureDate}}</td>
                   <td>{{item.diseaseName}}</td>
                   <td>{{item.medicationName}}</td>
@@ -633,13 +633,13 @@
           console.log(error)
         })
 
-      }, diseaseDetail: function (entityNumber, identityNumber, seq) {
+      }, diseaseDetail: function (entityNumber, identityNumber, day) {
 
         this.$http.get(this.$store.state.HOST + '/cattle/disease_treatment/detail', {
           params: {
             entityManagementNumber: entityNumber,
             entityIdentificationNumber: identityNumber,
-            seq: seq
+            day: day
           }
         }).then(({data}) => {
 

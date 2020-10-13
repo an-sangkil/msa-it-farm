@@ -42,6 +42,22 @@ public class ObserveJooqRepository {
         JDiseaseDetail jDiseaseDetail = JDiseaseDetail.DISEASE_DETAIL;
         JLocalBeefManagement jLocalBeefManagement = JLocalBeefManagement.LOCAL_BEEF_MANAGEMENT;
 
+        int total = dslContext
+                .selectCount()
+                .from(jDiseaseTreatment)
+                .leftOuterJoin(jDiseaseDetail)
+                .on(
+                        jDiseaseTreatment.ENTITY_IDENTIFICATION_NUMBER.eq(jDiseaseDetail.ENTITY_IDENTIFICATION_NUMBER),
+                        jDiseaseTreatment.ENTITY_MANAGEMENT_NUMBER.eq(jDiseaseDetail.ENTITY_MANAGEMENT_NUMBER),
+                        jDiseaseTreatment.DAY.eq(jDiseaseDetail.DAY)
+
+                )
+                .leftOuterJoin(jLocalBeefManagement)
+                .on(jDiseaseTreatment.ENTITY_IDENTIFICATION_NUMBER.eq(jLocalBeefManagement.ENTITY_IDENTIFICATION_NUMBER))
+                .where(this.observationDiaryCondition(predicateObserve))
+                .fetchOne(0, Integer.class);
+
+
         List<ObservationDiary> observationDiaries = dslContext
                 .select(
                         jDiseaseTreatment.asterisk(),
@@ -68,11 +84,11 @@ public class ObserveJooqRepository {
                 .fetchInto(ObservationDiary.class);
 
         observationDiaries.forEach(observationDiary -> {
-            log.debug("observationDiary = {}", observationDiary);
+            log.trace("observationDiary = {}", observationDiary);
         });
 
 
-        return new PageImpl<ObservationDiary>(pageable, observationDiaries, 0);
+        return new PageImpl<ObservationDiary>(pageable, observationDiaries, total);
     }
 
     private List<Condition> observationDiaryCondition(ObservationDiary predicate) {

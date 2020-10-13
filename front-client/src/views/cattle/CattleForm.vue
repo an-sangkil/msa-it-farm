@@ -123,7 +123,7 @@
               </form>
 
             </div>
-            <div class="card-footer">
+            <div class="card-footer" v-if="entityIdentificationNumber == ''">
               <div class="row justify-content-end">
                 <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
                   <button class="btn btn-block btn-outline-info" type="button" v-on:click="$router.go(-1)">cancel</button>
@@ -259,8 +259,16 @@
 
 
             </div>
-            <!--<div class="card-footer">
-            </div>-->
+            <div class="card-footer" v-if="entityIdentificationNumber != ''">
+              <div class="row justify-content-end">
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="$router.go(-1)">cancel</button>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
+                  <button class="btn btn-block btn-outline-info" type="button" v-on:click="cattleSave($event)">submit</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -340,7 +348,7 @@
     methods: {
       validation :function(){
 
-        if ( this.entityIdentificationNumber == '' || this.entityIdentificationNumber == '') {
+        if ( this.entityIdentificationNumber === '' || this.entityIdentificationNumber === '') {
           console.log('필수 입력 데이터 입니다.')
           return false
         } else {

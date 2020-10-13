@@ -235,7 +235,7 @@ public class RouterCattleManagement {
                 var identityId = request.param("entityIdentificationNumber").orElseThrow();
                 var day = request.param("day").orElseThrow();
 
-                DiseaseTreatment diseaseTreatment = this.diseaseTreatmentJpaRepository.findById(new DiseaseTreatment.DiseaseTreatmentPK(entityId,identityId, LocalDate.parse(day, DateTimeFormatter.ofPattern("yyyy-MM-dd")))).orElseThrow();
+                DiseaseTreatment diseaseTreatment = this.diseaseTreatmentJpaRepository.findById(new DiseaseTreatment.DiseaseTreatmentPK(identityId, entityId, LocalDate.parse(day, DateTimeFormatter.ofPattern("yyyy-MM-dd")))).orElseThrow();
 
                 response.setDetail(new Success<>(diseaseTreatment));
                 response.setMessage("disease treatment detail  success ");
@@ -243,7 +243,7 @@ public class RouterCattleManagement {
 
 
             }  catch (Exception e) {
-                log.debug("disease treatment save error =", e);
+                log.debug("disease treatment detail error =", e);
                 response.setMessage(e.getMessage());
                 response.setStatus(Response.ResponseCode.ERROR);
                 response.setDetail(new Error<>());

@@ -28,13 +28,13 @@
             <div class="card-body">
               <grid
                 ref="tuiGrid"
+                :rowHeaders="gridProps.rowHeaders"
                 :data="gridProps.data"
                 :columns="gridProps.columns"
-                :rowHeaders="gridProps.rowHeaders"
-                :columnOptions="gridProps.columnOptions"
+                :pageOptions="gridProps.pageOptions"
+                @click="detailView"
               ></grid>
 
-             <!-- <grid ref="tuiGrid" :data="rows" :columns="columns"/>-->
             </div>
           </div>
         </div>
@@ -43,150 +43,169 @@
   </div>
 </template>
 <script>
-  import 'tui-grid/dist/tui-grid.css';
-  import {Grid} from '@toast-ui/vue-grid';
-  import 'tui-pagination/dist/tui-pagination.css';
-  import TuiGrid from 'tui-grid';
+import 'tui-grid/dist/tui-grid.css';
+import {Grid} from '@toast-ui/vue-grid';
+import 'tui-pagination/dist/tui-pagination.css';
+import TuiGrid from 'tui-grid';
 
-  TuiGrid.setLanguage('ko');
-  TuiGrid.applyTheme('striped');
-
-
-  export default {
-    components: {
-      grid: Grid
-
-    },
-    data() {
-      return {
-        rows: [],
-        columns: []
-      }
-    },
-    mounted() {
-      // this.$refs.tuiGrid.invoke('use', 'Net', {
-      //   perPage: 10,
-      //   api: { readData: 'api/readData' }
-      // });
-      console.log(this.$refs.tuiGrid.getRootElement())
-      this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
-        .then(({data}) => {
-          console.log(data)
-          let contents = data.detail.contents.contents
-          var observeData = []
-          for (let x of contents) {
-            console.log(x.entityManagementNumber)
-            observeData.push({'name': x.entityManagementNumber})
-          }
-          this.$refs.tuiGrid.invoke('resetData', observeData);
-        })
+//TuiGrid.setLanguage('ko');
+TuiGrid.applyTheme('striped');
 
 
-    },
-    created() {
+export default {
+  components: {
+    grid: Grid
 
-      this.gridProps = {
-        scrollX: true,
-        scrollY: true,
-        rowHeaders: ['rowNum'],
-        pageOptions: {
-          perPage: 5
-          , useClient: true
+  },
+  data() {
+    return {
+      rows: [],
+      pageSize : 50,
+      columns: [ // for columnData prop
+        {
+          header: 'Name',
+          name: 'name',
+          sortingType: 'desc',
+          sortable: true
         },
-        data:[]
-        // {
-        //   api: {
-        //     readData: {
-        //       url: `${this.$store.state.HOST }/observation.diary/list`
-        //       , method: 'get'
-        //       , initParams: {
-        //         page:0
-        //         ,size:50
-        //       }
-        //     }
-        //   }
-        //   //,hideLoadingBar: true
-        // }
+        {
+          header: 'Artist1',
+          name: 'artist'
+        }]
+    }
+  },
+  mounted() {
+    // this.$refs.tuiGrid.invoke('use', 'Net', {
+    //   perPage: 10,
+    //   api: { readData: 'api/readData' }
+    // });
+    // this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
+    //   .then(({data}) => {
+    //     let contents = data.detail.contents.contents
+    //     let observeData = []
+    //     for (let x of contents) {
+    //       observeData.push({'name': x.entityManagementNumber})
+    //     }
+    //
+    //     const option = {
+    //       pageState: {
+    //         page: 1, totalCount: 100, perPage: 10
+    //       }
+    //       , filterState: {
+    //         columnName: ['name']
+    //       }
+    //     }
+    //     this.$refs.tuiGrid.invoke('resetData', observeData, option);
+
+    // const addColumn =[
+    //   {
+    //     header: 'Artist2',
+    //     name: 'artist2'
+    //   }
+    // ]
+    // this.$refs.tuiGrid.invoke('setColumns',addColumn );
+    // })
+    console.log('getRootElement = ', this.$refs.tuiGrid.getRootElement());
+    console.log('getColumns = ', this.$refs.tuiGrid.invoke('getColumns'));
+    console.log('getPagination = ', this.$refs.tuiGrid.invoke('getPagination'));
+    console.log('getPaginationTotalCount = ', this.$refs.tuiGrid.invoke('getPaginationTotalCount'));
+    //console.log(this.$refs.tuiGrid.invoke('getData'))
+    // this.$refs.tuiGrid.invoke('on','response', function (ev) {
+    //   // 성공/실패와 관계 없이 응답을 받았을 경우
+    //   console.log('ev',ev)
+    // })
+
+  },
+  created() {
+
+    this.gridProps = {
+      scrollX: true
+      , scrollY: true
+      , rowHeaders: ['rowNum']
+      , pageOptions: {
+        "perPage": this.pageSize,
+        //useClient: true
+      }
+      /*데이터를 datasource 백엔드 호출 readData로 직접 가져오고 싶은경우에 사용함.
+      1. 응답 객체에 대한 포맷과 페이징 옵션을 맞춰 주어야 만 동작된다.
+      2. 응답데이터를 커스텀하게 조작 할수 없음.*/
+      , data: {
+        api: {
+          readData: {
+            url: `${this.$store.state.HOST}/observation.diary/list`
+            , method: 'get'
+            , initParams: { page: 0, size: this.pageSize }
+          }
+        }
+        ,hideLoadingBar: true
+      }
+      , columns: [ // for columnData prop
+        {
+          header: 'EntityIdentificationNumber',
+          name: 'entityIdentificationNumber',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          header: 'cureDate',
+          name: 'cureDate'
+        }
         ,
-        columns:[ // for columnData prop
-          {
-            header: 'Name',
-            name: 'name',
-            sortingType: 'desc',
-            sortable: true
-          },
-          {
-            header: 'Artist1',
-            name: 'artist'
-          }]
-      };
+        {
+          header: 'cureAgeOfMonth',
+          name: 'cureAgeOfMonth'
+        }
+        ,
+        {
+          header: 'ageOfMonth',
+          name: 'ageOfMonth'
+        }
+        ,
+        {
+          header: 'medicationName',
+          name: 'medicationName'
+        }
+        ,
+        {
+          header: 'injectionMethod',
+          name: 'injectionMethod'
+        }
+        ,
+        {
+          header: 'treatmentDetails',
+          name: 'treatmentDetails'
+        }
+        ,
+        {
+          header: 'location',
+          name: 'location'
+        }
+        ,
+        {
+          header: 'remark',
+          name: 'remark'
+        }
+        ,
+        {
+          header:'withdrawalPeriodExpirationDate',
+          name:'withdrawalPeriodExpirationDate'
+        }]
+    };
 
 
-      //TuiGrid.getRootElement();
+  }
 
-      this.observeList()
+  , methods: {
+    observeList() {
 
+    },
+    detailView (ev) {
+      //console.log('click event: ', ev)
+      console.log(ev.instance.getValue(ev.rowKey, 'medicationName'))
     }
 
-    , methods: {
-      observeList() {
-        this.$http.get(`${this.$store.state.HOST}/observation.diary/list`)
-          .then(({data}) => {
-            console.log(data)
-            let contents = data.detail.contents.contents
-            var observeData = []
-            for (let x of contents) {
-              console.log(x.entityManagementNumber)
-              observeData.push({'name': x.entityManagementNumber})
-            }
-
-          })
-
-
-        //
-        // this.gridProps.data = {
-        //   "result": true,
-        //   "data": {
-        //     "contents": [{"name":1234}]
-        //   }
-          // ,"pagination": {
-          //   "page": 1,
-          //   "totalCount": 100
-          // }
-        // }
-
-        // this.gridProps.columns=[ // for columnData prop
-        //   {
-        //     header: 'Name',
-        //     name: 'name',
-        //     sortingType: 'desc',
-        //     sortable: true
-        //   },
-        //   {
-        //     header: 'Artist1',
-        //     name: 'artist'
-        //   }]
-
-
-
-        this.columns=[ // for columnData prop
-          {
-            header: 'Name',
-            name: 'name',
-            sortingType: 'desc',
-            sortable: true
-          },
-          {
-            header: 'Artist1',
-            name: 'artist'
-          }]
-
-
-
-      },
-
-    }
-  };
+  }
+};
 
 </script>
 
