@@ -76,7 +76,7 @@
                   <div class="form-group col-md-12 row">
                     <label class="col-md-1 col-form-label">내용</label>
                     <div class="col-md-11">
-                      <ckeditor :editor="editor" v-model="editorData" :config="editorConfig" class="ck-editor__editable_inline"></ckeditor>
+                      <ckeditor :editor="editor" v-model="editorData" :config="editorConfig" style="height: 500px"></ckeditor>
                     </div>
                   </div>
                 </div>
@@ -129,8 +129,8 @@ export default {
       seq: '',
       standardDate: '',
       subject: '',
-      todayContent: '',
-      tomorrowTodo: '',
+      contents: '',
+      note: '',
       todayWeatherCode: '',
       minTemperatureType: '',
       maxTemperatureType: '',
@@ -198,7 +198,7 @@ export default {
         seq: this.seq,
         standardDate: this.standardDate,
         subject: this.subject,
-        todayContent: this.todayContent,
+        todayContent: this.contents,
         todayWeatherCode: this.todayWeatherCode,
         minTemperatureType: this.minTemperatureType,
         maxTemperatureType: this.maxTemperatureType,
@@ -246,15 +246,14 @@ export default {
         this.seq = scheduleData.seq
         this.standardDate = scheduleData.standardDate
         this.subject = scheduleData.subject
-        this.todayContent = scheduleData.todayContent
-        this.editorData = scheduleData.todayContent
+        this.contents = scheduleData.contents
+        this.editorData = scheduleData.contents
+        this.note = scheduleData.note
         this.todayWeatherCode = scheduleData.todayWeatherCode
-        this.minTemperatureType = scheduleData.minTemperatureType,
-          this.maxTemperatureType = scheduleData.maxTemperatureType,
-
-          this.minimumTemperature = scheduleData.minimumTemperature
+        this.minTemperatureType = scheduleData.minTemperatureType
+        this.maxTemperatureType = scheduleData.maxTemperatureType
+        this.minimumTemperature = scheduleData.minimumTemperature
         this.maximumTemperature = scheduleData.maximumTemperature
-
       })
     }
   }
@@ -263,7 +262,4 @@ export default {
 </script>
 
 <style scoped="scoped">
-.ck-editor .ck-editor__main .ck-content {
-  min-height: 500px;
-}
 </style>
