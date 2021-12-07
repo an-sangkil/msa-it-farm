@@ -1,7 +1,6 @@
-
-### 사전 준비
- - node js npm
- - vue.js 설치 vue-cli version
+### 사전 준비 (vue-cli 로 프로젝트 구성)
+ - node.js 설치 
+ - vue.js 및 vue-cli 설치 
 ```shell script
 # npm 으로 vue-cli 설치
 npm install -g @vue/cli
@@ -10,7 +9,7 @@ npm install -g @vue/cli
 npm install -g @vue/cli-init
 
 # project Create
-vue init webpack frontend
+vue create {my-project-name} --no-git
 ```
 
 ### npm server 구동 스크립트
@@ -19,9 +18,9 @@ vue init webpack frontend
 > npn install
 
 # 서버 구동
-> npm start
+> npm run serve
 
-# webpack 빌드  (spring application 의 @/resources 폴더로 빌드)
+# 빌드
 > npm run build
 ```
 
@@ -39,6 +38,9 @@ vue init webpack frontend
 
 
 ### plug-in 설치 
+ - 필요에 따라 할것 (안해도됨 이미 package.json 에선언되어 있음)
+ - 인스톨시 package.json 에 자동 추가됨
+
 ```shell script
 # Vue bootstrap 
 npm install vue bootstrap-vue bootstrap

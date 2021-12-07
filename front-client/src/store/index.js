@@ -48,7 +48,11 @@ export default new Vuex.Store({
 
         const list = []
         for (let i = calculatorPagination.begin; i <= calculatorPagination.end; i++) {
-          const item = {value: i - 1, viewValue: i, active: pageNumber + 1 === i}
+          const item = {
+            value: i - 1,
+            viewValue: i,
+            active: pageNumber + 1 === i
+          }
           list.push(item)
         }
         state.paginationObject = list
