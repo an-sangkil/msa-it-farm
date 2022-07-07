@@ -18,7 +18,7 @@
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.16.0",
     "core-js": "^3.6.5",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "tui-pagination": "^3.4.0",
     "vue": "^2.6.11",
     "vue-i18n": "^8.17.3",
