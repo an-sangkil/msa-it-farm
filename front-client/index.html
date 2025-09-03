@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSA IT Farm - Debug</title>
+    <script>
+      console.log("🟡 INDEX.HTML LOADED at:", new Date().toISOString())
+      console.log("🟡 URL:", window.location.href)
+      console.log("🟡 User Agent:", navigator.userAgent)
+      
+      window.addEventListener("DOMContentLoaded", () => {
+        console.log("🟢 DOM LOADED")
+        const appDiv = document.getElementById("app")
+        if (appDiv) {
+          console.log("🟢 APP DIV FOUND:", appDiv)
+        } else {
+          console.error("🔴 APP DIV NOT FOUND")
+        }
+      })
+      
+      window.addEventListener("load", () => {
+        console.log("🟢 WINDOW LOADED")
+      })
+      
+      window.addEventListener("error", (e) => {
+        console.error("🔴 WINDOW ERROR:", e.error, e.filename, e.lineno)
+      })
+    </script>
+  </head>
+  <body>
+    <div id="app">
+      <h1 style="color: red; padding: 20px;">🔴 Vue App Not Loaded Yet - Check Console</h1>
+      <p>Current Time: <span id="time"></span></p>
+      <script>
+        document.getElementById("time").textContent = new Date().toLocaleString()
+        console.log("🟡 BODY SCRIPT EXECUTED")
+      </script>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

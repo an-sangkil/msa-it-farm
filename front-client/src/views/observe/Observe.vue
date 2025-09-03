@@ -43,18 +43,18 @@
   </div>
 </template>
 <script>
-import 'tui-grid/dist/tui-grid.css';
-import {Grid} from '@toast-ui/vue-grid';
-import 'tui-pagination/dist/tui-pagination.css';
-import TuiGrid from 'tui-grid';
+// import 'tui-grid/dist/tui-grid.css';
+// import {Grid} from '@toast-ui/vue-grid';
+// import 'tui-pagination/dist/tui-pagination.css';
+// import TuiGrid from 'tui-grid';
 
 //TuiGrid.setLanguage('ko');
-TuiGrid.applyTheme('striped');
+// TuiGrid.applyTheme('striped');
 
 
 export default {
   components: {
-    grid: Grid
+    // grid: Grid
 
   },
   data() {

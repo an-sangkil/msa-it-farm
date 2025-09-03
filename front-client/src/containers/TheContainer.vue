@@ -16,18 +16,19 @@
 
 
 <script>
-  import TheSidebar from './TheSidebar'
-  import TheHeader from './TheHeader'
-  import TheFooter from './TheFooter'
+import { defineComponent } from 'vue'
+import TheSidebar from './TheSidebar.vue'
+import TheHeader from './TheHeader.vue'
+import TheFooter from './TheFooter.vue'
 
-  export default {
-    name: 'TheContainer',
-    components: {
-      TheSidebar,
-      TheHeader,
-      TheFooter
-    }
+export default defineComponent({
+  name: 'TheContainer',
+  components: {
+    TheSidebar,
+    TheHeader,
+    TheFooter
   }
+})
 </script>
 
 

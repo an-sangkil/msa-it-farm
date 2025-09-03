@@ -55,16 +55,18 @@
   // import('../../vendors/@coreui/coreui/js/coreui.bundle.min.js')
   // import('../../vendors/@coreui/icons/js/svgxuse.min.js')
 
-  export default {
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
+    name: 'Login',
     data() {
       return {userId: '', password: ''}
     },
     created() {
-      console.log(process.env)
-      console.log(process.env.VUE_APP_API_SERVER_HOST)
-      console.log(process.env.BASE_URL)
+      console.log('Environment variables:', import.meta.env)
+      console.log('API Server Host:', import.meta.env.VITE_API_SERVER_HOST)
+      console.log('Base URL:', import.meta.env.BASE_URL)
     },
-    name: 'Login',
     methods: {
       login_action: function () {
 
@@ -97,7 +99,7 @@
         this.$router.push('/pages/register')
       }
     }
-  }
+  })
 </script>
 <style>
   /*@import "../../css/style.css";*/

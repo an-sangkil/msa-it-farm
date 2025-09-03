@@ -277,8 +277,9 @@
   </div>
 </template>
 <script>
-  import DatePicker from 'vue2-datepicker';
-  import 'vue2-datepicker/index.css';
+  // import DatePicker from 'vue2-datepicker';
+  // import 'vue2-datepicker/index.css';
+  // TODO: Vue 3로 교체 필요
 
 
   export default {

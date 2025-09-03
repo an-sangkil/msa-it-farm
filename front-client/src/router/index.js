@@ -1,219 +1,224 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
-import CattleList from '../views/cattle/CattleList'
-import CattleForm from '../views/cattle/CattleForm'
-import CattleView from '../views/cattle/CattleView'
-import DiaryList from '../views/diary/DiaryList'
-import DiaryForm from '../views/diary/DiaryForm'
-import DiaryView from '../views/diary/DiaryView'
-import ObserveList from '../views/observe/Observe'
+// 기본 페이지들 (외부 라이브러리 의존성 없음)
+import NotFound from '../components/common/NotFound.vue'
 
-// Views - Pages
-import NotFound from '../components/common/NotFound'
-import Store from '../store'
+// 동적 import로 일부 페이지들만 로드
+const Login = () => import('../views/pages/Login.vue')
+const Page404 = () => import('../views/pages/Page404.vue')
 
-// Containers
-const TheContainer = () => import('../containers/TheContainer')
+// 간단한 테스트 컴포넌트들
+const Dashboard = { 
+  template: `
+    <div class="container mt-4">
+      <h1>Dashboard</h1>
+      <p>Welcome to MSA IT Farm Dashboard!</p>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">소 관리</div>
+            <div class="card-body">
+              <router-link to="/cattle" class="btn btn-primary">소 목록 보기</router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">일지 관리</div>
+            <div class="card-body">
+              <router-link to="/diary" class="btn btn-primary">일지 보기</router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">관찰 기록</div>
+            <div class="card-body">
+              <router-link to="/observe" class="btn btn-primary">관찰 기록</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+}
 
-// Views
-const Dashboard = () => import('../views/Dashboard')
+const SimpleContainer = {
+  template: `
+    <div class="d-flex flex-column min-vh-100">
+      <!-- Simple Header -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <router-link class="navbar-brand" to="/dashboard">MSA IT Farm</router-link>
+          <div class="navbar-nav ml-auto">
+            <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+            <router-link class="nav-link" to="/cattle">소 관리</router-link>
+            <router-link class="nav-link" to="/diary">일지</router-link>
+            <router-link class="nav-link" to="/observe">관찰</router-link>
+            <router-link class="nav-link" to="/pages/login">로그아웃</router-link>
+          </div>
+        </div>
+      </nav>
+      
+      <!-- Main Content -->
+      <main class="flex-grow-1">
+        <router-view></router-view>
+      </main>
+      
+      <!-- Simple Footer -->
+      <footer class="bg-light py-3 mt-4">
+        <div class="container text-center">
+          <small>&copy; 2024 MSA IT Farm - Vue 3 버전</small>
+        </div>
+      </footer>
+    </div>
+  `
+}
 
-const Page404 = () => import('../views/pages/Page404')
-const Page500 = () => import('../views/pages/Page500')
-const Login = () => import('../views/pages/Login')
-const Register = () => import('../views/pages/Register')
+const CattleHome = { 
+  template: `
+    <div class="container mt-4">
+      <h2>소 관리 시스템</h2>
+      <p>소 관리 관련 기능들이 여기에 표시됩니다.</p>
+      <div class="alert alert-info">
+        <strong>알림:</strong> 현재 Vue 3 업그레이드 중입니다. 일부 기능은 임시적으로 비활성화되어 있습니다.
+      </div>
+      <router-view></router-view>
+    </div>
+  `
+}
 
-Vue.use(VueRouter)
+const DiaryHome = { 
+  template: `
+    <div class="container mt-4">
+      <h2>농장 일지</h2>
+      <p>농장 일지 관련 기능들이 여기에 표시됩니다.</p>
+      <router-view></router-view>
+    </div>
+  `
+}
 
-/**
- * 이미 로그인된 사용자 체크
- * @param to
- * @param from
- * @param next
- */
-const rejectAuth = (to, from, next) => {
-  console.log('rejectAuth  Store.getters.isAuth : ', Store.getters.isAuth)
-  // if (Store.getters.isAuth === true) {
-  //   alert('이미 로그인 되었습니다.')
-    next()
-  // } else {
-  //   // 로그인 페이지로 이동
-  //   next('/');
-  // }
+const ObserveHome = { 
+  template: `
+    <div class="container mt-4">
+      <h2>관찰 기록</h2>
+      <p>관찰 기록 관련 기능들이 여기에 표시됩니다.</p>
+      <router-view></router-view>
+    </div>
+  `
 }
 
 /**
- * 사용자 정보 체크
- * @param to
- * @param from
- * @param next
+ * 간단한 인증 체크
  */
-const requireAuth = (to, from, next) => {
+const requireAuth = () => {
+  console.log('🔐 requireAuth: 인증 확인')
+  return true // 임시로 모든 접근 허용
+}
 
-  console.log('requireAuth  Store.getters.isAuth : ', Store.getters.isAuth)
-
-  // if (Store.getters.isAuth === false) {
-  //   alert("로그인 필요한 기능 입니다.")
-  //   next('/')
-  // } else {
-    next()
-  // }
+const rejectAuth = () => {
+  console.log('🔐 rejectAuth: 로그인 페이지 접근')
+  return true
 }
 
 const routes = [
   {
     path: '/',
-    name: 'LoginPage',
-    redirect: '/pages/login',
-    beforeEnter: rejectAuth,
+    name: 'Home',
+    redirect: '/pages/login'
   },
   {
-    path: '*',
+    path: '/login',
+    name: 'LoginDirect',
+    redirect: '/pages/login'
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
     component: NotFound
   },
   {
     path: '/dashboard',
-    name: 'HomePage',
-    redirect: '/dashboard/dashboardView',
+    name: 'Dashboard',
     beforeEnter: requireAuth,
-    component: TheContainer,
+    component: SimpleContainer,
     children: [
       {
-        path: 'dashboardView',
-        name: 'Dashboard',
+        path: '',
+        name: 'DashboardHome',
         component: Dashboard
-      },
+      }
+    ]
+  },
+  {
+    path: '/cattle',
+    name: 'Cattle',
+    beforeEnter: requireAuth,
+    component: SimpleContainer,
+    children: [
       {
-        path: '/cattle',
-        redirect: '/cattle/cattleList',
-        name: 'Cattle',
-        component: {
-          render(c) {
-            return c('router-view')
-          }
-        },
-        children: [
-          {
-            path: 'cattleList',
-            name: 'CattleList',
-            component: CattleList
-          },
-          {
-            path: 'cattleForm',
-            name: 'CattleForm',
-            component: CattleForm
-          },
-          {
-            path: 'cattleDetail',
-            name: 'CattleView',
-            component: CattleView
-          }
-        ]
-      },
+        path: '',
+        name: 'CattleHome',
+        component: CattleHome
+      }
+    ]
+  },
+  {
+    path: '/diary',
+    name: 'Diary',
+    beforeEnter: requireAuth,
+    component: SimpleContainer,
+    children: [
       {
-        path: '/diary',
-        redirect: '/diary/diaryList',
-        name: 'Diary',
-        component: {
-          render(c) {
-            return c('router-view')
-          }
-        },
-        children: [
-          {
-            path: 'diaryList',
-            name: 'DiaryList',
-            component: DiaryList
-          },
-          {
-            path: 'diaryForm',
-            name: 'DiaryForm',
-            component: DiaryForm
-          },
-          {
-            path: 'diaryDetail',
-            name: 'DiaryView',
-            component: DiaryView
-          }
-        ]
-      },
+        path: '',
+        name: 'DiaryHome',
+        component: DiaryHome
+      }
+    ]
+  },
+  {
+    path: '/observe',
+    name: 'Observe',
+    beforeEnter: requireAuth,
+    component: SimpleContainer,
+    children: [
       {
-        path: '/observe',
-        redirect: '/observe/observeList',
-        name: 'Observe',
-        component: {
-          render(c) {
-            return c('router-view')
-          }
-        },
-        children: [
-          {
-            path: 'observeList',
-            name: 'ObserveList',
-            component: ObserveList
-          }
-        ]
-      },
-      {
-        path: 'base',
-        redirect: '/base/cards',
-        name: 'Base',
-        component: {
-          render(c) {
-            return c('router-view')
-          }
-        }
+        path: '',
+        name: 'ObserveHome',
+        component: ObserveHome
       }
     ]
   },
   {
     path: '/pages',
-    redirect: '/pages/404',
     name: 'Pages',
-    component: {
-      render(c) {
-        return c('router-view')
-      }
-    },
+    component: { template: '<router-view />' },
     children: [
-      {
-        path: '404',
-        name: 'Page404',
-        component: Page404
-      },
-      {
-        path: '500',
-        name: 'Page500',
-        component: Page500
-      },
       {
         path: 'login',
         name: 'Login',
         component: Login,
-        beforEnter: rejectAuth
+        beforeEnter: rejectAuth
       },
       {
-        path: 'register',
-        name: 'Register',
-        component: Register
+        path: '404',
+        name: 'Page404',
+        component: Page404
       }
     ]
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-
-  // 추가분
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   linkActiveClass: 'active',
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ top: 0 }),
   routes
 })
 
-router.beforeEach(async (to, from, next) => {
-  next()
+router.beforeEach(async (to, from) => {
+  console.log('🔄 Router navigating from', from.path, 'to', to.path)
+  return true
 })
 
 export default router

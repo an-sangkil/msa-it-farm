@@ -171,8 +171,8 @@
 <script>
 
   import PaginationUtils from '../../js/Pagination'
-  import DatePicker from 'vue2-datepicker';
-  import 'vue2-datepicker/index.css';
+  // import DatePicker from 'vue2-datepicker';
+  // import 'vue2-datepicker/index.css';
   import moment from 'moment';
 
 

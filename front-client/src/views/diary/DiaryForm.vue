@@ -106,11 +106,11 @@
   </div>
 </template>
 <script>
-import DatePicker from 'vue2-datepicker';
-import 'vue2-datepicker/index.css';
+// import DatePicker from 'vue2-datepicker';
+// import 'vue2-datepicker/index.css';
 
 //import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/base64uploadadapter';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   created() {

@@ -3,65 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --mode development",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "local": "vue-cli-service serve --open --mode local --port 3000",
-    "test": "vue-cli-service serve --open --mode test --port 3000"
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "local": "vite --mode local --port 3000",
+    "test": "vite --mode test --port 3000"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^23.0.0",
-    "@ckeditor/ckeditor5-vue": "^1.0.3",
-    "@toast-ui/vue-grid": "^4.15.0",
-    "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
-    "bootstrap-vue": "^2.16.0",
-    "core-js": "^3.6.5",
-    "moment": "^2.27.0",
-    "tui-pagination": "^3.4.0",
-    "vue": "^2.6.11",
-    "vue-i18n": "^8.17.3",
-    "vue-router": "^3.2.0",
+    "vue": "^3.5.21",
+    "vue-router": "^4.4.6",
+    "vuex": "^4.1.0",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.25.0",
+    "vue-i18n": "^10.0.4",
+    "moment": "^2.30.1",
     "vue-session": "^1.0.0",
-    "vue2-datepicker": "^3.6.1",
-    "vuex": "^3.4.0"
+    "vue-datepicker-next": "^1.0.3"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-plugin-router": "~4.4.0",
-    "@vue/cli-plugin-vuex": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "babel-eslint": "^10.1.0",
-    "core-js": "~3.6.5",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "~6.0.1",
-    "sass-loader": "~8.0.2",
-    "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2",
-    "vue-cli-plugin-i18n": "~1.0.1",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.31.0",
+    "prettier": "^3.4.2",
+    "vite": "^6.0.5",
+    "sass": "^1.83.0",
+    "@types/node": "^22.10.2"
   },
   "browserslist": [
     "> 1%",
