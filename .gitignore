@@ -36,3 +36,4 @@ target/
 */**/.project
 *.settings/
 /.project
+node_modules
